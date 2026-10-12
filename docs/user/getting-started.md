@@ -8,10 +8,9 @@
 R >= 4.1.0 is required. Non-commercial academic and research use is welcome under
 the [PolyForm Noncommercial License 1.0.0](../../LICENSE). See the
 [README licensing policy](../../README.md#license) for commercial licensing
-inquiries. This is the local **0.2.0 release candidate**; public cutover and the
-`v0.2.0` tag are pending. Install the built candidate with
-`R CMD INSTALL --library=/your/test/library Neoantimon2_0.2.0.tar.gz`.
-After the approved public release, install the pinned version:
+inquiries. **Neoantimon2 0.2.0 is released** on
+[GitHub](https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0). Install the
+pinned public version:
 
 ```r
 install.packages("remotes")
@@ -20,8 +19,11 @@ library(Neoantimon2)
 stopifnot(as.character(packageVersion("Neoantimon2")) == "0.2.0")
 ```
 
-The tag is not yet published. The current private remote does not contain this
-clean candidate. See the [installation notes](../../README.md#installation).
+The public tag and release-archive installation were verified on macOS arm64
+with R 4.5.1. For a downloaded archive, use
+`R CMD INSTALL --library=/your/test/library Neoantimon2_0.2.0.tar.gz`.
+See the [installation notes](../../README.md#installation) for dependencies
+and platform limitations.
 
 The package's Imports are `jsonlite`, `digest`, `stringi`, `yaml`, `xml2`, and
 `tools`. Suggested packages `testthat`, `jsonvalidate`, and `pkgload` are for

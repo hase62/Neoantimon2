@@ -28,11 +28,12 @@ independently. Native results remain available independently of external imports
 
 ## Installation
 
-R **4.1.0 or later** is required. This source is the **0.2.0 release candidate**;
-public cutover and the `v0.2.0` tag are pending. The tagged installation below is
-for use after publication and has not yet been verified against a public release.
+R **4.1.0 or later** is required. **Neoantimon2 0.2.0 is released** on
+[GitHub](https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0). Installation
+from the public `v0.2.0` tag and the release archive has been verified on macOS
+arm64 with R 4.5.1; other platforms and R versions retain their documented limits.
 
-The tested local installation is:
+To build and install from a source checkout:
 
 ```sh
 R CMD build .
@@ -40,7 +41,7 @@ mkdir -p /your/test/library
 R CMD INSTALL --install-tests --library=/your/test/library Neoantimon2_0.2.0.tar.gz
 ```
 
-After the approved public release:
+To install the pinned public release:
 
 ```r
 install.packages("remotes")
@@ -156,7 +157,7 @@ implementation. See [methods and limitations](docs/user/methods-and-limitations.
 [NOTICE](NOTICE). Commercial use requires separate permission or licensing from
 Takanori Hasegawa: <hasegawa.t.d968@m.isct.ac.jp>. An inquiry does not grant permission.
 Third-party tools, resources, and converters retain their own license boundaries.
-This GitHub release candidate is not a CRAN submission.
+This GitHub release is not a CRAN submission.
 
 ## Citation
 

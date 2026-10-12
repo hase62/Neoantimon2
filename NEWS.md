@@ -1,6 +1,6 @@
 # Neoantimon2 0.2.0
 
-Release candidate; public repository cutover, tag and GitHub Release are pending.
+Released on GitHub on 2026-10-12: https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0.
 
 * Add four public APIs: `neo_export_bundle()`, `neo_analyze_external()`,
   `neo_external_results()` and `neo_external_explain()`.
