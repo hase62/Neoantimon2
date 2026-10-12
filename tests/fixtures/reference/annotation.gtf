@@ -1,0 +1,17 @@
+##description: synthetic human genome (GRCh38), version 50
+##provider: GENCODE
+chr1	synthetic	transcript	1	35	.	+	.	gene_id "ENSG000001.3"; transcript_id "ENST000001.2"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000001.4";
+chr1	synthetic	exon	1	12	.	+	.	gene_id "ENSG000001.3"; transcript_id "ENST000001.2"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000001.4"; exon_number "1";
+chr1	synthetic	exon	21	35	.	+	.	gene_id "ENSG000001.3"; transcript_id "ENST000001.2"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000001.4"; exon_number "2";
+chr1	synthetic	CDS	1	12	.	+	0	gene_id "ENSG000001.3"; transcript_id "ENST000001.2"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000001.4";
+chr1	synthetic	CDS	21	35	.	+	1	gene_id "ENSG000001.3"; transcript_id "ENST000001.2"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000001.4";
+chr1	synthetic	transcript	61	95	.	-	.	gene_id "ENSG000002.1"; transcript_id "ENST000002.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000002.1";
+chr1	synthetic	exon	61	72	.	-	.	gene_id "ENSG000002.1"; transcript_id "ENST000002.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000002.1"; exon_number "1";
+chr1	synthetic	exon	81	95	.	-	.	gene_id "ENSG000002.1"; transcript_id "ENST000002.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000002.1"; exon_number "2";
+chr1	synthetic	CDS	61	72	.	-	0	gene_id "ENSG000002.1"; transcript_id "ENST000002.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000002.1";
+chr1	synthetic	CDS	81	95	.	-	1	gene_id "ENSG000002.1"; transcript_id "ENST000002.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000002.1";
+chrM	synthetic	transcript	1	27	.	+	.	gene_id "ENSG000003.1"; transcript_id "ENST000003.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000003.1";
+chrM	synthetic	exon	1	27	.	+	.	gene_id "ENSG000003.1"; transcript_id "ENST000003.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000003.1"; exon_number "1";
+chrM	synthetic	CDS	1	27	.	+	0	gene_id "ENSG000003.1"; transcript_id "ENST000003.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000003.1";
+chr1	synthetic	Selenocysteine	4	6	.	+	.	gene_id "ENSG000001.3"; transcript_id "ENST000001.2";
+chr1	synthetic	stop_codon	33	35	.	+	0	gene_id "ENSG000001.3"; transcript_id "ENST000001.2";

@@ -1,0 +1,3992 @@
+{
+  "cases": [
+    {
+      "name": "no evidence source_origin",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone source_origin /tmp/assignment.tsv",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            "/tmp/assignment.tsv"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone source_origin file:///tmp/assignment.tsv",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            "file:///tmp/assignment.tsv"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone source_origin aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone source_origin run-2026-10-06/result.json",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            "run-2026-10-06/result.json"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "locator object alone source_origin",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "path": "/tmp/assignment.tsv"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "legacy string escape rejected source_origin",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [],
+          "absence_scope": "sample_only",
+          "assignment_evidence_refs": [
+            "/tmp/assignment.tsv"
+          ]
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "non-supporting result source_origin",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "not_supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "failed assignment source_origin",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "failed",
+              "result_state": "failed",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "assay scope cannot resolve source_origin",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "assay_scope",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "assay_id": "synthetic-assay:ms_observation"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "no evidence presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone presenter /tmp/assignment.tsv",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            "/tmp/assignment.tsv"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone presenter file:///tmp/assignment.tsv",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            "file:///tmp/assignment.tsv"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone presenter aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "string alone presenter run-2026-10-06/result.json",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            "run-2026-10-06/result.json"
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "locator object alone presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "path": "/tmp/assignment.tsv"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "legacy string escape rejected presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [],
+          "absence_scope": "sample_only",
+          "assignment_evidence_refs": [
+            "/tmp/assignment.tsv"
+          ]
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "non-supporting result presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "not_supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "failed assignment presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "failed",
+              "result_state": "failed",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "assay scope cannot resolve presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "assay_scope",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "assay_id": "synthetic-assay:ms_observation"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "source A evidence observation B",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:41c098a9cb906a667dc4676e76a2b87d19e0ce82d701dc1d5a5567238358c2b9"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": true
+    },
+    {
+      "name": "presenter A evidence observation B",
+      "graph": "two_presenters",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:e95efd4f419aebd36b8b64f62b2562b0e02e325e3824991e3425b68b60db7cc3"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*03:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": true
+    },
+    {
+      "name": "assignment observed peptide mismatch",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "hla-source-occurrence-id-v1:41c098a9cb906a667dc4676e76a2b87d19e0ce82d701dc1d5a5567238358c2b9",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": true
+    },
+    {
+      "name": "unresolved frozen source reference",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "invalid:origin"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "invalid:origin"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": true
+    },
+    {
+      "name": "unresolved frozen presenter reference",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*99:99"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*99:99"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": true
+    },
+    {
+      "name": "required semantic field schema_version",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field assignment_kind",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field peptide_key",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field method",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field provider",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field method_version",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field provider_version",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field evaluability",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field result_state",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "required semantic field source_occurrence_id",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "physical field excluded path",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d",
+              "path": "/tmp/physical-locator"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "physical field excluded sha256",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d",
+              "sha256": "/tmp/physical-locator"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "physical field excluded acquisition_timestamp",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d",
+              "acquisition_timestamp": "/tmp/physical-locator"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "physical field excluded retrieval_timestamp",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d",
+              "retrieval_timestamp": "/tmp/physical-locator"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "physical field excluded raw_provider_output",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d",
+              "raw_provider_output": "/tmp/physical-locator"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "independent evidence source_origin",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "unresolved",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": true,
+      "schema_valid": true
+    },
+    {
+      "name": "independent evidence presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "unresolved",
+          "source_occurrence_ids": [],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": true,
+      "schema_valid": true
+    },
+    {
+      "name": "both independently evidenced",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            },
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": true,
+      "schema_valid": true
+    },
+    {
+      "name": "source evidence cannot resolve presenter",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "presenter evidence cannot resolve source",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "unknown evidence version",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "unknown-v2",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            },
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "assignment evidence cannot prove exhaustive assay scope",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            },
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "supplied_assay_exhaustive_contract"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    },
+    {
+      "name": "explicit supplied exhaustive assay contract",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "pmhc",
+            "target_id": "indirect-pmhc-id-v1:291ccea052795631400fe069eb3de3ce1218d2f9dc65f683e1b1b532fd3c2753"
+          }
+        ],
+        "dimension": "ms_observation",
+        "subject_id": "patient-1",
+        "subject_role": "presenter",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_test_apc",
+        "sample_id": "native-apc-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:ms_observation",
+          "method": "synthetic_ms_observation",
+          "version": "1.0.0",
+          "evidence_type": "mass_spectrometry",
+          "receptor_context_id": null
+        },
+        "result_state": "detected",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "peptide",
+          "alleles": [],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "resolved",
+          "source_occurrence_ids": [
+            "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+          ],
+          "presenter_status": "resolved",
+          "presenters": [
+            "HLA-DRA*01:01~HLA-DRB1*01:01"
+          ],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            },
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            },
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "assay_scope",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "assay_id": "synthetic-assay:ms_observation"
+            }
+          ],
+          "absence_scope": "supplied_assay_exhaustive_contract"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "assignment_evidence": {
+            "path": "/synthetic/assignment.tsv",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "acquisition_timestamp": "synthetic-acquisition",
+            "retrieval_timestamp": "synthetic-retrieval"
+          }
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": true,
+      "schema_valid": true
+    },
+    {
+      "name": "assignment evidence restricted to MS",
+      "graph": "complete",
+      "observation": {
+        "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+        "targets": [
+          {
+            "target_type": "source_occurrence",
+            "target_id": "hla-source-occurrence-id-v1:41c098a9cb906a667dc4676e76a2b87d19e0ce82d701dc1d5a5567238358c2b9"
+          }
+        ],
+        "dimension": "source_expression",
+        "subject_id": "donor-1",
+        "subject_role": "source",
+        "tissue": "declared_test_tissue",
+        "compartment": "declared_source_cells",
+        "sample_id": "native-source-sample",
+        "occasion_id": "occasion:phase-a-1",
+        "assay": {
+          "assay_id": "synthetic-assay:source_expression",
+          "method": "synthetic_source_expression",
+          "version": "1.0.0",
+          "evidence_type": "expression_assay",
+          "receptor_context_id": null
+        },
+        "result_state": "positive",
+        "evaluability": "evaluated",
+        "normalized_values": [],
+        "analyte": {
+          "resolution": "allele",
+          "alleles": [
+            "HLA-C*07:02"
+          ],
+          "genes": [],
+          "presenter": null,
+          "peptide_key": null,
+          "hla_class": "II",
+          "pathway": null,
+          "pathway_applicability": "not_evaluated"
+        },
+        "assignments": {
+          "source_status": "not_applicable",
+          "source_occurrence_ids": [],
+          "presenter_status": "not_applicable",
+          "presenters": [],
+          "assignment_evidence": [
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "source_origin",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "source_occurrence_id": "hla-source-occurrence-id-v1:e2dfa3817c9d39461aa819480aa64c539c54df09dfbcac866f26bf0d03034e0d"
+            },
+            {
+              "schema_version": "allo-ms-assignment-evidence-v1",
+              "assignment_kind": "presenter",
+              "peptide_key": "peptide_key:aab3940a90626cb63555c39f98e3a6a28887b3509a835285467275f7fbef0685",
+              "method": "synthetic_independent_assignment",
+              "provider": "synthetic_assignment_provider",
+              "method_version": "1.0.0",
+              "provider_version": "1.0.0",
+              "evaluability": "evaluated",
+              "result_state": "supported",
+              "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01"
+            }
+          ],
+          "absence_scope": "sample_only"
+        },
+        "reason_codes": [
+          "synthetic_fixture_observation"
+        ],
+        "provenance": {
+          "fixture": "synthetic; no external patient data",
+          "path": "/synthetic/native.json",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "raw_values": {
+          "assay_note": "synthetic qualitative evidence"
+        },
+        "readonly_references": []
+      },
+      "runtime_valid": false,
+      "schema_valid": false
+    }
+  ]
+}

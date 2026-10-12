@@ -1,0 +1,42 @@
+[
+  {
+    "states": [
+      "observed",
+      "not_observed_evaluable"
+    ],
+    "expected": "loss_with_supported_absence",
+    "ordered": true
+  },
+  {
+    "states": [
+      "not_observed_evaluable",
+      "observed"
+    ],
+    "expected": "gain_with_prior_supported_absence",
+    "ordered": true
+  },
+  {
+    "states": [
+      "observed",
+      "not_evaluated"
+    ],
+    "expected": "insufficient_to_classify",
+    "ordered": true
+  },
+  {
+    "states": [
+      "observed",
+      "not_observed_insufficient"
+    ],
+    "expected": "insufficient_to_classify",
+    "ordered": true
+  },
+  {
+    "states": [
+      "observed",
+      "not_observed_evaluable"
+    ],
+    "expected": "observed_single_sample",
+    "ordered": false
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "version": "source-event-2.0.0",
+  "identity_schema_version": "source-biological-id-v1",
+  "identity_evolution_policy": "Schema overlay version is independent of biological identity schema version. Additive representation changes preserve biological source IDs unless identity semantics change.",
+  "extends": "1.1.0",
+  "identity_policy": "frozen peptide_key, sample_peptide_id, origin_id, candidate_key and candidate_id",
+  "tables": {
+    "provider_observations": ["observation_id", "source_event_id", "provider", "provider_version", "source_record_id", "raw_fields", "artifact", "support"],
+    "canonical_events": ["source_event_id", "structure", "mapping_status", "transcript_hypothesis_status", "observation_ids"],
+    "transcript_hypotheses": ["transcript_structure_id", "altered_transcript_id", "source_event_id", "transcript_ids", "altered_transcript", "orf", "observation_ids"],
+    "splice_predictions": ["prediction_id", "values", "locus", "artifact", "sequence_generating"],
+    "junction_observations": ["junction_evidence_id", "intron_first_base", "intron_last_base", "strand", "unique_junction_reads", "multi_mapping_reads", "artifact", "sequence_generating"]
+  },
+  "source_types": ["fusion", "exon_skip", "alternative_donor", "alternative_acceptor", "retained_intron", "novel_junction"],
+  "grading": {
+    "status": "NOT_GRADED",
+    "frozen_code": "NOT_APPLICABLE",
+    "extension_reason": "SOURCE_PRIORITY_POLICY_NOT_IMPLEMENTED"
+  },
+  "coordinate_system": "one-based-inclusive genomic coordinates; transcript blocks in transcription orientation",
+  "novel_nt_intervals": "Newly present splice sequence, using altered-transcript one-based-inclusive start_nt/end_nt and oriented reference_coordinates, contig and strand; empty for deletion-only structures and fusion parental sequence",
+  "inserted_sequence_aa": "Translated codons overlapping novel_nt_intervals; union with split-junction residues and novel-frame tails forms novel_aa",
+  "inserted_sequence_reference_comparison": "inserted_sequence_no_single_reference; exact whole-reference-proteome self search remains independent",
+  "orf_policy": "fusion-splice-orf-v1",
+  "reconstruction_policy": "source-reconstruction-v1"
+}

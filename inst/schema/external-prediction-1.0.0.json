@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "external-prediction-1.0.0",
+  "columns": ["schema_version", "peptide_sequence", "scope", "mhc_key", "task", "provider", "predictor_version", "model_version", "run_id", "metric", "metric_kind", "metric_semantics", "score", "score_direction", "unit", "status", "reason", "source_row"],
+  "scope": ["peptide", "peptide_hla"],
+  "alphabet": "ACDEFGHIKLMNPQRSTVWYU",
+  "status": ["evaluated", "unsupported", "not_evaluated", "failed"],
+  "metric_kind": ["raw_score", "percentile_rank"],
+  "metric_semantics": ["raw", "mhc_binding_percentile", "mhc_presentation_percentile", "external_percentile"],
+  "score_direction": ["higher_is_better", "lower_is_better"],
+  "logical_key": ["scope", "peptide_sequence", "mhc_key", "provider", "predictor_version", "model_version", "run_id", "task", "metric"],
+  "rules": {
+    "score": "Finite numeric for evaluated, empty otherwise; missing never means negative",
+    "percentile_rank": "Declared percentile semantics, percent units, lower_is_better and [0,100]",
+    "mhc_key": "Empty for peptide; exact canonical full presenter for peptide_hla",
+    "task": "Frozen native vocabulary or external: namespace; TCR-specific scope rejected",
+    "reason": "Required for non-evaluated rows",
+    "source_row": "Nonempty original source row/reference; candidate IDs not required",
+    "versions": "predictor_version/model_version may be empty when unknown",
+    "duplicates": "Reject all duplicate logical keys, including identical duplicates",
+    "channels": "Scope, kind, semantics, units and direction constant within provider/model/run/task/metric"
+  }
+}

@@ -1,0 +1,2395 @@
+{
+  "schema_version": "indirect-hla-compatibility-1.0.0",
+  "specification_id": "neo-allo-indirect-spec-0.1",
+  "profile": "neo-literature-derived-indirect-hla-ii-dr-strict-v1",
+  "profile_version": "1.0.0",
+  "official_reproduction": false,
+  "audit_source": "docs/development/pirche_reconstruction_matrix.md",
+  "audit_source_sha256": "78a9e6221948b618ee8ee48f90544074d7ab956e823a04c65a2b331972ce0380",
+  "audit_boundary": "Frozen S1-S11 / G0-G7; S4 and S9 v4.2 configurations only as documented; S10 build unpinned separately; later v4.x/v4.5/current TxPredictor outside audit",
+  "targets": [
+    {
+      "target_label": "neo-indirect-hla-compatibility/g0-s1-initial-sot-described-concepts",
+      "application_version": null,
+      "configuration": "Initial SOT model as described by S1; no invented official v1 label",
+      "matrix_profile": "G0",
+      "source_labels": [
+        "S1"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II presentation of Class I source proteins",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Shared HLA-DR restriction; native scope is recipient typed DRA/DRB1",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "NetMHC-II named; exact executable/model unestablished",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact reference release is not pinned for this target in the frozen reconstruction matrix; cross-system reference-release equivalence unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; sources S1"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Donor Class I proteins (A/B/C); strict native source scope also includes DRB1/DQB1",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G0; section 5; sources S1"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:20ecf87045f88b1ff02d28a0461963922d3a9435458ed277c738d47dfa2df55e"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g1-s6-2014-hsct-described-steps",
+      "application_version": null,
+      "configuration": "2014 HSCT update; shared background; Class I/II kept separate",
+      "matrix_profile": "G1",
+      "source_labels": [
+        "S6"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Class II boundary not established here; Class I <500 nM and cleavage >0.5 do not supply it",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Processing-gated Class I and Class II prediction; exact enumeration absent",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "HSCT reports both I and II; native profile supports SOT II only",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II NetMHCIIpan family; additional NetMHCpan and NetChop steps are outside native Class II profile",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Class II NetMHCIIpan 2.0 (Class I NetMHCpan 2.4); native Class II pins 3.2",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact reference release is not pinned for this target in the frozen reconstruction matrix; cross-system reference-release equivalence unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; sources S6"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G1; section 5; sources S6"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:9f64461e09619a29ee7f083eaabb6cd34c8f247a744e4a745c77e82e23c45e18"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g2-s7-2015-hsct-core-complexes",
+      "application_version": null,
+      "configuration": "2015 HSCT operational description; inclusive boundaries",
+      "matrix_profile": "G2",
+      "source_labels": [
+        "S7"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Pair-specific counts; exact repeated-source/homozygous implementation absent",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II 1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Unique core/peptide-HLA complex concept; exact source allocation unresolved separately",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II core within 15-mer; unique patient-specific peptide-HLA complexes",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II 15-mers with nine-residue cores (Class I nonamers separately)",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "HSCT I and II; SOT native II only",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "Class II DRB1 named; shared background/pair resolution not a complete SOT recipient declaration",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact reference release is not pinned for this target in the frozen reconstruction matrix; cross-system reference-release equivalence unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; sources S7"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Class II <=1000 nM; native boundary is strict <",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II nM affinity",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G2; section 5; sources S7"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:b4d405123a4b17b95dfc4eddc005151bc71308f00a741a206fb626c204fc6820"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g3-s8-2019-hsct-described-steps",
+      "application_version": null,
+      "configuration": "2019 HSCT study; inclusive Class II threshold",
+      "matrix_profile": "G3",
+      "source_labels": [
+        "S8"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II 1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Nine-residue core discussed; full enumeration delegated",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Separate HSCT I/II counts; native SOT II only",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "NetMHCIIpan Class II affinity family",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "NetMHCIIpan 3.0; native pins 3.2",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact reference release is not pinned for this target in the frozen reconstruction matrix; cross-system reference-release equivalence unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; sources S8"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Class II <=1000 nM",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II nM affinity",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G3; section 5; sources S8"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:ecf8b39acd4a9ebb27771d1f8ccafb0be98bfa8a3c106966d11e138f7b215642"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g4-s2-s3-review-era-sot-v3-expansion",
+      "application_version": "3.0 expansion described; whole release not reconstructed",
+      "configuration": "Review-era SOT; earlier DRB1 restriction distinct from v3.0 expanded presenters",
+      "matrix_profile": "G4",
+      "source_labels": [
+        "S2",
+        "S3"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "SOT II <1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Full and core represented; release count/dedup incomplete",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Exact sliding/terminal rules not fully specified",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "15-mer full ligand and nine-residue core examples",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "SOT Class II",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "v3.0 expands to DQ/DP/DRB3/4/5; native strictly DRA/DRB1",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "NetMHCIIpan named; installed versions/builds not uniformly pinned",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact reference release is not pinned for this target in the frozen reconstruction matrix; cross-system reference-release equivalence unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; sources S2,S3"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "HLA-derived self excluded; exact comparison not pinned; broader proteome an extension",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Homology nearest-neighbor completion and typing imputation described",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Strict <",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "nM affinity",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G4; section 5; sources S2,S3"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:ac82c5c442a8be628ffe82819c84de26f8a04c1421a2ceec72ee7f74c862e5fd"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/later-v4x-v4.5-current-txpredictor-outside-audit",
+      "application_version": null,
+      "configuration": "Later v4.x including v4.5 / current TxPredictor: freshness boundary only; not reconstructed",
+      "matrix_profile": "outside_G0_G7",
+      "source_labels": [],
+      "audit_scope": "outside_audit_scope",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "missing_data",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "normalization",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "provider_family",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "reference_release",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Later v4.x / v4.5 / current TxPredictor reference releases are outside the frozen audit; no inherited v4.2 reference-release judgment",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 5: audited v4.2 configuration and later-version boundary"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "outside_audit_scope",
+          "classification": "outside_audit_scope",
+          "documented_behavior": "Outside frozen S1-S11/G0-G7 reconstruction audit; no inherited v4.2 judgment",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 outside_G0_G7; section 5; sources "
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:00431554d718b9bc714ec013adca0b9b54d846ba9d2228395ac0ac5d36313f99"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-3.3-described-affinity",
+      "application_version": "3.3",
+      "configuration": "S4 controlled legacy-affinity SOT configuration",
+      "matrix_profile": "G5",
+      "source_labels": [
+        "S4",
+        "S5"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Exact intersource allocation and homozygosity implementation unavailable",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Configured Class II 1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Same core/presenter tuple collapsed; repeated-origin allocation incompletely specified separately",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Distinct nine-residue core plus distinct presenter counted",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Tuple counts; ln(1+score) is a comparison transform, not disclosure of all corrections",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "All terminal/boundary rules not specified",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "15-mer ligand; distinct nine-residue core",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "SOT II",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Legacy cleavage/affinity pipeline cited; exact engine configuration not fully listed",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "3.3 SOT continuous full-length self including leader",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "Same IPD-IMGT/HLA 3.47 used for the S4 controlled application 3.3 / 4.2 SOT and SCT comparison; completed artifact not supplied; exact equivalence to the Neoantimon2 analysis reference unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; sources S4,S5; Source sequences row (R configuration; U exact artifacts)"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Allo pHLA/self subtraction described; exact domain/boundary mechanics unavailable",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Extrapolation/imputation infrastructure; native does neither",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Equality comparator not pinned; cannot infer strict <",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II affinity in nM",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:cb037d72a1c9a040ae943febdcd1a7bbd0c861a50b2b0e8465bbc3cb2df041fd"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-3.3-described-affinity-sct",
+      "application_version": "3.3",
+      "configuration": "S4 controlled legacy-affinity SCT configuration",
+      "matrix_profile": "G5",
+      "source_labels": [
+        "S4",
+        "S5"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Exact intersource allocation and homozygosity implementation unavailable",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Configured Class II 1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Same core/presenter tuple collapsed; repeated-origin allocation incompletely specified separately",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Distinct nine-residue core plus distinct presenter counted",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Tuple counts; ln(1+score) is a comparison transform, not disclosure of all corrections",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "All terminal/boundary rules not specified",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "15-mer ligand; distinct nine-residue core",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "SCT I and II",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Legacy cleavage/affinity pipeline cited; exact engine configuration not fully listed",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "SCT full protein including exon 1 in both releases",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "Same IPD-IMGT/HLA 3.47 used for the S4 controlled application 3.3 / 4.2 SOT and SCT comparison; completed artifact not supplied; exact equivalence to the Neoantimon2 analysis reference unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; sources S4,S5; Source sequences row (R configuration; U exact artifacts)"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Allo pHLA/self subtraction described; exact domain/boundary mechanics unavailable",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Extrapolation/imputation infrastructure; native does neither",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Equality comparator not pinned; cannot infer strict <",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II affinity in nM",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:23ef0c2feff277087c10ad65d586ebdad8fe9bbf8d3af5e7ba0a271eb477e22c"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-described-affinity",
+      "application_version": "4.2",
+      "configuration": "S4 controlled legacy-affinity SOT configuration",
+      "matrix_profile": "G5",
+      "source_labels": [
+        "S4",
+        "S5"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Exact intersource allocation and homozygosity implementation unavailable",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Configured Class II 1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Same core/presenter tuple collapsed; repeated-origin allocation incompletely specified separately",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Distinct nine-residue core plus distinct presenter counted",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Tuple counts; ln(1+score) is a comparison transform, not disclosure of all corrections",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "All terminal/boundary rules not specified",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "15-mer ligand; distinct nine-residue core",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "SOT II",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Legacy cleavage/affinity pipeline cited; exact engine configuration not fully listed",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "4.2 SOT expressed-domain-derived self (exact intervals unresolved)",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "Same IPD-IMGT/HLA 3.47 used for the S4 controlled application 3.3 / 4.2 SOT and SCT comparison; completed artifact not supplied; exact equivalence to the Neoantimon2 analysis reference unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; sources S4,S5; Source sequences row (R configuration; U exact artifacts)"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Allo pHLA/self subtraction described; exact domain/boundary mechanics unavailable",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Extrapolation/imputation infrastructure; native does neither",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Equality comparator not pinned; cannot infer strict <",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II affinity in nM",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:4e2cc3fcebff1860053809cff6910d828d8492d10263863c515d1e95d6cff9ba"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-described-affinity-sct",
+      "application_version": "4.2",
+      "configuration": "S4 controlled legacy-affinity SCT configuration",
+      "matrix_profile": "G5",
+      "source_labels": [
+        "S4",
+        "S5"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Exact intersource allocation and homozygosity implementation unavailable",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Configured Class II 1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Same core/presenter tuple collapsed; repeated-origin allocation incompletely specified separately",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Distinct nine-residue core plus distinct presenter counted",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Tuple counts; ln(1+score) is a comparison transform, not disclosure of all corrections",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "All terminal/boundary rules not specified",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "15-mer ligand; distinct nine-residue core",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "SCT I and II",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Legacy cleavage/affinity pipeline cited; exact engine configuration not fully listed",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "SCT full protein including exon 1 in both releases",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "Same IPD-IMGT/HLA 3.47 used for the S4 controlled application 3.3 / 4.2 SOT and SCT comparison; completed artifact not supplied; exact equivalence to the Neoantimon2 analysis reference unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; sources S4,S5; Source sequences row (R configuration; U exact artifacts)"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Allo pHLA/self subtraction described; exact domain/boundary mechanics unavailable",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Extrapolation/imputation infrastructure; native does neither",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Equality comparator not pinned; cannot infer strict <",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II affinity in nM",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G5; section 5; sources S4,S5"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:657916e27f16e9c3583aa94816876bd8518038a9ada97f129fb4c7b6106be3d4"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-s9-frost-described-concepts",
+      "application_version": "4.2",
+      "configuration": "S9 kidney study Frost",
+      "matrix_profile": "G6",
+      "source_labels": [
+        "S9"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Full presenter/source executable rules not supplied",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Frost rank <300 permille (<30%), B4, study-selected",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Unique cores; homozygous sources once; exact tuple/union implementation not fully pinned",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Unique cores described",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Frost no promiscuity postprocessing; v3 corrected variant; exact calibration/correction artifacts unavailable",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "All 15-mers; exact terminal/self mechanics unresolved separately",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "15-mers; nine-mer core",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "DRB1 named; explicit alpha/beta pairing not supplied",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Frost",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact trained model/inference artifacts unavailable",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "IMGT 3.54 for S9 v4.2; iterative completion; exact completed artifacts not supplied; exact equivalence to the Neoantimon2 analysis reference unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; sources S9; Source / reference row (R versions; U artifacts)"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Complete boundary and self implementation not supplied",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Iterative completion; low-resolution imputation with frequency weighting",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "A/B/C/DRB1/DQB1",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Strict < for the documented selection metric",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "permille rank",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:75ce702f93c0d57e0f2a705198113519a94d441e0fd7f7575664003d7365a6cb"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-t2-s10-frost-build-unpinned-concepts",
+      "application_version": null,
+      "configuration": "S10 updated T2/Frost; exact build unpinned; no inherited v4.2 identity",
+      "matrix_profile": "G7",
+      "source_labels": [
+        "S10"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Per-source-locus summaries; exact source/presenter union unspecified",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact updated inference threshold not pinned",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Total unique peptide-HLA tuples; exact tuple definition unpinned",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Original unique-15-mer wording cannot override another configuration core definition",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Updated scale differs; exact normalization not specified",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Original v3 unique 15-mers wording differs from S4 core/presenter wording; reconciliation unavailable",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II; Class I locus sums refer to source A/B/C only",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "Primarily DRB1; exhaustive/pairing contract not supplied",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Frost",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact updated inference threshold/build not fully pinned; not assigned v4.2",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "S10 exact reference release and completed sequence/model snapshot not provided; application build unpinned; no inherited S9 or S4 reference release",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; sources S10; Input / reference row; section 5 S10 build-unpinned boundary"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Mismatch/self/terminal rules not executable from this account",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not pinned for updated Frost",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Exact updated metric/configuration not executable from this account",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:77d606a26dbaf00be3d71376a1798980083fb5667b2b3706e2b9183fd3ecd80f"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-v3-s10-unique-15mer-description",
+      "application_version": "v3; precise application build not pinned",
+      "configuration": "S10 original v3 unique-15-mer description",
+      "matrix_profile": "G7",
+      "source_labels": [
+        "S10"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Per-source-locus summaries; exact source/presenter union unspecified",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Total unique peptide-HLA tuples; exact tuple definition unpinned",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Original unique-15-mer wording cannot override another configuration core definition",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Updated scale differs; exact normalization not specified",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Original v3 unique 15-mers wording differs from S4 core/presenter wording; reconciliation unavailable",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II; Class I locus sums refer to source A/B/C only",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "Primarily DRB1; exhaustive/pairing contract not supplied",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "NetMHCIIpan 3.2",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "3.2 named; exact executable/model build not pinned",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "S10 exact reference release and completed sequence/model snapshot not provided; application build unpinned; no inherited S9 or S4 reference release",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; sources S10; Input / reference row; section 5 S10 build-unpinned boundary"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Mismatch/self/terminal rules not executable from this account",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "<",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "nM affinity",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G7; section 5; sources S10"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:ce0caa96ca6290176d28da3fcea66517b238217c13c9848a34422aa7a3d1cd7c"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-v3-s9-described-affinity",
+      "application_version": "v3; precise application patch not pinned",
+      "configuration": "S9 kidney study NetMHCIIpan 3.2 affinity",
+      "matrix_profile": "G6",
+      "source_labels": [
+        "S9"
+      ],
+      "audit_scope": "audited",
+      "official_reproduction": false,
+      "dimensions": [
+        {
+          "dimension": "aggregation",
+          "status": "unresolved",
+          "classification": "A/U",
+          "documented_behavior": "Full presenter/source executable rules not supplied",
+          "neoantimon2_behavior": "context-specific core/presenter union; source subtotals may overlap; no context sum",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "binding_threshold",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "1000 nM",
+          "neoantimon2_behavior": "1000",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "duplicate_unit",
+          "status": "unresolved",
+          "classification": "A",
+          "documented_behavior": "Unique cores; homozygous sources once; exact tuple/union implementation not fully pinned",
+          "neoantimon2_behavior": "unique core/presenter; source multiplicity retained",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "full_peptide_vs_core",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Unique cores described",
+          "neoantimon2_behavior": "full ligands retained; core plus presenter counted",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "missing_data",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "fail closed; complete_count null if incomplete; conditional result inspectable only",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "normalization",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Frost no promiscuity postprocessing; v3 corrected variant; exact calibration/correction artifacts unavailable",
+          "neoantimon2_behavior": "raw unique core/presenter count; no frequency weighting or promiscuity correction",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "peptide_generation",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "All 15-mers; exact terminal/self mechanics unresolved separately",
+          "neoantimon2_behavior": "precursor full protein; stride-one windows; no padding or terminal completion",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "peptide_length",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "15-mers; nine-mer core",
+          "neoantimon2_behavior": "15-residue ligand; designated primary forward nine-residue core",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "presentation_class",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Class II",
+          "neoantimon2_behavior": "Class II only (source class is separate)",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "presenter_scope",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "DRB1 named; explicit alpha/beta pairing not supplied",
+          "neoantimon2_behavior": "explicit typed DRA/DRB1 molecules only; SOT recipient response",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "provider_family",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "NetMHCIIpan",
+          "neoantimon2_behavior": "NetMHCIIpan binding affinity (BA); imported evidence, synthetic fixtures explicitly labeled",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "provider_version_pinning",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "3.2 engine named; exact executable/model artifacts unavailable",
+          "neoantimon2_behavior": "3.2; build/model identity required; actual executable/model artifacts only for precomputed evidence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "reference_domains",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Not established sufficiently for this configuration in the frozen audit",
+          "neoantimon2_behavior": "complete pinned precursor source and self; full protein including leader",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "reference_release",
+          "status": "unresolved",
+          "classification": "R/A",
+          "documented_behavior": "IMGT 3.47 for S9 v3; iterative completion; exact completed artifacts not supplied; exact equivalence to the Neoantimon2 analysis reference unresolved",
+          "neoantimon2_behavior": "Explicitly pinned analysis reference; no globally fixed historical PIRCHE reference release; exact cross-system reference-release equivalence is not established",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; sources S9; Source / reference row (R versions; U artifacts)"
+        },
+        {
+          "dimension": "self_filter",
+          "status": "unresolved",
+          "classification": "U",
+          "documented_behavior": "Complete boundary and self implementation not supplied",
+          "neoantimon2_behavior": "all-self-HLA A/B/C/DRB1/DQB1 precursor; same-presenter qualifying primary forward core; incomplete search cannot establish absence",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "sequence_completion",
+          "status": "differs",
+          "classification": "R",
+          "documented_behavior": "Iterative completion; low-resolution imputation with frequency weighting",
+          "neoantimon2_behavior": "none; no homology completion or imputation",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "source_locus_scope",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "A/B/C/DRB1/DQB1",
+          "neoantimon2_behavior": "A/B/C/DRB1/DQB1",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "threshold_operator",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "Strict < for the documented selection metric",
+          "neoantimon2_behavior": "<",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        },
+        {
+          "dimension": "threshold_units",
+          "status": "matched",
+          "classification": "R",
+          "documented_behavior": "nM affinity",
+          "neoantimon2_behavior": "nM affinity",
+          "locator": "pirche_reconstruction_matrix.md section 4 G6; section 5; sources S9"
+        }
+      ],
+      "limitations": [
+        "Dimension comparisons describe public concepts/fields only; exact numerical score compatibility is not established",
+        "Unspecified historical behavior remains unresolved; native assumptions do not fill official gaps"
+      ],
+      "audit_record_id": "audit-record-sha256:e20e17d3fdbabc06332a6194b5a1c27e2b73b21e5233bff4f3f3cc94e2b33fcc"
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "indirect-hla-result-1.0.0"
+    },
+    "specification_id": {
+      "const": "neo-allo-indirect-spec-0.1"
+    },
+    "official_reproduction": {
+      "const": false
+    },
+    "aggregation": {
+      "const": "separate_contexts_no_patient_aggregate"
+    },
+    "contexts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/public_context"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "specification_id",
+    "official_reproduction",
+    "aggregation",
+    "contexts"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "public_context": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-hla-result-1.0.0"
+        },
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "profile_version": {
+          "const": "1.0.0"
+        },
+        "claim_boundary": {
+          "type": "string",
+          "pattern": "not official PIRCHE reproduction"
+        },
+        "official_reproduction": {
+          "const": false
+        },
+        "evidence_kind": {
+          "enum": [
+            "synthetic_fixture",
+            "precomputed_predictor_output"
+          ]
+        },
+        "analysis_status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "completeness_status": {
+          "enum": [
+            "complete",
+            "incomplete"
+          ]
+        },
+        "complete_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "conditional_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conditional_semantics": {
+          "const": "inspectable_conditional_result_only"
+        },
+        "included_unit_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "self_excluded_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_policy_excluded_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unevaluable_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluated_presenter_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluated_presenters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "declared_presenters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "presenter": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subject_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resolution_policy": {
+                "const": "explicit_typed_alpha_beta"
+              },
+              "status": {
+                "enum": [
+                  "evaluated",
+                  "unsupported",
+                  "insufficient"
+                ]
+              },
+              "reason_codes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "presenter",
+              "subject_id",
+              "resolution_policy",
+              "status",
+              "reason_codes"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "presenter_scope": {
+          "type": "object",
+          "properties": {
+            "typing_scenario_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "complete": {
+              "type": "boolean"
+            },
+            "status": {
+              "enum": [
+                "evaluated",
+                "insufficient"
+              ]
+            },
+            "evaluated_alpha_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "evaluated_beta_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "undeclared_beta_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "typing_scenario_id",
+            "complete",
+            "status",
+            "evaluated_alpha_alleles",
+            "evaluated_beta_alleles",
+            "undeclared_beta_alleles",
+            "reason_codes"
+          ],
+          "additionalProperties": false
+        },
+        "source_hla_summary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "source_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "self_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "self_universe_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-universe-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "allo_policy_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "allo_analysis_id": {
+          "type": "string",
+          "pattern": "^allo-analysis-id-v1:[0-9a-f]{64}$"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "allo_context_id",
+        "profile",
+        "profile_version",
+        "claim_boundary",
+        "official_reproduction",
+        "evidence_kind",
+        "analysis_status",
+        "completeness_status",
+        "complete_count",
+        "conditional_count",
+        "conditional_semantics",
+        "included_unit_count",
+        "self_excluded_count",
+        "binding_policy_excluded_count",
+        "unevaluable_count",
+        "evaluated_presenter_count",
+        "evaluated_presenters",
+        "declared_presenters",
+        "presenter_scope",
+        "source_hla_summary",
+        "source_subject_id",
+        "self_subject_id",
+        "self_universe_id",
+        "allo_policy_id",
+        "allo_analysis_id",
+        "reason_codes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "completeness_status": {
+                "const": "incomplete"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "complete_count": {
+                "type": "null"
+              },
+              "analysis_status": {
+                "const": "insufficient"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "complete_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "analysis_status": {
+                "const": "evaluated"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Neoantimon2 literature-derived indirect-HLA public result 1.0.0"
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": "indirect-hla-result-1.0.0",
+  "specification_id": "neo-allo-indirect-spec-0.1",
+  "official_reproduction": false,
+  "aggregation": "separate_contexts_no_patient_aggregate",
+  "contexts": [
+    {
+      "schema_version": "indirect-hla-result-1.0.0",
+      "allo_context_id": "allo-context-id-v1:e82681260d804b18bb9c7f96e27e0d730c3031cfd23e9d1e4f97d6c4d564c986",
+      "profile": "neo-literature-derived-indirect-hla-ii-dr-strict-v1",
+      "profile_version": "1.0.0",
+      "claim_boundary": "Neoantimon2 literature-derived molecular baseline; not official PIRCHE reproduction or a clinical risk score",
+      "official_reproduction": false,
+      "evidence_kind": "synthetic_fixture",
+      "analysis_status": "evaluated",
+      "completeness_status": "complete",
+      "complete_count": 5,
+      "conditional_count": 5,
+      "conditional_semantics": "inspectable_conditional_result_only",
+      "included_unit_count": 5,
+      "self_excluded_count": 1,
+      "binding_policy_excluded_count": 0,
+      "unevaluable_count": 0,
+      "evaluated_presenter_count": 1,
+      "evaluated_presenters": [
+        "HLA-DRA*01:01~HLA-DRB1*01:01"
+      ],
+      "declared_presenters": [
+        {
+          "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+          "subject_id": "patient-1",
+          "resolution_policy": "explicit_typed_alpha_beta",
+          "status": "evaluated",
+          "reason_codes": []
+        }
+      ],
+      "presenter_scope": {
+        "typing_scenario_id": "typing:1",
+        "complete": true,
+        "status": "evaluated",
+        "evaluated_alpha_alleles": [
+          "HLA-DRA*01:01"
+        ],
+        "evaluated_beta_alleles": [
+          "HLA-DRB1*01:01"
+        ],
+        "undeclared_beta_alleles": [],
+        "reason_codes": []
+      },
+      "source_hla_summary": [
+        {
+          "subject_id": "donor-1",
+          "typing_scenario_id": "typing:1",
+          "locus": "A",
+          "resolved_allele": "HLA-A*02:01",
+          "compatible_alleles": [
+            "HLA-A*02:01"
+          ],
+          "sequence_ids": [
+            "hla-source-sequence-id-v1:6d0f129c418242b865d2295d6c86ad0a7c5600e05e5b49184729dd73252163a5"
+          ],
+          "evaluability": {
+            "status": "evaluated",
+            "reason_codes": [],
+            "required_components": [
+              "HLA-A*02:01"
+            ],
+            "examined_components": [
+              "HLA-A*02:01"
+            ],
+            "scope": "pinned_hla_protein_resolution",
+            "evidence_refs": [],
+            "value": null
+          }
+        },
+        {
+          "subject_id": "donor-1",
+          "typing_scenario_id": "typing:1",
+          "locus": "B",
+          "resolved_allele": "HLA-B*07:02",
+          "compatible_alleles": [
+            "HLA-B*07:02"
+          ],
+          "sequence_ids": [
+            "hla-source-sequence-id-v1:6d0f129c418242b865d2295d6c86ad0a7c5600e05e5b49184729dd73252163a5"
+          ],
+          "evaluability": {
+            "status": "evaluated",
+            "reason_codes": [],
+            "required_components": [
+              "HLA-B*07:02"
+            ],
+            "examined_components": [
+              "HLA-B*07:02"
+            ],
+            "scope": "pinned_hla_protein_resolution",
+            "evidence_refs": [],
+            "value": null
+          }
+        },
+        {
+          "subject_id": "donor-1",
+          "typing_scenario_id": "typing:1",
+          "locus": "C",
+          "resolved_allele": "HLA-C*07:02",
+          "compatible_alleles": [
+            "HLA-C*07:02"
+          ],
+          "sequence_ids": [
+            "hla-source-sequence-id-v1:6d0f129c418242b865d2295d6c86ad0a7c5600e05e5b49184729dd73252163a5"
+          ],
+          "evaluability": {
+            "status": "evaluated",
+            "reason_codes": [],
+            "required_components": [
+              "HLA-C*07:02"
+            ],
+            "examined_components": [
+              "HLA-C*07:02"
+            ],
+            "scope": "pinned_hla_protein_resolution",
+            "evidence_refs": [],
+            "value": null
+          }
+        },
+        {
+          "subject_id": "donor-1",
+          "typing_scenario_id": "typing:1",
+          "locus": "DQB1",
+          "resolved_allele": "HLA-DQB1*03:01",
+          "compatible_alleles": [
+            "HLA-DQB1*03:01"
+          ],
+          "sequence_ids": [
+            "hla-source-sequence-id-v1:6d0f129c418242b865d2295d6c86ad0a7c5600e05e5b49184729dd73252163a5"
+          ],
+          "evaluability": {
+            "status": "evaluated",
+            "reason_codes": [],
+            "required_components": [
+              "HLA-DQB1*03:01"
+            ],
+            "examined_components": [
+              "HLA-DQB1*03:01"
+            ],
+            "scope": "pinned_hla_protein_resolution",
+            "evidence_refs": [],
+            "value": null
+          }
+        },
+        {
+          "subject_id": "donor-1",
+          "typing_scenario_id": "typing:1",
+          "locus": "DRB1",
+          "resolved_allele": "HLA-DRB1*04:01",
+          "compatible_alleles": [
+            "HLA-DRB1*04:01"
+          ],
+          "sequence_ids": [
+            "hla-source-sequence-id-v1:6d0f129c418242b865d2295d6c86ad0a7c5600e05e5b49184729dd73252163a5"
+          ],
+          "evaluability": {
+            "status": "evaluated",
+            "reason_codes": [],
+            "required_components": [
+              "HLA-DRB1*04:01"
+            ],
+            "examined_components": [
+              "HLA-DRB1*04:01"
+            ],
+            "scope": "pinned_hla_protein_resolution",
+            "evidence_refs": [],
+            "value": null
+          }
+        }
+      ],
+      "source_subject_id": "donor-1",
+      "self_subject_id": "patient-1",
+      "self_universe_id": "self-universe-id-v1:bfae83008c8407a10240d3b83c40c43f911775f9fd70ceeae24c0021ba625241",
+      "allo_policy_id": "allo-policy-id-v1:b3501715e0e03716b9d47c0918f72a8ed369fa9eda3c9ebda4824bc7b08a8c3e",
+      "allo_analysis_id": "allo-analysis-id-v1:ffa9ca58f2a8d373764d46790a4a8a7ac90479152c8217c247fbed3bf2b24706",
+      "reason_codes": []
+    }
+  ]
+}

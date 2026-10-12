@@ -1,0 +1,51 @@
+[
+  {
+    "name": "functional",
+    "flags": {
+      "productive": true,
+      "stop_codon": false,
+      "vj_in_frame": true
+    },
+    "expected": "functional",
+    "input_status": "supported"
+  },
+  {
+    "name": "nonproductive",
+    "flags": {
+      "productive": false
+    },
+    "expected": "explicitly_nonfunctional",
+    "input_status": "nonfunctional_receptor"
+  },
+  {
+    "name": "stop",
+    "flags": {
+      "stop_codon": true
+    },
+    "expected": "explicitly_nonfunctional",
+    "input_status": "nonfunctional_receptor"
+  },
+  {
+    "name": "out-of-frame",
+    "flags": {
+      "vj_in_frame": false
+    },
+    "expected": "explicitly_nonfunctional",
+    "input_status": "nonfunctional_receptor"
+  },
+  {
+    "name": "unknown",
+    "flags": {},
+    "expected": "functionality_unknown",
+    "input_status": "supported"
+  },
+  {
+    "name": "conflicting",
+    "flags": {
+      "productive": true,
+      "stop_codon": true
+    },
+    "expected": "functionality_conflicting",
+    "input_status": "receptor_functionality_unresolved"
+  }
+]

@@ -1,0 +1,4 @@
+region	HLA_A_type1	HLA_A_type2	Pval_unique	UnPairedPval_unique	LossAllele	KeptAllele	HLA_type1copyNum_withBAFBin	HLA_type1copyNum_withBAFBin_lower	HLA_type1copyNum_withBAFBin_upper	HLA_type2copyNum_withBAFBin	HLA_type2copyNum_withBAFBin_lower	HLA_type2copyNum_withBAFBin_upper	numMisMatchSitesCov	propSupportiveSites
+region-1	hla_a_02_01	HLA-A*24:02	0.0099	0.008	hla_a_02_01	HLA-A*24:02	0.4999	0.31	0.68	1.2	0.9	1.4	12	0.83
+region-1	HLA-B*07:02	HLA-B*08:01	0.2	0.18	HLA-B*07:02	HLA-B*08:01	1.0	0.8	1.2	1.1	0.9	1.3	8	0.5
+region-1	HLA-C*03:04	HLA-C*07:02	0.02	0.03	HLA-C*03:04	HLA-C*07:02	0.2	0.1	0.3	1.3	1.0	1.5	9	0.7

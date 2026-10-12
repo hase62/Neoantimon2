@@ -1,0 +1,45 @@
+.DS_Store
+/config/resources.local.yaml
+# Real resources and installed tools belong outside this repository.
+/data/
+/tools/
+/resources/
+/external_outputs/
+*.bam
+*.bai
+*.cram
+*.crai
+.Rhistory
+.RData
+*.Rcheck/
+
+# Local temporary backup files
+*.bak_*
+
+# Accidental local analysis state and build products.
+/runs/
+/cache/
+/tmp/
+/output/
+/results/
+__pycache__/
+*.pyc
+.Rproj.user/
+*.tar.gz
+/..Rcheck/
+
+# Local secrets/settings; authored examples remain tracked.
+.Renviron
+.Renviron.*
+.env
+.env.*
+!.env.example
+credentials.json
+id_rsa
+id_ed25519
+/config/*.local.yaml
+/config/*.local.json
+
+# Private staging/archive inputs must never be copied into source.
+/private-archives/
+/public-staging/

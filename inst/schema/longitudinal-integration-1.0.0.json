@@ -1,0 +1,909 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "longitudinal-integration-1.0.0",
+  "title": "Neoantimon2 longitudinal evidence overlay",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "identity_namespaces",
+    "context_graph",
+    "sample_graph_refs",
+    "event_links",
+    "candidate_links",
+    "clonal_evidence",
+    "event_trajectories",
+    "candidate_trajectories",
+    "sample_matrix",
+    "external_clonal_runs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "longitudinal-integration-1.0.0"
+    },
+    "identity_namespaces": {
+      "type": "object"
+    },
+    "context_graph": {
+      "$ref": "#/$defs/context_graph"
+    },
+    "sample_graph_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sample_graph_ref"
+      }
+    },
+    "event_links": {
+      "type": "array"
+    },
+    "candidate_links": {
+      "type": "array"
+    },
+    "clonal_evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/clonal"
+      }
+    },
+    "event_trajectories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trajectory"
+      }
+    },
+    "candidate_trajectories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trajectory"
+      }
+    },
+    "receptor_trajectories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trajectory"
+      }
+    },
+    "hla_genotype": {
+      "type": "array"
+    },
+    "sample_matrix": {
+      "type": "array"
+    },
+    "external_clonal_runs": {
+      "const": 0
+    }
+  },
+  "$defs": {
+    "context_graph": {
+      "type": "object",
+      "required": [
+        "version",
+        "subjects",
+        "contexts",
+        "relations",
+        "treatments",
+        "evaluability",
+        "providers",
+        "sample_runs"
+      ],
+      "properties": {
+        "version": {
+          "const": "longitudinal-integration-1.0.0"
+        },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "subject_id"
+            ],
+            "properties": {
+              "subject_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "species": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "project_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cohort_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "contexts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "subject_id",
+              "sample_id"
+            ],
+            "properties": {
+              "subject_id": {
+                "type": "string"
+              },
+              "sample_id": {
+                "type": "string"
+              },
+              "specimen_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "lesion_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "region_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "biological_context_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "collection_time": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "relative_time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "time_origin": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "time_unit": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "ordinal_time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "assay_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "material_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "anatomical_site": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "disease_site": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "role": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "description": "At most one non-null temporal axis; no axis denotes unordered sampling. Labels and treatment records do not establish chronology or causation.",
+            "allOf": [
+              {
+                "not": {
+                  "required": [
+                    "collection_time",
+                    "relative_time"
+                  ],
+                  "properties": {
+                    "collection_time": {
+                      "not": {
+                        "type": "null"
+                      }
+                    },
+                    "relative_time": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "collection_time",
+                    "ordinal_time"
+                  ],
+                  "properties": {
+                    "collection_time": {
+                      "not": {
+                        "type": "null"
+                      }
+                    },
+                    "ordinal_time": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "relative_time",
+                    "ordinal_time"
+                  ],
+                  "properties": {
+                    "relative_time": {
+                      "not": {
+                        "type": "null"
+                      }
+                    },
+                    "ordinal_time": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "relations": {
+          "type": "array"
+        },
+        "treatments": {
+          "type": "array"
+        },
+        "evaluability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evaluability"
+          }
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/provider_import"
+          }
+        },
+        "sample_runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sample_run"
+          }
+        }
+      }
+    },
+    "evaluability": {
+      "type": "object",
+      "required": [
+        "sample_id",
+        "domain",
+        "feature_key",
+        "state"
+      ],
+      "properties": {
+        "sample_id": {
+          "type": "string"
+        },
+        "domain": {
+          "enum": [
+            "event",
+            "candidate",
+            "rna",
+            "ms",
+            "repertoire",
+            "hla_loh",
+            "apm"
+          ]
+        },
+        "feature_key": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "evaluated_positive",
+            "evaluated_negative",
+            "not_evaluated",
+            "insufficient_evidence",
+            "not_applicable",
+            "ambiguous"
+          ]
+        },
+        "adequate": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "assay": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "policy_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "evaluated_positive",
+                  "evaluated_negative"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "adequate",
+              "assay",
+              "evidence_ref",
+              "policy_version"
+            ],
+            "properties": {
+              "adequate": {
+                "const": true
+              },
+              "assay": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "policy_version": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "cell": {
+      "type": "object",
+      "required": [
+        "sample_id",
+        "state",
+        "observations"
+      ],
+      "properties": {
+        "sample_id": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "observed",
+            "not_observed_evaluable",
+            "not_observed_insufficient",
+            "not_evaluated",
+            "not_applicable",
+            "ambiguous"
+          ]
+        },
+        "observations": {
+          "type": "array"
+        },
+        "evaluability": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "clonal_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clonal"
+          }
+        }
+      }
+    },
+    "trajectory": {
+      "type": "object",
+      "required": [
+        "subject_id",
+        "feature_key",
+        "domain",
+        "ordering",
+        "sample_ids",
+        "cells",
+        "summary",
+        "trajectory_evidence_id"
+      ],
+      "properties": {
+        "subject_id": {
+          "type": "string"
+        },
+        "feature_key": {
+          "type": "string"
+        },
+        "domain": {
+          "enum": [
+            "event",
+            "candidate",
+            "repertoire"
+          ]
+        },
+        "ordering": {
+          "enum": [
+            "explicit_time",
+            "unordered"
+          ]
+        },
+        "sample_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cell"
+          }
+        },
+        "summary": {
+          "type": "object"
+        },
+        "trajectory_evidence_id": {
+          "type": "string"
+        }
+      }
+    },
+    "clonal": {
+      "type": "object",
+      "required": [
+        "subject_id",
+        "sample_id",
+        "provider",
+        "provider_version",
+        "provider_run_id",
+        "artifact",
+        "provider_mutation_id",
+        "mapping_status",
+        "event_ids",
+        "cluster_scope",
+        "clonal_evidence_id",
+        "mapping_policy",
+        "mapping_input_id",
+        "mapping_artifact",
+        "mapping_semantics",
+        "raw_fields"
+      ],
+      "properties": {
+        "subject_id": {
+          "type": "string"
+        },
+        "sample_id": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "provider_version": {
+          "type": "string"
+        },
+        "provider_run_id": {
+          "type": "string"
+        },
+        "artifact": {
+          "$ref": "#/$defs/artifact"
+        },
+        "event_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "mapping_status": {
+          "enum": [
+            "mapped",
+            "ambiguous",
+            "unmapped"
+          ]
+        },
+        "provider_cluster_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cluster_scope": {
+          "type": "object"
+        },
+        "cellular_prevalence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "cellular_prevalence_std": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cluster_assignment_prob": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mapping_artifact": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mapping_semantics": {
+          "$ref": "#/$defs/mapping_semantics"
+        },
+        "mapping_input_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mapping_policy": {
+          "enum": [
+            "direct-event-id-v1",
+            "explicit-table-v1"
+          ]
+        },
+        "provider_mutation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider_sample_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_event_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "configuration": {
+          "description": "Provider-defined extensible configuration; empty R lists serialize as arrays.",
+          "type": [
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "reference_build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sample_mapping": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "raw_fields": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mapping_policy": {
+                "const": "explicit-table-v1"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "mapping_input_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "mapping_artifact": {
+                "$ref": "#/$defs/artifact"
+              },
+              "mapping_semantics": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/mapping_semantics"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "description": "Physical audit provenance. path and sha256 are excluded from semantic identities.",
+      "required": [
+        "input_id",
+        "sample_id",
+        "role",
+        "version",
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "input_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "mapping_semantics": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Semantic mapping identity: declared artifact metadata and canonically sorted, deduplicated parsed rows; excludes physical path and SHA256.",
+      "required": [
+        "input_id",
+        "sample_id",
+        "role",
+        "version",
+        "rows"
+      ],
+      "properties": {
+        "input_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "const": "clonal_mapping"
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "mutation_id",
+              "sample_id",
+              "event_id"
+            ],
+            "properties": {
+              "mutation_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sample_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "event_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "provider_import": {
+      "type": "object",
+      "description": "External evidence import configuration; input_id binds a provider artifact. run_id scopes clusters. sample_mapping binds provider labels to explicit context sample IDs; this configuration never invokes inference.",
+      "required": [
+        "input_id",
+        "provider",
+        "provider_version",
+        "run_id",
+        "subject_id"
+      ],
+      "properties": {
+        "input_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mapping_input_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reference_build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "options": {
+          "description": "Provider-defined extensible configuration; empty R lists serialize as arrays.",
+          "type": [
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "sample_mapping": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "sample_run": {
+      "type": "object",
+      "description": "One completed frozen sample graph per context in aggregate mode. Clonal imports associate through context sample/subject IDs, independently of sample run bindings.",
+      "required": [
+        "sample_id",
+        "path"
+      ],
+      "properties": {
+        "sample_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "sample_graph_ref": {
+      "type": "object",
+      "required": [
+        "sample_id",
+        "binding"
+      ],
+      "properties": {
+        "sample_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "binding": {
+          "type": "object",
+          "description": "Physical completed-run provenance; excluded from trajectory identity.",
+          "required": [
+            "analysis_id",
+            "run_id",
+            "path"
+          ],
+          "properties": {
+            "analysis_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "run_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

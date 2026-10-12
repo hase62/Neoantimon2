@@ -1,0 +1,6 @@
+# NetChop 3.1
+ pos AA C score Ident
+ 5 A . 0.25 protein1
+ 14 L S 0.95 protein1
+ 14 L . 0.45 protein2
+ 9 L S 0.99 terminal

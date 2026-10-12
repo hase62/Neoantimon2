@@ -1,0 +1,39 @@
+{
+  "unsupported_states": [
+    "ambiguous",
+    "not_observed_evaluable",
+    "not_observed_insufficient",
+    "not_evaluated",
+    "not_applicable"
+  ],
+  "duplicate_policy": {
+    "version": "vaccine-set-policy-1.0.0",
+    "max_peptides": 4,
+    "required_presenters": [
+      "HLA-A*02:01",
+      "HLA-A*02:01"
+    ],
+    "allowlist": [
+      "unused:b",
+      "unused:a",
+      "unused:b"
+    ],
+    "blocklist": [
+      "blocked:b",
+      "blocked:a",
+      "blocked:b"
+    ],
+    "forbidden_residues": [
+      "Z",
+      "Z"
+    ],
+    "forbidden_motifs": [
+      "ZZ",
+      "ZZ"
+    ],
+    "require_evidence": [
+      "linked_clonal",
+      "linked_clonal"
+    ]
+  }
+}

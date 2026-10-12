@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "external-export-1.0.0",
+  "files": ["peptides.tsv", "pmhc_queries.tsv", "candidates.tsv", "origins.tsv", "candidate_origin_links.tsv", "events.tsv", "source_events.tsv", "long_read_events.tsv", "query_coverage.tsv", "annotations.json", "manifest.json"],
+  "queries": "distinct literal AA20+U sequence or sequence and full canonical mhc_key",
+  "annotations": "Lossless persisted records; arrays and objects are JSON TSV cells. annotations.json contains the complete graph, peptide provenance occurrences and source/long-read events, hypotheses and observations.",
+  "integrity": "manifest bundle_id is infra_hash of envelope without bundle_id; files use SHA256; source manifest SHA256 must match completed run",
+  "empty": "header-only TSV tables and empty JSON arrays"
+}

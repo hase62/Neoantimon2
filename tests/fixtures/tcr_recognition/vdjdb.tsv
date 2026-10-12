@@ -1,0 +1,6 @@
+gene	cdr3	cdr3.alpha	cdr3.beta	v.segm	j.segm	antigen.epitope	mhc.a	mhc.b	mhc.class	species	vdjdb.score	reference.id	antigen.gene	v.alpha	j.alpha	v.beta	j.beta	extra
+TRB	CASSIRSSYEQYF	CAVRDSNYQLIW	CASSIRSSYEQYF			GILGFVFTL	HLA-A*02:01		I	HomoSapiens	3	synthetic:paired						synthetic
+TRB	CASSIRSSYEQYF					GILGFVFTL	HLA-A*02:01		I	HomoSapiens	1	synthetic:beta						synthetic
+TRB	CASSIRSSYEQYF					GILGFVFTL	HLA-A*01:01		I	HomoSapiens	2	synthetic:conflict						synthetic
+TRB	CASSIRSSYEQYF					GILGFVFTL			I	HomoSapiens	1	synthetic:unknown						synthetic
+TRB	CASSNOTREAL					GILGFVFTL	HLA-A*02:01		I	MusMusculus								synthetic

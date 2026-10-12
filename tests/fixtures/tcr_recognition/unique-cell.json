@@ -1,0 +1,16 @@
+{
+  "Info": {
+    "version": "2.0"
+  },
+  "Cell": [
+    {
+      "cell_id": "observed",
+      "repertoire_id": "cells",
+      "rearrangements": [
+        "oa",
+        "ob"
+      ],
+      "virtual_pairing": false
+    }
+  ]
+}

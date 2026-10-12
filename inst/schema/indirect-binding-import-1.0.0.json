@@ -1,0 +1,520 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "indirect-binding-import-1.0.0",
+  "title": "indirect-binding-import-1.0.0",
+  "$ref": "#/$defs/import",
+  "$defs": {
+    "provider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "const": "NetMHCIIpan"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^3\\.2($|\\.)"
+        },
+        "build": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task": {
+          "const": "mhc2_binding"
+        },
+        "prediction_mode": {
+          "const": "BA"
+        },
+        "species": {
+          "const": "NCBITaxon:9606"
+        },
+        "arguments": {
+          "type": "object",
+          "properties": {
+            "BA": {
+              "const": true
+            }
+          },
+          "required": [
+            "BA"
+          ],
+          "additionalProperties": false
+        },
+        "supported_presenters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "supported_lengths": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1
+        },
+        "calibration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "batching": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_kind": {
+          "enum": [
+            "synthetic_fixture",
+            "precomputed_predictor_output"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "build",
+        "model",
+        "task",
+        "prediction_mode",
+        "species",
+        "arguments",
+        "supported_presenters",
+        "supported_lengths",
+        "calibration",
+        "batching",
+        "evidence_kind"
+      ],
+      "additionalProperties": false
+    },
+    "core": {
+      "type": "object",
+      "properties": {
+        "core_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{9}$"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "orientation": {
+          "enum": [
+            "forward",
+            "reverse",
+            "unknown"
+          ]
+        },
+        "register": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "ambiguous",
+            "unresolved_mapping",
+            "unsupported"
+          ]
+        }
+      },
+      "required": [
+        "core_sequence",
+        "offset",
+        "orientation",
+        "register",
+        "primary",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "raw_row": {
+      "type": "object",
+      "properties": {
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "affinity_nM": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "percentile_rank": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/core"
+          }
+        },
+        "raw_output": {
+          "type": "object"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "peptide_sequence",
+        "presenter",
+        "status",
+        "affinity_nM",
+        "percentile_rank",
+        "cores",
+        "raw_output",
+        "reason_codes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "evaluated"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "affinity_nM": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "affinity_nM": {
+                "type": "null"
+              },
+              "cores": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "import": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "indirect-binding-import-1.0.0"
+        },
+        "provider": {
+          "$ref": "#/$defs/provider"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/raw_row"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/provider_provenance"
+        }
+      },
+      "required": [
+        "version",
+        "provider",
+        "rows",
+        "provenance"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "properties": {
+                  "evidence_kind": {
+                    "const": "synthetic_fixture"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "$ref": "#/$defs/synthetic_provenance"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "properties": {
+                  "evidence_kind": {
+                    "const": "precomputed_predictor_output"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "$ref": "#/$defs/precomputed_provenance"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "synthetic_provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "synthetic_fixture"
+        },
+        "fixture_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution": {
+          "const": "not_executed"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "fixture_id",
+        "license",
+        "source",
+        "execution"
+      ],
+      "additionalProperties": false
+    },
+    "precomputed_provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "precomputed_predictor_output"
+        },
+        "query_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "result_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "executable_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "model_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "license": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "authorized_external_precomputed"
+            },
+            "terms": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "status",
+            "terms"
+          ],
+          "additionalProperties": false
+        },
+        "execution": {
+          "type": "object",
+          "properties": {
+            "origin": {
+              "const": "imported_external_execution"
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider_name": {
+              "const": "NetMHCIIpan"
+            },
+            "provider_version": {
+              "type": "string",
+              "pattern": "^3\\.2($|\\.)"
+            },
+            "command": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "origin",
+            "source",
+            "provider_name",
+            "provider_version",
+            "command"
+          ],
+          "additionalProperties": false
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "query_artifact",
+        "result_artifact",
+        "executable_artifact",
+        "model_artifact",
+        "license",
+        "execution"
+      ],
+      "additionalProperties": false
+    },
+    "provider_provenance": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/synthetic_provenance"
+        },
+        {
+          "$ref": "#/$defs/precomputed_provenance"
+        }
+      ]
+    }
+  }
+}

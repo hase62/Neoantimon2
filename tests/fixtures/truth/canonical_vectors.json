@@ -1,0 +1,84 @@
+[
+  {
+    "value": null,
+    "canonical": "N0:",
+    "sha256": "36a8ba4c0e098d79d32cb016121aadab24d203c442a29b01a37a18ce12232c6d"
+  },
+  {
+    "value": [],
+    "canonical": "A0:",
+    "sha256": "35eb24e28a8d787daa249da4af1baa76f2b826e4c1f4aa07663a0c476ef42865"
+  },
+  {
+    "value": {},
+    "canonical": "O0:",
+    "sha256": "59a61a1c69e8fb08433bd945daf29f1cc3b124a19d74e2a4c070aa70afeb42f8"
+  },
+  {
+    "value": "",
+    "canonical": "S0:",
+    "sha256": "ddb96cc8b84783be42425ddae4eeab1e528dd7cd18fd7ccc9eba246f76ecbf84"
+  },
+  {
+    "value": "é",
+    "canonical": "S2:é",
+    "sha256": "52669a268b3de8bd030d5dca3e0171b22b253b2ac8ccc8a7a238985fe419e171"
+  },
+  {
+    "value": "é",
+    "canonical": "S2:é",
+    "sha256": "52669a268b3de8bd030d5dca3e0171b22b253b2ac8ccc8a7a238985fe419e171"
+  },
+  {
+    "value": "a:b|c",
+    "canonical": "S5:a:b|c",
+    "sha256": "32f1b93904aef354846126c9197a29d3e0c4f41d8ee0dadfaaf8d16187707375"
+  },
+  {
+    "value": false,
+    "canonical": "B1:0",
+    "sha256": "f6bacc30b511f233791478f2acde42a211e5572b02ef79245a5f1a17e12fa685"
+  },
+  {
+    "value": true,
+    "canonical": "B1:1",
+    "sha256": "3bea9bb0bfeca788275706fe87a946dc6b343b5419c887eff934b6618bd4920b"
+  },
+  {
+    "value": 0,
+    "canonical": "I1:0",
+    "sha256": "bc9e34c1df51acf2c849b487f237da6bfc0b9914d76cdb023dcd0161c55ed440"
+  },
+  {
+    "value": 0.0,
+    "canonical": "D16:0000000000000000",
+    "sha256": "4aabc3bdae6bb4fd669c3eda51d3c79d426265ce09457b391833e423bdcef937"
+  },
+  {
+    "value": -0.0,
+    "canonical": "D16:0000000000000000",
+    "sha256": "4aabc3bdae6bb4fd669c3eda51d3c79d426265ce09457b391833e423bdcef937"
+  },
+  {
+    "value": 1.5,
+    "canonical": "D16:3ff8000000000000",
+    "sha256": "29ec90c1ba2808076987bd6e9b0982de57fdafd4900ec61c3741e8d856ca6ea3"
+  },
+  {
+    "value": {
+      "z": null,
+      "a": "é"
+    },
+    "canonical": "O16:S1:aS2:éS1:zN0:",
+    "sha256": "543f6b377d8fe68abd466baf69aca449cddade0fa9b7893e90b5e96976e1bc6f"
+  },
+  {
+    "value": [
+      "a",
+      null,
+      ""
+    ],
+    "canonical": "A10:S1:aN0:S0:",
+    "sha256": "f94ec6444f74f43462f73bd8d6fc37b18d705f522433229ceba06cff2e5010eb"
+  }
+]

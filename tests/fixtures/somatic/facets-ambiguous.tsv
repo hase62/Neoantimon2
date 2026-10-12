@@ -1,0 +1,3 @@
+chrom	loc.start	loc.end	tcn.em	lcn.em	cf.em	num.mark	nhet	normal_cn	quality
+1	100	160	2	0	1.0	30	12	2	0.95
+chr1	150	200	3	1	0.9	25	10	2	0.90

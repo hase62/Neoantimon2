@@ -1,0 +1,7 @@
+case	chrom	pos	ref	alt	expected_pos	expected_ref	expected_alt
+homopolymer_insertion	chrR	8	A	AA	3	C	CA
+homopolymer_deletion	chrR	7	AA	A	3	CA	C
+tandem_repeat_insertion	chrR	12	T	TAT	8	A	AAT
+tandem_repeat_deletion	chrR	12	TAT	T	8	AAT	A
+redundant_suffix	chrR	14	TG	CG	14	T	C
+redundant_prefix	chrR	15	GG	GA	16	G	A

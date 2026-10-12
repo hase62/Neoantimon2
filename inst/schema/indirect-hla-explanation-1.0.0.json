@@ -1,0 +1,2417 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "indirect-hla-explanation-1.0.0"
+    },
+    "specification_id": {
+      "const": "neo-allo-indirect-spec-0.1"
+    },
+    "profile": {
+      "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+    },
+    "profile_version": {
+      "const": "1.0.0"
+    },
+    "claim_boundary": {
+      "type": "string",
+      "pattern": "not official PIRCHE reproduction"
+    },
+    "official_reproduction": {
+      "const": false
+    },
+    "contexts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "allo_context_id": {
+            "type": "string",
+            "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+          },
+          "summary": {
+            "$ref": "#/$defs/public_context"
+          },
+          "graph": {
+            "type": "object",
+            "properties": {
+              "nodes": {
+                "type": "object",
+                "properties": {
+                  "context": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "schema_version": {
+                              "const": "allo-context-1.0.0"
+                            },
+                            "semantics": {
+                              "type": "object",
+                              "additionalProperties": true
+                            },
+                            "evaluability": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "required": [
+                            "schema_version",
+                            "semantics",
+                            "evaluability"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "source_sequence": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^hla-source-sequence-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "semantics": {
+                              "type": "object",
+                              "additionalProperties": true
+                            },
+                            "mappings": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                              }
+                            }
+                          },
+                          "required": [
+                            "semantics",
+                            "mappings"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "source_occurrence": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^hla-source-occurrence-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "semantics": {
+                              "type": "object",
+                              "additionalProperties": true
+                            },
+                            "evaluability": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "required": [
+                            "semantics",
+                            "evaluability"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "peptide_occurrence": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "$ref": "#/$defs/occurrence"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "peptide": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^peptide_key:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "ligand_sequence": {
+                              "type": "string",
+                              "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+                            }
+                          },
+                          "required": [
+                            "ligand_sequence"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "pmhc": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "$ref": "#/$defs/pmhc"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "core_assignment": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^indirect-core-assignment-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "$ref": "#/$defs/assignment"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "epitope": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^epitope_key:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "core_sequence": {
+                              "type": "string",
+                              "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{9}$"
+                            },
+                            "presenter": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          },
+                          "required": [
+                            "core_sequence",
+                            "presenter"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "self_comparison": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^self-comparison-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "$ref": "#/$defs/comparison"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^indirect-evidence-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "$ref": "#/$defs/evidence"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "self_universe": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^self-universe-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "policy": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "kind": {
+                              "enum": [
+                                "baseline",
+                                "generation",
+                                "reference",
+                                "provider_configuration"
+                              ]
+                            },
+                            "semantics": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "required": [
+                            "kind",
+                            "semantics"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "analysis": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^allo-analysis-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "phase": {
+                              "enum": [
+                                "A",
+                                "B"
+                              ]
+                            },
+                            "profile": {
+                              "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+                            },
+                            "profile_version": {
+                              "const": "1.0.0"
+                            },
+                            "readiness": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "required": [
+                            "phase"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "decision": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "$ref": "#/$defs/report_decision"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "aggregate_unit": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^epitope_key:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "$ref": "#/$defs/report_aggregate"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "candidate": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^candidate_key:[0-9a-f]{64}$"
+                        },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "peptide_key": {
+                              "type": "string",
+                              "pattern": "^peptide_key:[0-9a-f]{64}$"
+                            },
+                            "presenter": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "hla_class": {
+                              "enum": [
+                                "I",
+                                "II"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "peptide_key",
+                            "presenter",
+                            "hla_class"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "data"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "context",
+                  "source_sequence",
+                  "source_occurrence",
+                  "peptide_occurrence",
+                  "peptide",
+                  "pmhc",
+                  "core_assignment",
+                  "epitope",
+                  "self_comparison",
+                  "evidence",
+                  "self_universe",
+                  "policy",
+                  "analysis",
+                  "decision",
+                  "aggregate_unit",
+                  "candidate"
+                ],
+                "additionalProperties": false
+              },
+              "edges": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "from_type": {
+                      "enum": [
+                        "context",
+                        "source_sequence",
+                        "source_occurrence",
+                        "peptide_occurrence",
+                        "peptide",
+                        "pmhc",
+                        "core_assignment",
+                        "epitope",
+                        "self_comparison",
+                        "evidence",
+                        "self_universe",
+                        "policy",
+                        "analysis",
+                        "decision",
+                        "aggregate_unit",
+                        "candidate"
+                      ]
+                    },
+                    "from_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "relation": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "to_type": {
+                      "enum": [
+                        "context",
+                        "source_sequence",
+                        "source_occurrence",
+                        "peptide_occurrence",
+                        "peptide",
+                        "pmhc",
+                        "core_assignment",
+                        "epitope",
+                        "self_comparison",
+                        "evidence",
+                        "self_universe",
+                        "policy",
+                        "analysis",
+                        "decision",
+                        "aggregate_unit",
+                        "candidate"
+                      ]
+                    },
+                    "to_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "from_type",
+                    "from_id",
+                    "relation",
+                    "to_type",
+                    "to_id"
+                  ],
+                  "additionalProperties": false
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "nodes",
+              "edges"
+            ],
+            "additionalProperties": false
+          },
+          "included_units": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/report_aggregate"
+            }
+          },
+          "decisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/report_decision"
+            }
+          },
+          "generation_coverage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "self_searches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/search"
+            }
+          },
+          "reference_status": {
+            "enum": [
+              "evaluated",
+              "failed"
+            ]
+          },
+          "reference_reason_codes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "reconciliation": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "const": "reconciled"
+              },
+              "included_unique_core_presenter_units": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "included_pmhc_records": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "duplicate_included_union_members": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "self_excluded_unique_core_presenter_units": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "self_excluded_pmhc_records": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "binding_policy_excluded_pmhc_records": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unevaluable_pmhc_records": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "complete_count": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "conditional_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "semantics": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "status",
+              "included_unique_core_presenter_units",
+              "included_pmhc_records",
+              "duplicate_included_union_members",
+              "self_excluded_unique_core_presenter_units",
+              "self_excluded_pmhc_records",
+              "binding_policy_excluded_pmhc_records",
+              "unevaluable_pmhc_records",
+              "complete_count",
+              "conditional_count",
+              "semantics"
+            ],
+            "additionalProperties": false
+          },
+          "unidentified_self_comparisons": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "allo_context_id",
+          "summary",
+          "graph",
+          "included_units",
+          "decisions",
+          "generation_coverage",
+          "self_searches",
+          "reference_status",
+          "reference_reason_codes",
+          "reconciliation",
+          "unidentified_self_comparisons"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-hla-compatibility-1.0.0"
+        },
+        "specification_id": {
+          "const": "neo-allo-indirect-spec-0.1"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "profile_version": {
+          "const": "1.0.0"
+        },
+        "official_reproduction": {
+          "const": false
+        },
+        "audit_source": {
+          "const": "docs/development/pirche_reconstruction_matrix.md"
+        },
+        "audit_source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "audit_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target_label": {
+                "type": "string",
+                "pattern": "^neo-indirect-hla-compatibility/"
+              },
+              "application_version": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "configuration": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matrix_profile": {
+                "enum": [
+                  "G0",
+                  "G1",
+                  "G2",
+                  "G3",
+                  "G4",
+                  "G5",
+                  "G6",
+                  "G7",
+                  "outside_G0_G7"
+                ]
+              },
+              "source_labels": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "S1",
+                    "S2",
+                    "S3",
+                    "S4",
+                    "S5",
+                    "S6",
+                    "S7",
+                    "S8",
+                    "S9",
+                    "S10",
+                    "S11"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "audit_scope": {
+                "enum": [
+                  "audited",
+                  "outside_audit_scope"
+                ]
+              },
+              "official_reproduction": {
+                "const": false
+              },
+              "dimensions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "enum": [
+                        "source_locus_scope",
+                        "peptide_generation",
+                        "peptide_length",
+                        "presenter_scope",
+                        "provider_family",
+                        "provider_version_pinning",
+                        "binding_threshold",
+                        "threshold_operator",
+                        "threshold_units",
+                        "self_filter",
+                        "full_peptide_vs_core",
+                        "duplicate_unit",
+                        "aggregation",
+                        "reference_domains",
+                        "reference_release",
+                        "sequence_completion",
+                        "missing_data",
+                        "normalization",
+                        "presentation_class"
+                      ]
+                    },
+                    "status": {
+                      "enum": [
+                        "matched",
+                        "differs",
+                        "unresolved",
+                        "not_applicable",
+                        "outside_audit_scope"
+                      ]
+                    },
+                    "classification": {
+                      "enum": [
+                        "R",
+                        "A",
+                        "U",
+                        "A/U",
+                        "R/A",
+                        "outside_audit_scope"
+                      ]
+                    },
+                    "documented_behavior": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "neoantimon2_behavior": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "locator": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "dimension",
+                    "status",
+                    "classification",
+                    "documented_behavior",
+                    "neoantimon2_behavior",
+                    "locator"
+                  ],
+                  "additionalProperties": false,
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "classification": {
+                            "enum": [
+                              "U",
+                              "A",
+                              "A/U",
+                              "R/A"
+                            ]
+                          }
+                        }
+                      },
+                      "then": {
+                        "properties": {
+                          "status": {
+                            "const": "unresolved"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "minItems": 19,
+                "maxItems": 19,
+                "allOf": [
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "source_locus_scope"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "peptide_generation"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "peptide_length"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "presenter_scope"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "provider_family"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "provider_version_pinning"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "binding_threshold"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "threshold_operator"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "threshold_units"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "self_filter"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "full_peptide_vs_core"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "duplicate_unit"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "aggregation"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "reference_domains"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "reference_release"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "sequence_completion"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "missing_data"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "normalization"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "type": "object",
+                      "properties": {
+                        "dimension": {
+                          "const": "presentation_class"
+                        }
+                      },
+                      "required": [
+                        "dimension"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "audit_record_id": {
+                "type": "string",
+                "pattern": "^audit-record-sha256:[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "target_label",
+              "application_version",
+              "configuration",
+              "matrix_profile",
+              "source_labels",
+              "audit_scope",
+              "official_reproduction",
+              "dimensions",
+              "limitations",
+              "audit_record_id"
+            ],
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "audit_scope": {
+                      "const": "outside_audit_scope"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "matrix_profile": {
+                      "const": "outside_G0_G7"
+                    },
+                    "dimensions": {
+                      "items": {
+                        "properties": {
+                          "status": {
+                            "const": "outside_audit_scope"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "specification_id",
+        "profile",
+        "profile_version",
+        "official_reproduction",
+        "audit_source",
+        "audit_source_sha256",
+        "audit_boundary",
+        "targets"
+      ],
+      "additionalProperties": false,
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Descriptive frozen-matrix compatibility audit; no official reproduction"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "specification_id",
+    "profile",
+    "profile_version",
+    "claim_boundary",
+    "official_reproduction",
+    "contexts",
+    "compatibility",
+    "provenance",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Neoantimon2 literature-derived indirect-HLA evidence graph 1.0.0",
+  "$defs": {
+    "assignment": {
+      "type": "object",
+      "properties": {
+        "indirect_core_assignment_id": {
+          "type": "string",
+          "pattern": "^indirect-core-assignment-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "type": "object"
+        },
+        "epitope_key": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^epitope_key:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mismatch_annotation": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "not_evaluated"
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "const": "alignment_not_performed"
+              },
+              "minItems": 1,
+              "maxItems": 1
+            }
+          },
+          "required": [
+            "status",
+            "reason_codes"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "indirect_core_assignment_id",
+        "semantics",
+        "epitope_key",
+        "mismatch_annotation"
+      ],
+      "additionalProperties": false
+    },
+    "comparison": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "self-comparison-1.0.0"
+        },
+        "self_comparison_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-comparison-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "semantics": {
+          "$ref": "#/$defs/comparison_payload"
+        },
+        "self_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "const": "all_self_hla"
+        },
+        "status": {
+          "enum": [
+            "supported_nonself_within_scope",
+            "self_match",
+            "insufficient_search",
+            "not_evaluated",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "search_complete": {
+          "type": "boolean"
+        },
+        "biological_self_completeness_established": {
+          "const": false
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "search_ledger": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "self_comparison_id",
+        "semantics",
+        "self_subject_id",
+        "scope",
+        "status",
+        "search_complete",
+        "biological_self_completeness_established",
+        "reason_codes",
+        "matches",
+        "occurrence_ids",
+        "search_ledger"
+      ],
+      "additionalProperties": false
+    },
+    "comparison_payload": {
+      "type": "object",
+      "properties": {
+        "query_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "query_type": {
+          "enum": [
+            "full_peptide",
+            "core_pmhc"
+          ]
+        },
+        "self_universe_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-universe-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "algorithm": {
+          "type": "object"
+        },
+        "self_presentation_policy": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "query_identity",
+        "query_type",
+        "self_universe_id",
+        "algorithm",
+        "self_presentation_policy"
+      ],
+      "additionalProperties": false
+    },
+    "core": {
+      "type": "object",
+      "properties": {
+        "core_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{9}$"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "orientation": {
+          "enum": [
+            "forward",
+            "reverse",
+            "unknown"
+          ]
+        },
+        "register": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "ambiguous",
+            "unresolved_mapping",
+            "unsupported"
+          ]
+        }
+      },
+      "required": [
+        "core_sequence",
+        "offset",
+        "orientation",
+        "register",
+        "primary",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "affinity_nM": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "percentile_rank": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/core"
+          }
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^indirect-evidence-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "peptide_sequence",
+        "presenter",
+        "status",
+        "affinity_nM",
+        "percentile_rank",
+        "cores",
+        "reason_codes",
+        "evidence_id"
+      ],
+      "additionalProperties": false
+    },
+    "interval": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name",
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "occurrence": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-peptide-occurrence-1.0.0"
+        },
+        "indirect_peptide_occurrence_id": {
+          "type": "string",
+          "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "$ref": "#/$defs/occurrence_payload"
+        },
+        "hla_source_sequence_id": {
+          "type": "string",
+          "pattern": "^hla-source-sequence-id-v1:[0-9a-f]{64}$"
+        },
+        "source_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_allele_hypothesis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequence_coordinates": {
+          "const": "precursor"
+        },
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interval"
+          }
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "mismatch_annotation": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "indirect_peptide_occurrence_id",
+        "semantics",
+        "hla_source_sequence_id",
+        "source_subject_id",
+        "source_allele_hypothesis",
+        "sequence_coordinates",
+        "peptide_sequence",
+        "domains",
+        "status",
+        "mismatch_annotation"
+      ],
+      "additionalProperties": false
+    },
+    "occurrence_payload": {
+      "type": "object",
+      "properties": {
+        "source_occurrence_id": {
+          "type": "string",
+          "pattern": "^hla-source-occurrence-id-v1:[0-9a-f]{64}$"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "peptide_key": {
+          "type": "string",
+          "pattern": "^peptide_key:[0-9a-f]{64}$"
+        },
+        "generation_policy_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "source_occurrence_id",
+        "start",
+        "end",
+        "peptide_key",
+        "generation_policy_id"
+      ],
+      "additionalProperties": false
+    },
+    "pmhc": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-pmhc-evidence-1.0.0"
+        },
+        "indirect_pmhc_id": {
+          "type": "string",
+          "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "$ref": "#/$defs/pmhc_payload"
+        },
+        "candidate_key": {
+          "type": "string",
+          "pattern": "^candidate_key:[0-9a-f]{64}$"
+        },
+        "peptide_key": {
+          "type": "string",
+          "pattern": "^peptide_key:[0-9a-f]{64}$"
+        },
+        "peptide_sequence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hla_class": {
+          "enum": [
+            "I",
+            "II"
+          ]
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "provider_configuration_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "threshold_policy": {
+          "$ref": "#/$defs/threshold"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable",
+            "insufficient"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "indirect_pmhc_id",
+        "semantics",
+        "candidate_key",
+        "peptide_key",
+        "peptide_sequence",
+        "presenter",
+        "hla_class",
+        "occurrence_ids",
+        "provider_configuration_id",
+        "threshold_policy",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "pmhc_payload": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+        },
+        "candidate_key": {
+          "type": "string",
+          "pattern": "^candidate_key:[0-9a-f]{64}$"
+        },
+        "presenting_compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenting_scenario": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "candidate_key",
+        "presenting_compartment",
+        "presenting_scenario"
+      ],
+      "additionalProperties": false
+    },
+    "public_context": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-hla-result-1.0.0"
+        },
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "profile_version": {
+          "const": "1.0.0"
+        },
+        "claim_boundary": {
+          "type": "string",
+          "pattern": "not official PIRCHE reproduction"
+        },
+        "official_reproduction": {
+          "const": false
+        },
+        "evidence_kind": {
+          "enum": [
+            "synthetic_fixture",
+            "precomputed_predictor_output"
+          ]
+        },
+        "analysis_status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "completeness_status": {
+          "enum": [
+            "complete",
+            "incomplete"
+          ]
+        },
+        "complete_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "conditional_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conditional_semantics": {
+          "const": "inspectable_conditional_result_only"
+        },
+        "included_unit_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "self_excluded_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_policy_excluded_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unevaluable_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluated_presenter_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluated_presenters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "declared_presenters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "presenter": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subject_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resolution_policy": {
+                "const": "explicit_typed_alpha_beta"
+              },
+              "status": {
+                "enum": [
+                  "evaluated",
+                  "unsupported",
+                  "insufficient"
+                ]
+              },
+              "reason_codes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "presenter",
+              "subject_id",
+              "resolution_policy",
+              "status",
+              "reason_codes"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "presenter_scope": {
+          "type": "object",
+          "properties": {
+            "typing_scenario_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "complete": {
+              "type": "boolean"
+            },
+            "status": {
+              "enum": [
+                "evaluated",
+                "insufficient"
+              ]
+            },
+            "evaluated_alpha_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "evaluated_beta_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "undeclared_beta_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "typing_scenario_id",
+            "complete",
+            "status",
+            "evaluated_alpha_alleles",
+            "evaluated_beta_alleles",
+            "undeclared_beta_alleles",
+            "reason_codes"
+          ],
+          "additionalProperties": false
+        },
+        "source_hla_summary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "source_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "self_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "self_universe_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-universe-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "allo_policy_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "allo_analysis_id": {
+          "type": "string",
+          "pattern": "^allo-analysis-id-v1:[0-9a-f]{64}$"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "allo_context_id",
+        "profile",
+        "profile_version",
+        "claim_boundary",
+        "official_reproduction",
+        "evidence_kind",
+        "analysis_status",
+        "completeness_status",
+        "complete_count",
+        "conditional_count",
+        "conditional_semantics",
+        "included_unit_count",
+        "self_excluded_count",
+        "binding_policy_excluded_count",
+        "unevaluable_count",
+        "evaluated_presenter_count",
+        "evaluated_presenters",
+        "declared_presenters",
+        "presenter_scope",
+        "source_hla_summary",
+        "source_subject_id",
+        "self_subject_id",
+        "self_universe_id",
+        "allo_policy_id",
+        "allo_analysis_id",
+        "reason_codes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "completeness_status": {
+                "const": "incomplete"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "complete_count": {
+                "type": "null"
+              },
+              "analysis_status": {
+                "const": "insufficient"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "complete_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "analysis_status": {
+                "const": "evaluated"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "report_aggregate": {
+      "type": "object",
+      "properties": {
+        "counted_unit_key": {
+          "type": "string",
+          "pattern": "^epitope_key:[0-9a-f]{64}$"
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "core_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{9}$"
+        },
+        "supporting_pmhc_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "peptide_keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^peptide_key:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "full_ligands": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+          },
+          "uniqueItems": true
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "source_occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^hla-source-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "supporting_evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-evidence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "threshold_policy": {
+          "$ref": "#/$defs/threshold"
+        },
+        "inclusion_reason": {
+          "const": "supported_nonself_within_scope_under_frozen_policy"
+        }
+      },
+      "required": [
+        "counted_unit_key",
+        "presenter",
+        "core_sequence",
+        "supporting_pmhc_ids",
+        "peptide_keys",
+        "full_ligands",
+        "occurrence_ids",
+        "source_occurrence_ids",
+        "supporting_evidence_ids",
+        "threshold_policy",
+        "inclusion_reason"
+      ],
+      "additionalProperties": false
+    },
+    "report_decision": {
+      "type": "object",
+      "properties": {
+        "indirect_pmhc_id": {
+          "type": "string",
+          "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+        },
+        "epitope_key": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^epitope_key:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "self_comparison_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-comparison-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "included",
+            "excluded_self",
+            "excluded_nonbinder",
+            "unevaluable"
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "outcome_kind": {
+          "enum": [
+            "supported_self_match",
+            "provider_not_binding_under_policy",
+            "supported_nonself_within_scope",
+            "presenter_out_of_profile",
+            "provider_failure",
+            "provider_unevaluable",
+            "core_assignment_unevaluable",
+            "reference_failure",
+            "missing_self_universe",
+            "ambiguous_self_typing",
+            "insufficient_self_search",
+            "presenter_resolution_insufficient"
+          ]
+        },
+        "explanation_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "affinity_nM": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "provider_status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "provider_evidence_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^indirect-evidence-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "threshold_policy": {
+          "$ref": "#/$defs/threshold"
+        },
+        "affinity_under_frozen_policy": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "aggregation_role": {
+          "enum": [
+            "uncounted",
+            "duplicate_union_member",
+            "union_representative"
+          ]
+        },
+        "counted_unit_key": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^epitope_key:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "self_comparison_status": {
+          "enum": [
+            "supported_nonself_within_scope",
+            "self_match",
+            "insufficient_search",
+            "not_evaluated",
+            "ambiguous",
+            "not_applicable",
+            null
+          ]
+        }
+      },
+      "required": [
+        "indirect_pmhc_id",
+        "epitope_key",
+        "self_comparison_id",
+        "occurrence_ids",
+        "presenter",
+        "state",
+        "reason_codes",
+        "outcome_kind",
+        "explanation_codes",
+        "affinity_nM",
+        "provider_status",
+        "provider_evidence_id",
+        "threshold_policy",
+        "affinity_under_frozen_policy",
+        "aggregation_role",
+        "counted_unit_key",
+        "self_comparison_status"
+      ],
+      "additionalProperties": false
+    },
+    "search": {
+      "type": "object",
+      "properties": {
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "hits": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "ledger": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "presenter",
+        "complete",
+        "hits",
+        "ledger"
+      ],
+      "additionalProperties": false
+    },
+    "threshold": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "strict-affinity-1000nm-1.0.0"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "dimension": {
+          "const": "binding_affinity"
+        },
+        "comparator": {
+          "const": "<"
+        },
+        "value": {
+          "const": 1000
+        },
+        "unit": {
+          "const": "nM"
+        },
+        "precision": {
+          "const": "raw_no_rounding"
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "version",
+        "profile",
+        "dimension",
+        "comparator",
+        "value",
+        "unit",
+        "precision",
+        "citation"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "name": "airr-I",
+    "row": {
+      "mhc_class": "MHC-I",
+      "mhc_allele_1": "HLA-A*02:01",
+      "mhc_allele_2": "B2M"
+    },
+    "status": "known",
+    "key": "HLA-A*02:01"
+  },
+  {
+    "name": "internal-I",
+    "row": {
+      "mhc_class": "I",
+      "mhc_allele_1": "HLA-A*02:01"
+    },
+    "status": "known",
+    "key": "HLA-A*02:01"
+  },
+  {
+    "name": "airr-II",
+    "row": {
+      "mhc_class": "MHC-II",
+      "mhc_allele_1": "HLA-DQA1*05:01",
+      "mhc_allele_2": "HLA-DQB1*02:01"
+    },
+    "status": "known",
+    "key": "HLA-DQA1*05:01~HLA-DQB1*02:01"
+  },
+  {
+    "name": "internal-II",
+    "row": {
+      "mhc_class": "II",
+      "mhc_allele_1": "HLA-DQA1*05:01",
+      "mhc_allele_2": "HLA-DQB1*02:01"
+    },
+    "status": "known",
+    "key": "HLA-DQA1*05:01~HLA-DQB1*02:01"
+  },
+  {
+    "name": "partial-II",
+    "row": {
+      "mhc_class": "MHC-II",
+      "mhc_allele_1": "HLA-DQA1*05:01"
+    },
+    "status": "unresolved",
+    "reason": "partial_class_ii_presenter"
+  },
+  {
+    "name": "unknown-class",
+    "row": {
+      "mhc_class": "unspecified",
+      "mhc_allele_1": "HLA-DQA1*05:01",
+      "mhc_allele_2": "HLA-DQB1*02:01"
+    },
+    "status": "unresolved",
+    "reason": "unknown_mhc_class"
+  },
+  {
+    "name": "canonical",
+    "row": {
+      "mhc_key": "HLA-DQA1*05:01~HLA-DQB1*02:01"
+    },
+    "status": "known",
+    "key": "HLA-DQA1*05:01~HLA-DQB1*02:01"
+  },
+  {
+    "name": "class-conflict",
+    "row": {
+      "mhc_key": "HLA-A*02:01",
+      "mhc_class": "MHC-II",
+      "mhc_allele_1": "HLA-DQA1*05:01",
+      "mhc_allele_2": "HLA-DQB1*02:01"
+    },
+    "status": "unresolved",
+    "reason": "conflicting_mhc_class"
+  },
+  {
+    "name": "allele-conflict",
+    "row": {
+      "mhc_key": "HLA-A*02:01",
+      "mhc_class": "MHC-I",
+      "mhc_allele_1": "HLA-A*01:01"
+    },
+    "status": "unresolved",
+    "reason": "conflicting_mhc_alleles"
+  },
+  {
+    "name": "II-chain-conflict",
+    "row": {
+      "mhc_key": "HLA-DQA1*05:01~HLA-DQB1*02:01",
+      "mhc_class": "MHC-II",
+      "mhc_allele_1": "HLA-DQA1*05:01",
+      "mhc_allele_2": "HLA-DQB1*03:01"
+    },
+    "status": "unresolved",
+    "reason": "conflicting_mhc_alleles"
+  }
+]

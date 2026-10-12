@@ -1,0 +1,99 @@
+{
+  "schema_version": "tcr-recognition-1.0.0",
+  "extends": "1.1.0",
+  "identity_versions": {
+    "profile": "tcr-feature-profile-id-v1",
+    "query": "recognition-query-id-v1",
+    "evidence": "recognition-evidence-id-v1",
+    "observation": "tcr-observation-id-v1"
+  },
+  "required": [
+    "schema_version",
+    "identity_versions",
+    "run_id",
+    "artifacts",
+    "repertoire",
+    "queries",
+    "evidence",
+    "measurements",
+    "annotations",
+    "repertoire_matches",
+    "statuses",
+    "provider_runs",
+    "candidate_ids"
+  ],
+  "records": {
+    "queries": [
+      "recognition_query_id",
+      "candidate_id",
+      "receptor_feature_profile_id",
+      "provider",
+      "model",
+      "features_used",
+      "required_features",
+      "mhc_conditioning",
+      "presenter",
+      "fingerprint",
+      "input_status",
+      "sample_id"
+    ],
+    "evidence": [
+      "recognition_evidence_id",
+      "candidate_id",
+      "receptor_feature_profile_id",
+      "scope",
+      "provider",
+      "provider_version",
+      "model_version",
+      "task",
+      "metric",
+      "raw_score",
+      "rank",
+      "probability",
+      "score_direction",
+      "status",
+      "mhc_conditioning",
+      "input_feature_completeness",
+      "applicability_status",
+      "capability_reason",
+      "run_id",
+      "fingerprint",
+      "raw_artifact",
+      "metadata"
+    ]
+  },
+  "scopes": [
+    "peptide_intrinsic",
+    "tcr_specific",
+    "experimental_reactivity",
+    "external_annotation"
+  ],
+  "pairing_states": [
+    "observed_pair",
+    "virtual_or_inferred_pair",
+    "unpaired_chain",
+    "ambiguous_pairing",
+    "not_run/query_limit"
+  ],
+  "invariants": [
+    "no_priority_changes",
+    "no_cross_model_consensus",
+    "no_fabricated_bulk_pairing",
+    "no_negative_evidence_from_absence",
+    "no_external_patient_data_transmission"
+  ],
+  "functional_states": [
+    "functional",
+    "explicitly_nonfunctional",
+    "functionality_unknown",
+    "functionality_conflicting"
+  ],
+  "functionality_policy": {
+    "scope": "sample_bound_observation_evidence",
+    "unknown_only": "prediction_permitted_with_explicit_annotation",
+    "explicitly_nonfunctional": "nonfunctional_receptor/no_prediction_evidence",
+    "conflicting_or_mixed_unresolved": "receptor_functionality_unresolved/no_prediction_evidence",
+    "any_functional_support": "prediction_permitted",
+    "profile_identity": "functionality_excluded"
+  }
+}

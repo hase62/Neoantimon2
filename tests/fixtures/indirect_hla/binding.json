@@ -1,0 +1,208 @@
+{
+  "version": "indirect-binding-import-1.0.0",
+  "provider": {
+    "name": "NetMHCIIpan",
+    "version": "3.2",
+    "build": "synthetic-fixture-build; no executable run",
+    "model": "synthetic-fixture-model; not historical weights",
+    "task": "mhc2_binding",
+    "species": "NCBITaxon:9606",
+    "arguments": {
+      "BA": true
+    },
+    "supported_presenters": [
+      "HLA-DRA*01:01~HLA-DRB1*01:01"
+    ],
+    "supported_lengths": [
+      15
+    ],
+    "calibration": "none; hand-authored synthetic fixture",
+    "batching": "unique ligand/presenter queries",
+    "evidence_kind": "synthetic_fixture",
+    "prediction_mode": "BA"
+  },
+  "rows": [
+    {
+      "peptide_sequence": "ACDEFGHIKLMNPQR",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "status": "evaluated",
+      "affinity_nM": 500.0,
+      "percentile_rank": null,
+      "cores": [
+        {
+          "core_sequence": "ACDEFGHIK",
+          "offset": 0,
+          "orientation": "forward",
+          "register": "primary:0",
+          "primary": true,
+          "status": "evaluated"
+        }
+      ],
+      "raw_output": {
+        "affinity": "500.0",
+        "origin": "hand-authored mechanics fixture"
+      },
+      "reason_codes": [],
+      "provenance": {
+        "label": "synthetic; not actual NetMHCIIpan predictions"
+      }
+    },
+    {
+      "peptide_sequence": "CDEFGHIKLMNPQRS",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "status": "evaluated",
+      "affinity_nM": 500.0,
+      "percentile_rank": null,
+      "cores": [
+        {
+          "core_sequence": "CDEFGHIKL",
+          "offset": 0,
+          "orientation": "forward",
+          "register": "primary:0",
+          "primary": true,
+          "status": "evaluated"
+        }
+      ],
+      "raw_output": {
+        "affinity": "500.0",
+        "origin": "hand-authored mechanics fixture"
+      },
+      "reason_codes": [],
+      "provenance": {
+        "label": "synthetic; not actual NetMHCIIpan predictions"
+      }
+    },
+    {
+      "peptide_sequence": "DEFGHIKLMNPQRST",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "status": "evaluated",
+      "affinity_nM": 500.0,
+      "percentile_rank": null,
+      "cores": [
+        {
+          "core_sequence": "DEFGHIKLM",
+          "offset": 0,
+          "orientation": "forward",
+          "register": "primary:0",
+          "primary": true,
+          "status": "evaluated"
+        }
+      ],
+      "raw_output": {
+        "affinity": "500.0",
+        "origin": "hand-authored mechanics fixture"
+      },
+      "reason_codes": [],
+      "provenance": {
+        "label": "synthetic; not actual NetMHCIIpan predictions"
+      }
+    },
+    {
+      "peptide_sequence": "EFGHIKLMNPQRSTV",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "status": "evaluated",
+      "affinity_nM": 500.0,
+      "percentile_rank": null,
+      "cores": [
+        {
+          "core_sequence": "EFGHIKLMN",
+          "offset": 0,
+          "orientation": "forward",
+          "register": "primary:0",
+          "primary": true,
+          "status": "evaluated"
+        }
+      ],
+      "raw_output": {
+        "affinity": "500.0",
+        "origin": "hand-authored mechanics fixture"
+      },
+      "reason_codes": [],
+      "provenance": {
+        "label": "synthetic; not actual NetMHCIIpan predictions"
+      }
+    },
+    {
+      "peptide_sequence": "FGHIKLMNPQRSTVW",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "status": "evaluated",
+      "affinity_nM": 500.0,
+      "percentile_rank": null,
+      "cores": [
+        {
+          "core_sequence": "FGHIKLMNP",
+          "offset": 0,
+          "orientation": "forward",
+          "register": "primary:0",
+          "primary": true,
+          "status": "evaluated"
+        }
+      ],
+      "raw_output": {
+        "affinity": "500.0",
+        "origin": "hand-authored mechanics fixture"
+      },
+      "reason_codes": [],
+      "provenance": {
+        "label": "synthetic; not actual NetMHCIIpan predictions"
+      }
+    },
+    {
+      "peptide_sequence": "GHIKLMNPQRSTVWY",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "status": "evaluated",
+      "affinity_nM": 500.0,
+      "percentile_rank": null,
+      "cores": [
+        {
+          "core_sequence": "GHIKLMNPQ",
+          "offset": 0,
+          "orientation": "forward",
+          "register": "primary:0",
+          "primary": true,
+          "status": "evaluated"
+        }
+      ],
+      "raw_output": {
+        "affinity": "500.0",
+        "origin": "hand-authored mechanics fixture"
+      },
+      "reason_codes": [],
+      "provenance": {
+        "label": "synthetic; not actual NetMHCIIpan predictions"
+      }
+    },
+    {
+      "peptide_sequence": "ACDEFGHIKAAAAAA",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "status": "evaluated",
+      "affinity_nM": 500.0,
+      "percentile_rank": null,
+      "cores": [
+        {
+          "core_sequence": "ACDEFGHIK",
+          "offset": 0,
+          "orientation": "forward",
+          "register": "primary:0",
+          "primary": true,
+          "status": "evaluated"
+        }
+      ],
+      "raw_output": {
+        "affinity": "500.0",
+        "origin": "hand-authored mechanics fixture"
+      },
+      "reason_codes": [],
+      "provenance": {
+        "label": "synthetic; not actual NetMHCIIpan predictions"
+      }
+    }
+  ],
+  "provenance": {
+    "kind": "synthetic_fixture",
+    "fixture_id": "indirect-hla-mechanics-1",
+    "license": "synthetic records only; no predictor redistributed",
+    "source": "hand-authored mechanics oracle; no historical executable or weights",
+    "execution": "not_executed"
+  }
+}

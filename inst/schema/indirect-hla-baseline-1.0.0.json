@@ -1,0 +1,1982 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "indirect-hla-baseline-1.0.0",
+  "title": "indirect-hla-baseline-1.0.0",
+  "$ref": "#/$defs/baseline",
+  "$defs": {
+    "threshold": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "strict-affinity-1000nm-1.0.0"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "dimension": {
+          "const": "binding_affinity"
+        },
+        "comparator": {
+          "const": "<"
+        },
+        "value": {
+          "const": 1000
+        },
+        "unit": {
+          "const": "nM"
+        },
+        "precision": {
+          "const": "raw_no_rounding"
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "version",
+        "profile",
+        "dimension",
+        "comparator",
+        "value",
+        "unit",
+        "precision",
+        "citation"
+      ],
+      "additionalProperties": false
+    },
+    "binding": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "manifest": {
+          "$ref": "#/$defs/import"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "presenter_input": {
+      "type": "object",
+      "properties": {
+        "scenario_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolution_policy": {
+          "const": "explicit_typed_alpha_beta"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "subject_id",
+        "presenter",
+        "resolution_policy"
+      ],
+      "additionalProperties": false
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "indirect-hla-baseline-1.0.0"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "presenters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/presenter_input"
+          }
+        },
+        "provider": {
+          "$ref": "#/$defs/binding"
+        }
+      },
+      "required": [
+        "version",
+        "profile",
+        "presenters",
+        "provider"
+      ],
+      "additionalProperties": false
+    },
+    "provider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "const": "NetMHCIIpan"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^3\\.2($|\\.)"
+        },
+        "build": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task": {
+          "const": "mhc2_binding"
+        },
+        "prediction_mode": {
+          "const": "BA"
+        },
+        "species": {
+          "const": "NCBITaxon:9606"
+        },
+        "arguments": {
+          "type": "object",
+          "properties": {
+            "BA": {
+              "const": true
+            }
+          },
+          "required": [
+            "BA"
+          ],
+          "additionalProperties": false
+        },
+        "supported_presenters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "supported_lengths": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1
+        },
+        "calibration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "batching": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_kind": {
+          "enum": [
+            "synthetic_fixture",
+            "precomputed_predictor_output"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "build",
+        "model",
+        "task",
+        "prediction_mode",
+        "species",
+        "arguments",
+        "supported_presenters",
+        "supported_lengths",
+        "calibration",
+        "batching",
+        "evidence_kind"
+      ],
+      "additionalProperties": false
+    },
+    "core": {
+      "type": "object",
+      "properties": {
+        "core_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{9}$"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "orientation": {
+          "enum": [
+            "forward",
+            "reverse",
+            "unknown"
+          ]
+        },
+        "register": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "ambiguous",
+            "unresolved_mapping",
+            "unsupported"
+          ]
+        }
+      },
+      "required": [
+        "core_sequence",
+        "offset",
+        "orientation",
+        "register",
+        "primary",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "raw_row": {
+      "type": "object",
+      "properties": {
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "affinity_nM": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "percentile_rank": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/core"
+          }
+        },
+        "raw_output": {
+          "type": "object"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "peptide_sequence",
+        "presenter",
+        "status",
+        "affinity_nM",
+        "percentile_rank",
+        "cores",
+        "raw_output",
+        "reason_codes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "evaluated"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "affinity_nM": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "affinity_nM": {
+                "type": "null"
+              },
+              "cores": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "import": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "indirect-binding-import-1.0.0"
+        },
+        "provider": {
+          "$ref": "#/$defs/provider"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/raw_row"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/provider_provenance"
+        }
+      },
+      "required": [
+        "version",
+        "provider",
+        "rows",
+        "provenance"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "properties": {
+                  "evidence_kind": {
+                    "const": "synthetic_fixture"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "$ref": "#/$defs/synthetic_provenance"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "provider": {
+                "properties": {
+                  "evidence_kind": {
+                    "const": "precomputed_predictor_output"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "$ref": "#/$defs/precomputed_provenance"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "affinity_nM": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "percentile_rank": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/core"
+          }
+        },
+        "raw_output": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array",
+              "maxItems": 0
+            }
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provenance": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "array",
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^indirect-evidence-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_output_alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "peptide_sequence",
+        "presenter",
+        "status",
+        "affinity_nM",
+        "percentile_rank",
+        "cores",
+        "raw_output",
+        "reason_codes",
+        "provenance",
+        "evidence_id",
+        "raw_output_alternatives"
+      ],
+      "additionalProperties": false
+    },
+    "occurrence_payload": {
+      "type": "object",
+      "properties": {
+        "source_occurrence_id": {
+          "type": "string",
+          "pattern": "^hla-source-occurrence-id-v1:[0-9a-f]{64}$"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "peptide_key": {
+          "type": "string",
+          "pattern": "^peptide_key:[0-9a-f]{64}$"
+        },
+        "generation_policy_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "source_occurrence_id",
+        "start",
+        "end",
+        "peptide_key",
+        "generation_policy_id"
+      ],
+      "additionalProperties": false
+    },
+    "interval": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name",
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "occurrence": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-peptide-occurrence-1.0.0"
+        },
+        "indirect_peptide_occurrence_id": {
+          "type": "string",
+          "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "$ref": "#/$defs/occurrence_payload"
+        },
+        "hla_source_sequence_id": {
+          "type": "string",
+          "pattern": "^hla-source-sequence-id-v1:[0-9a-f]{64}$"
+        },
+        "source_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_allele_hypothesis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequence_coordinates": {
+          "const": "precursor"
+        },
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interval"
+          }
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "mismatch_annotation": {
+          "type": "object"
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "indirect_peptide_occurrence_id",
+        "semantics",
+        "hla_source_sequence_id",
+        "source_subject_id",
+        "source_allele_hypothesis",
+        "sequence_coordinates",
+        "peptide_sequence",
+        "domains",
+        "status",
+        "mismatch_annotation",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "comparison_payload": {
+      "type": "object",
+      "properties": {
+        "query_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "query_type": {
+          "enum": [
+            "full_peptide",
+            "core_pmhc"
+          ]
+        },
+        "self_universe_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-universe-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "algorithm": {
+          "type": "object"
+        },
+        "self_presentation_policy": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "query_identity",
+        "query_type",
+        "self_universe_id",
+        "algorithm",
+        "self_presentation_policy"
+      ],
+      "additionalProperties": false
+    },
+    "comparison": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "self-comparison-1.0.0"
+        },
+        "self_comparison_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-comparison-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "semantics": {
+          "$ref": "#/$defs/comparison_payload"
+        },
+        "self_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "const": "all_self_hla"
+        },
+        "status": {
+          "enum": [
+            "supported_nonself_within_scope",
+            "self_match",
+            "insufficient_search",
+            "not_evaluated",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "search_complete": {
+          "type": "boolean"
+        },
+        "biological_self_completeness_established": {
+          "const": false
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "search_ledger": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "self_comparison_id",
+        "semantics",
+        "self_subject_id",
+        "scope",
+        "status",
+        "search_complete",
+        "biological_self_completeness_established",
+        "reason_codes",
+        "matches",
+        "occurrence_ids",
+        "search_ledger",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "pmhc_payload": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+        },
+        "candidate_key": {
+          "type": "string",
+          "pattern": "^candidate_key:[0-9a-f]{64}$"
+        },
+        "presenting_compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenting_scenario": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "candidate_key",
+        "presenting_compartment",
+        "presenting_scenario"
+      ],
+      "additionalProperties": false
+    },
+    "assignment": {
+      "type": "object",
+      "properties": {
+        "indirect_core_assignment_id": {
+          "type": "string",
+          "pattern": "^indirect-core-assignment-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "type": "object"
+        },
+        "epitope_key": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^epitope_key:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mismatch_annotation": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "not_evaluated"
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "const": "alignment_not_performed"
+              },
+              "minItems": 1,
+              "maxItems": 1
+            }
+          },
+          "required": [
+            "status",
+            "reason_codes"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "indirect_core_assignment_id",
+        "semantics",
+        "epitope_key",
+        "mismatch_annotation"
+      ],
+      "additionalProperties": false
+    },
+    "pmhc": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-pmhc-evidence-1.0.0"
+        },
+        "indirect_pmhc_id": {
+          "type": "string",
+          "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "$ref": "#/$defs/pmhc_payload"
+        },
+        "candidate_key": {
+          "type": "string",
+          "pattern": "^candidate_key:[0-9a-f]{64}$"
+        },
+        "peptide_key": {
+          "type": "string",
+          "pattern": "^peptide_key:[0-9a-f]{64}$"
+        },
+        "peptide_sequence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hla_class": {
+          "enum": [
+            "I",
+            "II"
+          ]
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "provider_configuration_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "binding_evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "threshold_policy": {
+          "$ref": "#/$defs/threshold"
+        },
+        "core_assignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assignment"
+          }
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable",
+            "insufficient"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "indirect_pmhc_id",
+        "semantics",
+        "candidate_key",
+        "peptide_key",
+        "peptide_sequence",
+        "presenter",
+        "hla_class",
+        "occurrence_ids",
+        "provider_configuration_id",
+        "binding_evidence",
+        "threshold_policy",
+        "core_assignments",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "generation": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "object"
+        },
+        "generation_policy_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "occurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/occurrence"
+          }
+        },
+        "ledger": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "policy",
+        "generation_policy_id",
+        "occurrences",
+        "ledger",
+        "complete"
+      ],
+      "additionalProperties": false
+    },
+    "presenter": {
+      "type": "object",
+      "properties": {
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolution_policy": {
+          "const": "explicit_typed_alpha_beta"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "insufficient"
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "presenter",
+        "subject_id",
+        "resolution_policy",
+        "status",
+        "reason_codes"
+      ],
+      "additionalProperties": false
+    },
+    "search": {
+      "type": "object",
+      "properties": {
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "hits": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "ledger": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "presenter",
+        "complete",
+        "hits",
+        "ledger"
+      ],
+      "additionalProperties": false
+    },
+    "unit": {
+      "type": "object",
+      "properties": {
+        "indirect_pmhc_id": {
+          "type": "string",
+          "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+        },
+        "epitope_key": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^epitope_key:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "self_comparison_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-comparison-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "included",
+            "excluded_self",
+            "excluded_nonbinder",
+            "unevaluable"
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "indirect_pmhc_id",
+        "epitope_key",
+        "self_comparison_id",
+        "occurrence_ids",
+        "presenter",
+        "state",
+        "reason_codes"
+      ],
+      "additionalProperties": false
+    },
+    "attribution": {
+      "type": "object",
+      "properties": {
+        "source_allele": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complete_count": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conditional_included_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "member_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^epitope_key:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "excluded_self_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "excluded_nonbinder_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unevaluable_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ligand_diagnostic_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "analysis_complete": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "conditional_count_is_not_a_lower_bound": {
+          "const": true
+        }
+      },
+      "required": [
+        "source_allele",
+        "presenter",
+        "complete_count",
+        "conditional_included_count",
+        "member_ids",
+        "excluded_self_count",
+        "excluded_nonbinder_count",
+        "unevaluable_count",
+        "ligand_diagnostic_count",
+        "analysis_complete",
+        "status",
+        "conditional_count_is_not_a_lower_bound"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "analysis_complete": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "complete_count": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "complete_count": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "complete_count": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conditional_included_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "member_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^epitope_key:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "excluded_self_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "excluded_nonbinder_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unevaluable_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ligand_diagnostic_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "analysis_complete": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "conditional_count_is_not_a_lower_bound": {
+          "const": true
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "coverage": {
+          "type": "object"
+        },
+        "source_attributed_counts_may_overlap": {
+          "const": true
+        }
+      },
+      "required": [
+        "complete_count",
+        "conditional_included_count",
+        "member_ids",
+        "excluded_self_count",
+        "excluded_nonbinder_count",
+        "unevaluable_count",
+        "ligand_diagnostic_count",
+        "analysis_complete",
+        "status",
+        "conditional_count_is_not_a_lower_bound",
+        "reason_codes",
+        "coverage",
+        "source_attributed_counts_may_overlap"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "analysis_complete": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "complete_count": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "complete_count": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "result_summary": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+        },
+        "complete_count": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conditional_included_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "member_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^epitope_key:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "excluded_self_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "excluded_nonbinder_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unevaluable_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ligand_diagnostic_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "analysis_complete": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "conditional_count_is_not_a_lower_bound": {
+          "const": true
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "coverage": {
+          "type": "object"
+        },
+        "source_attributed_counts_may_overlap": {
+          "const": true
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "complete_count",
+        "conditional_included_count",
+        "member_ids",
+        "excluded_self_count",
+        "excluded_nonbinder_count",
+        "unevaluable_count",
+        "ligand_diagnostic_count",
+        "analysis_complete",
+        "status",
+        "conditional_count_is_not_a_lower_bound",
+        "reason_codes",
+        "coverage",
+        "source_attributed_counts_may_overlap"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "analysis_complete": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "complete_count": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "complete_count": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+        },
+        "generation": {
+          "$ref": "#/$defs/generation"
+        },
+        "presenters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/presenter"
+          }
+        },
+        "self_universe_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-universe-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "self_searches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/search"
+          }
+        },
+        "pmhcs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pmhc"
+          }
+        },
+        "comparisons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/comparison"
+          }
+        },
+        "baseline_units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/unit"
+          }
+        },
+        "source_presenter_summaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attribution"
+          }
+        },
+        "summary": {
+          "$ref": "#/$defs/summary"
+        },
+        "presenter_scope": {
+          "type": "object",
+          "properties": {
+            "typing_scenario_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "complete": {
+              "type": "boolean"
+            },
+            "status": {
+              "enum": [
+                "evaluated",
+                "insufficient"
+              ]
+            },
+            "evaluated_alpha_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "evaluated_beta_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "undeclared_beta_alleles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "typing_scenario_id",
+            "complete",
+            "status",
+            "evaluated_alpha_alleles",
+            "evaluated_beta_alleles",
+            "undeclared_beta_alleles",
+            "reason_codes"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "generation",
+        "presenters",
+        "self_universe_id",
+        "self_searches",
+        "pmhcs",
+        "comparisons",
+        "baseline_units",
+        "source_presenter_summaries",
+        "summary",
+        "presenter_scope"
+      ],
+      "additionalProperties": false
+    },
+    "bound_provider": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-binding-import-1.0.0"
+        },
+        "semantics": {
+          "$ref": "#/$defs/provider"
+        },
+        "provider_configuration_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/provider_provenance"
+        }
+      },
+      "required": [
+        "schema_version",
+        "semantics",
+        "provider_configuration_id",
+        "rows",
+        "provenance"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "semantics": {
+                "properties": {
+                  "evidence_kind": {
+                    "const": "synthetic_fixture"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "$ref": "#/$defs/synthetic_provenance"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "semantics": {
+                "properties": {
+                  "evidence_kind": {
+                    "const": "precomputed_predictor_output"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "$ref": "#/$defs/precomputed_provenance"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-hla-baseline-1.0.0"
+        },
+        "phase": {
+          "const": "B"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "profile_version": {
+          "const": "1.0.0"
+        },
+        "specification_id": {
+          "const": "neo-allo-indirect-spec-0.1"
+        },
+        "claim": {
+          "const": "Neoantimon2 literature-derived molecular baseline; not official PIRCHE reproduction or a clinical risk score"
+        },
+        "allo_analysis_id": {
+          "type": "string",
+          "pattern": "^allo-analysis-id-v1:[0-9a-f]{64}$"
+        },
+        "allo_policy_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "policy": {
+          "type": "object"
+        },
+        "provider": {
+          "$ref": "#/$defs/bound_provider"
+        },
+        "contexts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/context"
+          }
+        },
+        "summaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/result_summary"
+          }
+        },
+        "provenance": {
+          "type": "object"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "phase",
+        "profile",
+        "profile_version",
+        "specification_id",
+        "claim",
+        "allo_analysis_id",
+        "allo_policy_id",
+        "policy",
+        "provider",
+        "contexts",
+        "summaries",
+        "provenance",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "synthetic_provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "synthetic_fixture"
+        },
+        "fixture_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution": {
+          "const": "not_executed"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "fixture_id",
+        "license",
+        "source",
+        "execution"
+      ],
+      "additionalProperties": false
+    },
+    "precomputed_provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "precomputed_predictor_output"
+        },
+        "query_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "result_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "executable_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "model_artifact": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reference": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "identity",
+            "reference",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "license": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "authorized_external_precomputed"
+            },
+            "terms": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "status",
+            "terms"
+          ],
+          "additionalProperties": false
+        },
+        "execution": {
+          "type": "object",
+          "properties": {
+            "origin": {
+              "const": "imported_external_execution"
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider_name": {
+              "const": "NetMHCIIpan"
+            },
+            "provider_version": {
+              "type": "string",
+              "pattern": "^3\\.2($|\\.)"
+            },
+            "command": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "origin",
+            "source",
+            "provider_name",
+            "provider_version",
+            "command"
+          ],
+          "additionalProperties": false
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "query_artifact",
+        "result_artifact",
+        "executable_artifact",
+        "model_artifact",
+        "license",
+        "execution"
+      ],
+      "additionalProperties": false
+    },
+    "provider_provenance": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/synthetic_provenance"
+        },
+        {
+          "$ref": "#/$defs/precomputed_provenance"
+        }
+      ]
+    }
+  }
+}

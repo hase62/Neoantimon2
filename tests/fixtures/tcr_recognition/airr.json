@@ -1,0 +1,72 @@
+{
+  "Info": {
+    "version": "2.0"
+  },
+  "Repertoire": [
+    {
+      "repertoire_id": "cells",
+      "study": {
+        "study_id": "synthetic-study"
+      },
+      "sample": [
+        {
+          "sample_id": "sample-1"
+        }
+      ]
+    }
+  ],
+  "Cell": [
+    {
+      "cell_id": "observed",
+      "repertoire_id": "cells",
+      "rearrangements": [
+        "oa",
+        "ob"
+      ],
+      "virtual_pairing": false,
+      "t_cell_type": "CD8"
+    },
+    {
+      "cell_id": "virtual",
+      "repertoire_id": "cells",
+      "rearrangements": [
+        "va",
+        "vb"
+      ],
+      "virtual_pairing": true
+    },
+    {
+      "cell_id": "multiple",
+      "repertoire_id": "cells",
+      "rearrangements": [
+        "ma1",
+        "ma2",
+        "mb"
+      ],
+      "virtual_pairing": false
+    },
+    {
+      "cell_id": "domain",
+      "repertoire_id": "cells",
+      "rearrangements": [],
+      "receptors": [
+        "full"
+      ],
+      "virtual_pairing": false
+    }
+  ],
+  "Receptor": [
+    {
+      "receptor_id": "full",
+      "receptor_type": "TCR",
+      "receptor_hash": "3b454d7fcb485ae78f65cc6eefe58de7427026f9a4ae707ba77ef42ffe098470",
+      "receptor_variable_domain_1_aa": "EVQLVESGGGLVQPGGSLRLSCAASCASSIRSSYEQYFGQGTLVTVSS",
+      "receptor_variable_domain_1_locus": "TRB",
+      "receptor_variable_domain_2_aa": "DVVMTQSPLSLPVTLGQPASISCCAVRDSNYQLIWFGQGTKVEIK",
+      "receptor_variable_domain_2_locus": "TRA",
+      "receptor_ref": [
+        "synthetic:full"
+      ]
+    }
+  ]
+}

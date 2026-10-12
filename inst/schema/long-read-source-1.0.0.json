@@ -1,0 +1,23 @@
+{
+  "version": "long-read-source-1.0.0",
+  "identity_schema_version": "long-read-isoform-id-v1",
+  "extends": "1.1.0",
+  "sequence_authority": "REFERENCE_GENOME",
+  "parser_policy": "long-read-provider-parser-v1",
+  "reference_comparison_policy": "long-read-reference-comparison-v1",
+  "reconstruction_policy": "long-read-reconstruction-v1",
+  "orf_policies": ["long-read-reference-orf-v1", "long-read-provider-orf-v1", "noncanonical-orf-v1"],
+  "required": ["schema_version", "identity_schema_version", "artifacts", "observations", "structures", "events", "hypotheses", "origins", "peptides", "candidates", "self_matches"],
+  "records": {
+    "observations": ["long_read_observation_id", "provider", "provider_version", "provider_transcript_id", "context", "artifact", "metadata", "parser_version", "reference_identity"],
+    "structures": ["isoform_structure_id", "structure"],
+    "events": ["long_read_source_event_id", "isoform_structure_id", "context", "observation_ids", "normal_observation_ids", "matched_normal_status", "altered_transcript", "structural_comparison", "orf_unavailable"],
+    "hypotheses": ["long_read_source_event_id", "isoform_structure_id", "orf", "observation_ids"]
+  },
+  "identity_fields": ["reference_build", "contig", "strand", "exons", "junctions", "transcript_start", "transcript_end"],
+  "de_novo_aug_default": false,
+  "de_novo_start_codons": ["ATG"],
+  "novelty_anchor_required": true,
+  "grading_status": "NOT_GRADED",
+  "grade_reason": "LONG_READ_PRIORITY_POLICY_NOT_IMPLEMENTED"
+}

@@ -1,0 +1,5 @@
+mutation_id	sample_id	event_id
+m1	S1	e1
+m1	S2	e2
+ambiguous	S1	e1
+ambiguous	S1	e3

@@ -1,0 +1,5 @@
+##fileformat=VCFv4.2
+##contig=<ID=chr1,length=120>
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+chr1	1	sv1	A	<DEL>	.	PASS	END=10
+chr1	5	bnd1	A	A]chr1:20]	.	PASS	MATEID=bnd2

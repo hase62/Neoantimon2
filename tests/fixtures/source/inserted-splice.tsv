@@ -1,0 +1,4 @@
+source_record_id	source_type	gene_id	contig	strand	donor	acceptor	transcript_id	observed_status	retained_start	retained_end
+retained-in-frame	retained_intron	GINSERT	chrInserted	+	36	79	TXINSERT	specified	37	78
+donor-in-frame	alternative_donor	GINSERT	chrInserted	+	72	79	TXINSERT	specified		
+acceptor-in-frame	alternative_acceptor	GINSERT	chrInserted	+	36	43	TXINSERT	specified		

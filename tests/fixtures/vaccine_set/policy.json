@@ -1,0 +1,7 @@
+{
+  "version": "vaccine-set-policy-1.0.0",
+  "max_peptides": 4,
+  "min_class_i": 2,
+  "min_class_ii": 1,
+  "required_presenters": ["HLA-A*02:01", "HLA-B*07:02", "HLA-DRA*01:01~HLA-DRB1*04:01"]
+}

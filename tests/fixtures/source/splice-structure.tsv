@@ -1,0 +1,2 @@
+source_record_id	source_type	gene_id	contig	strand	donor	acceptor	transcript_id	observed_status	junction_reads
+novel-1	novel_junction	G1.1	chr1	+	7	21	TA.1	observed	7

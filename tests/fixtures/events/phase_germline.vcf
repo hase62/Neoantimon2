@@ -1,0 +1,7 @@
+##fileformat=VCFv4.2
+##source=GermlineCaller
+##contig=<ID=chr1,length=120>
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phase set">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	sample-1
+chr1	3	.	G	T	.	PASS	.	GT:PS	1|0:44

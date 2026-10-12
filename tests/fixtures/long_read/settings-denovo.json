@@ -1,0 +1,10 @@
+{
+  "version": "long-read-run-settings-v1",
+  "bindings": [
+    {
+      "model_input_id": "model",
+      "de_novo_aug": true,
+      "sequencing_technology": "ONT_direct_RNA"
+    }
+  ]
+}

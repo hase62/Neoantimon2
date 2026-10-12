@@ -1,0 +1,305 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "allo-context-1.0.0",
+  "$ref": "#/$defs/context",
+  "$defs": {
+    "evaluability": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "evaluated",
+            "insufficient",
+            "ambiguous",
+            "unavailable",
+            "unsupported",
+            "failed",
+            "insufficient_search",
+            "not_applicable",
+            "not_evaluated"
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "required_components": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "examined_components": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "value": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "reason_codes",
+        "required_components",
+        "examined_components",
+        "scope",
+        "evidence_refs",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retrieved_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_lineage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cellular_origin_evidence_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sampling_time": {
+          "type": "string",
+          "minLength": 1
+        },
+        "display_label": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "empty_or_provenance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/provenance"
+        },
+        {
+          "type": "array",
+          "maxItems": 0
+        }
+      ]
+    },
+    "context_semantics": {
+      "type": "object",
+      "properties": {
+        "transplant_donor_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transplant_recipient_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "self_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenter_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "responding_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tissue": {
+          "type": "string",
+          "minLength": 1
+        },
+        "apc_compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occasion_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_subject_role": {
+          "enum": [
+            "donor",
+            "recipient"
+          ]
+        },
+        "self_subject_role": {
+          "enum": [
+            "donor",
+            "recipient"
+          ]
+        },
+        "presenter_subject_role": {
+          "enum": [
+            "donor",
+            "recipient"
+          ]
+        },
+        "responding_subject_role": {
+          "enum": [
+            "donor",
+            "recipient"
+          ]
+        },
+        "transplant_type": {
+          "enum": [
+            "SOT",
+            "HSCT"
+          ]
+        },
+        "scenario_id": {
+          "enum": [
+            "sot_recipient_response",
+            "hsct_graft_versus_host_donor_apc",
+            "hsct_host_versus_graft_recipient_apc"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "donor_to_recipient",
+            "recipient_to_donor"
+          ]
+        },
+        "claim_level": {
+          "const": "hypothetical_molecular_scenario"
+        }
+      },
+      "required": [
+        "transplant_donor_subject_id",
+        "transplant_recipient_subject_id",
+        "source_subject_id",
+        "self_subject_id",
+        "presenter_subject_id",
+        "responding_subject_id",
+        "tissue",
+        "apc_compartment",
+        "occasion_id",
+        "source_subject_role",
+        "self_subject_role",
+        "presenter_subject_role",
+        "responding_subject_role",
+        "transplant_type",
+        "scenario_id",
+        "direction",
+        "claim_level"
+      ],
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "allo-context-1.0.0"
+        },
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[a-f0-9]{64}$"
+        },
+        "semantics": {
+          "$ref": "#/$defs/context_semantics"
+        },
+        "frozen_projection": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "allo_hla"
+            },
+            "patient_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_subject_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "self_subject_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "presenter_subject_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "direction": {
+              "enum": [
+                "donor_to_recipient",
+                "recipient_to_donor"
+              ]
+            }
+          },
+          "required": [
+            "mode",
+            "patient_id",
+            "source_subject_id",
+            "self_subject_id",
+            "presenter_subject_id",
+            "direction"
+          ],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "$ref": "#/$defs/empty_or_provenance"
+        },
+        "evaluability": {
+          "$ref": "#/$defs/evaluability"
+        }
+      },
+      "required": [
+        "schema_version",
+        "allo_context_id",
+        "semantics",
+        "frozen_projection",
+        "provenance",
+        "evaluability"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "description": "Phase A only. Semantic payloads and physical provenance are separate. No peptide/pMHC/count structures. Runtime validates relational constraints and rederives IDs."
+}

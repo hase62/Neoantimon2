@@ -1,0 +1,47 @@
+test_that("local R conversion is independent of predictor installation and preserves diagnostics", {
+  p <- peptide_test_run(); b <- neo_export_bundle(p); q <- b$graph$candidates[[1]]
+  raw <- external_test_write(data.frame(peptide = q$peptide_sequence, hla = q$mhc_key, value = "0.8"))
+  converter <- system.file("extdata", "external-example-converter.R", package = "Neoantimon2")
+  policy <- list(mode = "external_rank", provider = "synthetic-model", run_id = "demo-run-1",
+    task = "external:synthetic_score", metric = "score", score_direction = "higher_is_better")
+  hash <- Neoantimon2:::external_sha(raw)
+  a <- neo_analyze_external(p, raw, policy, converter = converter)
+  expect_equal(neo_external_results(a)$external_score[neo_external_results(a)$candidate_id == q$candidate_id], .8)
+  payload <- Neoantimon2:::external_analysis_read(a)$payload
+  expect_equal(payload$conversion$execution$exit_status, 0)
+  expect_identical(payload$conversion$identity$converter_sha256, Neoantimon2:::external_sha(converter))
+  expect_identical(payload$conversion$identity$raw_input_sha256, hash)
+  expect_match(payload$conversion$identity$interpreter_version, "Rscript")
+  expect_identical(neo_analyze_external(p, raw, policy, converter = converter)$analysis_id, a$analysis_id)
+  expect_identical(Neoantimon2:::external_sha(raw), hash)
+  cache <- file.path(p$path, "cache", "external_conversions", Neoantimon2:::infra_hash(payload$conversion$identity), "standard.tsv")
+  writeLines("tampered", cache)
+  expect_error(neo_analyze_external(p, raw, policy, converter = converter), "INTEGRITY_FAILURE")
+  expect_error(neo_analyze_external(p, raw, policy, converter = "/missing.R"), "CONVERTER_INPUT_MISSING")
+  bad <- tempfile(fileext = ".R"); writeLines("stop('synthetic failure')", bad)
+  expect_error(neo_analyze_external(p, raw, policy, converter = bad), "CONVERTER_FAILED")
+  slow <- tempfile(fileext = ".R"); writeLines("Sys.sleep(5)", slow)
+  expect_error(neo_analyze_external(p, raw, policy, converter = slow, timeout = 1), "CONVERTER_TIMEOUT")
+  missing <- tempfile(fileext = ".R"); writeLines("invisible(NULL)", missing)
+  expect_error(neo_analyze_external(p, raw, policy, converter = missing), "CONVERTER_OUTPUT_MISSING")
+  failed <- list.dirs(file.path(p$path, "cache", "external_conversions"), recursive = FALSE)
+  expect_true(any(grepl("failed-", basename(failed))))
+  expect_error(Neoantimon2:::external_convert(p, raw, converter, b, Inf), "INVALID_TIMEOUT")
+  withr_path <- Sys.getenv("PATH")
+  on.exit(Sys.setenv(PATH = withr_path), add = TRUE)
+  Sys.setenv(PATH = "")
+  expect_error(Neoantimon2:::external_converter_interpreter("Python"), "INTERPRETER_MISSING")
+})
+
+test_that("optional Python converter uses the same offline contract", {
+  skip_if(!nzchar(Sys.which("python3")), "Python interpreter unavailable")
+  cfg <- neo_config(env = character(), paths = list(run_root = tempfile("python-runs-")))
+  p <- neo_run(neo_project(config = cfg, fixture_kind = "synthetic"))
+  script <- tempfile(fileext = ".py")
+  writeLines(c("import argparse, shutil", "p = argparse.ArgumentParser()",
+    "p.add_argument('--input'); p.add_argument('--output'); p.add_argument('--bundle')",
+    "a = p.parse_args(); shutil.copyfile(a.input, a.output)"), script)
+  a <- neo_analyze_external(p, external_test_write(external_test_row()), list(mode = "evidence_only"), converter = script)
+  expect_equal(nrow(neo_external_results(a)), 0)
+  expect_identical(Neoantimon2:::external_analysis_read(a)$payload$conversion$identity$runtime, "Python")
+})

@@ -1,0 +1,5 @@
+# NetMHCstabpan version 1.0
+ pos HLA peptide Identity Pred Thalf(h) %Rank_Stab 1-log50k Aff(nM) %Rank_aff Combined Combined_%rank BindLevel
+ 0 HLA-A*02:01 GILGFVFTL PEPLIST 0.82 3.5 1.0 0.682 31.29 1.5 0.71 1.36 <= WB
+ 0 HLA-A*02:01 GILGFVFT PEPLIST 0.7 2.5 2.0 0.6 40.0 2.5 0.65 2.2 <= WB
+ 0 HLA-A*02:01 GILGFVFTLAAAAA PEPLIST 0.6 1.5 3.0 0.5 50.0 3.5 0.55 3.2

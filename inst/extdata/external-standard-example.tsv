@@ -1,0 +1,2 @@
+schema_version	peptide_sequence	scope	mhc_key	task	provider	predictor_version	model_version	run_id	metric	metric_kind	metric_semantics	score	score_direction	unit	status	reason	source_row
+1.0.0	ACDEFGHIK	peptide_hla	HLA-A*02:01	external:synthetic_score	synthetic-model	1	demo-1	demo-run-1	score	raw_score	raw	0.8	higher_is_better	unitless	evaluated		X:1

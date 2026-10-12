@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "external-converter-1.0.0",
+  "runtimes": ["R", "Python"],
+  "arguments": ["--input", "--output", "--bundle"],
+  "output_schema": "external-prediction-1.0.0",
+  "exit_status": "0 only when a complete standard table was written; nonzero on failure",
+  "execution": "Finite timeout; arbitrary user code, not a security sandbox",
+  "provenance": ["raw_input_sha256", "converter_sha256", "interpreter_version", "interpreter_sha256", "exit_status", "command", "stdout", "stderr"],
+  "privacy": "Commands use path placeholders; local logs may contain user code output. No automatic upload. Original inputs are copied into disposable conversion workspace."
+}

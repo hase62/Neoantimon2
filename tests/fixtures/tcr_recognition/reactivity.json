@@ -1,0 +1,98 @@
+{
+  "Info": {
+    "version": "2.0"
+  },
+  "Reactivity": [
+    {
+      "reactivity_id": "positive",
+      "cell_id": "observed",
+      "repertoire_id": "cells",
+      "ligand_type": "MHC:peptide",
+      "antigen_type": "peptide",
+      "antigen": "synthetic:antigen",
+      "peptide_sequence_aa": "GILGFVFTL",
+      "mhc_key": "HLA-A*02:01",
+      "reactivity_method": "ELISpot",
+      "reactivity_readout": "spots",
+      "reactivity_value": 120,
+      "reactivity_unit": "SFU",
+      "reactivity_refs": [
+        "synthetic:study"
+      ],
+      "qualitative_annotation": "positive",
+      "threshold": 10,
+      "threshold_reference": "synthetic:study#documented-cutoff"
+    },
+    {
+      "reactivity_id": "negative",
+      "cell_id": "observed",
+      "repertoire_id": "cells",
+      "ligand_type": "MHC:peptide",
+      "antigen_type": "peptide",
+      "antigen": "synthetic:antigen",
+      "peptide_sequence_aa": "GILGFVFTL",
+      "mhc_key": "HLA-A*02:01",
+      "reactivity_method": "ELISpot",
+      "reactivity_readout": "spots",
+      "reactivity_value": 0,
+      "reactivity_unit": "SFU",
+      "reactivity_refs": [
+        "synthetic:study"
+      ],
+      "qualitative_annotation": "negative",
+      "threshold": 10,
+      "threshold_reference": "synthetic:study#documented-cutoff"
+    },
+    {
+      "reactivity_id": "continuous",
+      "cell_id": "multiple",
+      "repertoire_id": "cells",
+      "ligand_type": "MHC:peptide",
+      "antigen_type": "peptide",
+      "antigen": "synthetic:antigen",
+      "peptide_sequence_aa": "GILGFVFTL",
+      "mhc_key": "HLA-A*02:01",
+      "reactivity_method": "fluorescence",
+      "reactivity_readout": "intensity",
+      "reactivity_value": 38,
+      "reactivity_unit": "AU",
+      "reactivity_refs": [
+        "synthetic:study"
+      ]
+    },
+    {
+      "reactivity_id": "unknown",
+      "cell_id": "observed",
+      "repertoire_id": "cells",
+      "ligand_type": "MHC:peptide",
+      "antigen_type": "peptide",
+      "antigen": "synthetic:antigen",
+      "peptide_sequence_aa": "GILGFVFTL",
+      "mhc_key": null,
+      "reactivity_method": "ELISpot",
+      "reactivity_readout": "spots",
+      "reactivity_value": 60,
+      "reactivity_unit": "SFU",
+      "reactivity_refs": [
+        "synthetic:study"
+      ]
+    },
+    {
+      "reactivity_id": "class-ii",
+      "cell_id": "observed",
+      "repertoire_id": "cells",
+      "ligand_type": "MHC:peptide",
+      "antigen_type": "peptide",
+      "antigen": "synthetic:antigen",
+      "peptide_sequence_aa": "GILGFVFTL",
+      "mhc_key": "HLA-DRA*01:01~HLA-DRB1*04:01",
+      "reactivity_method": "proliferation",
+      "reactivity_readout": "intensity",
+      "reactivity_value": 25,
+      "reactivity_unit": "AU",
+      "reactivity_refs": [
+        "synthetic:study"
+      ]
+    }
+  ]
+}

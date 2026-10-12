@@ -1,0 +1,377 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "indirect-pmhc-evidence-1.0.0",
+  "title": "indirect-pmhc-evidence-1.0.0",
+  "$ref": "#/$defs/pmhc",
+  "$defs": {
+    "threshold": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "strict-affinity-1000nm-1.0.0"
+        },
+        "profile": {
+          "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+        },
+        "dimension": {
+          "const": "binding_affinity"
+        },
+        "comparator": {
+          "const": "<"
+        },
+        "value": {
+          "const": 1000
+        },
+        "unit": {
+          "const": "nM"
+        },
+        "precision": {
+          "const": "raw_no_rounding"
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "version",
+        "profile",
+        "dimension",
+        "comparator",
+        "value",
+        "unit",
+        "precision",
+        "citation"
+      ],
+      "additionalProperties": false
+    },
+    "core": {
+      "type": "object",
+      "properties": {
+        "core_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{9}$"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "orientation": {
+          "enum": [
+            "forward",
+            "reverse",
+            "unknown"
+          ]
+        },
+        "register": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "ambiguous",
+            "unresolved_mapping",
+            "unsupported"
+          ]
+        }
+      },
+      "required": [
+        "core_sequence",
+        "offset",
+        "orientation",
+        "register",
+        "primary",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "affinity_nM": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "percentile_rank": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/core"
+          }
+        },
+        "raw_output": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array",
+              "maxItems": 0
+            }
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provenance": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "array",
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^indirect-evidence-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_output_alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "peptide_sequence",
+        "presenter",
+        "status",
+        "affinity_nM",
+        "percentile_rank",
+        "cores",
+        "raw_output",
+        "reason_codes",
+        "provenance",
+        "evidence_id",
+        "raw_output_alternatives"
+      ],
+      "additionalProperties": false
+    },
+    "pmhc_payload": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "pattern": "^allo-context-id-v1:[0-9a-f]{64}$"
+        },
+        "candidate_key": {
+          "type": "string",
+          "pattern": "^candidate_key:[0-9a-f]{64}$"
+        },
+        "presenting_compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenting_scenario": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "candidate_key",
+        "presenting_compartment",
+        "presenting_scenario"
+      ],
+      "additionalProperties": false
+    },
+    "assignment": {
+      "type": "object",
+      "properties": {
+        "indirect_core_assignment_id": {
+          "type": "string",
+          "pattern": "^indirect-core-assignment-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "type": "object"
+        },
+        "epitope_key": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^epitope_key:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mismatch_annotation": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "not_evaluated"
+            },
+            "reason_codes": {
+              "type": "array",
+              "items": {
+                "const": "alignment_not_performed"
+              },
+              "minItems": 1,
+              "maxItems": 1
+            }
+          },
+          "required": [
+            "status",
+            "reason_codes"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "indirect_core_assignment_id",
+        "semantics",
+        "epitope_key",
+        "mismatch_annotation"
+      ],
+      "additionalProperties": false
+    },
+    "pmhc": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-pmhc-evidence-1.0.0"
+        },
+        "indirect_pmhc_id": {
+          "type": "string",
+          "pattern": "^indirect-pmhc-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "$ref": "#/$defs/pmhc_payload"
+        },
+        "candidate_key": {
+          "type": "string",
+          "pattern": "^candidate_key:[0-9a-f]{64}$"
+        },
+        "peptide_key": {
+          "type": "string",
+          "pattern": "^peptide_key:[0-9a-f]{64}$"
+        },
+        "peptide_sequence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presenter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hla_class": {
+          "enum": [
+            "I",
+            "II"
+          ]
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "provider_configuration_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        },
+        "binding_evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "threshold_policy": {
+          "$ref": "#/$defs/threshold"
+        },
+        "core_assignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assignment"
+          }
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "unsupported",
+            "unavailable",
+            "failed",
+            "ambiguous",
+            "not_applicable",
+            "insufficient"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "indirect_pmhc_id",
+        "semantics",
+        "candidate_key",
+        "peptide_key",
+        "peptide_sequence",
+        "presenter",
+        "hla_class",
+        "occurrence_ids",
+        "provider_configuration_id",
+        "binding_evidence",
+        "threshold_policy",
+        "core_assignments",
+        "status"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

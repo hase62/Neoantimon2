@@ -1,0 +1,2 @@
+allele	abundance	unit	provider_loss_call	interpretation_reference
+HLA-A*02:01	0.1	TPM	ASE_loss	synthetic:provider-model

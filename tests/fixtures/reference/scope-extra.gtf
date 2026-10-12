@@ -1,0 +1,6 @@
+chr1_GL000001v1_fix	synthetic	transcript	1	27	.	+	.	gene_id "ENSG000002.1"; transcript_id "ENST000004.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000004.1";
+chr1_GL000001v1_fix	synthetic	exon	1	27	.	+	.	gene_id "ENSG000002.1"; transcript_id "ENST000004.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000004.1";
+chr1_GL000001v1_fix	synthetic	CDS	1	27	.	+	0	gene_id "ENSG000002.1"; transcript_id "ENST000004.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000004.1";
+chr1_GL000002v1_alt	synthetic	transcript	1	27	.	+	.	gene_id "ENSG000005.1"; transcript_id "ENST000005.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000005.1";
+chr1_GL000002v1_alt	synthetic	exon	1	27	.	+	.	gene_id "ENSG000005.1"; transcript_id "ENST000005.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000005.1";
+chr1_GL000002v1_alt	synthetic	CDS	1	27	.	+	0	gene_id "ENSG000005.1"; transcript_id "ENST000005.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "ENSP000005.1";

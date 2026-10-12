@@ -1,0 +1,7 @@
+mutation_id	sample_id	cluster_id	cellular_prevalence
+mx	S1	1	0.7
+my	S1	2	0.3
+mx	S2	1	0.6
+my	S2	2	0.4
+mx	S3	1	0.5
+my	S3	2	0.5

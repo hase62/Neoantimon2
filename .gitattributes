@@ -1,0 +1,1 @@
+tests/fixtures/source/*.tsv whitespace=-blank-at-eol

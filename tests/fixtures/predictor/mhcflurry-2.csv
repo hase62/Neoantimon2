@@ -1,0 +1,4 @@
+allele,peptide,mhcflurry_affinity,mhcflurry_affinity_percentile,mhcflurry_presentation_score,mhcflurry_presentation_percentile
+HLA-A0201,LMNPQRSTV,320,2.3,0.31,5.2
+HLA-B0702,LMNPQRSTV,190,1.7,0.48,3.1
+HLA-A0201,ACDEFGHIK,80,0.9,0.77,0.7

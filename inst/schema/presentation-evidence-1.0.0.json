@@ -1,0 +1,142 @@
+{
+  "schema_version": "presentation-evidence-1.0.0",
+  "extends": "1.1.0",
+  "identity_versions": {
+    "query": "processing-query-id-v1",
+    "evidence": "processing-evidence-id-v1",
+    "psm": "immunopeptidomics-psm-id-v1",
+    "observation": "immunopeptidomics-observation-id-v1",
+    "apm": "apm-observation-id-v1"
+  },
+  "immunopeptidomics_schema": "immunopeptidomics-evidence-1.0.0",
+  "component_map_version": "apm-component-map-1.0.0",
+  "required": [
+    "schema_version",
+    "identity_versions",
+    "immunopeptidomics_schema",
+    "component_map_version",
+    "run_id",
+    "artifacts",
+    "queries",
+    "processing_links",
+    "processing_evidence",
+    "psms",
+    "observations",
+    "ms_links",
+    "apm_observations",
+    "apm_links",
+    "statuses",
+    "provider_runs",
+    "candidate_ids",
+    "candidate_contexts"
+  ],
+  "records": {
+    "queries": [
+      "processing_query_id",
+      "peptide_id",
+      "peptide",
+      "context",
+      "presenter",
+      "provider",
+      "provider_version",
+      "model",
+      "options",
+      "fingerprint",
+      "input_status"
+    ],
+    "processing_evidence": [
+      "processing_evidence_id",
+      "processing_query_id",
+      "peptide_id",
+      "protein_origin_id",
+      "provider",
+      "provider_version",
+      "model",
+      "task",
+      "metric",
+      "raw_value",
+      "unit",
+      "rank",
+      "score_direction",
+      "boundary",
+      "position",
+      "n_flank",
+      "c_flank",
+      "context_completeness",
+      "presenter",
+      "raw_artifact",
+      "fingerprint",
+      "run_id"
+    ],
+    "psms": [
+      "psm_id",
+      "psm_source_id",
+      "peptide_source_id",
+      "spectrum_id",
+      "peptide_sequence",
+      "modifications",
+      "modification_status",
+      "decoy",
+      "passThreshold",
+      "q_value",
+      "rank",
+      "context",
+      "restriction",
+      "raw_artifact",
+      "assignment_status"
+    ],
+    "observations": [
+      "immunopeptidomics_observation_id",
+      "biological_peptide_id",
+      "psm_ids",
+      "peptide_sequence",
+      "modifications",
+      "context",
+      "restriction",
+      "assignment_status",
+      "origin_assignment"
+    ],
+    "apm_observations": [
+      "apm_observation_id",
+      "gene",
+      "allele",
+      "measurement_type",
+      "context",
+      "state",
+      "raw_artifact"
+    ],
+    "ms_links": [
+      "candidate_id",
+      "observation_id",
+      "status",
+      "direct_hla_assignment",
+      "origin_assignment"
+    ],
+    "apm_links": [
+      "candidate_id",
+      "apm_observation_id",
+      "applicability",
+      "state"
+    ],
+    "processing_links": [
+      "processing_query_id",
+      "candidate_id",
+      "applicability",
+      "status",
+      "origin_contexts"
+    ]
+  },
+  "invariants": [
+    "no_frozen_identity_change",
+    "no_priority_change",
+    "no_external_execution",
+    "origin_specific_processing",
+    "no_allele_inference_from_pan_hla",
+    "no_exact_unmodified_claim_for_modified_psm",
+    "no_pathway_intact_from_absence",
+    "class_specific_apm",
+    "provider_input_query_identity",
+    "separate_processing_candidate_links",
+    "unique_query_limits"
+  ]
+}

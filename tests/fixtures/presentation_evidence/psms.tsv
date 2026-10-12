@@ -1,0 +1,9 @@
+psm_id	spectrum_id	peptide_sequence	decoy	passThreshold	rank	q_value	pep	fdr	search_engine_score	modifications	modified_sequence
+p1	scan=1	GILGFVFTL	FALSE	TRUE	1	.001	NA	NA	NA	NA	NA
+p2	scan=2	GILGFVFTL	FALSE	TRUE	1	NA	NA	NA	NA	NA	NA
+p3	scan=3	GILGFVFTL	FALSE	TRUE	1	NA	NA	NA	NA	NA	NA
+p4	scan=3	GILGFVFTA	FALSE	TRUE	1	NA	NA	NA	NA	NA	NA
+p5	scan=4	GILGFVFTL	FALSE	TRUE	1					[{"location": 8, "accession": "UNIMOD:21", "name": "Phospho", "monoisotopicMassDelta": 79.966331}]	GILGFVFT[Phospho]L
+p6	scan=5	GILGFVFTL	TRUE	TRUE	1	NA	NA	NA	NA	NA	NA
+p7	scan=6	GILGFVFTL	FALSE	FALSE	1	NA	NA	NA	NA	NA	NA
+p8	scan=7	GILGFVFTL		TRUE	1	NA	NA	NA	NA	NA	NA

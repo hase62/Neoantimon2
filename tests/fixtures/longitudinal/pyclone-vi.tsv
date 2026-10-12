@@ -1,0 +1,5 @@
+mutation_id	sample_id	cluster_id	cellular_prevalence	cellular_prevalence_std	cluster_assignment_prob
+m1	S1	1	0.72	0.08	0.65
+m1	S2	1	0.63	0.12	0.82
+unknown	S1	2	0.40	0.20	0.50
+ambiguous	S1	1	0.70	0.10	0.55

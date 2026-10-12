@@ -1,0 +1,314 @@
+{
+  "one_sample": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R1",
+        "ordinal_time": 0,
+        "role": "tumor",
+        "disease_status": "primary",
+        "treatment_label": "pre"
+      }
+    ],
+    "relations": []
+  },
+  "unordered_regions": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R1",
+        "role": "tumor",
+        "disease_status": "primary",
+        "treatment_label": "pre"
+      },
+      {
+        "sample_id": "S2",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R2",
+        "role": "tumor"
+      }
+    ],
+    "relations": []
+  },
+  "primary_metastasis": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R1",
+        "ordinal_time": 0,
+        "role": "tumor",
+        "disease_status": "primary",
+        "treatment_label": "pre"
+      },
+      {
+        "sample_id": "S3",
+        "subject_id": "patient-1",
+        "region_id": "M1",
+        "lesion_id": "metastasis",
+        "ordinal_time": 1,
+        "role": "tumor",
+        "disease_status": "metastatic",
+        "treatment_label": "post"
+      }
+    ],
+    "relations": [
+      {
+        "from": "S1",
+        "to": "S3",
+        "type": "primary_to_metastasis"
+      }
+    ]
+  },
+  "pretreatment_posttreatment": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R1",
+        "ordinal_time": 0,
+        "role": "tumor",
+        "disease_status": "primary",
+        "treatment_label": "pre"
+      },
+      {
+        "sample_id": "S3",
+        "subject_id": "patient-1",
+        "region_id": "M1",
+        "lesion_id": "metastasis",
+        "ordinal_time": 1,
+        "role": "tumor",
+        "disease_status": "metastatic",
+        "treatment_label": "post"
+      }
+    ],
+    "relations": [
+      {
+        "from": "S1",
+        "to": "S3",
+        "type": "primary_to_metastasis"
+      }
+    ],
+    "treatments": [
+      {
+        "treatment_id": "TX1",
+        "subject_id": "patient-1",
+        "name": "synthetic exposure",
+        "before_samples": [
+          "S1"
+        ],
+        "after_samples": [
+          "S3"
+        ],
+        "relative_start": 0.1,
+        "relative_stop": 0.9
+      }
+    ]
+  },
+  "matched_normal": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R1",
+        "ordinal_time": 0,
+        "role": "tumor",
+        "disease_status": "primary",
+        "treatment_label": "pre"
+      },
+      {
+        "sample_id": "S2",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R2",
+        "ordinal_time": 0,
+        "role": "normal"
+      }
+    ],
+    "relations": [
+      {
+        "from": "S1",
+        "to": "S2",
+        "type": "matched_normal"
+      }
+    ]
+  },
+  "technical_replicates": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R1",
+        "ordinal_time": 0,
+        "role": "tumor",
+        "disease_status": "primary",
+        "treatment_label": "pre"
+      },
+      {
+        "sample_id": "S2",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R2",
+        "ordinal_time": 1,
+        "role": "tumor"
+      }
+    ],
+    "relations": [
+      {
+        "from": "S1",
+        "to": "S2",
+        "type": "technical_replicate"
+      }
+    ]
+  },
+  "missing_timepoint": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "baseline",
+        "subject_id": "patient-1"
+      },
+      {
+        "sample_id": "followup",
+        "subject_id": "patient-1"
+      }
+    ],
+    "relations": []
+  },
+  "hla_conflict": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R1",
+        "ordinal_time": 0,
+        "role": "tumor",
+        "disease_status": "primary",
+        "treatment_label": "pre",
+        "hla_genotype": [
+          "HLA-A*02:01"
+        ]
+      },
+      {
+        "sample_id": "S2",
+        "subject_id": "patient-1",
+        "specimen_id": "surgery-1",
+        "lesion_id": "primary",
+        "region_id": "R2",
+        "ordinal_time": 0,
+        "role": "tumor",
+        "hla_genotype": [
+          "HLA-B*07:02"
+        ]
+      }
+    ],
+    "relations": []
+  },
+  "different_subjects": {
+    "version": "longitudinal-integration-1.0.0",
+    "subjects": [
+      {
+        "subject_id": "patient-1",
+        "species": "NCBITaxon:9606",
+        "project_id": "synthetic-cohort"
+      },
+      {
+        "subject_id": "patient-2"
+      }
+    ],
+    "contexts": [
+      {
+        "sample_id": "S1",
+        "subject_id": "patient-1"
+      },
+      {
+        "sample_id": "S2",
+        "subject_id": "patient-2"
+      }
+    ],
+    "relations": []
+  }
+}

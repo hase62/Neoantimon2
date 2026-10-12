@@ -1,0 +1,6 @@
+##fileformat=VCFv4.2
+##source=CallerTwo
+##reference=GRCh38
+##contig=<ID=chr1,length=120>
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+chr1	1	other	A	C	.	q10	.

@@ -1,0 +1,214 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "allo-native-evidence-summary-1.0.0"
+    },
+    "model_id": {
+      "const": "neo-allo-hla-evidence-v1"
+    },
+    "official_reproduction": {
+      "const": false
+    },
+    "baseline_unchanged": {
+      "const": true
+    },
+    "aggregation": {
+      "const": "separate_dimensions_and_contexts_no_score"
+    },
+    "contexts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "allo_context_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "record_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dimension": {
+                  "enum": [
+                    "source_expression",
+                    "presenter_expression",
+                    "hla_allele_loh",
+                    "antigen_processing_machinery",
+                    "ms_observation",
+                    "tcr_recognition"
+                  ]
+                },
+                "record_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "status_counts": {
+                  "type": "object",
+                  "properties": {
+                    "applicable_supported": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "applicable_negative": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "ambiguous": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "insufficient_scope": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "not_evaluated": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "not_applicable": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "failed": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  },
+                  "required": [
+                    "applicable_supported",
+                    "applicable_negative",
+                    "ambiguous",
+                    "insufficient_scope",
+                    "not_evaluated",
+                    "not_applicable",
+                    "failed"
+                  ],
+                  "additionalProperties": false
+                },
+                "measured_record_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "missing_record_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "target_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "reason_codes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "required": [
+                "dimension",
+                "record_count",
+                "status_counts",
+                "measured_record_count",
+                "missing_record_count",
+                "target_count",
+                "reason_codes"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 6,
+            "maxItems": 6,
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "dimension": {
+                      "const": "source_expression"
+                    }
+                  }
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "dimension": {
+                      "const": "presenter_expression"
+                    }
+                  }
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "dimension": {
+                      "const": "hla_allele_loh"
+                    }
+                  }
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "dimension": {
+                      "const": "antigen_processing_machinery"
+                    }
+                  }
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "dimension": {
+                      "const": "ms_observation"
+                    }
+                  }
+                }
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "dimension": {
+                      "const": "tcr_recognition"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "covered_member_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "baseline_unchanged": {
+            "const": true
+          }
+        },
+        "required": [
+          "allo_context_id",
+          "record_count",
+          "dimensions",
+          "covered_member_count",
+          "baseline_unchanged"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "model_id",
+    "official_reproduction",
+    "baseline_unchanged",
+    "aggregation",
+    "contexts"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "allo-native-evidence-summary-1.0.0"
+}

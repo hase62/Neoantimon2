@@ -1,0 +1,505 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "indirect-hla-compatibility-1.0.0"
+    },
+    "specification_id": {
+      "const": "neo-allo-indirect-spec-0.1"
+    },
+    "profile": {
+      "const": "neo-literature-derived-indirect-hla-ii-dr-strict-v1"
+    },
+    "profile_version": {
+      "const": "1.0.0"
+    },
+    "official_reproduction": {
+      "const": false
+    },
+    "audit_source": {
+      "const": "docs/development/pirche_reconstruction_matrix.md"
+    },
+    "audit_source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "audit_boundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target_label": {
+            "type": "string",
+            "pattern": "^neo-indirect-hla-compatibility/"
+          },
+          "application_version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "configuration": {
+            "type": "string",
+            "minLength": 1
+          },
+          "matrix_profile": {
+            "enum": [
+              "G0",
+              "G1",
+              "G2",
+              "G3",
+              "G4",
+              "G5",
+              "G6",
+              "G7",
+              "outside_G0_G7"
+            ]
+          },
+          "source_labels": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "S1",
+                "S2",
+                "S3",
+                "S4",
+                "S5",
+                "S6",
+                "S7",
+                "S8",
+                "S9",
+                "S10",
+                "S11"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "audit_scope": {
+            "enum": [
+              "audited",
+              "outside_audit_scope"
+            ]
+          },
+          "official_reproduction": {
+            "const": false
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dimension": {
+                  "enum": [
+                    "source_locus_scope",
+                    "peptide_generation",
+                    "peptide_length",
+                    "presenter_scope",
+                    "provider_family",
+                    "provider_version_pinning",
+                    "binding_threshold",
+                    "threshold_operator",
+                    "threshold_units",
+                    "self_filter",
+                    "full_peptide_vs_core",
+                    "duplicate_unit",
+                    "aggregation",
+                    "reference_domains",
+                    "reference_release",
+                    "sequence_completion",
+                    "missing_data",
+                    "normalization",
+                    "presentation_class"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "matched",
+                    "differs",
+                    "unresolved",
+                    "not_applicable",
+                    "outside_audit_scope"
+                  ]
+                },
+                "classification": {
+                  "enum": [
+                    "R",
+                    "A",
+                    "U",
+                    "A/U",
+                    "R/A",
+                    "outside_audit_scope"
+                  ]
+                },
+                "documented_behavior": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "neoantimon2_behavior": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "dimension",
+                "status",
+                "classification",
+                "documented_behavior",
+                "neoantimon2_behavior",
+                "locator"
+              ],
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "classification": {
+                        "enum": [
+                          "U",
+                          "A",
+                          "A/U",
+                          "R/A"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "status": {
+                        "const": "unresolved"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "minItems": 19,
+            "maxItems": 19,
+            "allOf": [
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "source_locus_scope"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "peptide_generation"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "peptide_length"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "presenter_scope"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "provider_family"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "provider_version_pinning"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "binding_threshold"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "threshold_operator"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "threshold_units"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "self_filter"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "full_peptide_vs_core"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "duplicate_unit"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "aggregation"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "reference_domains"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "reference_release"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "sequence_completion"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "missing_data"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "normalization"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              },
+              {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "dimension": {
+                      "const": "presentation_class"
+                    }
+                  },
+                  "required": [
+                    "dimension"
+                  ]
+                }
+              }
+            ]
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "audit_record_id": {
+            "type": "string",
+            "pattern": "^audit-record-sha256:[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "target_label",
+          "application_version",
+          "configuration",
+          "matrix_profile",
+          "source_labels",
+          "audit_scope",
+          "official_reproduction",
+          "dimensions",
+          "limitations",
+          "audit_record_id"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "audit_scope": {
+                  "const": "outside_audit_scope"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "matrix_profile": {
+                  "const": "outside_G0_G7"
+                },
+                "dimensions": {
+                  "items": {
+                    "properties": {
+                      "status": {
+                        "const": "outside_audit_scope"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "specification_id",
+    "profile",
+    "profile_version",
+    "official_reproduction",
+    "audit_source",
+    "audit_source_sha256",
+    "audit_boundary",
+    "targets"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Descriptive frozen-matrix compatibility audit; no official reproduction"
+}

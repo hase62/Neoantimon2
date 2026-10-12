@@ -1,0 +1,44 @@
+{
+  "fixture_kind": "synthetic",
+  "truth_source": "Hand-authored biological relationships, independent Python hashlib ID oracle; no R production calls, no public data, no real prediction.",
+  "cases": {
+    "simple_somatic": {
+      "events": 1,
+      "origins": 1,
+      "candidates": 1
+    },
+    "multiple_origins": {
+      "events": 2,
+      "origins": 2,
+      "candidates": 1
+    },
+    "class_ii_shared_core": {
+      "events": 1,
+      "origins": 2,
+      "candidates": 2,
+      "epitopes": 1
+    },
+    "multiple_registers": {
+      "events": 1,
+      "origins": 1,
+      "candidates": 1,
+      "registers": 2,
+      "epitopes": 2
+    },
+    "subject_roles": {
+      "events": 1,
+      "origins": 1,
+      "candidates": 1
+    },
+    "zero_vs_missing": {
+      "events": 1,
+      "origins": 1,
+      "candidates": 1
+    },
+    "linked_antigens": {
+      "events": 1,
+      "origins": 2,
+      "candidates": 1
+    }
+  }
+}

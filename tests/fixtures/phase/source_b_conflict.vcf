@@ -1,0 +1,8 @@
+##fileformat=VCFv4.2
+##source=PhaseB
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=PS,Number=1,Type=String,Description="Phase set">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	sample-1
+chr1	2	shared	C	T	.	PASS	.	GT:PS	0|1:91
+chr1	4	shared2	T	C	.	PASS	.	GT:PS	1|0:91
+chr1	3	b1	G	A	.	PASS	.	GT:PS	0|1:91

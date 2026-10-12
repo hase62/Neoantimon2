@@ -1,0 +1,5172 @@
+{
+  "schema_version": "1.0.0",
+  "id_schema_version": "1.0.0",
+  "format": "Neoantimon2 typed record contract 1",
+  "tables": {
+    "events": {
+      "primary_key": [
+        "event_id"
+      ],
+      "row_unit": "somatic: sample × event（既存）。allo: analysis_context/sample × source sequenceまたはgermline protein difference event。",
+      "fields": [
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "1.0.0"
+          ],
+          "definition": "Version of this output record contract."
+        },
+        {
+          "name": "analysis_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "IDはmanifestまたはcanonical entityに由来。event_typeとtranscript consequenceは分離。"
+        },
+        {
+          "name": "patient_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "IDはmanifestまたはcanonical entityに由来。event_typeとtranscript consequenceは分離。"
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "IDはmanifestまたはcanonical entityに由来。event_typeとtranscript consequenceは分離。"
+        },
+        {
+          "name": "event_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "IDはmanifestまたはcanonical entityに由来。event_typeとtranscript consequenceは分離。"
+        },
+        {
+          "name": "event_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "IDはmanifestまたはcanonical entityに由来。event_typeとtranscript consequenceは分離。"
+        },
+        {
+          "name": "event_type",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "SNV",
+            "MNV",
+            "INS",
+            "DEL",
+            "INDEL",
+            "SV",
+            "BND",
+            "FUSION",
+            "SEQUENCE",
+            "ALLO_HLA_SOURCE",
+            "GERMLINE_PROTEIN_DIFFERENCE"
+          ],
+          "definition": "IDはmanifestまたはcanonical entityに由来。event_typeとtranscript consequenceは分離。"
+        },
+        {
+          "name": "event_role",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "somatic",
+            "germline",
+            "context",
+            "source"
+          ],
+          "definition": "IDはmanifestまたはcanonical entityに由来。event_typeとtranscript consequenceは分離。"
+        },
+        {
+          "name": "genome_assembly",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "contig",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "mate_contig",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "sv_type",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "strand1",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "strand2",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "original_record_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "座標がないsequence入力ではnull可。BND記法・confidence intervalはevent_details_jsonに原型保存。"
+        },
+        {
+          "name": "pos",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "base_1_based_inclusive",
+          "enum": null,
+          "definition": "外部表示は1-based inclusive。VCF anchorの意味を維持し、内部editは明示的0-based half-open。",
+          "minimum": 1
+        },
+        {
+          "name": "end",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "base_1_based_inclusive",
+          "enum": null,
+          "definition": "外部表示は1-based inclusive。VCF anchorの意味を維持し、内部editは明示的0-based half-open。",
+          "minimum": 1
+        },
+        {
+          "name": "mate_pos",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "base_1_based_inclusive",
+          "enum": null,
+          "definition": "外部表示は1-based inclusive。VCF anchorの意味を維持し、内部editは明示的0-based half-open。",
+          "minimum": 1
+        },
+        {
+          "name": "caller",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "callerとrecountのどちらを採用したか、phaseが共有される範囲を明示。"
+        },
+        {
+          "name": "caller_filter",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "callerとrecountのどちらを採用したか、phaseが共有される範囲を明示。"
+        },
+        {
+          "name": "primary_evidence_source",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "callerとrecountのどちらを採用したか、phaseが共有される範囲を明示。"
+        },
+        {
+          "name": "phase_namespace",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "callerとrecountのどちらを採用したか、phaseが共有される範囲を明示。"
+        },
+        {
+          "name": "phase_set",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "callerとrecountのどちらを採用したか、phaseが共有される範囲を明示。"
+        },
+        {
+          "name": "phase_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "callerとrecountのどちらを採用したか、phaseが共有される範囲を明示。"
+        },
+        {
+          "name": "tumor_raw_depth",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_usable_depth",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_ref_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_alt_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_other_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_ambiguous_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_vaf_denominator",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_vaf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "定義済みdenominatorから計算。0/0はNA。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "tumor_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "未提供/未評価/未検出/支持ありを区別する。"
+        },
+        {
+          "name": "tumor_count_method",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "未提供/未評価/未検出/支持ありを区別する。"
+        },
+        {
+          "name": "tumor_assessment_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "definition": "未提供/未評価/未検出/支持ありを区別する。",
+          "vocabulary": "assessment_status"
+        },
+        {
+          "name": "normal_raw_depth",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_usable_depth",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_ref_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_alt_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_other_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_ambiguous_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_vaf_denominator",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_vaf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "定義済みdenominatorから計算。0/0はNA。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "normal_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "未提供/未評価/未検出/支持ありを区別する。"
+        },
+        {
+          "name": "normal_count_method",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "未提供/未評価/未検出/支持ありを区別する。"
+        },
+        {
+          "name": "normal_assessment_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "definition": "未提供/未評価/未検出/支持ありを区別する。",
+          "vocabulary": "assessment_status"
+        },
+        {
+          "name": "rna_raw_depth",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_usable_depth",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_ref_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_alt_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_other_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_ambiguous_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_vaf_denominator",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "独立fragment/molecule単位。ref+altとraw depthは同一とは限らない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_vaf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "定義済みdenominatorから計算。0/0はNA。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "rna_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "未提供/未評価/未検出/支持ありを区別する。"
+        },
+        {
+          "name": "rna_count_method",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "未提供/未評価/未検出/支持ありを区別する。"
+        },
+        {
+          "name": "rna_assessment_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "definition": "未提供/未評価/未検出/支持ありを区別する。",
+          "vocabulary": "assessment_status"
+        },
+        {
+          "name": "dna_split_support",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "同一moleculeの重複を統合する根拠をdetailsへ残す。",
+          "minimum": 0
+        },
+        {
+          "name": "dna_spanning_support",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "同一moleculeの重複を統合する根拠をdetailsへ残す。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_junction_support",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "同一moleculeの重複を統合する根拠をdetailsへ残す。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_spanning_support",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "同一moleculeの重複を統合する根拠をdetailsへ残す。",
+          "minimum": 0
+        },
+        {
+          "name": "total_cn",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0
+        },
+        {
+          "name": "major_cn",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0
+        },
+        {
+          "name": "minor_cn",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_cn",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0
+        },
+        {
+          "name": "purity",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "ploidy",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0
+        },
+        {
+          "name": "mutation_multiplicity",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0
+        },
+        {
+          "name": "ccf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "ccf_lower",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "ccf_upper",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "外部値はQC後もrawを保持。CCF範囲外値は黙ってclipしない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "cn_method",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "cn_source",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "ccf_source",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "ccf_method",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "ccf_interval_type",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "ccf_identifiability",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "IDENTIFIED",
+            "CONDITIONAL",
+            "AMBIGUOUS",
+            "NOT_EVALUABLE"
+          ],
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "ccf_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "NOT_PROVIDED",
+            "NOT_EVALUABLE",
+            "EXTERNAL",
+            "CONDITIONAL",
+            "AMBIGUOUS",
+            "OUT_OF_RANGE"
+          ],
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "clonality_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "segment cellular fractionとvariant CCFを混同しない。"
+        },
+        {
+          "name": "caller_evidence_json",
+          "type": "array",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "JSON array/object。複数gene/assay/endpointにscalar値を強制しない。",
+          "items_type": "json"
+        },
+        {
+          "name": "expression_json",
+          "type": "array",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "JSON array/object。複数gene/assay/endpointにscalar値を強制しない。",
+          "items_type": "json"
+        },
+        {
+          "name": "cn_by_breakpoint_json",
+          "type": "array",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "JSON array/object。複数gene/assay/endpointにscalar値を強制しない。",
+          "items_type": "json"
+        },
+        {
+          "name": "ccf_candidates_json",
+          "type": "array",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "JSON array/object。複数gene/assay/endpointにscalar値を強制しない。",
+          "items_type": "json"
+        },
+        {
+          "name": "phase_links_json",
+          "type": "array",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "JSON array/object。複数gene/assay/endpointにscalar値を強制しない。",
+          "items_type": "json"
+        },
+        {
+          "name": "event_details_json",
+          "type": "object",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "JSON array/object。複数gene/assay/endpointにscalar値を強制しない。"
+        },
+        {
+          "name": "event_warning_codes",
+          "type": "array",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "JSON array/object。複数gene/assay/endpointにscalar値を強制しない。",
+          "items_type": "string",
+          "items_vocabulary": "warning_codes"
+        },
+        {
+          "name": "event_detection_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "CALLED",
+            "NOT_CALLED",
+            "DETECTED",
+            "NOT_DETECTED",
+            "NOT_ASSESSABLE",
+            "SOURCE_PROVIDED"
+          ],
+          "definition": "CALLなしとABSENT、NO_NOVEL_PEPTIDEとINVALIDを区別。"
+        },
+        {
+          "name": "reconstruction_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "NOT_RUN",
+            "SUCCESS",
+            "PARTIAL",
+            "FAILED",
+            "UNSUPPORTED",
+            "INVALID",
+            "NO_NOVEL_PEPTIDE",
+            "NOT_APPLICABLE"
+          ],
+          "definition": "CALLなしとABSENT、NO_NOVEL_PEPTIDEとINVALIDを区別。"
+        },
+        {
+          "name": "candidate_generation_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "NOT_RUN",
+            "SUCCESS",
+            "PARTIAL",
+            "FAILED",
+            "UNSUPPORTED",
+            "INVALID",
+            "NO_NOVEL_PEPTIDE",
+            "NOT_APPLICABLE"
+          ],
+          "definition": "CALLなしとABSENT、NO_NOVEL_PEPTIDEとINVALIDを区別。"
+        },
+        {
+          "name": "analysis_context",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Foreign key to run_manifest.analysis_contexts.context_id, not a mode string."
+        },
+        {
+          "name": "source_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for source role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "source_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of source subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "self_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for self role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "self_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of self subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "presenter_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for presenter role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "presenter_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of presenter subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "canonical_event",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Upstream canonical event facts; normalization is not performed here.",
+          "record": "canonical_event"
+        },
+        {
+          "name": "dna_split_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "dna split count unit; retained within the containing record scope."
+        },
+        {
+          "name": "dna_spanning_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "dna spanning count unit; retained within the containing record scope."
+        },
+        {
+          "name": "rna_junction_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "rna junction count unit; retained within the containing record scope."
+        },
+        {
+          "name": "rna_spanning_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "rna spanning count unit; retained within the containing record scope."
+        },
+        {
+          "name": "ccf_raw",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "raw_fraction_estimate",
+          "enum": null,
+          "definition": "Unclipped external estimate, including out-of-range values; ccf is bounded and nullable."
+        }
+      ]
+    },
+    "peptide_origins": {
+      "primary_key": [
+        "origin_id"
+      ],
+      "row_unit": "analysis_context/sample内のfull ligand出現 × sequence origin。somatic既存粒度を維持。",
+      "fields": [
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "1.0.0"
+          ],
+          "definition": "Version of this output record contract."
+        },
+        {
+          "name": "analysis_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "analysis id; retained within the containing record scope."
+        },
+        {
+          "name": "patient_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "patient id; retained within the containing record scope."
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample id; retained within the containing record scope."
+        },
+        {
+          "name": "origin_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "origin id; retained within the containing record scope."
+        },
+        {
+          "name": "sample_peptide_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample peptide id; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "peptide key; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "peptide sequence; retained within the containing record scope.",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"
+        },
+        {
+          "name": "origin_type",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "somatic",
+            "sequence",
+            "fusion",
+            "allo_hla",
+            "allo_genome"
+          ],
+          "definition": "origin type; retained within the containing record scope."
+        },
+        {
+          "name": "sequence_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sequence id; retained within the containing record scope."
+        },
+        {
+          "name": "sequence_context_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sequence context id; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_length",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "amino_acid_count",
+          "enum": null,
+          "definition": "peptide length; retained within the containing record scope.",
+          "minimum": 1
+        },
+        {
+          "name": "peptide_start_aa",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "amino_acid_1_based_inclusive",
+          "enum": null,
+          "definition": "peptide start aa; retained within the containing record scope.",
+          "minimum": 1
+        },
+        {
+          "name": "peptide_end_aa",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "amino_acid_1_based_inclusive",
+          "enum": null,
+          "definition": "peptide end aa; retained within the containing record scope.",
+          "minimum": 1
+        },
+        {
+          "name": "transcript_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "transcript_version",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "protein_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "protein_version",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "gene_symbol",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "mane_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "canonical_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "consequence",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "fusionはtranscript_pair_json、multi-geneはgenes_jsonも使う。"
+        },
+        {
+          "name": "source_event_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source event ids; retained within the containing record scope.",
+          "items_type": "string",
+          "unique_items": true
+        },
+        {
+          "name": "context_event_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "context event ids; retained within the containing record scope.",
+          "items_type": "string",
+          "unique_items": true
+        },
+        {
+          "name": "germline_context_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "germline context ids; retained within the containing record scope.",
+          "items_type": "string",
+          "unique_items": true
+        },
+        {
+          "name": "genes_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "genes json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "transcript_pair_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "transcript pair json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "mutation_positions_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "mutation positions json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "junction_positions_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "junction positions json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "wt_peptide_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "一対一WTがなければsequence=null、status=NO_DIRECT_COUNTERPART。配列refはproject内相対path+checksum。"
+        },
+        {
+          "name": "wt_definition",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "一対一WTがなければsequence=null、status=NO_DIRECT_COUNTERPART。配列refはproject内相対path+checksum。"
+        },
+        {
+          "name": "wt_comparison_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "一対一WTがなければsequence=null、status=NO_DIRECT_COUNTERPART。配列refはproject内相対path+checksum。"
+        },
+        {
+          "name": "upstream_flank",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "一対一WTがなければsequence=null、status=NO_DIRECT_COUNTERPART。配列refはproject内相対path+checksum。"
+        },
+        {
+          "name": "downstream_flank",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "一対一WTがなければsequence=null、status=NO_DIRECT_COUNTERPART。配列refはproject内相対path+checksum。"
+        },
+        {
+          "name": "mutant_sequence_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "一対一WTがなければsequence=null、status=NO_DIRECT_COUNTERPART。配列refはproject内相対path+checksum。"
+        },
+        {
+          "name": "normal_sequence_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "一対一WTがなければsequence=null、status=NO_DIRECT_COUNTERPART。配列refはproject内相対path+checksum。"
+        },
+        {
+          "name": "haplotype_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "normal/translation未実証なら確定としない。"
+        },
+        {
+          "name": "phase_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "normal/translation未実証なら確定としない。"
+        },
+        {
+          "name": "phase_namespace",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "normal/translation未実証なら確定としない。"
+        },
+        {
+          "name": "sequence_certainty",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "normal/translation未実証なら確定としない。"
+        },
+        {
+          "name": "translation_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "normal/translation未実証なら確定としない。"
+        },
+        {
+          "name": "isoform_source",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "normal/translation未実証なら確定としない。"
+        },
+        {
+          "name": "normal_comparison_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "normal/translation未実証なら確定としない。"
+        },
+        {
+          "name": "gene_tpm",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "TPM",
+          "enum": null,
+          "definition": "対応するこのoriginのgene/transcript。BAMのみのgene countをTPMに見せない。",
+          "minimum": 0
+        },
+        {
+          "name": "transcript_tpm",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "TPM",
+          "enum": null,
+          "definition": "対応するこのoriginのgene/transcript。BAMのみのgene countをTPMに見せない。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_origin_support_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "同molecule上のjoint support。各variant altの最大値ではない。",
+          "minimum": 0
+        },
+        {
+          "name": "origin_validity",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "VALID",
+            "INVALID",
+            "UNCERTAIN"
+          ],
+          "definition": "複数必要eventから成るoriginの判断はここを起点に追う。"
+        },
+        {
+          "name": "origin_evidence_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "複数必要eventから成るoriginの判断はここを起点に追う。"
+        },
+        {
+          "name": "origin_evaluation_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "複数必要eventから成るoriginの判断はここを起点に追う。"
+        },
+        {
+          "name": "source_annotation_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "複数必要eventから成るoriginの判断はここを起点に追う。"
+        },
+        {
+          "name": "origin_warning_codes",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "origin warning codes; retained within the containing record scope.",
+          "items_type": "string",
+          "items_vocabulary": "warning_codes"
+        },
+        {
+          "name": "source_metadata_json",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Empty object before source detail evaluation, otherwise a source_sequence_detail record, retaining completion/domain/typing uncertainty."
+        },
+        {
+          "name": "analysis_context",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Foreign key to run_manifest.analysis_contexts.context_id, not a mode string."
+        },
+        {
+          "name": "source_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for source role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "source_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of source subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "self_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for self role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "self_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of self subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "presenter_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for presenter role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "presenter_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of presenter subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "source_protein_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Source protein identity at this origin; may differ for multiple origins producing the same ligand."
+        },
+        {
+          "name": "source_allele",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Canonical source allele supplied upstream; not the presenter MHC."
+        },
+        {
+          "name": "source_locus",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Locus of the source protein/allele, independent of presenter locus."
+        },
+        {
+          "name": "source_domain",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Source protein domain annotation; MULTI_DOMAIN when crossing domains, with source metadata intervals."
+        },
+        {
+          "name": "source_antigen_key",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "subject/allele/chain/sequence checksum/scenarioのidentity。alloで必須。"
+        },
+        {
+          "name": "source_sequence_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "relative path + checksumを解決するsequence ref。alloで必須。"
+        },
+        {
+          "name": "self_sequence_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "self sequenceまたはself sequence setへの参照。未構築はnull＋理由。"
+        },
+        {
+          "name": "ligand_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Full uppercase amino-acid ligand; equals peptide_sequence. Not the Class II binding core.",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"
+        },
+        {
+          "name": "origin_identity",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Canonical reconstruction/phase identity supplied by later tasks.",
+          "record": "origin_identity"
+        },
+        {
+          "name": "rna_origin_count_unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "read",
+            "fragment",
+            "molecule"
+          ],
+          "definition": "rna origin count unit; retained within the containing record scope."
+        }
+      ]
+    },
+    "neoantigen_results": {
+      "primary_key": [
+        "candidate_id"
+      ],
+      "row_unit": "analysis_context/sample × full ligand × presenter MHC。somatic既存candidate_idを維持。coreで行を統合しない。",
+      "fields": [
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "1.0.0"
+          ],
+          "definition": "Version of this output record contract."
+        },
+        {
+          "name": "analysis_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "analysis id; retained within the containing record scope."
+        },
+        {
+          "name": "patient_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "patient id; retained within the containing record scope."
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample id; retained within the containing record scope."
+        },
+        {
+          "name": "candidate_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Unified somatic/allo identity of context_id, sample_id, candidate_key in that order; patient binding belongs to the context. Excludes origin, run and prediction provenance."
+        },
+        {
+          "name": "sample_peptide_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample peptide id; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "peptide key; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "peptide sequence; retained within the containing record scope.",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"
+        },
+        {
+          "name": "mhc_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "mhc key; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_length",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "amino_acid_count",
+          "enum": null,
+          "definition": "peptide length; retained within the containing record scope.",
+          "minimum": 1
+        },
+        {
+          "name": "n_origins",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n origins; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "origin_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "origin ids; retained within the containing record scope.",
+          "items_type": "string",
+          "unique_items": true
+        },
+        {
+          "name": "gene_symbols",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "gene symbols; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "event_types",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "event types; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "grading_origin_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "The single origin supporting projected grading evidence. Never combine DNA/RNA/CCF/expression across different origins."
+        },
+        {
+          "name": "representative_origin_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "origin内の一貫した評価を採用。代表表示用originとgrading originを混同しない。"
+        },
+        {
+          "name": "source_evidence_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "origin内の一貫した評価を採用。代表表示用originとgrading originを混同しない。"
+        },
+        {
+          "name": "tumor_alt_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "grading originの要約。複合eventはdetails必須。",
+          "minimum": 0
+        },
+        {
+          "name": "normal_alt_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "grading originの要約。複合eventはdetails必須。",
+          "minimum": 0
+        },
+        {
+          "name": "rna_alt_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "grading originの要約。複合eventはdetails必須。",
+          "minimum": 0
+        },
+        {
+          "name": "tumor_vaf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "このoriginに一意な場合のみscalar。異なるoriginからmaxを合成しない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "normal_vaf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "このoriginに一意な場合のみscalar。異なるoriginからmaxを合成しない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "rna_vaf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "このoriginに一意な場合のみscalar。異なるoriginからmaxを合成しない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "gene_tpm",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "TPM",
+          "enum": null,
+          "definition": "このoriginに一意な場合のみscalar。異なるoriginからmaxを合成しない。",
+          "minimum": 0
+        },
+        {
+          "name": "transcript_tpm",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "TPM",
+          "enum": null,
+          "definition": "このoriginに一意な場合のみscalar。異なるoriginからmaxを合成しない。",
+          "minimum": 0
+        },
+        {
+          "name": "ccf",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "このoriginに一意な場合のみscalar。異なるoriginからmaxを合成しない。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "hla_class",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "I",
+            "II",
+            "UNSPECIFIED"
+          ],
+          "definition": "MHC class I or II; UNSPECIFIED explicitly represents unresolved class for candidate identity. Evaluated epitope assignments require resolved class."
+        },
+        {
+          "name": "hla_allele",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "named alleleだけに限定しない。custom MHCではhla_allele null可。"
+        },
+        {
+          "name": "hla_raw_input",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "named alleleだけに限定しない。custom MHCではhla_allele null可。"
+        },
+        {
+          "name": "hla_alpha",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "named alleleだけに限定しない。custom MHCではhla_allele null可。"
+        },
+        {
+          "name": "hla_beta",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "named alleleだけに限定しない。custom MHCではhla_allele null可。"
+        },
+        {
+          "name": "mhc_sequence_hash",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "named alleleだけに限定しない。custom MHCではhla_allele null可。"
+        },
+        {
+          "name": "hla_pairing_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "named alleleだけに限定しない。custom MHCではhla_allele null可。"
+        },
+        {
+          "name": "species",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Canonical NCBI Taxonomy identifier, formatted NCBITaxon:<positive decimal TaxID> without leading zeros. Human is NCBITaxon:9606; names and aliases are rejected. Upstream supplies the canonical current TaxID, not a merged alias.",
+          "pattern": "^NCBITaxon:[1-9][0-9]*$"
+        },
+        {
+          "name": "primary_prediction_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "予測の成否と生物学的評価を分離。"
+        },
+        {
+          "name": "primary_predictor",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "予測の成否と生物学的評価を分離。"
+        },
+        {
+          "name": "primary_metric",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "予測の成否と生物学的評価を分離。"
+        },
+        {
+          "name": "prediction_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "NOT_RUN",
+            "RUNNING",
+            "SUCCESS",
+            "PARTIAL",
+            "FAILED",
+            "UNSUPPORTED",
+            "NOT_APPLICABLE"
+          ],
+          "definition": "Explicit prediction execution state; NOT_RUN represents unperformed prediction, never null. Execution failure is distinct from biological grade."
+        },
+        {
+          "name": "mhc_rank_pct",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "percent_0_100",
+          "enum": null,
+          "definition": "mhc rank pct; retained within the containing record scope.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "name": "mhc_affinity_nm",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "nM",
+          "enum": null,
+          "definition": "mhc affinity nm; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "mhc_raw_score",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "意味/方向/校正はmanifest metric registryに必須。",
+          "minimum": 0
+        },
+        {
+          "name": "mhc_binding_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "NetMHC native BindLevelも詳細に保存。coreは予測出力として扱いpeptide identityを変更しない。"
+        },
+        {
+          "name": "binding_core",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Assigned binding core sequence. Scalar result is only the selected primary assignment projection; null when unresolved.",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"
+        },
+        {
+          "name": "binding_orientation",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "forward",
+            "reverse",
+            "gapped",
+            "unknown"
+          ],
+          "definition": "NetMHC native BindLevelも詳細に保存。coreは予測出力として扱いpeptide identityを変更しない。"
+        },
+        {
+          "name": "cleavage_support",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "supplemental scoreはdefault gradeに直接使わない。seenとconfidenceを同義にしない。"
+        },
+        {
+          "name": "stability_support",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "supplemental scoreはdefault gradeに直接使わない。seenとconfidenceを同義にしない。"
+        },
+        {
+          "name": "immunogenicity_support",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "supplemental scoreはdefault gradeに直接使わない。seenとconfidenceを同義にしない。"
+        },
+        {
+          "name": "tcr_support",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "supplemental scoreはdefault gradeに直接使わない。seenとconfidenceを同義にしない。"
+        },
+        {
+          "name": "tcr_applicability",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "supplemental scoreはdefault gradeに直接使わない。seenとconfidenceを同義にしない。"
+        },
+        {
+          "name": "tcr_confidence_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "supplemental scoreはdefault gradeに直接使わない。seenとconfidenceを同義にしない。"
+        },
+        {
+          "name": "prediction_details_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "全model/origin/clonotypeのraw/normalized値を取得するlocator。neo_explainで読める。"
+        },
+        {
+          "name": "tcr_details_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "全model/origin/clonotypeのraw/normalized値を取得するlocator。neo_explainで読める。"
+        },
+        {
+          "name": "origin_evaluation_details_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "全model/origin/clonotypeのraw/normalized値を取得するlocator。neo_explainで読める。"
+        },
+        {
+          "name": "hla_expression",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "量とallelic imbalanceを区別。unitはhla evidence metadataへ。",
+          "minimum": 0
+        },
+        {
+          "name": "hla_allelic_fraction",
+          "type": "number",
+          "required": true,
+          "nullable": true,
+          "unit": "fraction_0_1",
+          "enum": null,
+          "definition": "量とallelic imbalanceを区別。unitはhla evidence metadataへ。",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "name": "hla_genomic_loh",
+          "type": "boolean",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "NAをFALSEへ変換しない。"
+        },
+        {
+          "name": "hla_ase_loss",
+          "type": "boolean",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "NAをFALSEへ変換しない。"
+        },
+        {
+          "name": "hla_genomic_qc",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "DNA/RNA discordance、Class II/APC文脈を保持。"
+        },
+        {
+          "name": "hla_rna_qc",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "DNA/RNA discordance、Class II/APC文脈を保持。"
+        },
+        {
+          "name": "hla_escape_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "DNA/RNA discordance、Class II/APC文脈を保持。"
+        },
+        {
+          "name": "hla_escape_confidence",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "DNA/RNA discordance、Class II/APC文脈を保持。"
+        },
+        {
+          "name": "hla_escape_context",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "DNA/RNA discordance、Class II/APC文脈を保持。"
+        },
+        {
+          "name": "hla_escape_basis",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "DNA/RNA discordance、Class II/APC文脈を保持。"
+        },
+        {
+          "name": "self_exact_match",
+          "type": "boolean",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "未検索はNA。"
+        },
+        {
+          "name": "self_match_canonical",
+          "type": "boolean",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "未検索はNA。"
+        },
+        {
+          "name": "self_match_protein_count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "declared_count_unit",
+          "enum": null,
+          "definition": "self match protein count; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "self_match_details_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "単一gradeで元証拠を覆い隠さない。"
+        },
+        {
+          "name": "self_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "単一gradeで元証拠を覆い隠さない。"
+        },
+        {
+          "name": "tumor_evidence_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "単一gradeで元証拠を覆い隠さない。"
+        },
+        {
+          "name": "normal_evidence_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "単一gradeで元証拠を覆い隠さない。"
+        },
+        {
+          "name": "rna_evidence_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "単一gradeで元証拠を覆い隠さない。"
+        },
+        {
+          "name": "clonality_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "単一gradeで元証拠を覆い隠さない。"
+        },
+        {
+          "name": "presentation_status",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "単一gradeで元証拠を覆い隠さない。"
+        },
+        {
+          "name": "grading_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "GRADED",
+            "INVALID",
+            "NOT_GRADED"
+          ],
+          "definition": "GRADED for final_grade A-E; INVALID or NOT_GRADED must equal final_grade. NOT_GRADED is an explicit ungraded state, not missing or INVALID."
+        },
+        {
+          "name": "final_grade",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "definition": "Explicit grade state A-E, INVALID, or NOT_GRADED; never null. NOT_GRADED requires not_evaluated_codes. INVALID requires every candidate origin to be INVALID; it does not represent prediction failure.",
+          "vocabulary": "grade"
+        },
+        {
+          "name": "grade_before_warnings",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "definition": "Explicit pre-warning grade state; NOT_GRADED when no pre-warning grade was assigned, never null. This contract stores supplied grades and does not compute warning downgrades.",
+          "vocabulary": "grade"
+        },
+        {
+          "name": "rule_version",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Version of the supplied grading rules, null when no rule version was provided. Does not alter explicit final_grade/status semantics."
+        },
+        {
+          "name": "default_include",
+          "type": "boolean",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "未評価はNA。FALSEでもall resultsから削除しない。"
+        },
+        {
+          "name": "warning_codes",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Cautions retaining candidate validity; no automatic exclusion or downgrade.",
+          "items_type": "string",
+          "items_vocabulary": "warning_codes"
+        },
+        {
+          "name": "downgrade_reasons",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Reasons for an explicitly recorded grade reduction.",
+          "items_type": "string",
+          "items_vocabulary": "downgrade_reasons"
+        },
+        {
+          "name": "exclusion_reasons",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Reasons for exclusion from a declared view, without deleting candidate records.",
+          "items_type": "string",
+          "items_vocabulary": "exclusion_reasons"
+        },
+        {
+          "name": "not_evaluated_codes",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Why evidence or grading was not evaluated; never biological negative.",
+          "items_type": "string",
+          "items_vocabulary": "not_evaluated_codes"
+        },
+        {
+          "name": "decision_summary_json",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "decision summary json; retained within the containing record scope."
+        },
+        {
+          "name": "analysis_context",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Foreign key to run_manifest.analysis_contexts.context_id, not a mode string."
+        },
+        {
+          "name": "source_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for source role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "source_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of source subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "self_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for self role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "self_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of self subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "presenter_subject_id",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for presenter role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "presenter_subject_role",
+          "type": "string",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "definition": "Biological role of presenter subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "ligand_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Full uppercase amino-acid ligand; equals peptide_sequence. Not the Class II binding core.",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"
+        },
+        {
+          "name": "candidate_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Context-independent molecular identity of canonical species, hla_class, complete ligand_sequence and presenter mhc_key, in that order."
+        },
+        {
+          "name": "binding_core_start",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "amino_acid_1_based_inclusive",
+          "enum": null,
+          "definition": "primary assignmentのfull ligand内位置。未評価/曖昧/mapping不能はnull。",
+          "minimum": 1
+        },
+        {
+          "name": "binding_core_length",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "amino_acid_count",
+          "enum": null,
+          "definition": "primary assignmentのcore長。Class II標準例9、未評価を9で埋めない。",
+          "minimum": 1
+        },
+        {
+          "name": "epitope_key",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "pMHC identity of canonical species, hla_class, binding_core sequence and presenter mhc_key, in that order. Mapping, orientation, ligand coordinates and derived core length are excluded; unresolved assignments have null key."
+        },
+        {
+          "name": "epitope_assignments_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Lossless 0..n core/register assignments for this full-ligand candidate. Empty means not evaluated, not no epitopes.",
+          "items_type": "json",
+          "items_record": "epitope_assignment"
+        },
+        {
+          "name": "evidence_records_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "candidate/epitope/origin/antigen/presenterにscopeを持つtyped evidence。",
+          "items_type": "json",
+          "items_record": "evidence"
+        },
+        {
+          "name": "linked_recognition_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "同source antigen上のB-cell supportとT-cell originのrelation。",
+          "items_type": "json",
+          "items_record": "linked_recognition"
+        }
+      ]
+    },
+    "multisample_summary": {
+      "primary_key": [
+        "analysis_context",
+        "patient_id",
+        "peptide_key"
+      ],
+      "row_unit": "patient × exact peptide。multi-sample明示指定時だけ作成し通常sample結果へ書き戻さない。",
+      "fields": [
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "1.0.0"
+          ],
+          "definition": "Version of this output record contract."
+        },
+        {
+          "name": "analysis_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "analysis id; retained within the containing record scope."
+        },
+        {
+          "name": "analysis_context",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Foreign key to run_manifest.analysis_contexts.context_id, not a mode string."
+        },
+        {
+          "name": "patient_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "patient id; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "peptide key; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "peptide sequence; retained within the containing record scope.",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"
+        },
+        {
+          "name": "peptide_length",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "amino_acid_count",
+          "enum": null,
+          "definition": "peptide length; retained within the containing record scope.",
+          "minimum": 1
+        },
+        {
+          "name": "n_samples_total",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n samples total; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "n_samples_detected",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n samples detected; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "n_samples_peptide_assessed",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n samples peptide assessed; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "n_samples_not_assessed",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n samples not assessed; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "samples_detected",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "samples detected; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "sample_status_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample status json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "grades_by_sample_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "grades by sample json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "hla_support_by_sample_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "hla support by sample json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "origins_by_sample_json",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "origins by sample json; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "comparison_design_json",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "comparison design json; retained within the containing record scope."
+        },
+        {
+          "name": "origin_consistency",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "sampled lesionsでのpattern。truncalや真の消失と自動的に言い換えない。"
+        },
+        {
+          "name": "spatial_pattern",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "sampled lesionsでのpattern。truncalや真の消失と自動的に言い換えない。"
+        },
+        {
+          "name": "longitudinal_pattern",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "sampled lesionsでのpattern。truncalや真の消失と自動的に言い換えない。"
+        },
+        {
+          "name": "pattern_confidence",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "sampled lesionsでのpattern。truncalや真の消失と自動的に言い換えない。"
+        },
+        {
+          "name": "detection_scope",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "sampled lesionsでのpattern。truncalや真の消失と自動的に言い換えない。"
+        },
+        {
+          "name": "rna_supported_samples",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "rna supported samples; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "clonal_samples",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "clonal samples; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "hla_escape_samples",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "hla escape samples; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "warning_codes",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Cautions retaining candidate validity; no automatic exclusion or downgrade.",
+          "items_type": "string",
+          "items_vocabulary": "warning_codes"
+        },
+        {
+          "name": "comparison_details_json",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "comparison details json; retained within the containing record scope."
+        }
+      ]
+    },
+    "run_manifest": {
+      "primary_key": [
+        "analysis_id"
+      ],
+      "fields": [
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "1.0.0"
+          ],
+          "definition": "schema version; retained within the containing record scope."
+        },
+        {
+          "name": "id_schema_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "1.0.0"
+          ],
+          "definition": "id schema version; retained within the containing record scope."
+        },
+        {
+          "name": "analysis_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "analysis id; retained within the containing record scope."
+        },
+        {
+          "name": "package_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "package version; retained within the containing record scope."
+        },
+        {
+          "name": "fixture_kind",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "synthetic",
+            "mock",
+            "real"
+          ],
+          "definition": "fixture kind; retained within the containing record scope."
+        },
+        {
+          "name": "analysis_contexts",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "analysis contexts; retained within the containing record scope.",
+          "items_record": "analysis_context"
+        },
+        {
+          "name": "predictions",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "predictions; retained within the containing record scope.",
+          "items_record": "prediction_metadata"
+        },
+        {
+          "name": "resources",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "resources; retained within the containing record scope.",
+          "items_record": "resource_metadata"
+        },
+        {
+          "name": "allo_policy",
+          "type": "object",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "allo policy; retained within the containing record scope.",
+          "record": "allo_policy"
+        },
+        {
+          "name": "output_schema_versions",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "output schema versions; retained within the containing record scope."
+        },
+        {
+          "name": "uncertainty",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "uncertainty; retained within the containing record scope.",
+          "items_type": "string"
+        }
+      ]
+    }
+  },
+  "records": {
+    "analysis_context": {
+      "fields": [
+        {
+          "name": "context_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "context id; retained within the containing record scope."
+        },
+        {
+          "name": "mode",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "somatic",
+            "allo_hla",
+            "allo_genome"
+          ],
+          "definition": "mode; retained within the containing record scope."
+        },
+        {
+          "name": "source_subject_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for source role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "source_subject_role",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "definition": "Biological role of source subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "self_subject_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for self role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "self_subject_role",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "definition": "Biological role of self subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "presenter_subject_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for presenter role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "presenter_subject_role",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "definition": "Biological role of presenter subject within this context, validated against mode and direction.",
+          "vocabulary": "subject_role"
+        },
+        {
+          "name": "sample_bindings",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample bindings; retained within the containing record scope.",
+          "items_type": "string",
+          "unique_items": true
+        },
+        {
+          "name": "direction",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "direction; retained within the containing record scope."
+        },
+        {
+          "name": "organ",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "organ; retained within the containing record scope."
+        },
+        {
+          "name": "tissue",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "tissue; retained within the containing record scope."
+        },
+        {
+          "name": "timepoint",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "timepoint; retained within the containing record scope."
+        },
+        {
+          "name": "scenario_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "scenario id; retained within the containing record scope."
+        },
+        {
+          "name": "missing_reasons",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "missing reasons; retained within the containing record scope."
+        }
+      ]
+    },
+    "epitope_assignment": {
+      "fields": [
+        {
+          "name": "assignment_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "assignment id; retained within the containing record scope."
+        },
+        {
+          "name": "candidate_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Unified somatic/allo identity of context_id, sample_id, candidate_key in that order; patient binding belongs to the context. Excludes origin, run and prediction provenance."
+        },
+        {
+          "name": "prediction_ref",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "prediction ref; retained within the containing record scope."
+        },
+        {
+          "name": "request_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "request id; retained within the containing record scope."
+        },
+        {
+          "name": "predictor_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "predictor version; retained within the containing record scope."
+        },
+        {
+          "name": "model_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "model checksum; retained within the containing record scope."
+        },
+        {
+          "name": "binding_core",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Assigned binding core sequence. Scalar result is only the selected primary assignment projection; null when unresolved.",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"
+        },
+        {
+          "name": "binding_core_start",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "amino_acid_1_based_inclusive",
+          "enum": null,
+          "definition": "binding core start; retained within the containing record scope.",
+          "minimum": 1
+        },
+        {
+          "name": "binding_core_length",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "amino_acid_count",
+          "enum": null,
+          "definition": "binding core length; retained within the containing record scope.",
+          "minimum": 1
+        },
+        {
+          "name": "binding_orientation",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "forward",
+            "reverse",
+            "gapped",
+            "unknown"
+          ],
+          "definition": "binding orientation; retained within the containing record scope."
+        },
+        {
+          "name": "position_mapping",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "position mapping; retained within the containing record scope.",
+          "items_type": "integer"
+        },
+        {
+          "name": "epitope_key",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "pMHC identity of canonical species, hla_class, binding_core sequence and presenter mhc_key, in that order. Mapping, orientation, ligand coordinates and derived core length are excluded; unresolved assignments have null key."
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "definition": "status; retained within the containing record scope.",
+          "vocabulary": "assessment_status"
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "reason; retained within the containing record scope."
+        },
+        {
+          "name": "is_primary",
+          "type": "boolean",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "is primary; retained within the containing record scope."
+        },
+        {
+          "name": "selection_policy_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "selection policy id; retained within the containing record scope."
+        },
+        {
+          "name": "raw_offsets",
+          "type": "object",
+          "required": false,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "raw offsets; retained within the containing record scope."
+        }
+      ]
+    },
+    "evidence": {
+      "fields": [
+        {
+          "name": "evidence_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "evidence id; retained within the containing record scope."
+        },
+        {
+          "name": "analysis_context",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Foreign key to run_manifest.analysis_contexts.context_id, not a mode string."
+        },
+        {
+          "name": "target_type",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "candidate",
+            "epitope_assignment",
+            "origin",
+            "source_antigen",
+            "presenter"
+          ],
+          "definition": "target type; retained within the containing record scope."
+        },
+        {
+          "name": "target_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "target id; retained within the containing record scope."
+        },
+        {
+          "name": "evidence_type",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "hla_binding_rank",
+            "hla_affinity",
+            "source_antigen_expression",
+            "presenter_hla_expression",
+            "processing_plausibility",
+            "observed_proteomics",
+            "observed_immunopeptidomics",
+            "recipient_hla_self_match",
+            "whole_proteome_self_match",
+            "personalized_self_match",
+            "prior_immunizer_overlap",
+            "tcr_evidence",
+            "tcr_applicability",
+            "uncertainty",
+            "exposed_amino_acid_mismatch",
+            "structural_accessibility",
+            "protrusion",
+            "physicochemical_disparity",
+            "imported_eplet_annotation",
+            "linked_recognition",
+            "structural_b_cell"
+          ],
+          "definition": "evidence type; retained within the containing record scope."
+        },
+        {
+          "name": "assessment_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "definition": "assessment status; retained within the containing record scope.",
+          "vocabulary": "assessment_status"
+        },
+        {
+          "name": "finding",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "INDETERMINATE"
+          ],
+          "definition": "finding; retained within the containing record scope."
+        },
+        {
+          "name": "value",
+          "type": "scalar",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "value; retained within the containing record scope."
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "unit; retained within the containing record scope."
+        },
+        {
+          "name": "metric_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "metric id; retained within the containing record scope."
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "reason; retained within the containing record scope."
+        },
+        {
+          "name": "method",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "method; retained within the containing record scope."
+        },
+        {
+          "name": "source_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "source ref; retained within the containing record scope."
+        },
+        {
+          "name": "source_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "source checksum; retained within the containing record scope."
+        },
+        {
+          "name": "model_version",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "model version; retained within the containing record scope."
+        },
+        {
+          "name": "assay",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "assay; retained within the containing record scope."
+        },
+        {
+          "name": "tissue",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "tissue; retained within the containing record scope."
+        },
+        {
+          "name": "timepoint",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "timepoint; retained within the containing record scope."
+        },
+        {
+          "name": "applicability",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "APPLICABLE",
+            "NOT_APPLICABLE",
+            "UNKNOWN",
+            "OUT_OF_DOMAIN"
+          ],
+          "definition": "applicability; retained within the containing record scope."
+        },
+        {
+          "name": "uncertainty",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "uncertainty; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "details",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Assay/search scope and typed self-match detail when applicable; non-evaluated evidence must retain reason."
+        }
+      ]
+    },
+    "self_match_detail": {
+      "fields": [
+        {
+          "name": "self_scope",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "self scope; retained within the containing record scope."
+        },
+        {
+          "name": "self_subject_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for self role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "query_identity",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "query identity; retained within the containing record scope."
+        },
+        {
+          "name": "query_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "query sequence; retained within the containing record scope."
+        },
+        {
+          "name": "self_policy_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "self policy id; retained within the containing record scope."
+        },
+        {
+          "name": "reference_release",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "reference release; retained within the containing record scope."
+        },
+        {
+          "name": "reference_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "reference checksum; retained within the containing record scope."
+        },
+        {
+          "name": "presenter_scope",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "presenter scope; retained within the containing record scope."
+        },
+        {
+          "name": "binding_filter",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "binding filter; retained within the containing record scope."
+        },
+        {
+          "name": "search_coverage",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "search coverage; retained within the containing record scope."
+        },
+        {
+          "name": "matches",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "matches; retained within the containing record scope.",
+          "items_type": "json"
+        }
+      ]
+    },
+    "source_sequence_detail": {
+      "fields": [
+        {
+          "name": "source_antigen_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source antigen key; retained within the containing record scope."
+        },
+        {
+          "name": "source_sequence_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source sequence checksum; retained within the containing record scope."
+        },
+        {
+          "name": "reference_release",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "reference release; retained within the containing record scope."
+        },
+        {
+          "name": "reference_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "reference checksum; retained within the containing record scope."
+        },
+        {
+          "name": "source_allele_candidates",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source allele candidates; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "scenario_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "scenario id; retained within the containing record scope."
+        },
+        {
+          "name": "domain_intervals",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "domain intervals; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "leader_policy_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "leader policy id; retained within the containing record scope."
+        },
+        {
+          "name": "coordinate_mapping",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "coordinate mapping; retained within the containing record scope."
+        },
+        {
+          "name": "completion_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "completion status; retained within the containing record scope."
+        },
+        {
+          "name": "completion_method",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "completion method; retained within the containing record scope."
+        },
+        {
+          "name": "imputed_positions",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "imputed positions; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "typing_resolution",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "typing resolution; retained within the containing record scope."
+        },
+        {
+          "name": "uncertainty",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "uncertainty; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "source_antigen_complex_keys",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source antigen complex keys; retained within the containing record scope.",
+          "items_type": "json"
+        }
+      ]
+    },
+    "linked_recognition": {
+      "fields": [
+        {
+          "name": "link_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "link id; retained within the containing record scope."
+        },
+        {
+          "name": "analysis_context",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Foreign key to run_manifest.analysis_contexts.context_id, not a mode string."
+        },
+        {
+          "name": "source_antigen_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source antigen key; retained within the containing record scope."
+        },
+        {
+          "name": "source_antigen_complex_key",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "source antigen complex key; retained within the containing record scope."
+        },
+        {
+          "name": "b_cell_evidence_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "b cell evidence ids; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "t_cell_origin_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "t cell origin ids; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "candidate_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "candidate ids; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "assignment_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "assignment ids; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "relationship_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "relationship status; retained within the containing record scope."
+        },
+        {
+          "name": "method",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "method; retained within the containing record scope."
+        },
+        {
+          "name": "source_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "source ref; retained within the containing record scope."
+        },
+        {
+          "name": "license_ref",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "license ref; retained within the containing record scope."
+        },
+        {
+          "name": "uncertainty",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "uncertainty; retained within the containing record scope.",
+          "items_type": "json"
+        }
+      ]
+    },
+    "summary_snapshot": {
+      "fields": [
+        {
+          "name": "summary_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "summary id; retained within the containing record scope."
+        },
+        {
+          "name": "analysis_context",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Foreign key to run_manifest.analysis_contexts.context_id, not a mode string."
+        },
+        {
+          "name": "scenario_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "scenario id; retained within the containing record scope."
+        },
+        {
+          "name": "policy_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "policy id; retained within the containing record scope."
+        },
+        {
+          "name": "policy_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "policy checksum; retained within the containing record scope."
+        },
+        {
+          "name": "count",
+          "type": "integer",
+          "required": true,
+          "nullable": true,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "count; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "completeness",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "COMPLETE",
+            "PARTIAL",
+            "NOT_EVALUABLE"
+          ],
+          "definition": "completeness; retained within the containing record scope."
+        },
+        {
+          "name": "n_eligible",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n eligible; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "n_evaluated",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n evaluated; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "n_not_evaluable",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "entity_count",
+          "enum": null,
+          "definition": "n not evaluable; retained within the containing record scope.",
+          "minimum": 0
+        },
+        {
+          "name": "included_epitope_keys",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "included epitope keys; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "included_assignment_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "included assignment ids; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "included_candidate_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "included candidate ids; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "included_origin_ids",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "included origin ids; retained within the containing record scope.",
+          "items_type": "json"
+        },
+        {
+          "name": "exclusion_reasons",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Reasons for exclusion from a declared view, without deleting candidate records.",
+          "items_type": "string",
+          "items_vocabulary": "exclusion_reasons"
+        },
+        {
+          "name": "evidence_snapshot_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "evidence snapshot checksum; retained within the containing record scope."
+        }
+      ]
+    },
+    "origin_identity": {
+      "fields": [
+        {
+          "name": "transcript_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "transcript id; retained within the containing record scope."
+        },
+        {
+          "name": "transcript_version",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "transcript version; retained within the containing record scope."
+        },
+        {
+          "name": "reconstructed_sequence_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "reconstructed sequence checksum; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_start_aa",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "amino_acid_1_based_inclusive",
+          "enum": null,
+          "definition": "peptide start aa; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_end_aa",
+          "type": "integer",
+          "required": true,
+          "nullable": false,
+          "unit": "amino_acid_1_based_inclusive",
+          "enum": null,
+          "definition": "peptide end aa; retained within the containing record scope."
+        },
+        {
+          "name": "source_event_keys",
+          "type": "array",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source event keys; retained within the containing record scope.",
+          "items_type": "string",
+          "unique_items": true,
+          "sorted_set": true
+        },
+        {
+          "name": "phase_namespace",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "phase namespace; retained within the containing record scope."
+        },
+        {
+          "name": "phase_set",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "phase set; retained within the containing record scope."
+        },
+        {
+          "name": "haplotype_id",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "haplotype id; retained within the containing record scope."
+        },
+        {
+          "name": "source_subject_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Stable subject identity for source role; optional row projection must equal manifest binding."
+        },
+        {
+          "name": "source_antigen_key",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "source antigen key; retained within the containing record scope."
+        },
+        {
+          "name": "scenario_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "scenario id; retained within the containing record scope."
+        }
+      ]
+    },
+    "canonical_event": {
+      "fields": [
+        {
+          "name": "namespace",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Canonicalization algorithm and version supplied upstream."
+        },
+        {
+          "name": "identity",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Canonical biological facts, e.g. contig/position/ref/alt or source sequence checksum."
+        }
+      ]
+    },
+    "prediction_metadata": {
+      "fields": [
+        {
+          "name": "prediction_ref",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "prediction ref; retained within the containing record scope."
+        },
+        {
+          "name": "request_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "request id; retained within the containing record scope."
+        },
+        {
+          "name": "model_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "model checksum; retained within the containing record scope."
+        },
+        {
+          "name": "predictor_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "predictor version; retained within the containing record scope."
+        }
+      ]
+    },
+    "resource_metadata": {
+      "fields": [
+        {
+          "name": "resource_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "resource id; retained within the containing record scope."
+        },
+        {
+          "name": "release",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "release; retained within the containing record scope."
+        },
+        {
+          "name": "checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "checksum; retained within the containing record scope."
+        }
+      ]
+    },
+    "allo_policy": {
+      "fields": [
+        {
+          "name": "baseline_name",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "baseline_version",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "predictor_software_version",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "model_id",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "model_checksum",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "reference_release",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "reference_checksums",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "source_loci",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "self_loci",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "source_domain_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "self_domain_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "leader_peptide_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "boundary_window_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "ligand_generation_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "core_assignment_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "heterodimer_pairing_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "sequence_completion_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "typing_imputation_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "self_peptidome_definition",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "metric_id",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "threshold",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "threshold_unit",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "threshold_boundary",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "deduplication_scope",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "counting_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "uncertainty_policy",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "source_citations",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "license_refs",
+          "type": "json",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "Versioned allo policy metadata; null when not run, with policy_status/reason."
+        },
+        {
+          "name": "policy_status",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "NOT_RUN",
+            "DEFINED"
+          ],
+          "definition": "policy status; retained within the containing record scope."
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "reason; retained within the containing record scope."
+        }
+      ]
+    }
+  },
+  "vocabularies": {
+    "assessment_status": [
+      "NOT_PROVIDED",
+      "NOT_RUN",
+      "NOT_EVALUABLE",
+      "NOT_APPLICABLE",
+      "EVALUATED",
+      "FAILED"
+    ],
+    "subject_role": [
+      "tumor",
+      "normal",
+      "patient",
+      "donor",
+      "recipient"
+    ],
+    "grade": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "INVALID",
+      "NOT_GRADED"
+    ],
+    "warning_codes": [
+      "LOW_CONFIDENCE",
+      "SELF_MATCH",
+      "PHASE_UNCERTAIN",
+      "INCOMPLETE_SOURCE",
+      "UNCALIBRATED"
+    ],
+    "downgrade_reasons": [
+      "SELF_MATCH",
+      "HLA_ESCAPE",
+      "EVIDENCE_LIMITED"
+    ],
+    "exclusion_reasons": [
+      "INVALID_SEQUENCE",
+      "POLICY_EXCLUDED",
+      "BINDING_THRESHOLD",
+      "SELF_MATCH"
+    ],
+    "not_evaluated_codes": [
+      "NOT_PROVIDED",
+      "NOT_RUN",
+      "NOT_EVALUABLE",
+      "NOT_APPLICABLE",
+      "UNSUPPORTED_INPUT",
+      "UNSUPPORTED_LENGTH",
+      "UNSUPPORTED_HLA",
+      "PREDICTION_FAILED",
+      "MISSING_EVIDENCE",
+      "AMBIGUOUS_CORE",
+      "UNRESOLVED_MAPPING",
+      "ALLO_GRADING_NOT_IMPLEMENTED"
+    ]
+  },
+  "rules": {
+    "unknown_fields": "reject (opaque annotation objects retain explicitly scoped provenance)",
+    "reason_extension": "Closed versioned lists. Extend only with a schema version bump.",
+    "counts": "Non-null count requires declared unit and EVALUATED status; zero is measured, never imputed.",
+    "role_projection": "Role columns optional. If present/non-null they must match manifest context exactly.",
+    "origin_projection": "Result DNA/RNA/CCF/expression scalars must come from one grading_origin_id and its unique source event; ambiguous multi-event projections remain null.",
+    "schema_version_policy": "MAJOR: type/unit/meaning/requiredness/ID breaking change; MINOR: optional additive field/vocabulary; PATCH: clarification with unchanged accepted values. Validators accept exact supported version; migrations explicit.",
+    "canonicalization": "NFC UTF-8; typed netstrings; SHA-256; identity field order below; generic object names sorted by UTF-8 bytes; sets explicitly sorted; arrays ordered. See docs/development/T002_contract.md.",
+    "vocabulary_references": "vocabulary and items_vocabulary reference top-level vocabularies. Inline enum/items_enum may only define field-specific values, never duplicate shared vocabularies.",
+    "multisample_context": "Each summary analysis_context references run_manifest.analysis_contexts.context_id; patient_id equals the bound somatic patient. Allo summaries are unsupported; unrelated allo contexts do not invalidate somatic summaries.",
+    "candidate_status": "species, hla_class, prediction_status, grading_status, final_grade and grade_before_warnings are required and non-null. NOT_GRADED is an explicit state, distinct from INVALID and missing."
+  },
+  "metrics": {
+    "hla_binding_rank": {
+      "type": "number",
+      "unit": "percent_0_100",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "hla_affinity": {
+      "type": "number",
+      "unit": "nM",
+      "minimum": 0
+    },
+    "recipient_hla_self_match": {
+      "type": "boolean",
+      "unit": "boolean"
+    },
+    "whole_proteome_self_match": {
+      "type": "boolean",
+      "unit": "boolean"
+    },
+    "personalized_self_match": {
+      "type": "boolean",
+      "unit": "boolean"
+    }
+  },
+  "role_bindings": {
+    "somatic": {
+      "source": [
+        "tumor"
+      ],
+      "self": [
+        "normal",
+        "patient"
+      ],
+      "presenter": [
+        "patient"
+      ]
+    },
+    "allo_hla": {
+      "source": [
+        "donor",
+        "recipient"
+      ],
+      "self": [
+        "recipient",
+        "donor"
+      ],
+      "presenter": [
+        "recipient",
+        "donor"
+      ]
+    },
+    "allo_genome": {
+      "source": [
+        "donor",
+        "recipient"
+      ],
+      "self": [
+        "recipient",
+        "donor"
+      ],
+      "presenter": [
+        "recipient",
+        "donor"
+      ]
+    }
+  },
+  "identities": {
+    "event_key": {
+      "fields": [
+        {
+          "name": "genome_assembly",
+          "type": "string",
+          "required": true,
+          "nullable": true,
+          "unit": null,
+          "enum": null,
+          "definition": "genome assembly; retained within the containing record scope."
+        },
+        {
+          "name": "canonical_event",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "canonical event; retained within the containing record scope."
+        }
+      ]
+    },
+    "event_id": {
+      "fields": [
+        {
+          "name": "context_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "context id; retained within the containing record scope."
+        },
+        {
+          "name": "patient_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "patient id; retained within the containing record scope."
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample id; retained within the containing record scope."
+        },
+        {
+          "name": "event_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "event key; retained within the containing record scope."
+        }
+      ]
+    },
+    "peptide_key": {
+      "fields": [
+        {
+          "name": "ligand_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "ligand sequence; retained within the containing record scope."
+        }
+      ]
+    },
+    "sample_peptide_id": {
+      "fields": [
+        {
+          "name": "context_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "context id; retained within the containing record scope."
+        },
+        {
+          "name": "patient_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "patient id; retained within the containing record scope."
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample id; retained within the containing record scope."
+        },
+        {
+          "name": "peptide_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "peptide key; retained within the containing record scope."
+        }
+      ]
+    },
+    "origin_id": {
+      "fields": [
+        {
+          "name": "sample_peptide_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample peptide id; retained within the containing record scope."
+        },
+        {
+          "name": "origin_identity",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "origin identity; retained within the containing record scope."
+        }
+      ]
+    },
+    "candidate_key": {
+      "fields": [
+        {
+          "name": "species",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Canonical NCBI Taxonomy identifier, formatted NCBITaxon:<positive decimal TaxID> without leading zeros. Human is NCBITaxon:9606; names and aliases are rejected. Upstream supplies the canonical current TaxID, not a merged alias.",
+          "pattern": "^NCBITaxon:[1-9][0-9]*$"
+        },
+        {
+          "name": "hla_class",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "I",
+            "II",
+            "UNSPECIFIED"
+          ],
+          "definition": "MHC class I or II; UNSPECIFIED explicitly represents unresolved class for candidate identity. Evaluated epitope assignments require resolved class."
+        },
+        {
+          "name": "ligand_sequence",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "ligand sequence; retained within the containing record scope."
+        },
+        {
+          "name": "mhc_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "mhc key; retained within the containing record scope."
+        }
+      ]
+    },
+    "epitope_key": {
+      "fields": [
+        {
+          "name": "species",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Canonical NCBI Taxonomy identifier, formatted NCBITaxon:<positive decimal TaxID> without leading zeros. Human is NCBITaxon:9606; names and aliases are rejected. Upstream supplies the canonical current TaxID, not a merged alias.",
+          "pattern": "^NCBITaxon:[1-9][0-9]*$"
+        },
+        {
+          "name": "hla_class",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": [
+            "I",
+            "II",
+            "UNSPECIFIED"
+          ],
+          "definition": "MHC class I or II; UNSPECIFIED explicitly represents unresolved class for candidate identity. Evaluated epitope assignments require resolved class."
+        },
+        {
+          "name": "binding_core",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "binding core; retained within the containing record scope."
+        },
+        {
+          "name": "mhc_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "mhc key; retained within the containing record scope."
+        }
+      ]
+    },
+    "source_antigen_key": {
+      "fields": [
+        {
+          "name": "source_subject_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source subject id; retained within the containing record scope."
+        },
+        {
+          "name": "source_allele",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source allele; retained within the containing record scope."
+        },
+        {
+          "name": "source_sequence_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "source sequence checksum; retained within the containing record scope."
+        },
+        {
+          "name": "scenario_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "scenario id; retained within the containing record scope."
+        }
+      ]
+    },
+    "request_id": {
+      "fields": [
+        {
+          "name": "actual_inputs",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "actual inputs; retained within the containing record scope."
+        },
+        {
+          "name": "model_checksum",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "model checksum; retained within the containing record scope."
+        },
+        {
+          "name": "parameters",
+          "type": "object",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "parameters; retained within the containing record scope."
+        },
+        {
+          "name": "execution_contract_version",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "execution contract version; retained within the containing record scope."
+        }
+      ]
+    },
+    "candidate_id": {
+      "fields": [
+        {
+          "name": "context_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "context id; retained within the containing record scope."
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "sample id; retained within the containing record scope."
+        },
+        {
+          "name": "candidate_key",
+          "type": "string",
+          "required": true,
+          "nullable": false,
+          "unit": null,
+          "enum": null,
+          "definition": "Context-independent molecular identity of canonical species, hla_class, complete ligand_sequence and presenter mhc_key, in that order."
+        }
+      ]
+    }
+  },
+  "canonical_serialization": {
+    "algorithm": "SHA-256",
+    "encoding": "UTF-8 NFC",
+    "framing": "tag + decimal UTF-8 byte length + colon + payload; no escaping or separator ambiguity",
+    "tags": {
+      "N": "null, all typed R NA (not NaN)",
+      "S": "NFC UTF-8 string; empty S0: differs from N0:",
+      "B": "logical 0 or 1",
+      "I": "signed base-10 integer without leading zero",
+      "D": "finite IEEE-754 binary64 big-endian lowercase 16 hex; -0 normalized to +0",
+      "A": "ordered concatenation of encoded items",
+      "O": "concatenation of encoded normalized name/value pairs sorted by name UTF-8 bytes"
+    },
+    "identity_envelope": [
+      "Neoantimon2",
+      "id_schema_version",
+      "identity_kind",
+      "field values in identities[kind].fields order"
+    ],
+    "output": "identity_kind:lowercase full 64-hex digest",
+    "sets": "Only declared set fields are sorted; origin source_event_keys must be unique and sorted before hashing. No row ordering enters identity.",
+    "normalization_boundary": "T006 supplies canonical variants, T012 canonical MHC keys (alpha then beta, suffix/resolution retained). No allele/contig alias guessing. AA inputs uppercase canonical one-letter strings; no trimming/case conversion. Unresolved MHC uses UNSPECIFIED; unresolved epitope is null."
+  }
+}

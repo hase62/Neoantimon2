@@ -1,0 +1,8 @@
+source_record_id	source_type	gene_id	contig	strand	donor	acceptor	transcript_id	observed_status	junction_reads	retained_start	retained_end
+donor-1	alternative_donor	G1.1	chr1	+	9	21	TA.1	observed	5		
+acceptor-1	alternative_acceptor	G1.1	chr1	+	8	20	TA.1	observed	5		
+intron-1	retained_intron	G1.1	chr1	+	8	21	TA.1	observed	5	9	20
+intron-minus	retained_intron	G2.1	chr2	-	21	13	TC.1	observed	6	14	20
+ambiguous-splice	novel_junction	G1.1	chr1	+	4	21		observed	5		
+novel-minus	novel_junction	G2.1	chr2	-	22	13	TC.1	observed	5		
+no-model	novel_junction	GU.9	chr1	+	7	21		observed	5		

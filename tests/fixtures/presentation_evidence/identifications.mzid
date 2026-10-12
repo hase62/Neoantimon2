@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MzIdentML xmlns="http://psidev.info/psi/pi/mzIdentML/1.3" version="1.3.0" id="synthetic-mzid">
+  <cvList><cv id="PSI-MS" fullName="PSI-MS" uri="https://example.invalid/ms.obo" version="synthetic"/><cv id="UNIMOD" fullName="UNIMOD" uri="https://example.invalid/unimod.obo"/></cvList>
+  <AnalysisSoftwareList><AnalysisSoftware id="software1" name="SyntheticSearch" version="1.0"><SoftwareName><userParam name="SyntheticSearch"/></SoftwareName></AnalysisSoftware></AnalysisSoftwareList>
+  <SequenceCollection>
+    <DBSequence id="db1" accession="synthetic:protein1" searchDatabase_ref="searchdb"/>
+    <DBSequence id="dbdecoy" accession="DECOY:protein1" searchDatabase_ref="searchdb"/>
+    <Peptide id="peptide2"><PeptideSequence>GILGFVFTL</PeptideSequence><Modification location="8" residues="T" monoisotopicMassDelta="79.966331"><cvParam cvRef="UNIMOD" accession="UNIMOD:21" name="Phospho"/></Modification></Peptide>
+    <Peptide id="peptide1"><PeptideSequence>GILGFVFTL</PeptideSequence></Peptide>
+    <PeptideEvidence id="pe1" peptide_ref="peptide1" dBSequence_ref="db1" start="6" end="14" isDecoy="false"/>
+    <PeptideEvidence id="pe2" peptide_ref="peptide2" dBSequence_ref="db1" start="6" end="14" isDecoy="false"/>
+    <PeptideEvidence id="pedecoy" peptide_ref="peptide1" dBSequence_ref="dbdecoy" isDecoy="true"/>
+  </SequenceCollection>
+  <AnalysisCollection><SpectrumIdentification id="analysis1" spectrumIdentificationList_ref="sil1" spectrumIdentificationProtocol_ref="protocol1"><InputSpectra spectraData_ref="spectra1"/><SearchDatabaseRef searchDatabase_ref="searchdb"/></SpectrumIdentification></AnalysisCollection>
+  <AnalysisProtocolCollection><SpectrumIdentificationProtocol id="protocol1" analysisSoftware_ref="software1"><SearchType><cvParam cvRef="PSI-MS" accession="MS:1001083" name="ms-ms search"/></SearchType><Threshold><cvParam cvRef="PSI-MS" accession="MS:1001494" name="no threshold"/></Threshold></SpectrumIdentificationProtocol></AnalysisProtocolCollection>
+  <DataCollection><Inputs>
+    <SearchDatabase id="searchdb" location="synthetic:database.fasta" version="synthetic-1"><FileFormat><cvParam cvRef="PSI-MS" accession="MS:1001348" name="FASTA format"/></FileFormat><DatabaseName><userParam name="synthetic-db"/></DatabaseName><cvParam cvRef="PSI-MS" accession="MS:1003151" name="SHA-256" value="153778d9d6abf69b0ebb68889b46258c4ccb6be164909a44a1a3b98c6e770639"/></SearchDatabase>
+    <SpectraData id="spectra1" location="synthetic:spectra.mgf"><FileFormat><cvParam cvRef="PSI-MS" accession="MS:1001062" name="Mascot MGF format"/></FileFormat><SpectrumIDFormat><cvParam cvRef="PSI-MS" accession="MS:1000774" name="multiple peak list nativeID format"/></SpectrumIDFormat></SpectraData>
+  </Inputs><AnalysisData><SpectrumIdentificationList id="sil1">
+    <SpectrumIdentificationResult id="sir1" spectrumID="index=1" spectraData_ref="spectra1"><SpectrumIdentificationItem id="sii1" rank="1" passThreshold="true" peptide_ref="peptide1" chargeState="2" experimentalMassToCharge="500.3" calculatedMassToCharge="500.2"><PeptideEvidenceRef peptideEvidence_ref="pe1"/><cvParam cvRef="PSI-MS" accession="MS:1002354" name="PSM-level q-value" value="0.001"/><cvParam cvRef="PSI-MS" accession="MS:1001171" name="Mascot:score" value="42"/><cvParam cvRef="PSI-MS" accession="MS:1002351" name="PSM-level local FDR" value="0.003"/></SpectrumIdentificationItem></SpectrumIdentificationResult>
+    <SpectrumIdentificationResult id="sir2" spectrumID="index=2" spectraData_ref="spectra1"><SpectrumIdentificationItem id="sii2" rank="1" passThreshold="true" peptide_ref="peptide2" chargeState="2" experimentalMassToCharge="540.3" calculatedMassToCharge="540.2"><PeptideEvidenceRef peptideEvidence_ref="pe2"/><cvParam cvRef="PSI-MS" accession="MS:1001493" name="posterior error probability" value="0.002"/></SpectrumIdentificationItem></SpectrumIdentificationResult>
+    <SpectrumIdentificationResult id="sir3" spectrumID="index=3" spectraData_ref="spectra1"><SpectrumIdentificationItem id="sii3" rank="1" passThreshold="false" peptide_ref="peptide1" chargeState="2" experimentalMassToCharge="500.3" calculatedMassToCharge="500.2"><PeptideEvidenceRef peptideEvidence_ref="pedecoy"/></SpectrumIdentificationItem></SpectrumIdentificationResult>
+  </SpectrumIdentificationList></AnalysisData></DataCollection>
+</MzIdentML>

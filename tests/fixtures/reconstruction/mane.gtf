@@ -1,0 +1,5 @@
+chr1	synthetic	transcript	1	33	.	+	.	gene_id "G1.1"; transcript_id "TA.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PA.1";
+chr1	synthetic	exon	1	8	.	+	.	gene_id "G1.1"; transcript_id "TA.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PA.1";
+chr1	synthetic	exon	21	33	.	+	.	gene_id "G1.1"; transcript_id "TA.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PA.1";
+chr1	synthetic	CDS	1	8	.	+	0	gene_id "G1.1"; transcript_id "TA.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PA.1";
+chr1	synthetic	CDS	21	30	.	+	1	gene_id "G1.1"; transcript_id "TA.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PA.1";

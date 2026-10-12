@@ -1,0 +1,5 @@
+chrLR	synthetic	transcript	1	195	.	+	.	gene_id "GLR.1"; transcript_id "novel-exon";
+chrLR	synthetic	exon	1	36	.	+	.	gene_id "GLR.1"; transcript_id "novel-exon";
+chrLR	synthetic	exon	40	75	.	+	.	gene_id "GLR.1"; transcript_id "novel-exon";
+chrLR	synthetic	exon	79	114	.	+	.	gene_id "GLR.1"; transcript_id "novel-exon";
+chrLR	synthetic	exon	157	195	.	+	.	gene_id "GLR.1"; transcript_id "novel-exon";

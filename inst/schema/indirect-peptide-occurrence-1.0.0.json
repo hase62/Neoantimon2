@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "indirect-peptide-occurrence-1.0.0",
+  "title": "indirect-peptide-occurrence-1.0.0",
+  "$ref": "#/$defs/occurrence",
+  "$defs": {
+    "occurrence_payload": {
+      "type": "object",
+      "properties": {
+        "source_occurrence_id": {
+          "type": "string",
+          "pattern": "^hla-source-occurrence-id-v1:[0-9a-f]{64}$"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "peptide_key": {
+          "type": "string",
+          "pattern": "^peptide_key:[0-9a-f]{64}$"
+        },
+        "generation_policy_id": {
+          "type": "string",
+          "pattern": "^allo-policy-id-v1:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "source_occurrence_id",
+        "start",
+        "end",
+        "peptide_key",
+        "generation_policy_id"
+      ],
+      "additionalProperties": false
+    },
+    "interval": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "name",
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "occurrence": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "indirect-peptide-occurrence-1.0.0"
+        },
+        "indirect_peptide_occurrence_id": {
+          "type": "string",
+          "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+        },
+        "semantics": {
+          "$ref": "#/$defs/occurrence_payload"
+        },
+        "hla_source_sequence_id": {
+          "type": "string",
+          "pattern": "^hla-source-sequence-id-v1:[0-9a-f]{64}$"
+        },
+        "source_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_allele_hypothesis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequence_coordinates": {
+          "const": "precursor"
+        },
+        "peptide_sequence": {
+          "type": "string",
+          "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interval"
+          }
+        },
+        "status": {
+          "enum": [
+            "evaluated",
+            "insufficient"
+          ]
+        },
+        "mismatch_annotation": {
+          "type": "object"
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "indirect_peptide_occurrence_id",
+        "semantics",
+        "hla_source_sequence_id",
+        "source_subject_id",
+        "source_allele_hypothesis",
+        "sequence_coordinates",
+        "peptide_sequence",
+        "domains",
+        "status",
+        "mismatch_annotation",
+        "provenance"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

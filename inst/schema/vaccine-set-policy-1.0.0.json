@@ -1,0 +1,116 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": "vaccine-set-policy-1.0.0"
+    },
+    "max_peptides": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "min_class_i": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "min_class_ii": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "max_class_i": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "max_class_ii": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "max_per_presenter": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "max_per_redundancy_group": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "min_length": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "max_length": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "required_presenters": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "allowlist": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "blocklist": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "forbidden_residues": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]$"
+      }
+    },
+    "forbidden_motifs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]+$"
+      }
+    },
+    "require_evidence": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "exact_self_evaluated",
+          "longitudinal_evaluable",
+          "linked_clonal",
+          "ms_observed"
+        ]
+      }
+    },
+    "forbid_confirmed_exact_self": {
+      "type": "boolean"
+    },
+    "fill_to_capacity": {
+      "type": "boolean"
+    },
+    "reduce_overlap": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "version",
+    "max_peptides"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "vaccine-set-policy-1.0.0",
+  "title": "Explicit deterministic vaccine policy"
+}

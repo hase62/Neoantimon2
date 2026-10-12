@@ -1,0 +1,12 @@
+{
+  "version": "1.1.0",
+  "extends": "1.0.0",
+  "id_schema_version": "1.0.0",
+  "alphabet": "ACDEFGHIKLMNPQRSTVWYU",
+  "tables": {
+    "peptide_origins": ["peptide_sequence", "ligand_sequence", "wt_peptide_sequence", "upstream_flank", "downstream_flank"],
+    "neoantigen_results": ["peptide_sequence", "ligand_sequence", "binding_core"],
+    "multisample_summary": ["peptide_sequence"]
+  },
+  "records": {"epitope_assignment": ["binding_core"], "self_match_detail": ["query_sequence"]}
+}

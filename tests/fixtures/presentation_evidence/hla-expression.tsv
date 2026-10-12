@@ -1,0 +1,8 @@
+allele	raw_count	abundance	unit	allele_fraction	provider	provider_version	reference_identity	mapping_qc	provider_loss_call	interpretation_reference
+HLA-A*02:01	999	99.9	TPM	0.999	synthetic		synthetic:hla-ref	supplied	NA	NA
+HLA-A*01:01	1	0.1	TPM	0.001	synthetic		synthetic:hla-ref	supplied	NA	NA
+HLA-B*07:02	0	0	TPM	0	synthetic		synthetic:hla-ref	supplied	NA	NA
+HLA-B*08:01			TPM		synthetic		synthetic:hla-ref	supplied	NA	NA
+HLA-C*04:01	20	2	TPM	1	synthetic		synthetic:hla-ref	supplied	NA	NA
+HLA-DRA*01:01	10	1	TPM	0.4	synthetic		synthetic:hla-ref	supplied	NA	NA
+HLA-DRB1*04:01	20	2	TPM	0.6	synthetic		synthetic:hla-ref	supplied	NA	NA

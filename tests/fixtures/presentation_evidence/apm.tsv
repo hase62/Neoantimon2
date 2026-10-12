@@ -1,0 +1,30 @@
+gene	gene_id	measurement_type	raw_count	abundance	unit	unit_definition	provider	provider_version	event_id	variant_type	consequence	copy_number	zygosity	loh	functional_annotation	pathogenicity	loss_support	provider_loss_call	abnormality_annotation	interpretation_reference
+B2M		gene_expression		10	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+B2M		gene_expression		0.01	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+TAP1		gene_expression		0.1	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+TAPBP		gene_expression		5	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+CALR		gene_expression		6	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+PDIA3		gene_expression		7	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+ERAP1		gene_expression		8	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+ERAP2		gene_expression		9	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+PSMB8		gene_expression		3	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+PSMB9		gene_expression		4	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+PSMB10		gene_expression		5	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+NLRC5		gene_expression		2	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+CD74		gene_expression		8	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DMA		gene_expression		3	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DMB		gene_expression		4	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DOA		gene_expression		5	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DOB		gene_expression		5	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+CIITA		gene_expression		2	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DRA		gene_expression		5	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DRB1		gene_expression		6	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DPA1		gene_expression		7	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DPB1		gene_expression		8	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DQA1		gene_expression		4	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-DQB1		gene_expression		2	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+HLA-A		gene_expression		5	TPM	transcripts per million	synthetic	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+B2M		somatic_alteration							variant:1	SNV	missense_variant				unresolved_functional_effect	NA	NA	NA	NA	NA
+B2M		copy_number										0					documented_homozygous_deletion			synthetic:cn-validation
+TAP2		somatic_alteration							variant:2		frameshift_variant	NA	NA	NA	NA	NA	NA	NA	NA	NA
+JAK1		somatic_alteration									missense_variant	NA	NA	NA	NA	NA	NA	NA	NA	NA

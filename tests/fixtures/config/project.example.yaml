@@ -1,0 +1,41 @@
+# Executable T003 loader contract. Paths are portable defaults, not downloads.
+paths:
+  data_root: /path/to/your/data
+  run_root: /path/to/your/runs
+scientific:
+  species: NCBITaxon:9606
+  genome_assembly: null
+  policy_id: null
+runtime:
+  threads: 1
+  verbosity: info
+checksum: metadata
+resources:
+  reference.genome_fasta:
+    path: reference/genome/genome.fa
+    type: file
+    required: false
+    resource_id: null
+    version: null
+    checksum: null
+    source: null
+  reference.gencode_gtf:
+    path: reference/gencode/annotation.gtf
+    type: file
+    required: false
+  reference.mane:
+    path: reference/mane
+    type: directory
+    required: false
+  reference.hla:
+    path: reference/hla
+    type: directory
+    required: false
+  tools.netmhcpan:
+    path: netmhcpan/netMHCpan
+    type: executable
+    required: false
+  tools.netmhciipan:
+    path: netmhciipan/netMHCIIpan
+    type: executable
+    required: false

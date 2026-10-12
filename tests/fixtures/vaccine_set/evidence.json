@@ -1,0 +1,21 @@
+{
+  "subject_id": "patient-1",
+  "contexts": [
+    {"sample_id": "S1", "subject_id": "patient-1", "region_id": "primary-left", "ordinal_time": 1},
+    {"sample_id": "S2", "subject_id": "patient-1", "region_id": "primary-right", "ordinal_time": 1},
+    {"sample_id": "S3", "subject_id": "patient-1", "region_id": "metastasis", "ordinal_time": 2}
+  ],
+  "candidates": [
+    {"label": "A", "ligand": "GILGFVFTL", "presenter": "HLA-A*02:01", "states": ["observed", "observed", "observed"], "epitope": "ep:1", "event": "E1", "start": 1, "clonal": true, "loh_samples": ["S3"], "apm_samples": ["S3"]},
+    {"label": "B", "ligand": "ILGFVFTLA", "presenter": "HLA-A*02:01", "states": ["observed", "observed", "observed"], "epitope": "ep:1", "event": "E1", "start": 2, "clonal": true},
+    {"label": "C", "ligand": "GILGFVFTL", "presenter": "HLA-B*07:02", "states": ["observed", "observed", "observed"], "event": "E1", "start": 1, "clonal": true, "apm_samples": ["S3"]},
+    {"label": "D", "ligand": "AAAGILGFVFTLAAA", "presenter": "HLA-DRA*01:01~HLA-DRB1*04:01", "states": ["observed", "observed", "observed"], "event": "fusion:1", "start": 1, "source": "fusion", "grade": "NOT_GRADED"},
+    {"label": "E", "ligand": "LLLAAAAAA", "presenter": "HLA-C*07:02", "states": ["observed", "not_observed_insufficient", "not_evaluated"], "event": "E2", "start": 1},
+    {"label": "F", "ligand": "FFFVVVAAA", "presenter": "HLA-A*24:02", "states": ["observed", "observed", "not_observed_evaluable"], "event": "E3", "start": 1},
+    {"label": "G", "ligand": "GGGKKKAAA", "presenter": "HLA-B*08:01", "states": ["not_observed_evaluable", "not_observed_evaluable", "observed"], "event": "E4", "start": 1},
+    {"label": "H", "ligand": "CCCAAARRR", "presenter": "HLA-A*02:01", "states": ["observed", "not_evaluated", "not_evaluated"], "event": "E5", "start": 1, "grade": "INVALID"},
+    {"label": "I", "ligand": "PPPAAAVVV", "presenter": "HLA-A*02:01", "states": ["observed", "not_evaluated", "not_evaluated"], "event": "E6", "start": 1, "exact_self": true},
+    {"label": "J", "ligand": "RRRYYYAAA", "presenter": "HLA-A*02:01", "states": ["observed", "observed", "observed"], "event": "E1", "start": 40, "source": "splice", "grade": "NOT_GRADED"},
+    {"label": "K", "ligand": "VVVFFFLLL", "presenter": "HLA-A*02:01", "states": ["observed", "observed", "observed"], "event": "longread:1", "start": 1, "source": "long_read", "grade": "NOT_GRADED"}
+  ]
+}

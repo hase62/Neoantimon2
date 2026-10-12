@@ -1,0 +1,4 @@
+chrom	loc.start	loc.end	tcn.em	lcn.em	cf.em	num.mark	nhet	normal_cn	quality	purity	ploidy
+1	100	150	2	0	1.0	30	12	2	0.95	0.8	2.1
+1	151	200	3	1	0.9	25	10	2	0.90	0.8	2.1
+2	100	200	2	1	1.0	28	11	2	0.92	0.8	2.1

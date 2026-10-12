@@ -1,0 +1,99 @@
+{
+  "version": "allo-foundation-1.0.0",
+  "subjects": [
+    {
+      "subject_id": "donor-1"
+    },
+    {
+      "subject_id": "patient-1"
+    }
+  ],
+  "contexts": [
+    {
+      "transplant_donor_subject_id": "donor-1",
+      "transplant_recipient_subject_id": "patient-1",
+      "source_subject_id": "donor-1",
+      "self_subject_id": "patient-1",
+      "presenter_subject_id": "patient-1",
+      "responding_subject_id": "patient-1",
+      "source_subject_role": "donor",
+      "self_subject_role": "recipient",
+      "presenter_subject_role": "recipient",
+      "responding_subject_role": "recipient",
+      "transplant_type": "SOT",
+      "scenario_id": "sot_recipient_response",
+      "direction": "donor_to_recipient",
+      "tissue": "declared_test_tissue",
+      "apc_compartment": "declared_test_apc",
+      "occasion_id": "occasion:phase-a-1",
+      "claim_level": "hypothetical_molecular_scenario"
+    }
+  ],
+  "typing": [
+    {
+      "subject_id": "donor-1",
+      "typing_scenario_id": "typing:1",
+      "locus": "A",
+      "alleles": [
+        "A*02:01"
+      ],
+      "complete": true,
+      "copy_number": 1,
+      "phase": null
+    },
+    {
+      "subject_id": "patient-1",
+      "typing_scenario_id": "typing:1",
+      "locus": "A",
+      "alleles": [
+        "A*02:01"
+      ],
+      "complete": true,
+      "copy_number": 1,
+      "phase": null
+    },
+    {
+      "subject_id": "donor-1",
+      "typing_scenario_id": "typing:1",
+      "locus": "B",
+      "alleles": [
+        "B*07:02"
+      ],
+      "complete": true,
+      "copy_number": 1,
+      "phase": null
+    },
+    {
+      "subject_id": "patient-1",
+      "typing_scenario_id": "typing:1",
+      "locus": "B",
+      "alleles": [
+        "B*07:02"
+      ],
+      "complete": true,
+      "copy_number": 1,
+      "phase": null
+    }
+  ],
+  "reference": {
+    "path": "reference.json"
+  },
+  "self_search": [
+    {
+      "scenario_id": "sot_recipient_response",
+      "self_subject_id": "patient-1",
+      "typing_scenario_id": "typing:1",
+      "scope": "all_self_hla",
+      "required_loci": [
+        "A",
+        "B"
+      ],
+      "required_domains": [
+        "full_precursor"
+      ],
+      "catalog_complete": true,
+      "isoform_policy": "explicit_mapped_isoforms",
+      "sequence_policy": "precursor"
+    }
+  ]
+}

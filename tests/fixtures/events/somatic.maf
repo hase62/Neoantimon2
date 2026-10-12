@@ -1,0 +1,4 @@
+Hugo_Symbol	Chromosome	Start_Position	End_Position	Strand	Reference_Allele	Tumor_Seq_Allele1	Tumor_Seq_Allele2	Variant_Type	Tumor_Sample_Barcode	NCBI_Build
+GENE1	chr1	1	1	-	A	A	C	SNP	sample-1	GRCh38
+GENE2	chr1	5	6	+	-	-	T	INS	sample-1	GRCh38
+GENE3	chr1	5	6	+	AC	AC	-	DEL	sample-1	GRCh38

@@ -1,0 +1,2 @@
+isoform	chrom	strand	length	exons	structural_category	subcategory	associated_gene	associated_transcript	RTS_stage	all_canonical	FL	iso_exp	CDS_start	CDS_end	polyA_motif	unknown_future_column
+sqanti3-isoform	chrLR	+	147	4	novel_not_in_catalog	novel_combination	GLR.1	LRREF.1	FALSE	TRUE	12	0.0	1	144	AATAAA	retained

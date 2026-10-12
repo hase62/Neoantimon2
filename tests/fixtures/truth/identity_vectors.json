@@ -1,0 +1,49 @@
+[
+  {
+    "kind": "candidate_key",
+    "values": {
+      "species": "NCBITaxon:9606",
+      "hla_class": "II",
+      "ligand_sequence": "AAACDEFGHIKLMMM",
+      "mhc_key": "HLA-DRA*01:01~HLA-DRB1*01:01"
+    },
+    "expected": "candidate_key:07e68012e321d66d9c96c2cd5f3b8054c42600dd65521f899d6c5872e4d80290"
+  },
+  {
+    "kind": "epitope_key",
+    "values": {
+      "species": "NCBITaxon:9606",
+      "hla_class": "II",
+      "binding_core": "ACDEFGHIK",
+      "mhc_key": "HLA-DRA*01:01~HLA-DRB1*01:01"
+    },
+    "expected": "epitope_key:59478871e09758473fba9f2608b19b347498907803ae3e3da51e170d6ae683f6"
+  },
+  {
+    "kind": "candidate_id",
+    "values": {
+      "context_id": "ctx-somatic",
+      "sample_id": "sample-1",
+      "candidate_key": "candidate_key:07e68012e321d66d9c96c2cd5f3b8054c42600dd65521f899d6c5872e4d80290"
+    },
+    "expected": "candidate_id:a2fafac33270c1399d168eecfa64243a7ac8049482b68b94577b6939e4f73ac3"
+  },
+  {
+    "kind": "candidate_id",
+    "values": {
+      "context_id": "ctx-somatic-second",
+      "sample_id": "sample-1",
+      "candidate_key": "candidate_key:07e68012e321d66d9c96c2cd5f3b8054c42600dd65521f899d6c5872e4d80290"
+    },
+    "expected": "candidate_id:ddfba1d6fce7df0d3e5533a582c2dc69ba6bcf2975b2bec70f4ac060418c859a"
+  },
+  {
+    "kind": "candidate_id",
+    "values": {
+      "context_id": "ctx-donor-recipient",
+      "sample_id": "sample-1",
+      "candidate_key": "candidate_key:07e68012e321d66d9c96c2cd5f3b8054c42600dd65521f899d6c5872e4d80290"
+    },
+    "expected": "candidate_id:44ad25d603f30a70cfbe1229fc4d6bfd57aa97416b7eb1687e89f58bbddff4af"
+  }
+]

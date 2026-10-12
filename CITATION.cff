@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: >-
+  If you use Neoantimon2 in academic or research work, please cite this software
+  using the metadata below. A dedicated Neoantimon2 paper is planned and is not
+  yet published; citation guidance will be updated when the paper is published.
+title: Neoantimon2
+type: software
+authors:
+  - family-names: Hasegawa
+    given-names: Takanori
+repository-code: https://github.com/hase62/Neoantimon2
+version: 0.2.0
+license: PolyForm-Noncommercial-1.0.0

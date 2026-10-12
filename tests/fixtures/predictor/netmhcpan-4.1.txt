@@ -1,0 +1,5 @@
+# NetMHCpan version 4.1
+Pos HLA Peptide Core Of Gp Gl Ip Il Icore Identity Score_EL %Rank_EL Score_BA %Rank_BA Aff(nM) BindLevel
+0 HLA-B07:02 LMNPQRSTV LMNPQRSTV 0 0 0 0 0 LMNPQRSTV synthetic 0.35 3.2 0.52 1.4 210 NA
+0 HLA-A02:01 ACDEFGHIK ACDEFGHIK 0 0 0 0 0 ACDEFGHIK synthetic 0.68 0.8 0.61 1.1 85 NA
+1 HLA-A02:01 LMNPQRSTV LMNPQRSTV 0 0 0 0 0 LMNPQRSTV synthetic 0.29 4.1 0.48 2.2 410 NA

@@ -1,0 +1,15 @@
+##fileformat=VCFv4.2
+##source=CallerOne
+##reference=GRCh38
+##contig=<ID=chr1,length=120>
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele fractions">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Depth">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allele depths">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Likelihoods">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	sample-1
+chr1	1	rs1	A	C	.	PASS	AF=0.2;DP=20	GT:AD:PL	0|1:10,4:0,1,2
+chr1	2	.	CG	TA	.	PASS	AF=0.3	GT	0/1
+chr1	5	.	A	AT	.	PASS	AF=0.4	GT	0/1
+chr1	5	.	AC	A	.	PASS	AF=0.5	GT	0/1
+chr1	9	multi	A	C,G	.	PASS	AF=0.2,0.3	GT:AD:PL	1|2:10,3,4:0,1,2,3,4,5

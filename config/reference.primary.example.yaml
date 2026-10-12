@@ -1,0 +1,62 @@
+# Explicit opt-in T005 profile. No package defaults are changed.
+# Supply sha256/file checksum records when available; metadata is not content verification.
+scientific:
+  species: NCBITaxon:9606
+  genome_assembly: GRCh38.p14
+checksum: metadata
+resources:
+  reference.genome_fasta:
+    path: reference/genome/GRCh38.primary_assembly.genome.fa
+    type: file
+    required: true
+    version: "GRCh38.p14"
+    source: GENCODE
+  reference.genome_fai:
+    path: reference/genome/GRCh38.primary_assembly.genome.fa.fai
+    type: file
+    required: true
+    version: "GRCh38.p14"
+    source: GENCODE
+  reference.annotation_gtf:
+    path: reference/gencode/gencode.v50.primary_assembly.annotation.gtf.gz
+    type: file
+    required: true
+    version: "50"
+    resource_id: gencode_primary_assembly_all_catalogs_mane_supplemental_v1
+    source: GENCODE
+  reference.transcript_fasta:
+    path: reference/gencode/gencode.v50.transcripts.fa.gz
+    type: file
+    required: true
+    version: "50"
+    source: GENCODE
+  reference.protein_coding_transcript_fasta:
+    path: reference/gencode/gencode.v50.pc_transcripts.fa.gz
+    type: file
+    required: true
+    version: "50"
+    source: GENCODE
+  reference.protein_fasta:
+    path: reference/gencode/gencode.v50.pc_translations.fa.gz
+    type: file
+    required: true
+    version: "50"
+    source: GENCODE
+  reference.selenocysteine_metadata:
+    path: reference/gencode/gencode.v50.metadata.Selenocysteine.gz
+    type: file
+    required: true
+    version: "50"
+    source: GENCODE
+  reference.mane_summary:
+    path: reference/mane/MANE.GRCh38.v1.5.summary.txt.gz
+    type: file
+    required: true
+    version: "1.5"
+    source: NCBI MANE
+  reference.mane_gtf:
+    path: reference/mane/MANE.GRCh38.v1.5.ensembl_genomic.gtf.gz
+    type: file
+    required: true
+    version: "1.5"
+    source: NCBI MANE

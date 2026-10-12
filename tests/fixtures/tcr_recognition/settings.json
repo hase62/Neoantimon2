@@ -1,0 +1,13 @@
+{
+  "version": "recognition-run-settings-v1",
+  "providers": [
+    {
+      "provider": "fixture",
+      "fixture": true,
+      "model": "paired"
+    }
+  ],
+  "max_queries": 10000,
+  "max_pairing_hypotheses": 1000,
+  "batch_size": 32
+}

@@ -1,0 +1,15 @@
+{
+  "version": "indirect-hla-baseline-1.0.0",
+  "profile": "neo-literature-derived-indirect-hla-ii-dr-strict-v1",
+  "presenters": [
+    {
+      "scenario_id": "sot_recipient_response",
+      "subject_id": "patient-1",
+      "presenter": "HLA-DRA*01:01~HLA-DRB1*01:01",
+      "resolution_policy": "explicit_typed_alpha_beta"
+    }
+  ],
+  "provider": {
+    "path": "binding.json"
+  }
+}

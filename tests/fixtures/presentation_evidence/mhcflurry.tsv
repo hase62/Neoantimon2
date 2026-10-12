@@ -1,0 +1,6 @@
+peptide	n_flank	c_flank	processing_score	processing_percentile
+GILGFVFTL	AAAAA	CCCCC	.8	1.0
+GILGFVFTL	AAAAA		.5	5
+GILGFVFTL		CCCCC	.4	6
+GILGFVFTL			.2	9
+GILGFVFTL	DDDDD	EEEEE	.7	2

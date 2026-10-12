@@ -1,0 +1,3 @@
+sequence_id	repertoire_id	cell_id	locus	junction_aa	junction	v_call	d_call	j_call	c_call	variable_domain_aa	productive	stop_codon	vj_in_frame	duplicate_count	umi_count	consensus_count	t_cell_type	source
+a	bulk		TRA	CAVRDSNYQLIW		TRAV1-2		TRAJ33			T	F	T					synthetic
+b	bulk		TRB	CASSIRSSYEQYF		TRBV19		TRBJ2-7			T	F	T					synthetic

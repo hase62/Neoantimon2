@@ -1,0 +1,2559 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "neo-allo-hla-evidence-1.0.0",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/import"
+    },
+    {
+      "$ref": "#/$defs/overlay"
+    }
+  ],
+  "$defs": {
+    "target": {
+      "type": "object",
+      "properties": {
+        "target_type": {
+          "enum": [
+            "context",
+            "source_occurrence",
+            "peptide_occurrence",
+            "peptide",
+            "pmhc",
+            "core_assignment",
+            "aggregate_unit"
+          ]
+        },
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "target_type",
+        "target_id"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "context"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_id": {
+                "pattern": "^allo-context-id-v1:[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "source_occurrence"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_id": {
+                "pattern": "^hla-source-occurrence-id-v1:[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "peptide_occurrence"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_id": {
+                "pattern": "^indirect-peptide-occurrence-id-v1:[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "peptide"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_id": {
+                "pattern": "^peptide_key:[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "pmhc"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_id": {
+                "pattern": "^indirect-pmhc-id-v1:[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "core_assignment"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_id": {
+                "pattern": "^indirect-core-assignment-id-v1:[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "aggregate_unit"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_id": {
+                "pattern": "^epitope_key:[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "value": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "number",
+            "string",
+            "boolean"
+          ]
+        },
+        "value_type": {
+          "enum": [
+            "number",
+            "string",
+            "boolean"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "required": [
+        "metric",
+        "value",
+        "value_type",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value_type": {
+                "const": "number"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "value_type": {
+                "const": "string"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "value_type": {
+                "const": "boolean"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "assay": {
+      "type": "object",
+      "properties": {
+        "assay_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_type": {
+          "enum": [
+            "expression_assay",
+            "allele_loh_assay",
+            "apm_assay",
+            "mass_spectrometry",
+            "tcr_recognition_assay",
+            "binding_prediction",
+            "processing_prediction"
+          ]
+        },
+        "receptor_context_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "required": [
+        "assay_id",
+        "method",
+        "version",
+        "evidence_type",
+        "receptor_context_id"
+      ],
+      "additionalProperties": false
+    },
+    "analyte": {
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "enum": [
+            "allele",
+            "gene",
+            "protein",
+            "molecule",
+            "peptide",
+            "core",
+            "pathway",
+            "unresolved"
+          ]
+        },
+        "alleles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "genes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "presenter": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "peptide_key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "hla_class": {
+          "enum": [
+            "I",
+            "II",
+            null
+          ]
+        },
+        "pathway": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "pathway_applicability": {
+          "enum": [
+            "supported",
+            "not_evaluated",
+            "not_applicable"
+          ]
+        }
+      },
+      "required": [
+        "resolution",
+        "alleles",
+        "genes",
+        "presenter",
+        "peptide_key",
+        "hla_class",
+        "pathway",
+        "pathway_applicability"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "allele"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "alleles": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolution": {
+                "const": "gene"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "genes": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "assignments": {
+      "type": "object",
+      "properties": {
+        "source_status": {
+          "enum": [
+            "resolved",
+            "ambiguous",
+            "unresolved",
+            "not_applicable"
+          ]
+        },
+        "source_occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "presenter_status": {
+          "enum": [
+            "resolved",
+            "ambiguous",
+            "unresolved",
+            "not_applicable"
+          ]
+        },
+        "presenters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "absence_scope": {
+          "enum": [
+            "sample_only",
+            "supplied_assay_exhaustive_contract"
+          ]
+        },
+        "assignment_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assignment_evidence"
+          }
+        }
+      },
+      "required": [
+        "source_status",
+        "source_occurrence_ids",
+        "presenter_status",
+        "presenters",
+        "assignment_evidence",
+        "absence_scope"
+      ],
+      "additionalProperties": false
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/target"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "dimension": {
+          "enum": [
+            "source_expression",
+            "presenter_expression",
+            "hla_allele_loh",
+            "antigen_processing_machinery",
+            "ms_observation",
+            "tcr_recognition"
+          ]
+        },
+        "subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_role": {
+          "enum": [
+            "source",
+            "presenter",
+            "responding"
+          ]
+        },
+        "tissue": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "occasion_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assay": {
+          "$ref": "#/$defs/assay"
+        },
+        "result_state": {
+          "enum": [
+            "positive",
+            "negative",
+            "allele_retained",
+            "allele_loss_supported",
+            "detected",
+            "not_detected",
+            "missing",
+            "ambiguous",
+            "insufficient_resolution",
+            "not_evaluated",
+            "not_applicable",
+            "failed"
+          ]
+        },
+        "evaluability": {
+          "enum": [
+            "evaluated",
+            "ambiguous",
+            "insufficient_resolution",
+            "not_evaluated",
+            "not_applicable",
+            "failed"
+          ]
+        },
+        "normalized_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "analyte": {
+          "$ref": "#/$defs/analyte"
+        },
+        "assignments": {
+          "$ref": "#/$defs/assignments"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provenance": {
+          "type": "object"
+        },
+        "raw_values": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "readonly_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "targets",
+        "dimension",
+        "subject_id",
+        "subject_role",
+        "tissue",
+        "compartment",
+        "sample_id",
+        "occasion_id",
+        "assay",
+        "result_state",
+        "evaluability",
+        "normalized_values",
+        "analyte",
+        "assignments",
+        "reason_codes",
+        "provenance",
+        "raw_values",
+        "readonly_references"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "source_expression"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "presenter_expression"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "hla_allele_loh"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "allele_retained",
+                  "allele_loss_supported",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "antigen_processing_machinery"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "ms_observation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "detected",
+                  "not_detected",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "tcr_recognition"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "missing"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "not_evaluated"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "not_evaluated"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "not_evaluated"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "not_applicable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "not_applicable"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "failed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "failed"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "insufficient_resolution"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "insufficient_resolution"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "ambiguous"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "ambiguous"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "allele_retained",
+                  "allele_loss_supported",
+                  "detected",
+                  "not_detected"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sample_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evaluability": {
+                "enum": [
+                  "evaluated",
+                  "ambiguous",
+                  "insufficient_resolution"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "hla_allele_loh"
+              },
+              "result_state": {
+                "enum": [
+                  "allele_retained",
+                  "allele_loss_supported"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "analyte": {
+                "properties": {
+                  "resolution": {
+                    "const": "allele"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "tcr_recognition"
+              },
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "assay": {
+                "properties": {
+                  "receptor_context_id": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "ms_observation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "analyte": {
+                "properties": {
+                  "peptide_key": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "assignments": {
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "source_status": {
+                          "const": "resolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "source_occurrence_ids": {
+                          "minItems": 1,
+                          "maxItems": 1
+                        },
+                        "assignment_evidence": {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "assignment_kind": {
+                                "const": "source_origin"
+                              },
+                              "evaluability": {
+                                "const": "evaluated"
+                              },
+                              "result_state": {
+                                "const": "supported"
+                              }
+                            },
+                            "required": [
+                              "assignment_kind",
+                              "evaluability",
+                              "result_state"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "source_status": {
+                          "const": "unresolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "source_occurrence_ids": {
+                          "maxItems": 0
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "presenter_status": {
+                          "const": "resolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "presenters": {
+                          "minItems": 1,
+                          "maxItems": 1
+                        },
+                        "assignment_evidence": {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "assignment_kind": {
+                                "const": "presenter"
+                              },
+                              "evaluability": {
+                                "const": "evaluated"
+                              },
+                              "result_state": {
+                                "const": "supported"
+                              }
+                            },
+                            "required": [
+                              "assignment_kind",
+                              "evaluability",
+                              "result_state"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "presenter_status": {
+                          "const": "unresolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "presenters": {
+                          "maxItems": 0
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "absence_scope": {
+                          "const": "supplied_assay_exhaustive_contract"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "assignment_evidence": {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "assignment_kind": {
+                                "const": "assay_scope"
+                              },
+                              "evaluability": {
+                                "const": "evaluated"
+                              },
+                              "result_state": {
+                                "const": "supported"
+                              }
+                            },
+                            "required": [
+                              "assignment_kind",
+                              "evaluability",
+                              "result_state"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "not": {
+                  "const": "ms_observation"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "assignments": {
+                "properties": {
+                  "assignment_evidence": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "semantic_observation": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/target"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "dimension": {
+          "enum": [
+            "source_expression",
+            "presenter_expression",
+            "hla_allele_loh",
+            "antigen_processing_machinery",
+            "ms_observation",
+            "tcr_recognition"
+          ]
+        },
+        "subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_role": {
+          "enum": [
+            "source",
+            "presenter",
+            "responding"
+          ]
+        },
+        "tissue": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "occasion_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assay": {
+          "$ref": "#/$defs/assay"
+        },
+        "result_state": {
+          "enum": [
+            "positive",
+            "negative",
+            "allele_retained",
+            "allele_loss_supported",
+            "detected",
+            "not_detected",
+            "missing",
+            "ambiguous",
+            "insufficient_resolution",
+            "not_evaluated",
+            "not_applicable",
+            "failed"
+          ]
+        },
+        "evaluability": {
+          "enum": [
+            "evaluated",
+            "ambiguous",
+            "insufficient_resolution",
+            "not_evaluated",
+            "not_applicable",
+            "failed"
+          ]
+        },
+        "normalized_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "analyte": {
+          "$ref": "#/$defs/analyte"
+        },
+        "assignments": {
+          "$ref": "#/$defs/assignments"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "targets",
+        "dimension",
+        "subject_id",
+        "subject_role",
+        "tissue",
+        "compartment",
+        "sample_id",
+        "occasion_id",
+        "assay",
+        "result_state",
+        "evaluability",
+        "normalized_values",
+        "analyte",
+        "assignments",
+        "reason_codes"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "source_expression"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "presenter_expression"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "hla_allele_loh"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "allele_retained",
+                  "allele_loss_supported",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "antigen_processing_machinery"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "ms_observation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "detected",
+                  "not_detected",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "tcr_recognition"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "missing",
+                  "ambiguous",
+                  "insufficient_resolution",
+                  "not_evaluated",
+                  "not_applicable",
+                  "failed"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "missing"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "not_evaluated"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "not_evaluated"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "not_evaluated"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "not_applicable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "not_applicable"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "failed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "failed"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "insufficient_resolution"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "insufficient_resolution"
+              },
+              "normalized_values": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "const": "ambiguous"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evaluability": {
+                "const": "ambiguous"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "allele_retained",
+                  "allele_loss_supported",
+                  "detected",
+                  "not_detected"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sample_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evaluability": {
+                "enum": [
+                  "evaluated",
+                  "ambiguous",
+                  "insufficient_resolution"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "hla_allele_loh"
+              },
+              "result_state": {
+                "enum": [
+                  "allele_retained",
+                  "allele_loss_supported"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "analyte": {
+                "properties": {
+                  "resolution": {
+                    "const": "allele"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "tcr_recognition"
+              },
+              "result_state": {
+                "enum": [
+                  "positive",
+                  "negative"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "assay": {
+                "properties": {
+                  "receptor_context_id": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "const": "ms_observation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "analyte": {
+                "properties": {
+                  "peptide_key": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "assignments": {
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "source_status": {
+                          "const": "resolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "source_occurrence_ids": {
+                          "minItems": 1,
+                          "maxItems": 1
+                        },
+                        "assignment_evidence": {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "assignment_kind": {
+                                "const": "source_origin"
+                              },
+                              "evaluability": {
+                                "const": "evaluated"
+                              },
+                              "result_state": {
+                                "const": "supported"
+                              }
+                            },
+                            "required": [
+                              "assignment_kind",
+                              "evaluability",
+                              "result_state"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "source_status": {
+                          "const": "unresolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "source_occurrence_ids": {
+                          "maxItems": 0
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "presenter_status": {
+                          "const": "resolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "presenters": {
+                          "minItems": 1,
+                          "maxItems": 1
+                        },
+                        "assignment_evidence": {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "assignment_kind": {
+                                "const": "presenter"
+                              },
+                              "evaluability": {
+                                "const": "evaluated"
+                              },
+                              "result_state": {
+                                "const": "supported"
+                              }
+                            },
+                            "required": [
+                              "assignment_kind",
+                              "evaluability",
+                              "result_state"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "presenter_status": {
+                          "const": "unresolved"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "presenters": {
+                          "maxItems": 0
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "absence_scope": {
+                          "const": "supplied_assay_exhaustive_contract"
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "assignment_evidence": {
+                          "contains": {
+                            "type": "object",
+                            "properties": {
+                              "assignment_kind": {
+                                "const": "assay_scope"
+                              },
+                              "evaluability": {
+                                "const": "evaluated"
+                              },
+                              "result_state": {
+                                "const": "supported"
+                              }
+                            },
+                            "required": [
+                              "assignment_kind",
+                              "evaluability",
+                              "result_state"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "dimension": {
+                "not": {
+                  "const": "ms_observation"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "assignments": {
+                "properties": {
+                  "assignment_evidence": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "responding_compartment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_sample_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "presenter_sample_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "responding_sample_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "source_compartment",
+        "responding_compartment",
+        "source_sample_ids",
+        "presenter_sample_ids",
+        "responding_sample_ids"
+      ],
+      "additionalProperties": false
+    },
+    "applicability": {
+      "type": "object",
+      "properties": {
+        "target_type": {
+          "enum": [
+            "context",
+            "source_occurrence",
+            "peptide_occurrence",
+            "peptide",
+            "pmhc",
+            "core_assignment",
+            "aggregate_unit"
+          ]
+        },
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "applicable_supported",
+            "applicable_negative",
+            "ambiguous",
+            "insufficient_scope",
+            "not_evaluated",
+            "not_applicable",
+            "failed"
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "measurement_scope_only": {
+          "const": true
+        },
+        "baseline_unchanged": {
+          "const": true
+        }
+      },
+      "required": [
+        "target_type",
+        "target_id",
+        "status",
+        "reason_codes",
+        "measurement_scope_only",
+        "baseline_unchanged"
+      ],
+      "additionalProperties": false
+    },
+    "record": {
+      "type": "object",
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^allo-native-observation-record-id-v1:[a-f0-9]{64}$"
+        },
+        "allo_context_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimension": {
+          "enum": [
+            "source_expression",
+            "presenter_expression",
+            "hla_allele_loh",
+            "antigen_processing_machinery",
+            "ms_observation",
+            "tcr_recognition"
+          ]
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/target"
+          }
+        },
+        "observation": {
+          "$ref": "#/$defs/semantic_observation"
+        },
+        "applicability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/applicability"
+          }
+        },
+        "raw_observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "raw_values": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "provenance": {
+                "type": "object"
+              },
+              "readonly_references": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "raw_values",
+              "provenance",
+              "readonly_references"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "evidence_id",
+        "allo_context_id",
+        "dimension",
+        "targets",
+        "observation",
+        "applicability",
+        "raw_observations"
+      ],
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "allo_context_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "member_links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "member_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "semantics": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "member_id",
+              "evidence_ids",
+              "semantics"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "allo_context_id",
+        "member_links"
+      ],
+      "additionalProperties": false
+    },
+    "import": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "neo-allo-hla-evidence-1.0.0"
+        },
+        "model_id": {
+          "const": "neo-allo-hla-evidence-v1"
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/observation"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_id",
+        "observations"
+      ],
+      "additionalProperties": false
+    },
+    "overlay": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "neo-allo-hla-evidence-1.0.0"
+        },
+        "model_id": {
+          "const": "neo-allo-hla-evidence-v1"
+        },
+        "official_reproduction": {
+          "const": false
+        },
+        "baseline_unchanged": {
+          "const": true
+        },
+        "allo_policy_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "allo_analysis_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scope"
+          }
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/record"
+          }
+        },
+        "contexts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/context"
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "model_id",
+        "official_reproduction",
+        "baseline_unchanged",
+        "allo_policy_id",
+        "allo_analysis_id",
+        "scopes",
+        "records",
+        "contexts",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "assignment_evidence": {
+      "description": "Closed inline semantic MS assignment evidence. Physical locators belong only to observation provenance/raw_values/readonly_references. Cross-record claim equality and frozen-graph resolution are checked by the runtime.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "peptide_key": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema_version": {
+              "const": "allo-ms-assignment-evidence-v1"
+            },
+            "assignment_kind": {
+              "const": "source_origin"
+            },
+            "evaluability": {
+              "enum": [
+                "evaluated",
+                "ambiguous",
+                "not_evaluated",
+                "failed"
+              ]
+            },
+            "result_state": {
+              "enum": [
+                "supported",
+                "not_supported",
+                "ambiguous",
+                "not_evaluated",
+                "failed"
+              ]
+            },
+            "source_occurrence_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "peptide_key",
+            "method",
+            "provider",
+            "method_version",
+            "provider_version",
+            "schema_version",
+            "assignment_kind",
+            "evaluability",
+            "result_state",
+            "source_occurrence_id"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "supported"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "not_supported"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "ambiguous"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "ambiguous"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "not_evaluated"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "not_evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "failed"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "failed"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "peptide_key": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema_version": {
+              "const": "allo-ms-assignment-evidence-v1"
+            },
+            "assignment_kind": {
+              "const": "presenter"
+            },
+            "evaluability": {
+              "enum": [
+                "evaluated",
+                "ambiguous",
+                "not_evaluated",
+                "failed"
+              ]
+            },
+            "result_state": {
+              "enum": [
+                "supported",
+                "not_supported",
+                "ambiguous",
+                "not_evaluated",
+                "failed"
+              ]
+            },
+            "presenter": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "peptide_key",
+            "method",
+            "provider",
+            "method_version",
+            "provider_version",
+            "schema_version",
+            "assignment_kind",
+            "evaluability",
+            "result_state",
+            "presenter"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "supported"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "not_supported"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "ambiguous"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "ambiguous"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "not_evaluated"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "not_evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "failed"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "failed"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "peptide_key": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "provider_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "schema_version": {
+              "const": "allo-ms-assignment-evidence-v1"
+            },
+            "assignment_kind": {
+              "const": "assay_scope"
+            },
+            "evaluability": {
+              "enum": [
+                "evaluated",
+                "ambiguous",
+                "not_evaluated",
+                "failed"
+              ]
+            },
+            "result_state": {
+              "enum": [
+                "supported",
+                "not_supported",
+                "ambiguous",
+                "not_evaluated",
+                "failed"
+              ]
+            },
+            "assay_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "peptide_key",
+            "method",
+            "provider",
+            "method_version",
+            "provider_version",
+            "schema_version",
+            "assignment_kind",
+            "evaluability",
+            "result_state",
+            "assay_id"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "supported"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "not_supported"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "ambiguous"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "ambiguous"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "not_evaluated"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "not_evaluated"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "result_state": {
+                    "const": "failed"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "evaluability": {
+                    "const": "failed"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

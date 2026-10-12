@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "self-comparison-1.0.0",
+  "title": "self-comparison-1.0.0",
+  "$ref": "#/$defs/comparison",
+  "$defs": {
+    "comparison_payload": {
+      "type": "object",
+      "properties": {
+        "query_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "query_type": {
+          "enum": [
+            "full_peptide",
+            "core_pmhc"
+          ]
+        },
+        "self_universe_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-universe-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "algorithm": {
+          "type": "object"
+        },
+        "self_presentation_policy": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "query_identity",
+        "query_type",
+        "self_universe_id",
+        "algorithm",
+        "self_presentation_policy"
+      ],
+      "additionalProperties": false
+    },
+    "comparison": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "self-comparison-1.0.0"
+        },
+        "self_comparison_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^self-comparison-id-v1:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "semantics": {
+          "$ref": "#/$defs/comparison_payload"
+        },
+        "self_subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "const": "all_self_hla"
+        },
+        "status": {
+          "enum": [
+            "supported_nonself_within_scope",
+            "self_match",
+            "insufficient_search",
+            "not_evaluated",
+            "ambiguous",
+            "not_applicable"
+          ]
+        },
+        "search_complete": {
+          "type": "boolean"
+        },
+        "biological_self_completeness_established": {
+          "const": false
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "occurrence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^indirect-peptide-occurrence-id-v1:[0-9a-f]{64}$"
+          },
+          "uniqueItems": true
+        },
+        "search_ledger": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "self_comparison_id",
+        "semantics",
+        "self_subject_id",
+        "scope",
+        "status",
+        "search_complete",
+        "biological_self_completeness_established",
+        "reason_codes",
+        "matches",
+        "occurrence_ids",
+        "search_ledger",
+        "provenance"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

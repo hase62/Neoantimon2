@@ -1,0 +1,127 @@
+{
+  "matrix_sha256": "78a9e6221948b618ee8ee48f90544074d7ab956e823a04c65a2b331972ce0380",
+  "official_reproduction": false,
+  "checks": [
+    {
+      "target_label": "neo-indirect-hla-compatibility/g2-s7-2015-hsct-core-complexes",
+      "dimension": "threshold_operator",
+      "status": "differs"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-described-affinity",
+      "dimension": "threshold_operator",
+      "status": "unresolved"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-described-affinity",
+      "dimension": "reference_domains",
+      "status": "differs"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-s9-frost-described-concepts",
+      "dimension": "provider_family",
+      "status": "differs"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-s9-frost-described-concepts",
+      "dimension": "provider_version_pinning",
+      "status": "unresolved"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-t2-s10-frost-build-unpinned-concepts",
+      "dimension": "provider_version_pinning",
+      "status": "unresolved"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/later-v4x-v4.5-current-txpredictor-outside-audit",
+      "dimension": "binding_threshold",
+      "status": "outside_audit_scope"
+    }
+  ],
+  "reference_release_checks": [
+    {
+      "target_label": "neo-indirect-hla-compatibility/g0-s1-initial-sot-described-concepts",
+      "status": "unresolved",
+      "release": null,
+      "classification": "U"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g1-s6-2014-hsct-described-steps",
+      "status": "unresolved",
+      "release": null,
+      "classification": "U"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g2-s7-2015-hsct-core-complexes",
+      "status": "unresolved",
+      "release": null,
+      "classification": "U"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g3-s8-2019-hsct-described-steps",
+      "status": "unresolved",
+      "release": null,
+      "classification": "U"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/g4-s2-s3-review-era-sot-v3-expansion",
+      "status": "unresolved",
+      "release": null,
+      "classification": "U"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/later-v4x-v4.5-current-txpredictor-outside-audit",
+      "status": "outside_audit_scope",
+      "release": null,
+      "classification": "outside_audit_scope"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-3.3-described-affinity",
+      "status": "unresolved",
+      "release": "IPD-IMGT/HLA 3.47",
+      "classification": "R/A"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-3.3-described-affinity-sct",
+      "status": "unresolved",
+      "release": "IPD-IMGT/HLA 3.47",
+      "classification": "R/A"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-described-affinity",
+      "status": "unresolved",
+      "release": "IPD-IMGT/HLA 3.47",
+      "classification": "R/A"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-described-affinity-sct",
+      "status": "unresolved",
+      "release": "IPD-IMGT/HLA 3.47",
+      "classification": "R/A"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-4.2-s9-frost-described-concepts",
+      "status": "unresolved",
+      "release": "IMGT 3.54",
+      "classification": "R/A"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-t2-s10-frost-build-unpinned-concepts",
+      "status": "unresolved",
+      "release": null,
+      "classification": "U"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-v3-s10-unique-15mer-description",
+      "status": "unresolved",
+      "release": null,
+      "classification": "U"
+    },
+    {
+      "target_label": "neo-indirect-hla-compatibility/pirche-v3-s9-described-affinity",
+      "status": "unresolved",
+      "release": "IMGT 3.47",
+      "classification": "R/A"
+    }
+  ]
+}

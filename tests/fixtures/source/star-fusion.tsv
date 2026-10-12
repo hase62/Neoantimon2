@@ -1,0 +1,2 @@
+#FusionName	JunctionReadCount	SpanningFragCount	SpliceType	LeftGene	LeftBreakpoint	RightGene	RightBreakpoint	LargeAnchorSupport	FFPM	annots
+G1--GS	5	3	INCL_NON_REF_SPLICE	G1^G1.1	chr1:8:+	GS^GS.1	chrS:1:+	YES	0.8	fixture
