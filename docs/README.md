@@ -4,6 +4,7 @@ Start with the [project overview](../README.md) and the installed synthetic exam
 
 | Goal | Guide |
 | --- | --- |
+| Understand the complete analysis routes | [Workflow overview and figure](user/workflow-overview.md) |
 | Install and run a native example | [Getting started](user/getting-started.md) |
 | Declare multiple patients and separate sample files | [Multi-patient/multi-sample examples](user/multi-sample-examples.md) |
 | Prepare variants, metadata, HLA, and references | [Inputs and configuration](user/inputs.md) |

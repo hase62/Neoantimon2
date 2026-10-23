@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840" role="img" aria-labelledby="figure-title figure-description">
+  <title id="figure-title">Neoantimon2: variants to traceable peptide–HLA candidates</title>
+  <desc id="figure-description">User-declared samples, patients and HLA plus explicit references support variant events, multiple sequence and translation paths, shared peptide sequences and peptide–HLA candidates. Separately acquired references and predictors are not bundled. Optional configured local prediction and supplied observations support native prioritization and explanations. A completed project can export queries and all origins for a separately run external model, optional conversion, strict matching and an independent derived analysis. Native results are preserved. Longitudinal, vaccine-set and restricted indirect-HLA/allo views have separate opt-in requirements. Missing evidence is neither zero nor an evaluated negative. Research outputs do not establish clinical validation.</desc>
+  <defs>
+    <marker id="arrow-native" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4.5 L 0 9 Z" fill="#176487" />
+    </marker>
+    <marker id="arrow-external" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4.5 L 0 9 Z" fill="#a34a09" />
+    </marker>
+    <marker id="arrow-optional" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4.5 L 0 9 Z" fill="#52616d" />
+    </marker>
+  </defs>
+  <rect width="1200" height="840" fill="#ffffff" />
+  <g id="native-panel">
+    <rect x="16" y="218" width="1168" height="182" fill="#f1f7fa" stroke="#9bb8c8" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="external-panel">
+    <rect x="16" y="436" width="1168" height="222" fill="#fff7ed" stroke="#d4ad88" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="events-to-origins">
+    <polyline points="192,303 216,303" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="origins-to-peptides">
+    <polyline points="384,303 408,303" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="peptides-to-candidates">
+    <polyline points="576,303 600,303" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="candidates-to-native-evidence">
+    <polyline points="768,303 792,303" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="native-evidence-to-native-results">
+    <polyline points="960,303 984,303" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="samples-to-events">
+    <polyline points="150,176 150,197 108,197 108,242" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="references-to-native">
+    <polyline points="411,176 411,218" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="patient-hla-to-candidates">
+    <polyline points="665,176 665,196 684,196 684,242" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" />
+  </g>
+  <g id="configured-tools-to-native">
+    <polyline points="837.6,176 837.6,242" fill="none" stroke="#176487" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-native)" stroke-dasharray="7 5" />
+  </g>
+  <g id="observations-to-native">
+    <polyline points="1084,228 1084,232 944,232 944,242" fill="none" stroke="#52616d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-optional)" stroke-dasharray="7 5" />
+  </g>
+  <g id="export-to-external-model">
+    <polyline points="232,539 260,539" fill="none" stroke="#a34a09" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-external)" />
+  </g>
+  <g id="external-model-to-standard-format">
+    <polyline points="468,539 496,539" fill="none" stroke="#a34a09" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-external)" />
+  </g>
+  <g id="standard-format-to-strict-import">
+    <polyline points="704,539 732,539" fill="none" stroke="#a34a09" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-external)" />
+  </g>
+  <g id="strict-import-to-external-results">
+    <polyline points="940,539 968,539" fill="none" stroke="#a34a09" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-external)" />
+  </g>
+  <g id="completed-project-to-export">
+    <polyline points="1080,364 1080,415 8,415 8,539 24,539" fill="none" stroke="#52616d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow-optional)" stroke-dasharray="7 5" />
+  </g>
+  <g id="title">
+    <text x="24" y="38.2" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="30" text-anchor="start" data-box="24 10 1152 40" font-weight="700">
+      <tspan x="24" y="38.2">Neoantimon2 — variants to traceable candidates</tspan>
+    </text>
+  </g>
+  <g id="subtitle">
+    <text x="24" y="66.8" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="start" data-box="24 48 1152 26">
+      <tspan x="24" y="66.8">Native analysis and a separate External route; references and predictors are obtained separately</tspan>
+    </text>
+  </g>
+  <g id="input-samples-box">
+    <rect x="24" y="80" width="252" height="96" fill="#f4f6f8" stroke="#c5cfd7" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="input-samples-title">
+    <text x="150" y="110.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="36 90 228 26.4" font-weight="700">
+      <tspan x="150" y="110.68">Patients + samples</tspan>
+    </text>
+  </g>
+  <g id="input-samples-body">
+    <text x="150" y="141.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="36 124.4 228 43.2">
+      <tspan x="150" y="141.32">Explicit identity mapping</tspan>
+      <tspan x="150" y="162.92">Per-sample VCF inputs</tspan>
+    </text>
+  </g>
+  <g id="input-references-box">
+    <rect x="292" y="80" width="238" height="96" fill="#f4f6f8" stroke="#c5cfd7" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="input-references-title">
+    <text x="411" y="110.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="304 90 214 26.4" font-weight="700">
+      <tspan x="411" y="110.68">Reference bundle</tspan>
+    </text>
+  </g>
+  <g id="input-references-body">
+    <text x="411" y="141.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="304 124.4 214 43.2">
+      <tspan x="411" y="141.32">Genome + annotation</tspan>
+      <tspan x="411" y="162.92">Transcript / protein</tspan>
+    </text>
+  </g>
+  <g id="input-hla-box">
+    <rect x="546" y="80" width="238" height="96" fill="#f4f6f8" stroke="#c5cfd7" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="input-hla-title">
+    <text x="665" y="110.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="558 90 214 26.4" font-weight="700">
+      <tspan x="665" y="110.68">Patient-level HLA</tspan>
+    </text>
+  </g>
+  <g id="input-hla-body">
+    <text x="665" y="141.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="558 124.4 214 43.2">
+      <tspan x="665" y="141.32">User supplied</tspan>
+      <tspan x="665" y="162.92">Applied to each sample</tspan>
+    </text>
+  </g>
+  <g id="native-tools-box">
+    <rect x="800" y="80" width="376" height="96" fill="#edf6fa" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="native-tools-title">
+    <text x="988" y="110.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="812 90 352 26.4" font-weight="700">
+      <tspan x="988" y="110.68">Optional local predictors</tspan>
+    </text>
+  </g>
+  <g id="native-tools-body">
+    <text x="988" y="141.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="812 124.4 352 43.2">
+      <tspan x="988" y="141.32">Class I: NetMHCpan / MHCflurry</tspan>
+      <tspan x="988" y="162.92">Class II: NetMHCIIpan</tspan>
+    </text>
+  </g>
+  <g id="observations">
+    <rect x="992" y="180" width="184" height="48" fill="#f4f6f8" stroke="#8a98a4" stroke-width="1.5" rx="10" ry="10" stroke-dasharray="7 5" />
+  </g>
+  <g id="observations-label">
+    <text x="1084" y="197.92" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="1000 181 168 44">
+      <tspan x="1084" y="197.92">Optional evidence</tspan>
+      <tspan x="1084" y="219.52">RNA / DNA / MS</tspan>
+    </text>
+  </g>
+  <g id="native-tab">
+    <rect x="448" y="202" width="160" height="30" fill="#ffffff" stroke="#ffffff" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="native-heading">
+    <text x="456" y="225.68" fill="#176487" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="456 205 144 27" font-weight="700">
+      <tspan x="456" y="225.68">A  NATIVE</tspan>
+    </text>
+  </g>
+  <g id="events-box">
+    <rect x="24" y="242" width="168" height="122" fill="#ffffff" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="events-title">
+    <text x="108" y="272.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="36 252 144 52.8" font-weight="700">
+      <tspan x="108" y="272.68">Variant</tspan>
+      <tspan x="108" y="299.08">events</tspan>
+    </text>
+  </g>
+  <g id="events-body">
+    <text x="108" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="36 312.8 144 43.2">
+      <tspan x="108" y="329.72">Normalize</tspan>
+      <tspan x="108" y="351.32">REF / ALT</tspan>
+    </text>
+  </g>
+  <g id="origins-box">
+    <rect x="216" y="242" width="168" height="122" fill="#ffffff" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="origins-title">
+    <text x="300" y="272.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="228 252 144 52.8" font-weight="700">
+      <tspan x="300" y="272.68">Origins +</tspan>
+      <tspan x="300" y="299.08">translation</tspan>
+    </text>
+  </g>
+  <g id="origins-body">
+    <text x="300" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="228 312.8 144 43.2">
+      <tspan x="300" y="329.72">Multiple paths</tspan>
+      <tspan x="300" y="351.32">per event</tspan>
+    </text>
+  </g>
+  <g id="peptides-box">
+    <rect x="408" y="242" width="168" height="122" fill="#ffffff" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="peptides-title">
+    <text x="492" y="272.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="420 252 144 52.8" font-weight="700">
+      <tspan x="492" y="272.68">Peptide</tspan>
+      <tspan x="492" y="299.08">sequences</tspan>
+    </text>
+  </g>
+  <g id="peptides-body">
+    <text x="492" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="420 312.8 144 43.2">
+      <tspan x="492" y="329.72">Shared peptides</tspan>
+      <tspan x="492" y="351.32">Origins retained</tspan>
+    </text>
+  </g>
+  <g id="candidates-box">
+    <rect x="600" y="242" width="168" height="122" fill="#ffffff" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="candidates-title">
+    <text x="684" y="272.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="612 252 144 52.8" font-weight="700">
+      <tspan x="684" y="272.68">Peptide–HLA</tspan>
+      <tspan x="684" y="299.08">candidates</tspan>
+    </text>
+  </g>
+  <g id="candidates-body">
+    <text x="684" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="612 312.8 144 43.2">
+      <tspan x="684" y="329.72">Sample + patient</tspan>
+      <tspan x="684" y="351.32">and presenter</tspan>
+    </text>
+  </g>
+  <g id="native-evidence-box">
+    <rect x="792" y="242" width="168" height="122" fill="#ffffff" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="native-evidence-title">
+    <text x="876" y="272.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="804 252 144 52.8" font-weight="700">
+      <tspan x="876" y="272.68">Prediction +</tspan>
+      <tspan x="876" y="299.08">evidence</tspan>
+    </text>
+  </g>
+  <g id="native-evidence-body">
+    <text x="876" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="804 312.8 144 43.2">
+      <tspan x="876" y="329.72">Local predictors</tspan>
+      <tspan x="876" y="351.32">Observations</tspan>
+    </text>
+  </g>
+  <g id="native-results-box">
+    <rect x="984" y="242" width="192" height="122" fill="#ffffff" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="native-results-title">
+    <text x="1080" y="272.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="996 252 168 52.8" font-weight="700">
+      <tspan x="1080" y="272.68">Prioritize +</tspan>
+      <tspan x="1080" y="299.08">explain</tspan>
+    </text>
+  </g>
+  <g id="native-results-body">
+    <text x="1080" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="996 312.8 168 43.2">
+      <tspan x="1080" y="329.72">Rank / eligible grade</tspan>
+      <tspan x="1080" y="351.32">Traceable results</tspan>
+    </text>
+  </g>
+  <g id="origin-retention">
+    <text x="220" y="394.92" fill="#176487" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="220 378 790 22">
+      <tspan x="220" y="394.92">Multiple paths can share a peptide; every candidate–origin link is retained.</tspan>
+    </text>
+  </g>
+  <g id="external-heading">
+    <text x="32" y="468.56" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="24" text-anchor="start" data-box="32 446 1136 30" font-weight="700">
+      <tspan x="32" y="468.56">B  EXTERNAL — a separate derived view</tspan>
+    </text>
+  </g>
+  <g id="export-box">
+    <rect x="24" y="480" width="208" height="118" fill="#ffffff" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="export-title">
+    <text x="128" y="509.74" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="21" text-anchor="middle" data-box="36 490 184 50.4" font-weight="700">
+      <tspan x="128" y="509.74">Export</tspan>
+      <tspan x="128" y="534.94">bundle</tspan>
+    </text>
+  </g>
+  <g id="export-body">
+    <text x="128" y="565.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="36 548.4 184 43.2">
+      <tspan x="128" y="565.32">Queries + all origins</tspan>
+      <tspan x="128" y="586.92">Completed project</tspan>
+    </text>
+  </g>
+  <g id="external-model-box">
+    <rect x="260" y="480" width="208" height="118" fill="#ffffff" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="external-model-title">
+    <text x="364" y="509.74" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="21" text-anchor="middle" data-box="272 490 184 50.4" font-weight="700">
+      <tspan x="364" y="509.74">Model outside</tspan>
+      <tspan x="364" y="534.94">Neoantimon2</tspan>
+    </text>
+  </g>
+  <g id="external-model-body">
+    <text x="364" y="565.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="272 548.4 184 43.2">
+      <tspan x="364" y="565.32">Run separately</tspan>
+      <tspan x="364" y="586.92">User-selected model</tspan>
+    </text>
+  </g>
+  <g id="standard-format-box">
+    <rect x="496" y="480" width="208" height="118" fill="#ffffff" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="standard-format-title">
+    <text x="600" y="509.74" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="21" text-anchor="middle" data-box="508 490 184 50.4" font-weight="700">
+      <tspan x="600" y="509.74">Standard</tspan>
+      <tspan x="600" y="534.94">format</tspan>
+    </text>
+  </g>
+  <g id="standard-format-body">
+    <text x="600" y="565.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="508 548.4 184 43.2">
+      <tspan x="600" y="565.32">Direct standard TSV</tspan>
+      <tspan x="600" y="586.92">or explicit converter</tspan>
+    </text>
+  </g>
+  <g id="strict-import-box">
+    <rect x="732" y="480" width="208" height="118" fill="#ffffff" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="strict-import-title">
+    <text x="836" y="509.74" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="21" text-anchor="middle" data-box="744 490 184 50.4" font-weight="700">
+      <tspan x="836" y="509.74">Strict</tspan>
+      <tspan x="836" y="534.94">matching</tspan>
+    </text>
+  </g>
+  <g id="strict-import-body">
+    <text x="836" y="565.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="744 548.4 184 43.2">
+      <tspan x="836" y="565.32">Peptide or</tspan>
+      <tspan x="836" y="586.92">peptide + HLA</tspan>
+    </text>
+  </g>
+  <g id="external-results-box">
+    <rect x="968" y="480" width="208" height="118" fill="#ffffff" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="external-results-title">
+    <text x="1072" y="509.74" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="21" text-anchor="middle" data-box="980 490 184 50.4" font-weight="700">
+      <tspan x="1072" y="509.74">External results</tspan>
+      <tspan x="1072" y="534.94">+ explanations</tspan>
+    </text>
+  </g>
+  <g id="external-results-body">
+    <text x="1072" y="565.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="980 548.4 184 43.2">
+      <tspan x="1072" y="565.32">Derived analysis</tspan>
+      <tspan x="1072" y="586.92">Native unchanged</tspan>
+    </text>
+  </g>
+  <g id="export-condition-background">
+    <rect x="280" y="403" width="590" height="25" fill="#ffffff" stroke="#ffffff" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="export-condition">
+    <text x="292" y="422.92" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="292 406 566 23">
+      <tspan x="292" y="422.92">Optional: export after the native project completes</tspan>
+    </text>
+  </g>
+  <g id="external-project-required">
+    <text x="32" y="626.92" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="32 610 1136 23">
+      <tspan x="32" y="626.92">Import requires the original completed project. Strict matching preserves all origin links.</tspan>
+    </text>
+  </g>
+  <g id="external-grading-boundary">
+    <text x="32" y="650.92" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="32 634 1136 23">
+      <tspan x="32" y="650.92">External grades require MHC percentiles + eligible core somatic evidence; raw scores alone do not grade.</tspan>
+    </text>
+  </g>
+  <g id="specialized-heading">
+    <text x="24" y="688.8" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="start" data-box="24 670 1152 25" font-weight="700">
+      <tspan x="24" y="688.8">Specialized workflows — explicit opt-ins; external scores do not feed these views</tspan>
+    </text>
+  </g>
+  <g id="longitudinal-box">
+    <rect x="24" y="700" width="368" height="96" fill="#ffffff" stroke="#c5cfd7" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="longitudinal-title">
+    <text x="208" y="730.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="36 710 344 26.4" font-weight="700">
+      <tspan x="208" y="730.68">Longitudinal</tspan>
+    </text>
+  </g>
+  <g id="longitudinal-body">
+    <text x="208" y="761.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="36 744.4 344 43.2">
+      <tspan x="208" y="761.32">Completed sample runs + settings</tspan>
+      <tspan x="208" y="782.92">Native grades / ranks retained</tspan>
+    </text>
+  </g>
+  <g id="vaccine-box">
+    <rect x="416" y="700" width="368" height="96" fill="#ffffff" stroke="#c5cfd7" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="vaccine-title">
+    <text x="600" y="730.68" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="middle" data-box="428 710 344 26.4" font-weight="700">
+      <tspan x="600" y="730.68">Vaccine-set selection</tspan>
+    </text>
+  </g>
+  <g id="vaccine-body">
+    <text x="600" y="761.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="428 744.4 344 43.2">
+      <tspan x="600" y="761.32">Native evidence + explicit policy</tspan>
+      <tspan x="600" y="782.92">Native grades / ranks retained</tspan>
+    </text>
+  </g>
+  <g id="indirect-allo-box">
+    <rect x="808" y="700" width="368" height="96" fill="#ffffff" stroke="#c5cfd7" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="indirect-allo-title">
+    <text x="992" y="728.8" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" data-box="820 710 344 24" font-weight="700">
+      <tspan x="992" y="728.8">Restricted indirect-HLA / allo</tspan>
+    </text>
+  </g>
+  <g id="indirect-allo-body">
+    <text x="992" y="758.92" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="820 742 344 43.2">
+      <tspan x="992" y="758.92">Own inputs + restricted profile</tspan>
+      <tspan x="992" y="780.52">Not an official PIRCHE implementation</tspan>
+    </text>
+  </g>
+  <g id="missingness">
+    <text x="600" y="828.8" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle" data-box="24 810 1152 24" font-weight="700">
+      <tspan x="600" y="828.8">Missing evidence ≠ zero ≠ evaluated negative  •  Research outputs, not clinical validation</tspan>
+    </text>
+  </g>
+</svg>

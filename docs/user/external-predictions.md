@@ -1,5 +1,8 @@
 # External prediction interoperability
 
+The [workflow overview](workflow-overview.md) shows the Native and independent
+External routes and their evidence boundaries.
+
 Neoantimon2 supports three workflows. External prediction is optional; native
 analysis never needs an Internet connection, registry or new executable.
 

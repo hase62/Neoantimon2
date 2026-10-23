@@ -21,24 +21,20 @@ do not establish clinical immunogenicity, treatment efficacy or clinical risk.
 
 ## How it works
 
-1. Declare samples, their patients, patient-level HLA and supported input files.
-2. Import genomic events against explicitly selected reference resources.
-3. Reconstruct sequence origins and altered peptides; retain all origins when
-   several produce the same peptide.
-4. Construct peptide–HLA candidates using each patient's declared presenters.
-5. Add predictions and other evidence, then inspect results and explanations.
+![Neoantimon2 workflow: sample-linked variants and declared patient HLA become traceable peptide–HLA candidates. Native prediction and a separate external export/import route support interpretation; specialized workflows require explicit settings.](docs/assets/neoantimon2-overview.svg)
 
-**Native prediction:** configure supported local adapters in `neo_config()`;
-`neo_run()` executes the configured stages. Some additional evidence providers
-are supported through imports rather than automatic execution.
+Events lead to reconstruction/translation origins, peptide sequences and
+peptide–HLA candidates. Several origins can yield the same peptide; each
+candidate keeps its origin links for inspection.
 
-**External prediction:** complete a local project, export with
-`neo_export_bundle()`, run your chosen method separately, and import with
-`neo_analyze_external()`. Exact peptide/HLA matching retains origin associations.
-External evidence, user-selected ranking and eligible somatic grading remain
-separate from native results. An exported bundle alone cannot run downstream
-analysis. See the [external prediction guide](docs/user/external-predictions.md)
-for executable examples, schemas and prerequisites.
+**Native:** `neo_run()` uses configured local predictors and supplied evidence.
+**External:** export a completed project, run the model separately, and import
+standardized predictions by exact peptide or peptide–HLA matching. External
+results and explanations remain separate from native results.
+
+[Figure guide and accessible description](docs/user/workflow-overview.md) ·
+[Full-size SVG](docs/assets/neoantimon2-overview.svg) ·
+[PNG / PDF / editable source](docs/user/workflow-overview.md#maintain-or-reuse-the-figure)
 
 ## Installation
 
@@ -159,7 +155,8 @@ Start with the [documentation index](docs/README.md), or go directly to:
   [Multiple patients and samples](docs/user/multi-sample-examples.md)
 - [Inputs and configuration](docs/user/inputs.md) ·
   [Resources and tools](docs/user/resources-and-tools.md)
-- [Workflows](docs/user/workflows.md) ·
+- [Workflow overview](docs/user/workflow-overview.md) ·
+  [Workflows](docs/user/workflows.md) ·
   [External prediction interoperability](docs/user/external-predictions.md)
 - [Public API reference](docs/user/api-reference.md) ·
   [Results and explanations](docs/user/results-and-explain.md)
