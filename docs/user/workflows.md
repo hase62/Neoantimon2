@@ -54,6 +54,12 @@ score nor a replacement for the somatic grade.
 
 ## Longitudinal and multi-sample analysis
 
+For ordinary projects containing several separately declared sample files, start
+with the [multi-patient/multi-sample examples](multi-sample-examples.md). Those
+projects need no longitudinal settings and can run all samples together.
+`neo_multisample()` remains empty without the dedicated overlay described below;
+sample `timepoint` labels alone do not request it.
+
 An input with role `longitudinal_settings` loads a JSON document with
 `version = "longitudinal-integration-1.0.0"` and explicit arrays `subjects`,
 `contexts`, `relations`, optional `treatments`, `evaluability`, `providers`,

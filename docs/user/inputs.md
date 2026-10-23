@@ -11,6 +11,12 @@ Optional `timepoint`, `tissue` and `role` are strings. Do not infer subject iden
 from filenames. Subject-level HLA is a named list keyed by `patient_id`; declare
 one genotype per subject across its samples.
 
+See the [four executable multi-patient/multi-sample examples](multi-sample-examples.md)
+for complete declarations, offline setup and sample-specific result selection.
+Multiple separately bound single-sample VCFs can be processed in one project;
+this does not enable multiple sample columns inside a VCF or automatically
+create longitudinal summaries.
+
 Each `inputs` record needs `input_id`, `input_role`, `sample_id` and `path`.
 `sample_id` must belong to the project. `input_id` is a unique instance label;
 `input_role` chooses the actual parser/meaning. Optional `version` records the

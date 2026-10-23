@@ -91,6 +91,11 @@ outside runs. Retain original provider output if it cannot be recreated. Change
 scientific inputs/settings by creating a new project, not mutating a completed
 run. Add optional sources using the [input/configuration guide](inputs.md).
 
+For a complete offline recipe with several patients or samples, see the
+[four multi-patient/multi-sample examples](multi-sample-examples.md). Several
+separately bound single-sample VCFs can share one project/run. This differs from
+the [dedicated longitudinal workflow](workflows.md#longitudinal-and-multi-sample-analysis).
+
 ## Reopen and inspect
 
 ```r

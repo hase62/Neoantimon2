@@ -14,7 +14,8 @@ provenance, evaluability, and uncertainty remain explicit. There is no universal
 immunogenicity or clinical-risk score. Research grades and set selections are not
 treatment recommendations. See [grading and explanation](results-and-explain.md).
 
-Native single-sample analysis, subject-scoped longitudinal summaries,
+Native sample-specific analysis (including multiple samples in one project),
+subject-scoped longitudinal summaries,
 deterministic lexicographic vaccine-set selection, and the strict
 literature-derived indirect-HLA profile have separate contracts. The selection
 heuristic is not a global optimum. Indirect-HLA is not an official PIRCHE
