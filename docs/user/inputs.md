@@ -1,5 +1,9 @@
 # Inputs and configuration
 
+For the current development source, [R-based setup](setup.md) can supply
+reference configuration fragments directly. The declarations below remain the
+analysis contract, including when resources were obtained by Python or shell.
+
 [Getting started](getting-started.md) · [Resources/tools](resources-and-tools.md) ·
 [Workflows](workflows.md)
 

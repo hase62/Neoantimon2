@@ -220,6 +220,30 @@ inputs and the recipe outside runs to recreate the analysis.
 
 ## Executable offline example
 
+Source builds containing `examples/external-predictions.R` also provide a
+complete installed-package example; no checkout, licensed predictor or network
+is needed after installation:
+
+```r
+library(Neoantimon2)
+example_file <- system.file("examples", "external-predictions.R",
+  package = "Neoantimon2")
+stopifnot(nzchar(example_file))
+source(example_file, local = TRUE)
+external_results
+external_explanation
+external_example
+```
+
+This example is added in the local release-validation source and is not in
+immutable v0.2.0 or the pinned Phase 3 setup commit. It builds on the bundled
+native Quick Start, imports an evaluated zero, an explicit unsupported result
+and a peptide-intrinsic score, and leaves two candidates without predictions.
+A query with a different HLA remains unmatched. Candidate origins, native
+results/explanations and original artifact hashes are retained; reopening the
+external analysis returns identical results. Scores are synthetic technical
+inputs, not prediction-accuracy evidence.
+
 From the repository, run:
 
 ```sh

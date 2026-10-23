@@ -8,6 +8,25 @@ They are not included in the immutable v0.2.0 release. Install a source build
 containing this guide before running them; no development repository is needed
 at runtime. Existing configurations and `neo_run()` still work independently.
 
+## Install the development source
+
+This published source commit contains the four setup APIs. Restart R before
+installing if Neoantimon2 or one of its dependencies is already loaded.
+
+```r
+install.packages("remotes")
+remotes::install_github("hase62/Neoantimon2",
+  ref = "97c13211b9fb211b6a26439efc7a32a8941dadb0", upgrade = "never")
+library(Neoantimon2)
+stopifnot(all(c("neo_download_resources", "neo_check_resources",
+  "neo_check_predictors", "neo_setup_predictor") %in%
+  getNamespaceExports("Neoantimon2")))
+```
+
+The development DESCRIPTION still says 0.2.0; package version alone cannot
+distinguish this source from the immutable release. Record the source commit.
+No new release tag is implied by this example.
+
 ## Inspect resources before downloading
 
 Choose your own durable data directory. This example respects an optional
@@ -83,6 +102,12 @@ is cleaned on ordinary errors/interrupts. A process killed externally can leave
 a staging directory or lock: check that no acquisition is running before dealing
 with that owned state. Do not run different acquisition tools concurrently in
 one destination.
+
+A header-only `1000g` regional subset left by an earlier extraction is invalid,
+even if its filename and index exist. The acquisition helper derives the region's
+contig name from the source; it does not rename VCF contigs for analysis. Inspect
+the diagnostic and recreate the subset in a separate destination, or explicitly
+choose `overwrite = TRUE` after deciding which invalid files may be replaced.
 
 SHA256 states distinguish declared hashes, R acquisition-receipt hashes, and
 observed-only hashes. A local receipt binds observed bytes; it is not a publisher

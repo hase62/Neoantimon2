@@ -1,0 +1,15 @@
+test_that('the installed external example preserves zero, missingness and native provenance', {
+  e <- new.env(parent=globalenv())
+  source(system.file('examples','external-predictions.R',package='Neoantimon2'),local=e)
+  expect_identical(e$external_example$status,'PASS')
+  expect_equal(e$external_example$zero_score,0)
+  expect_equal(e$external_example$not_predicted,2L)
+  expect_equal(e$external_example$unsupported,1L)
+  expect_equal(e$external_example$unmatched,1L)
+  expect_true(e$external_example$native_unchanged)
+  expect_identical(e$external_results$candidate_id,e$native_results$candidate_id)
+  expect_identical(e$external_results$final_grade,e$native_results$final_grade)
+  expect_setequal(vapply(e$external_explanation$candidates[[1L]]$origins,`[[`,'','origin_id'),
+    unlist(e$selected_candidate$origin_ids,use.names=FALSE))
+  expect_identical(neo_results(neo_project(path=e$p$path)),e$native_results)
+})

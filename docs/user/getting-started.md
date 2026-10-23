@@ -56,9 +56,19 @@ session to inspect/reopen; R temporary storage is not durable storage.
 
 ## Explore the completed run
 
-See the [public API reference](api-reference.md) for all twelve functions,
-selectors, and runnable inspection examples. The native workflow requires no
+See the [public API reference](api-reference.md) for the twelve v0.2.0 functions,
+the four additional development setup functions, selectors and runnable examples.
+The native workflow requires no
 external converter or Registry connection.
+
+## Use R-based setup in the development version
+
+The published development source adds resource downloads/checks and predictor
+configuration from R. These functions are absent from v0.2.0 even though the
+development package still reports version 0.2.0. Use the pinned source commit
+and availability check in the [R setup guide](setup.md#install-the-development-source),
+then choose an explicit resource profile and destination. Existing analysis
+configurations continue to work without these setup calls.
 
 ## Configure your own project
 
@@ -66,6 +76,10 @@ Choose original input, reference and output locations, for example
 `~/neo-data/reference/`, `/analysis/sample01/inputs/` and
 `/analysis/sample01/runs/`. Absolute paths may be anywhere. Supply your actual
 paths; no Codex directory convention is required.
+
+With the development version, [R setup](setup.md) returns reference configuration
+fragments directly and does not require a checkout or YAML template. The
+following existing file-based route remains available in both versions.
 
 Acquire the primary references and obtain
 [reference.primary.example.yaml](../../config/reference.primary.example.yaml)
