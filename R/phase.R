@@ -5,10 +5,7 @@ phase_hash <- function(x) digest::digest(charToRaw(canonical_bytes(x)),
 phase_format <- function(source) {
   raw <- source$raw_format
   if (is.null(raw)) return(list())
-  keys <- strsplit(raw$keys, ":", fixed = TRUE)[[1L]]
-  values <- strsplit(raw$sample, ":", fixed = TRUE)[[1L]]
-  if (length(keys) != length(values) || anyDuplicated(keys)) return(list())
-  stats::setNames(as.list(values), keys)
+  tryCatch(event_vcf_format(raw), error = function(e) list())
 }
 
 phase_genotype <- function(token, alt_count) {

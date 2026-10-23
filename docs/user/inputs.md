@@ -85,7 +85,8 @@ primary profile for a new analysis.
 The supported VCF has standard `#CHROM POS ID REF ALT QUAL FILTER INFO` fields;
 when a sample column exists it must match the bound `sample_id`. Multi-sample
 VCFs are rejected: supply a separately selected single-sample input. Number=A/R
-fields preserve their selected ALT relation. GT/PS and PID/PGT phase evidence are
+fields preserve their selected ALT relation. See the [VCF scope and compatibility suite](vcf-compatibility.md)
+for genotype selection, missingness, parser limits and reproducible public-input tests. GT/PS and PID/PGT phase evidence are
 source/sample/contig-scoped; missing/conflicting phase is not resolved by guessing.
 Declarations of reference/contig build and contig length must match the selected
 reference. Small-variant REF/ALT must be supported genomic alleles; symbolic SVs

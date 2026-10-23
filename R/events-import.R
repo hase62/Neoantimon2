@@ -116,16 +116,16 @@ event_check_build_declaration <- function(value, assembly, label) {
 
 event_vcf_fields <- function(raw, defs, alt_index, alt_count) {
   if (is.null(raw) || raw == "." || !nzchar(raw)) return(list())
-  fields <- strsplit(raw, ";", fixed = TRUE)[[1L]]
+  fields <- event_vcf_info_map(raw)
   out <- list()
-  for (x in fields) {
-    pair <- strsplit(x, "=", fixed = TRUE)[[1L]]
-    key <- pair[[1L]]; value <- if (length(pair) > 1L) paste(pair[-1L], collapse = "=") else NULL
+  for (key in names(fields)) {
+    value <- fields[[key]]
     number <- defs[[key]]$Number
-    if (is.null(value) || is.null(number)) next
-    items <- strsplit(value, ",", fixed = TRUE)[[1L]]
-    if (number == "A" && length(items) == alt_count) out[[key]] <- items[[alt_index]]
-    if (number == "R" && length(items) == alt_count + 1L)
+    if (is.null(number) || !number %in% c("A", "R")) next
+    items <- event_vcf_allele_values(value, number, alt_count, paste("INFO", key))
+    if (is.null(items)) next
+    if (number == "A") out[[key]] <- items[[alt_index]]
+    if (number == "R")
       out[[key]] <- list(ref = items[[1L]], alt = items[[alt_index + 1L]])
   }
   out
@@ -134,12 +134,37 @@ event_vcf_fields <- function(raw, defs, alt_index, alt_count) {
 event_vcf_info_map <- function(raw) {
   if (is.null(raw) || raw == ".") return(list())
   out <- list()
-  for (item in strsplit(raw, ";", fixed = TRUE)[[1L]]) {
+  for (item in stringi::stri_split_fixed(raw, ";", omit_empty = FALSE)[[1L]]) {
+    if (!nzchar(item)) stop("Malformed/duplicate VCF INFO key")
     p <- strsplit(item, "=", fixed = TRUE)[[1L]]
     if (!nzchar(p[[1L]]) || p[[1L]] %in% names(out)) stop("Malformed/duplicate VCF INFO key")
     out[[p[[1L]]]] <- if (length(p) > 1L) paste(p[-1L], collapse = "=") else TRUE
   }
   out
+}
+
+event_vcf_allele_values <- function(value, number, alt_count, label) {
+  if (!is.character(value) || length(value) != 1L || !nzchar(value))
+    stop("Malformed VCF ", label, " allele field")
+  expected <- alt_count + if (number == "R") 1L else 0L
+  # Preserve the released literal-dot projection when the expected length is
+  # one; a whole missing array otherwise has no per-ALT projection.
+  if (value == "." && expected > 1L) return(NULL)
+  items <- stringi::stri_split_fixed(value, ",", omit_empty = FALSE)[[1L]]
+  if (length(items) != expected || any(!nzchar(items)))
+    stop("VCF ", label, " Number=", number, " cardinality mismatch")
+  items
+}
+
+event_vcf_format <- function(raw) {
+  if (is.null(raw)) return(list())
+  keys <- stringi::stri_split_fixed(raw$keys, ":", omit_empty = FALSE)[[1L]]
+  values <- stringi::stri_split_fixed(raw$sample, ":", omit_empty = FALSE)[[1L]]
+  if (any(!nzchar(keys)) || anyDuplicated(keys) || any(!nzchar(values)) ||
+      length(values) > length(keys)) stop("Malformed VCF FORMAT")
+  # VCF permits omitted trailing sample fields. Keep raw_format unchanged.
+  if (length(values) < length(keys)) values <- c(values, rep(".", length(keys) - length(values)))
+  stats::setNames(as.list(values), keys)
 }
 
 event_parse_vcf <- function(project, input, reference) {
@@ -166,6 +191,7 @@ event_parse_vcf <- function(project, input, reference) {
         next
       }
       if (startsWith(line, "#CHROM")) {
+        if (!is.null(header)) stop("Duplicate VCF column header")
         header <- strsplit(line, "\t", fixed = TRUE)[[1L]]
         if (length(header) < 8L || !identical(header[1:8],
           c("#CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO")))
@@ -173,6 +199,9 @@ event_parse_vcf <- function(project, input, reference) {
         if (length(header) > 9L && !identical(header[[10L]], input$sample_id))
           stop("VCF sample does not match authoritative input sample binding")
         if (length(header) > 10L) stop("Multi-sample VCF requires a single explicit sample input")
+        if (!length(header) %in% c(8L, 10L) ||
+            (length(header) == 10L && header[[9L]] != "FORMAT"))
+          stop("Malformed VCF column header")
         event_check_build_declaration(declared_reference, reference$assembly, "VCF reference declaration")
         for (contig in names(contigs)) {
           d <- contigs[[contig]]; i <- match(contig, reference$fai$contig)
@@ -185,47 +214,47 @@ event_parse_vcf <- function(project, input, reference) {
       }
       if (startsWith(line, "#")) next
       if (is.null(header)) stop("VCF data before column header")
-      fields <- strsplit(line, "\t", fixed = TRUE)[[1L]]
+      fields <- stringi::stri_split_fixed(line, "\t", omit_empty = FALSE)[[1L]]
       if (length(fields) != length(header)) stop("Malformed VCF record at line ", line_number)
+      if (any(!nzchar(fields))) stop("Malformed VCF record: empty field at line ", line_number)
       names(fields) <- header
       pos <- suppressWarnings(as.numeric(fields[["POS"]]))
-      if (!is.finite(pos) || pos != floor(pos) || pos < 1 || pos > 2147483647)
+      if (!grepl("^[0-9]+$", fields[["POS"]]) || !is.finite(pos) ||
+          pos != floor(pos) || pos < 1 || pos > 2147483647)
         stop("Invalid VCF POS at line ", line_number)
       chrom <- fields[["#CHROM"]]
       if (!chrom %in% reference$fai$contig) stop("Contig absent from selected primary reference: ", chrom)
       ref <- fields[["REF"]]
       if (!grepl("^[ACGT]+$", ref)) stop("Malformed VCF REF at line ", line_number)
-      alts <- strsplit(fields[["ALT"]], ",", fixed = TRUE)[[1L]]
+      alts <- stringi::stri_split_fixed(fields[["ALT"]], ",", omit_empty = FALSE)[[1L]]
       if (!length(alts) || any(!nzchar(alts))) stop("Malformed VCF ALT")
       caller <- if (length(unique(sources)) == 1L) unique(sources) else NULL
       raw_format <- if (length(fields) >= 10L) list(keys = fields[["FORMAT"]], sample = fields[[10L]]) else NULL
+      format_values <- event_vcf_format(raw_format)
+      event_vcf_info_map(fields[["INFO"]])
       called_alts <- seq_along(alts)
       if (identical(input$input_role, "germline_vcf") && !is.null(raw_format)) {
-        keys <- strsplit(raw_format$keys, ":", fixed = TRUE)[[1L]]
-        values <- strsplit(raw_format$sample, ":", fixed = TRUE)[[1L]]
-        gt <- if ("GT" %in% keys && length(values) >= match("GT", keys)) values[[match("GT", keys)]] else NULL
+        gt <- format_values$GT
         if (!is.null(gt)) {
           if (!grepl("^[0-9]+([/|][0-9]+)*$", gt)) stop("Malformed germline GT")
           tokens <- strsplit(gt, "[/|]", perl = TRUE)[[1L]]
           if (any(!grepl("^[0-9]+$", tokens))) stop("Germline GT contains unresolved allele")
-          indexes <- as.integer(tokens)
-          if (any(indexes > length(alts))) stop("Germline GT allele index exceeds ALT count")
+          indexes <- suppressWarnings(as.numeric(tokens))
+          if (any(!is.finite(indexes)) || any(indexes > length(alts)))
+            stop("Germline GT allele index exceeds ALT count")
           called_alts <- sort(unique(indexes[indexes > 0L]))
         }
       }
       projected_format <- function(index) {
         if (is.null(raw_format)) return(list())
-        keys <- strsplit(raw_format$keys, ":", fixed = TRUE)[[1L]]
-        vals <- strsplit(raw_format$sample, ":", fixed = TRUE)[[1L]]
-        if (length(keys) != length(vals)) stop("Malformed VCF FORMAT")
         out <- list()
-        for (j in seq_along(keys)) {
-          def <- format_defs[[keys[[j]]]]; number <- def$Number
-          if (is.null(number)) next
-          items <- strsplit(vals[[j]], ",", fixed = TRUE)[[1L]]
-          if (number == "A" && length(items) == length(alts)) out[[keys[[j]]]] <- items[[index]]
-          if (number == "R" && length(items) == length(alts) + 1L)
-            out[[keys[[j]]]] <- list(ref = items[[1L]], alt = items[[index + 1L]])
+        for (key in names(format_values)) {
+          number <- format_defs[[key]]$Number
+          if (is.null(number) || !number %in% c("A", "R")) next
+          items <- event_vcf_allele_values(format_values[[key]], number, length(alts), paste("FORMAT", key))
+          if (is.null(items)) next
+          if (number == "A") out[[key]] <- items[[index]]
+          if (number == "R") out[[key]] <- list(ref = items[[1L]], alt = items[[index + 1L]])
         }
         out
       }

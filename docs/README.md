@@ -7,6 +7,7 @@ Start with the [project overview](../README.md) and the installed synthetic exam
 | Install and run a native example | [Getting started](user/getting-started.md) |
 | Declare multiple patients and separate sample files | [Multi-patient/multi-sample examples](user/multi-sample-examples.md) |
 | Prepare variants, metadata, HLA, and references | [Inputs and configuration](user/inputs.md) |
+| Check VCF scope and input compatibility | [VCF compatibility validation](user/vcf-compatibility.md) |
 | Obtain public resources and optional tools | [Resources and tools](user/resources-and-tools.md) |
 | Run supported native analyses end to end | [Workflows](user/workflows.md) |
 | Connect external predictors | [External prediction interoperability](user/external-predictions.md) |
