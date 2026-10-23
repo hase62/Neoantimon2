@@ -22,6 +22,44 @@ IMGTHLA_RELEASE = '3.65.0'
 RESOURCES = ('genome', 'gencode', 'mane', 'imgthla', '1000g', 'hcc1395',
              'processed-rna', 'longread', 'full-rna', 'full-truth')
 PROFILES = {'minimum': ('genome', 'gencode', 'mane'), 'full': RESOURCES}
+RESOURCE_CATALOG_SHA256 = 'f2693c4edd0176376b7b1e078ffac8cedad5ecd31efe8076fe608f89cd9589e1'
+_CATALOG = None
+_CATALOG_PATH = None
+_CHECK_ONLY = False
+_NO_OVERWRITE = False
+
+
+def resource_catalog():
+    """One catalog for installed R, this utility and standalone downloads."""
+    global _CATALOG
+    if _CATALOG is not None:
+        return _CATALOG
+    candidates = ([Path(_CATALOG_PATH)] if _CATALOG_PATH else
+                  [Path(__file__).resolve().parents[2] / 'inst/setup/resource-catalog.json',
+                   Path(__file__).resolve().parent / 'resource-catalog.json'])
+    local = next((p for p in candidates if p.is_file()), None)
+    if local:
+        payload = local.read_bytes()
+    elif _CATALOG_PATH:
+        raise ValueError('Resource catalog not found: ' + str(_CATALOG_PATH))
+    else:
+        url = 'https://raw.githubusercontent.com/hase62/Neoantimon2/main/inst/setup/resource-catalog.json'
+        require('curl')
+        payload = run('curl', '--location', '--fail', '--retry', '3', url, capture=True).encode('utf-8')
+    if not _CATALOG_PATH and hashlib.sha256(payload).hexdigest() != RESOURCE_CATALOG_SHA256:
+        raise ValueError('Resource catalog checksum mismatch; obtain the matching catalog/utility')
+    catalog = json.loads(payload)
+    if (catalog.get('schema_version') != 'neo-resource-catalog-1' or
+            set(catalog['resources']) != set(RESOURCES) or
+            {k: tuple(v) for k, v in catalog['profiles'].items()} != PROFILES):
+        raise ValueError('Resource catalog selection contract mismatch')
+    for spec in catalog['resources'].values():
+        for item in spec['files']:
+            path = Path(item['path'])
+            if path.is_absolute() or '..' in path.parts:
+                raise ValueError('Catalog path escapes destination')
+    _CATALOG = catalog
+    return catalog
 
 
 def run(*args, capture=False):
@@ -143,6 +181,8 @@ def fasta_scope(path, expected, exact=False):
 
 def acquire(url, output, kind=None, validator=None):
     output = Path(output)
+    if _CHECK_ONLY and not output.exists():
+        raise ValueError('Missing resource: ' + str(output))
     output.parent.mkdir(parents=True, exist_ok=True)
     check = validator or (lambda p: validate(p, kind))
     if output.exists():
@@ -151,6 +191,8 @@ def acquire(url, output, kind=None, validator=None):
             print('[validated reuse]', output, flush=True)
             return output
         except (ValueError, OSError, subprocess.CalledProcessError) as error:
+            if _CHECK_ONLY or _NO_OVERWRITE:
+                raise ValueError('Invalid existing resource retained: ' + str(output)) from error
             print('[invalid existing artifact; acquiring replacement]', output, str(error), flush=True)
     require('curl')
     # Each attempt owns fresh staging state. Never resume/reuse an unverified
@@ -169,6 +211,9 @@ def acquire_pair(url, output, suffix, pair_validator):
     """Validate a data/index pair in staging before promoting either member."""
     output = Path(output)
     index = Path(str(output) + suffix)
+    if _CHECK_ONLY:
+        pair_validator(output)
+        return output
     output.parent.mkdir(parents=True, exist_ok=True)
     if output.exists() and index.exists():
         try:
@@ -176,7 +221,8 @@ def acquire_pair(url, output, suffix, pair_validator):
             print('[validated pair reuse]', output, flush=True)
             return output
         except (ValueError, OSError, subprocess.CalledProcessError):
-            pass
+            if _NO_OVERWRITE:
+                raise ValueError('Invalid existing data/index pair retained: ' + str(output))
     with tempfile.TemporaryDirectory(prefix='.neo-pair-', dir=output.parent) as directory:
         stage = Path(directory) / output.name
         stage_index = Path(str(stage) + suffix)
@@ -188,6 +234,8 @@ def acquire_pair(url, output, suffix, pair_validator):
                     os.link(prior, candidate)
                     reused.add(candidate)
                 except (ValueError, OSError, subprocess.CalledProcessError):
+                    if _NO_OVERWRITE:
+                        raise ValueError('Invalid existing pair member retained: ' + str(prior))
                     acquire(endpoint, candidate)
             else:
                 acquire(endpoint, candidate)
@@ -196,6 +244,8 @@ def acquire_pair(url, output, suffix, pair_validator):
         except (ValueError, OSError, subprocess.CalledProcessError):
             if stage_index not in reused:
                 raise
+            if _NO_OVERWRITE:
+                raise ValueError('Conflicting existing index retained: ' + str(index))
             # This is only our temporary hard link, not the existing input.
             stage_index.unlink()
             reused.remove(stage_index)
@@ -240,6 +290,9 @@ def bam_pair(path):
 def index_bam(path):
     """Supported samtools index syntax; promote only a readable new index."""
     p = validate(path, 'bam')
+    if _CHECK_ONLY or (_NO_OVERWRITE and Path(str(p) + '.bai').exists()):
+        bam_pair(p)
+        return
     with tempfile.TemporaryDirectory(prefix='.neo-index-', dir=p.parent) as directory:
         stage = Path(directory) / (p.name + '.bai')
         run('samtools', 'index', p, stage)
@@ -251,12 +304,19 @@ def index_bam(path):
 def ensure_fasta(path):
     p = validate(path, 'fasta')
     require('samtools')
-    with tempfile.TemporaryDirectory(prefix='.neo-fasta-', dir=p.parent) as directory:
+    with tempfile.TemporaryDirectory(prefix='.neo-fasta-', dir=None if _CHECK_ONLY else p.parent) as directory:
         stage = Path(directory) / (p.name + '.fai')
         run('samtools', 'faidx', '-o', stage, p)
         validate(stage, 'fai')
         target = Path(str(p) + '.fai')
         if not target.exists() or target.read_bytes() != stage.read_bytes():
+            if _CHECK_ONLY or (_NO_OVERWRITE and target.exists()):
+                def geometry(file):
+                    rows = [line.split('\t') for line in file.read_text().splitlines()]
+                    return [(f[0], tuple(int(v) for v in f[1:])) for f in rows]
+                if not target.exists() or geometry(target) != geometry(stage):
+                    raise ValueError('Missing/inconsistent FASTA index retained: ' + str(target))
+                return p
             os.replace(stage, target)
     return p
 
@@ -274,6 +334,8 @@ def decompress_fasta(source, output):
                     break
                 if not a: break
     if not matches:
+        if _CHECK_ONLY or (_NO_OVERWRITE and output.exists()):
+            raise ValueError('Missing/inconsistent decompressed FASTA retained: ' + str(output))
         with tempfile.TemporaryDirectory(prefix='.neo-fasta-', dir=output.parent) as directory:
             stage = Path(directory) / output.name
             with gzip.open(source, 'rb') as src, stage.open('wb') as dst:
@@ -286,6 +348,8 @@ def decompress_fasta(source, output):
 def extract_1000g(panel, destination):
     require('bcftools')
     destination = Path(destination)
+    if _CHECK_ONLY and not destination.is_dir():
+        raise ValueError('Missing subset directory: ' + str(destination))
     destination.mkdir(parents=True, exist_ok=True)
     vcf_pair(panel, sample='NA12878')
     contigs = [line.split('\t')[0] for line in run('bcftools', 'index', '-s', panel, capture=True).splitlines()]
@@ -301,7 +365,10 @@ def extract_1000g(panel, destination):
                 vcf_pair(out, region=region, sample='NA12878')
                 continue
             except (ValueError, OSError, subprocess.CalledProcessError):
-                pass
+                if _CHECK_ONLY or _NO_OVERWRITE:
+                    raise ValueError('Invalid existing subset retained: ' + str(out))
+        if _CHECK_ONLY:
+            raise ValueError('Missing subset: ' + str(out))
         with tempfile.TemporaryDirectory(prefix='.neo-1000g-', dir=destination) as directory:
             stage = Path(directory) / name
             run('bcftools', 'view', '-s', 'NA12878', *arguments, '-Oz', '-o', stage, panel)
@@ -315,9 +382,12 @@ def extract_1000g(panel, destination):
             'subset_records': vcf_pair(destination / 'NA12878.chr22.20-25Mb.GRCh38.phased.vcf.gz', region=region)}
 
 
-def acquire_imgthla(destination, commit=IMGTHLA_COMMIT, release=IMGTHLA_RELEASE):
+def acquire_imgthla(destination, commit=IMGTHLA_COMMIT, release=IMGTHLA_RELEASE,
+                    url='https://github.com/ANHIG/IMGTHLA.git'):
     require('git')
     destination = Path(destination)
+    if _CHECK_ONLY and not destination.exists():
+        raise ValueError('Missing IMGTHLA checkout: ' + str(destination))
     destination.parent.mkdir(parents=True, exist_ok=True)
     def check(p):
         if run('git', '-C', p, 'rev-parse', 'HEAD', capture=True).strip() != commit:
@@ -331,7 +401,7 @@ def acquire_imgthla(destination, commit=IMGTHLA_COMMIT, release=IMGTHLA_RELEASE)
     else:
         with tempfile.TemporaryDirectory(prefix='.neo-imgthla-', dir=destination.parent) as directory:
             stage = Path(directory) / 'IMGTHLA'
-            run('git', 'clone', '--no-checkout', 'https://github.com/ANHIG/IMGTHLA.git', stage)
+            run('git', 'clone', '--no-checkout', url, stage)
             run('git', '-C', stage, 'checkout', '--detach', commit)
             check(stage)
             os.replace(stage, destination)
@@ -341,13 +411,17 @@ def acquire_imgthla(destination, commit=IMGTHLA_COMMIT, release=IMGTHLA_RELEASE)
 def acquire_sra(accession, directory):
     require('prefetch', 'vdb-validate')
     directory = Path(directory)
-    directory.mkdir(parents=True, exist_ok=True)
     out = directory / accession / (accession + '.sra')
+    if _CHECK_ONLY and not out.exists():
+        raise ValueError('Missing SRA: ' + str(out))
+    directory.mkdir(parents=True, exist_ok=True)
     if out.exists():
         try:
             run('vdb-validate', out)
             return out
         except subprocess.CalledProcessError:
+            if _CHECK_ONLY or _NO_OVERWRITE:
+                raise ValueError('Invalid existing SRA retained: ' + str(out))
             print('[invalid existing SRA; staging replacement]', out, flush=True)
     with tempfile.TemporaryDirectory(prefix='.neo-sra-', dir=directory) as stage:
         run('prefetch', '--max-size', 'u', '--output-directory', stage, accession)
@@ -362,6 +436,9 @@ def acquire_sra(accession, directory):
 
 def atomic_json(path, value):
     path = Path(path)
+    if _NO_OVERWRITE and path.exists():
+        # Preserve earlier acquisition provenance under the opt-in R policy.
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(mode='w', dir=path.parent, delete=False, prefix='.neo-metadata-') as stream:
         json.dump(value, stream, indent=2)
@@ -372,134 +449,100 @@ def atomic_json(path, value):
 
 def acquire_resource(resource, root, observed_sha256=False):
     root = Path(root)
+    catalog = resource_catalog()
+    spec = catalog['resources'][resource]
     files, sources = [], []
-    def get(url, relative, kind=None):
-        p = acquire(url, root / relative, kind, validator=(lambda p: fasta_scope(p, {'chr1':248956422,'chr22':50818468,'chrM':16569})) if resource == 'genome' else (lambda p: fasta_scope(p, {'chr1':248956422}, exact=True)) if relative.endswith('GRCh38_no_alts_chr1.fasta') else None)
-        files.append(p)
-        sources.append(url)
-        return p
-    def get_pair(url, relative, suffix, checker):
-        p = acquire_pair(url, root / relative, suffix, checker)
-        files.extend([p, Path(str(p) + suffix)])
-        sources.extend([url, url + suffix])
-        return p
-    scope = {}
-    release = None
-    license_url = None
-    if resource in ('genome', 'gencode'):
-        base = 'https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/'
-        release = 'GENCODE 50 / GRCh38.p14'
-        license_url = 'https://www.gencodegenes.org/pages/data_access.html'
-        if resource == 'genome':
-            p = get(base + 'GRCh38.primary_assembly.genome.fa.gz', 'reference/genome/GRCh38.primary_assembly.genome.fa.gz', 'fasta')
-            files.extend([decompress_fasta(p, root / 'reference/genome/GRCh38.primary_assembly.genome.fa'), root / 'reference/genome/GRCh38.primary_assembly.genome.fa.fai'])
-            scope = {'assembly': 'GRCh38.p14', 'scope': 'primary_assembly'}
-        else:
-            for name in ('primary_assembly.annotation.gtf', 'transcripts.fa', 'pc_transcripts.fa', 'pc_translations.fa', 'metadata.Selenocysteine'):
-                filename = 'gencode.v50.' + name + '.gz'
-                get(base + filename, 'reference/gencode/' + filename, 'gencode-gtf' if name.endswith('.gtf') else 'sec' if name=='metadata.Selenocysteine' else None)
-            scope = {'annotation_release': '50', 'annotation_scope': 'primary_assembly', 'catalogs': 'all'}
-    elif resource == 'mane':
-        license_url = 'https://www.ncbi.nlm.nih.gov/home/about/policies/'
-        release = 'MANE 1.5 / GRCh38'
-        base = 'https://ftp.ncbi.nlm.nih.gov/refseq/MANE/MANE_human/release_1.5/'
-        for filename in ('MANE.GRCh38.v1.5.summary.txt.gz', 'MANE.GRCh38.v1.5.ensembl_genomic.gtf.gz'):
-            get(base + filename, 'reference/mane/' + filename, 'mane-summary' if filename.endswith('summary.txt.gz') else None)
-    elif resource == 'imgthla':
-        release = IMGTHLA_RELEASE
-        p = acquire_imgthla(root / 'reference/hla/IMGTHLA')
-        sources = ['https://github.com/ANHIG/IMGTHLA.git']
-        scope = {'git_commit': IMGTHLA_COMMIT, 'format': 'original upstream data; not normalized allo manifest'}
-        license_url = 'https://www.ebi.ac.uk/ipd/imgt/hla/licence/'
-        atomic_json(root / 'reference/hla/IMGTHLA.acquisition.json', {'commit': IMGTHLA_COMMIT, 'release': release})
-    elif resource == '1000g':
-        release = '20190312_biallelic_SNV_and_INDEL / v2a_27022019 / GRCh38'
-        base = 'https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000_genomes_project/release/20190312_biallelic_SNV_and_INDEL/'
-        filename = 'ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38.phased.vcf.gz'
-        panel = get_pair(base + filename, 'public_datasets/1000genomes/' + filename, '.tbi', lambda p: vcf_pair(p, sample='NA12878'))
-        scope = extract_1000g(panel, root / 'samples/germline_vcf')
-    elif resource in ('hcc1395', 'full-truth'):
-        base = 'https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/'
-        if resource == 'hcc1395':
-            base += 'quick-start/'
-            directory = 'public_datasets/hcc1395_seqc2/'
-            names = [s + ext for s in ('S1395_WGS_ilm_normal.bwa.dedup.chr1.quickstart', 'S1395_WGS_ilm_tumor.bwa.dedup.chr1.quickstart') for ext in ('.bam', '.bam.bai')]
-            names += ['GRCh38_no_alts_chr1.fasta', 'GRCh38_no_alts_chr1.fasta.fai', 'SEQC2_truth.chr1.quick_start.vcf.gz', 'SEQC2_truth.chr1.quick_start.vcf.gz.tbi', 'SEQC2_truth.chr1.quick_start.bed']
-            release = 'DeepSomatic quick-start named HCC1395/SEQC2 chr1 artifacts'
-            scope = {'assembly': 'GRCh38', 'contig': 'chr1', 'scope': 'quick-start'}
-        else:
-            base += 'SEQC2-S1395-truth/'
-            directory = 'public_datasets/hcc1395_seqc2/full_truth/'
-            names = ['high-confidence_sINDEL_sSNV_in_HC_regions_v1.2.1.merged.vcf.gz', 'high-confidence_sINDEL_sSNV_in_HC_regions_v1.2.1.merged.vcf.gz.tbi', 'High-Confidence_Regions_v1.2.bed']
-            release = 'SEQC2 VCF 1.2.1 / BED 1.2'
-            scope = {'assembly': 'GRCh38', 'scope': 'full truth'}
-        for filename in names:
-            if filename.endswith(('.bam.bai', '.vcf.gz.tbi')): continue
-            if filename.endswith('.bam'):
-                get_pair(base + filename, directory + filename, '.bai', bam_pair)
-            elif filename.endswith('.vcf.gz'):
-                get_pair(base + filename, directory + filename, '.tbi', vcf_pair)
-            else:
-                get(base + filename, directory + filename)
-        for p in list(files):
-            if p.name.endswith('.bam'):
-                bam_pair(p)
-            elif p.name.endswith('.vcf.gz'):
-                vcf_pair(p)
-            elif p.name.endswith('.fasta'):
-                ensure_fasta(p)
-    elif resource == 'processed-rna':
-        release = 'HCC1395 HISAT tutorial named tumor/normal BAM artifacts'
-        scope = {'source': 'genomedata RNA-seq tutorial', 'release_published': False}
-        base = 'https://genomedata.org/rnaseq-tutorial/results/alignments/hisat/'
-        for name in ('HCC1395_tumor.bam', 'HCC1395_normal.bam'):
-            get_pair(base + name, 'public_datasets/hcc1395_rna/' + name, '.bai', bam_pair)
-        license_url = 'https://genomedata.org/rnaseq-tutorial/'
-    else:
-        license_url = 'https://www.ncbi.nlm.nih.gov/home/about/policies/'
-        accession = 'SRR23456709' if resource == 'longread' else 'SRR37849525'
-        directory = root / ('public_datasets/hcc1395_longread' if resource == 'longread' else 'public_datasets/hcc1395_full_rna/sra')
-        files = [acquire_sra(accession, directory)]
-        release = accession
+    downloads = [f for f in spec['files'] if f['action'] == 'download']
+    def get(item):
+        kind = 'fasta' if item['kind'] in ('transcript', 'protein') else item['kind']
+        checker = (lambda p: fasta_scope(p, catalog['reference']['genome_contigs'])) if resource == 'genome' else (
+            (lambda p: fasta_scope(p, {'chr1': 248956422}, exact=True))
+            if item['path'].endswith('GRCh38_no_alts_chr1.fasta') else None)
+        path = acquire(item['url'], root / item['path'], kind, validator=checker)
+        files.append(path); sources.append(item['url'])
+        return path
+    scope = dict(spec['semantic_scope'])
+    if resource == 'imgthla':
+        checkout = spec['checkout']
+        acquire_imgthla(root / checkout['path'], checkout['commit'], spec['release'], checkout['url'])
+        sources = [checkout['url']]
+        if not _CHECK_ONLY:
+            atomic_json(root / 'reference/hla/IMGTHLA.acquisition.json',
+                        {'commit': checkout['commit'], 'release': spec['release']})
+    elif resource in ('longread', 'full-rna'):
+        item = spec['files'][0]
+        accession = spec['accession']
+        files = [acquire_sra(accession, (root / item['path']).parent.parent)]
         sources = ['https://www.ncbi.nlm.nih.gov/sra/' + accession]
-        scope = {'accession': accession, 'format': 'original SRA; FASTQ/alignment generation separate'}
+    else:
+        for item in downloads:
+            if item['kind'] in ('tbi', 'bai'):
+                continue
+            suffix = '.tbi' if item['kind'] == 'vcf' else '.bai' if item['kind'] == 'bam' else None
+            if suffix:
+                checker = bam_pair if suffix == '.bai' else (
+                    (lambda p: vcf_pair(p, sample='NA12878')) if resource == '1000g' else vcf_pair)
+                path = acquire_pair(item['url'], root / item['path'], suffix, checker)
+                files.extend([path, Path(str(path) + suffix)])
+                sources.extend([item['url'], item['url'] + suffix])
+            else:
+                get(item)
+        if resource == 'genome':
+            target = next(f for f in spec['files'] if f['action'] == 'gunzip')
+            path = decompress_fasta(root / target['parent'], root / target['path'])
+            files.extend([path, Path(str(path) + '.fai')])
+        elif resource == '1000g':
+            scope = extract_1000g(root / downloads[0]['path'], root / 'samples/germline_vcf')
+        elif resource == 'hcc1395':
+            for path in files:
+                if path.name.endswith('.fasta'):
+                    ensure_fasta(path)
     artifacts = []
-    for p in files:
-        entry = {'local_relative_path': str(p.relative_to(root)), 'bytes': p.stat().st_size}
+    for path in files:
+        entry = {'local_relative_path': str(path.relative_to(root)), 'bytes': path.stat().st_size}
         if observed_sha256:
             digest = hashlib.sha256()
-            with p.open('rb') as stream:
+            with path.open('rb') as stream:
                 for block in iter(lambda: stream.read(1024 * 1024), b''):
                     digest.update(block)
             entry['observed_sha256'] = digest.hexdigest()
         artifacts.append(entry)
     versions = {}
     commands = ('samtools','bcftools') if resource in ('1000g','hcc1395','processed-rna','full-truth') else ('samtools',) if resource=='genome' else ('git',) if resource=='imgthla' else ('prefetch','vdb-validate') if resource in ('longread','full-rna') else ()
-    for command in commands:
-        if shutil.which(command):
-            probe = subprocess.run([command,'--version'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
-            versions[command] = probe.stdout.splitlines()[0] if probe.returncode==0 and probe.stdout.splitlines() else 'version probe unavailable'
-    atomic_json(root / 'acquisition' / (resource + '.json'), {
-        'schema_version': '1.0.0', 'resource_id': resource, 'release': release,
-        'source_urls': sources, 'semantic_scope': scope, 'license_url': license_url,
+    for name in commands:
+        if shutil.which(name):
+            probe = subprocess.run([name,'--version'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+            versions[name] = probe.stdout.splitlines()[0] if probe.returncode==0 and probe.stdout.splitlines() else 'version probe unavailable'
+    result = {
+        'schema_version': '1.0.0', 'resource_id': resource, 'release': spec['release'],
+        'source_urls': sources, 'semantic_scope': scope, 'license_url': spec['license_url'],
         'license_status': 'consult upstream; no redistribution grant inferred', 'tool_versions': versions,
         'acquisition_mode': 'public_download', 'redistribution': 'consult selected upstream terms; not granted by this script',
         'artifacts': artifacts, 'acquisition_script_version': 'operational-1',
-        'checksum_policy': 'observed optional; semantic/release and format validation required'})
+        'checksum_policy': 'observed optional; semantic/release and format validation required'}
+    if not _CHECK_ONLY:
+        atomic_json(root / 'acquisition' / (resource + '.json'), result)
+    return result
 
 
 def main(argv=None):
+    global _CATALOG_PATH, _CATALOG, _CHECK_ONLY, _NO_OVERWRITE
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--dest', default=os.environ.get('NEOANTIMON2_DATA_ROOT'), help='chosen input/data directory (or NEOANTIMON2_DATA_ROOT)')
     parser.add_argument('--profile', choices=PROFILES)
     parser.add_argument('--resource', help='comma-separated selection: ' + ','.join(RESOURCES))
     parser.add_argument('--record-sha256', action='store_true', help='optional observed file hashes')
+    parser.add_argument('--catalog', help='explicit matching resource catalog (normally located automatically)')
+    parser.add_argument('--check-only', action='store_true', help='validate selected existing resources without acquisition or promotion')
+    parser.add_argument('--no-overwrite', action='store_true', help='retain invalid existing files rather than replacing them')
     # Shared operations for the shell workflows; these do not need --dest.
     parser.add_argument('--download', metavar='PUBLIC_URL')
     parser.add_argument('--output')
     parser.add_argument('--kind')
     parser.add_argument('--index-bam')
     args = parser.parse_args(argv)
+    _CATALOG_PATH, _CATALOG = args.catalog, None
+    _CHECK_ONLY, _NO_OVERWRITE = args.check_only, args.no_overwrite
     if args.index_bam:
         index_bam(args.index_bam)
         return
@@ -516,7 +559,8 @@ def main(argv=None):
     if any(s not in RESOURCES for s in selected):
         parser.error('unknown resource selection')
     root = Path(args.dest).expanduser().resolve()
-    root.mkdir(parents=True, exist_ok=True)
+    if not _CHECK_ONLY:
+        root.mkdir(parents=True, exist_ok=True)
     for resource in dict.fromkeys(selected):
         print('[resource]', resource, flush=True)
         acquire_resource(resource, root, args.record_sha256)

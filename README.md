@@ -66,6 +66,9 @@ validation on every platform or the minimum supported R version. See
 [getting started](docs/user/getting-started.md) and
 [resources and tools](docs/user/resources-and-tools.md).
 
+The Phase 3 development build adds [R-based resource and predictor setup](docs/user/setup.md).
+These setup APIs are not included in the immutable v0.2.0 release above.
+
 ## Quick Start
 
 After installation, run this complete offline example:

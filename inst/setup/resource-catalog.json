@@ -1,0 +1,406 @@
+{
+  "schema_version": "neo-resource-catalog-1",
+  "profiles": {
+    "minimum": [
+      "genome",
+      "gencode",
+      "mane"
+    ],
+    "full": [
+      "genome",
+      "gencode",
+      "mane",
+      "imgthla",
+      "1000g",
+      "hcc1395",
+      "processed-rna",
+      "longread",
+      "full-rna",
+      "full-truth"
+    ]
+  },
+  "reference": {
+    "species": "NCBITaxon:9606",
+    "assembly": "GRCh38.p14",
+    "genome_contigs": {
+      "chr1": 248956422,
+      "chr22": 50818468,
+      "chrM": 16569
+    }
+  },
+  "resources": {
+    "genome": {
+      "release": "GENCODE 50 / GRCh38.p14",
+      "source_name": "GENCODE",
+      "license_url": "https://www.gencodegenes.org/pages/data_access.html",
+      "semantic_scope": {
+        "assembly": "GRCh38.p14",
+        "scope": "primary_assembly"
+      },
+      "files": [
+        {
+          "path": "reference/genome/GRCh38.primary_assembly.genome.fa.gz",
+          "action": "download",
+          "kind": "fasta",
+          "url": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/GRCh38.primary_assembly.genome.fa.gz"
+        },
+        {
+          "path": "reference/genome/GRCh38.primary_assembly.genome.fa",
+          "action": "gunzip",
+          "kind": "fasta",
+          "parent": "reference/genome/GRCh38.primary_assembly.genome.fa.gz",
+          "role": "genome_fasta",
+          "version": "GRCh38.p14"
+        },
+        {
+          "path": "reference/genome/GRCh38.primary_assembly.genome.fa.fai",
+          "action": "faidx",
+          "kind": "fai",
+          "parent": "reference/genome/GRCh38.primary_assembly.genome.fa",
+          "role": "genome_fai",
+          "version": "GRCh38.p14"
+        }
+      ],
+      "tools": {
+        "python": [
+          "curl",
+          "gzip",
+          "samtools"
+        ]
+      }
+    },
+    "gencode": {
+      "release": "GENCODE 50 / GRCh38.p14",
+      "source_name": "GENCODE",
+      "license_url": "https://www.gencodegenes.org/pages/data_access.html",
+      "semantic_scope": {
+        "annotation_release": "50",
+        "annotation_scope": "primary_assembly",
+        "catalogs": "all"
+      },
+      "files": [
+        {
+          "path": "reference/gencode/gencode.v50.primary_assembly.annotation.gtf.gz",
+          "action": "download",
+          "kind": "gencode-gtf",
+          "url": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/gencode.v50.primary_assembly.annotation.gtf.gz",
+          "role": "annotation_gtf",
+          "version": "50",
+          "resource_id": "gencode_primary_assembly_all_catalogs_mane_supplemental_v1"
+        },
+        {
+          "path": "reference/gencode/gencode.v50.transcripts.fa.gz",
+          "action": "download",
+          "kind": "transcript",
+          "url": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/gencode.v50.transcripts.fa.gz",
+          "role": "transcript_fasta",
+          "version": "50"
+        },
+        {
+          "path": "reference/gencode/gencode.v50.pc_transcripts.fa.gz",
+          "action": "download",
+          "kind": "transcript",
+          "url": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/gencode.v50.pc_transcripts.fa.gz",
+          "role": "protein_coding_transcript_fasta",
+          "version": "50"
+        },
+        {
+          "path": "reference/gencode/gencode.v50.pc_translations.fa.gz",
+          "action": "download",
+          "kind": "protein",
+          "url": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/gencode.v50.pc_translations.fa.gz",
+          "role": "protein_fasta",
+          "version": "50"
+        },
+        {
+          "path": "reference/gencode/gencode.v50.metadata.Selenocysteine.gz",
+          "action": "download",
+          "kind": "sec",
+          "url": "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/gencode.v50.metadata.Selenocysteine.gz",
+          "role": "selenocysteine_metadata",
+          "version": "50"
+        }
+      ],
+      "tools": {
+        "python": [
+          "curl",
+          "gzip"
+        ]
+      }
+    },
+    "mane": {
+      "release": "MANE 1.5 / GRCh38",
+      "source_name": "NCBI MANE",
+      "license_url": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+      "semantic_scope": {},
+      "files": [
+        {
+          "path": "reference/mane/MANE.GRCh38.v1.5.summary.txt.gz",
+          "action": "download",
+          "kind": "mane-summary",
+          "url": "https://ftp.ncbi.nlm.nih.gov/refseq/MANE/MANE_human/release_1.5/MANE.GRCh38.v1.5.summary.txt.gz",
+          "role": "mane_summary",
+          "version": "1.5"
+        },
+        {
+          "path": "reference/mane/MANE.GRCh38.v1.5.ensembl_genomic.gtf.gz",
+          "action": "download",
+          "kind": "gtf",
+          "url": "https://ftp.ncbi.nlm.nih.gov/refseq/MANE/MANE_human/release_1.5/MANE.GRCh38.v1.5.ensembl_genomic.gtf.gz",
+          "role": "mane_gtf",
+          "version": "1.5"
+        }
+      ],
+      "tools": {
+        "python": [
+          "curl",
+          "gzip"
+        ]
+      }
+    },
+    "imgthla": {
+      "release": "3.65.0",
+      "source_name": "IPD-IMGT/HLA",
+      "license_url": "https://www.ebi.ac.uk/ipd/imgt/hla/licence/",
+      "semantic_scope": {
+        "git_commit": "5b915f27f7f620361cf83cb626eeac8a03c0247c",
+        "format": "original upstream data; not normalized allo manifest"
+      },
+      "files": [],
+      "checkout": {
+        "path": "reference/hla/IMGTHLA",
+        "url": "https://github.com/ANHIG/IMGTHLA.git",
+        "commit": "5b915f27f7f620361cf83cb626eeac8a03c0247c"
+      },
+      "tools": {
+        "python": [
+          "git"
+        ]
+      }
+    },
+    "1000g": {
+      "release": "20190312_biallelic_SNV_and_INDEL / v2a_27022019 / GRCh38",
+      "source_name": "IGSR",
+      "license_url": "https://internationalgenome.org/IGSR_disclaimer/",
+      "semantic_scope": {},
+      "files": [
+        {
+          "path": "public_datasets/1000genomes/ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38.phased.vcf.gz",
+          "action": "download",
+          "kind": "vcf",
+          "url": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000_genomes_project/release/20190312_biallelic_SNV_and_INDEL/ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38.phased.vcf.gz"
+        },
+        {
+          "path": "public_datasets/1000genomes/ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38.phased.vcf.gz.tbi",
+          "action": "download",
+          "kind": "tbi",
+          "url": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000_genomes_project/release/20190312_biallelic_SNV_and_INDEL/ALL.chr22.shapeit2_integrated_snvindels_v2a_27022019.GRCh38.phased.vcf.gz.tbi"
+        }
+      ],
+      "tools": {
+        "python": [
+          "curl",
+          "gzip",
+          "bcftools"
+        ]
+      }
+    },
+    "hcc1395": {
+      "release": "DeepSomatic quick-start named HCC1395/SEQC2 chr1 artifacts",
+      "source_name": "DeepSomatic/SEQC2",
+      "license_url": null,
+      "semantic_scope": {
+        "assembly": "GRCh38",
+        "contig": "chr1",
+        "scope": "quick-start"
+      },
+      "files": [
+        {
+          "path": "public_datasets/hcc1395_seqc2/S1395_WGS_ilm_normal.bwa.dedup.chr1.quickstart.bam",
+          "action": "download",
+          "kind": "bam",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/S1395_WGS_ilm_normal.bwa.dedup.chr1.quickstart.bam"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/S1395_WGS_ilm_normal.bwa.dedup.chr1.quickstart.bam.bai",
+          "action": "download",
+          "kind": "bai",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/S1395_WGS_ilm_normal.bwa.dedup.chr1.quickstart.bam.bai"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/S1395_WGS_ilm_tumor.bwa.dedup.chr1.quickstart.bam",
+          "action": "download",
+          "kind": "bam",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/S1395_WGS_ilm_tumor.bwa.dedup.chr1.quickstart.bam"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/S1395_WGS_ilm_tumor.bwa.dedup.chr1.quickstart.bam.bai",
+          "action": "download",
+          "kind": "bai",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/S1395_WGS_ilm_tumor.bwa.dedup.chr1.quickstart.bam.bai"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/GRCh38_no_alts_chr1.fasta",
+          "action": "download",
+          "kind": "fasta",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/GRCh38_no_alts_chr1.fasta"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/GRCh38_no_alts_chr1.fasta.fai",
+          "action": "download",
+          "kind": "fai",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/GRCh38_no_alts_chr1.fasta.fai"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/SEQC2_truth.chr1.quick_start.vcf.gz",
+          "action": "download",
+          "kind": "vcf",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/SEQC2_truth.chr1.quick_start.vcf.gz"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/SEQC2_truth.chr1.quick_start.vcf.gz.tbi",
+          "action": "download",
+          "kind": "tbi",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/SEQC2_truth.chr1.quick_start.vcf.gz.tbi"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/SEQC2_truth.chr1.quick_start.bed",
+          "action": "download",
+          "kind": "bed",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/quick-start/SEQC2_truth.chr1.quick_start.bed"
+        }
+      ],
+      "tools": {
+        "python": [
+          "curl",
+          "gzip",
+          "samtools",
+          "bcftools"
+        ]
+      }
+    },
+    "processed-rna": {
+      "release": "HCC1395 HISAT tutorial named tumor/normal BAM artifacts",
+      "source_name": "genomedata RNA tutorial",
+      "license_url": "https://genomedata.org/rnaseq-tutorial/",
+      "semantic_scope": {
+        "source": "genomedata RNA-seq tutorial",
+        "release_published": false
+      },
+      "files": [
+        {
+          "path": "public_datasets/hcc1395_rna/HCC1395_tumor.bam",
+          "action": "download",
+          "kind": "bam",
+          "url": "https://genomedata.org/rnaseq-tutorial/results/alignments/hisat/HCC1395_tumor.bam"
+        },
+        {
+          "path": "public_datasets/hcc1395_rna/HCC1395_tumor.bam.bai",
+          "action": "download",
+          "kind": "bai",
+          "url": "https://genomedata.org/rnaseq-tutorial/results/alignments/hisat/HCC1395_tumor.bam.bai"
+        },
+        {
+          "path": "public_datasets/hcc1395_rna/HCC1395_normal.bam",
+          "action": "download",
+          "kind": "bam",
+          "url": "https://genomedata.org/rnaseq-tutorial/results/alignments/hisat/HCC1395_normal.bam"
+        },
+        {
+          "path": "public_datasets/hcc1395_rna/HCC1395_normal.bam.bai",
+          "action": "download",
+          "kind": "bai",
+          "url": "https://genomedata.org/rnaseq-tutorial/results/alignments/hisat/HCC1395_normal.bam.bai"
+        }
+      ],
+      "tools": {
+        "python": [
+          "curl",
+          "samtools"
+        ]
+      }
+    },
+    "longread": {
+      "release": "SRR23456709",
+      "source_name": "NCBI SRA",
+      "license_url": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+      "semantic_scope": {
+        "accession": "SRR23456709",
+        "format": "original SRA; FASTQ/alignment generation separate"
+      },
+      "files": [
+        {
+          "path": "public_datasets/hcc1395_longread/SRR23456709/SRR23456709.sra",
+          "action": "sra",
+          "kind": "sra"
+        }
+      ],
+      "accession": "SRR23456709",
+      "tools": {
+        "python": [
+          "prefetch",
+          "vdb-validate"
+        ]
+      }
+    },
+    "full-rna": {
+      "release": "SRR37849525",
+      "source_name": "NCBI SRA",
+      "license_url": "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+      "semantic_scope": {
+        "accession": "SRR37849525",
+        "format": "original SRA; FASTQ/alignment generation separate"
+      },
+      "files": [
+        {
+          "path": "public_datasets/hcc1395_full_rna/sra/SRR37849525/SRR37849525.sra",
+          "action": "sra",
+          "kind": "sra"
+        }
+      ],
+      "accession": "SRR37849525",
+      "tools": {
+        "python": [
+          "prefetch",
+          "vdb-validate"
+        ]
+      }
+    },
+    "full-truth": {
+      "release": "SEQC2 VCF 1.2.1 / BED 1.2",
+      "source_name": "DeepSomatic/SEQC2",
+      "license_url": null,
+      "semantic_scope": {
+        "assembly": "GRCh38",
+        "scope": "full truth"
+      },
+      "files": [
+        {
+          "path": "public_datasets/hcc1395_seqc2/full_truth/high-confidence_sINDEL_sSNV_in_HC_regions_v1.2.1.merged.vcf.gz",
+          "action": "download",
+          "kind": "vcf",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/SEQC2-S1395-truth/high-confidence_sINDEL_sSNV_in_HC_regions_v1.2.1.merged.vcf.gz"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/full_truth/high-confidence_sINDEL_sSNV_in_HC_regions_v1.2.1.merged.vcf.gz.tbi",
+          "action": "download",
+          "kind": "tbi",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/SEQC2-S1395-truth/high-confidence_sINDEL_sSNV_in_HC_regions_v1.2.1.merged.vcf.gz.tbi"
+        },
+        {
+          "path": "public_datasets/hcc1395_seqc2/full_truth/High-Confidence_Regions_v1.2.bed",
+          "action": "download",
+          "kind": "bed",
+          "url": "https://storage.googleapis.com/deepvariant/deepsomatic-case-studies/SEQC2-S1395-truth/High-Confidence_Regions_v1.2.bed"
+        }
+      ],
+      "tools": {
+        "python": [
+          "curl",
+          "gzip",
+          "bcftools"
+        ]
+      }
+    }
+  }
+}

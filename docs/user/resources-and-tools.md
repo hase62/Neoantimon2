@@ -3,6 +3,13 @@
 [README](../../README.md) · [Inputs/configuration](inputs.md) ·
 [Workflows](workflows.md)
 
+## R setup in the development build
+
+The Phase 3 development build adds R-based reference acquisition, resource checks
+and native-predictor configuration. See the [R setup guide](setup.md).
+These APIs are not in the immutable v0.2.0 release. The standalone Python/shell
+route below is preserved, and existing analysis configurations remain valid.
+
 ## Public acquisition is separate from R installation
 
 Large references and supporting datasets are not included in the package.

@@ -38,6 +38,12 @@ predictor_version_from_text <- function(text, provider) {
   if (length(hit) < 2L) NULL else hit[[2L]]
 }
 
+predictor_version_supported <- function(provider, version) {
+  is.null(version) || if (provider == "netmhcpan")
+    grepl("^4\\.[12](?:\\.[0-9]+)?(?:[A-Za-z][A-Za-z0-9._-]*)?$",version) else if (provider == "netmhciipan")
+      startsWith(version,"4.3") else startsWith(version,"2.")
+}
+
 predictor_capability <- function(provider, executable = NULL, model_path = NULL) {
   spec <- predictor_registry()[[provider]]
   if (is.null(spec)) stop("Unknown predictor adapter")
@@ -62,9 +68,7 @@ predictor_capability <- function(provider, executable = NULL, model_path = NULL)
       error = function(e) character())
     version <- predictor_version_from_text(output, provider)
   }
-  supported_version <- is.null(version) || if (provider == "netmhcpan")
-    grepl("^4\\.[12](?:\\.[0-9]+)?(?:[A-Za-z][A-Za-z0-9._-]*)?$",version) else if (provider == "netmhciipan")
-      startsWith(version,"4.3") else startsWith(version,"2.")
+  supported_version <- predictor_version_supported(provider, version)
   c(spec, list(available = !is.null(path) && model_ok && !is.null(version) && supported_version,
     availability_status = if (is.null(path)) "predictor_unavailable" else
       if (is.null(version)) "version_unresolved" else

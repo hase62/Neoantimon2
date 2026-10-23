@@ -5,6 +5,8 @@
 The eight native functions below remain exported. Four additional external
 prediction APIs are also exported and listed separately below; optional
 workflows use their supported configuration and evidence inputs.
+The four [development setup APIs](#development-setup-apis) are listed at the end;
+they are not part of the immutable v0.2.0 release.
 
 | Function | Main arguments and purpose | Return / side effects |
 | --- | --- | --- |
@@ -46,3 +48,16 @@ neo_explain(p, candidate_id = results$candidate_id[[1L]], format = "text")
 The example's single sample has no configured multi-tumor overlay, so its
 multi-sample summary is empty. This does not mean a measured absence.
 
+
+## Development setup APIs
+
+These functions require the Phase 3 development build and are absent from the
+immutable v0.2.0 release. Existing public API signatures and analysis contracts
+are unchanged. See [R setup](setup.md) and installed help `?neo_download_resources`.
+
+| Function | Purpose |
+| --- | --- |
+| `neo_download_resources(profile, resources, dest, ...)` | Explicit public selections; native R minimum-profile download/preparation; advanced selections use the installed existing helper |
+| `neo_check_resources(..., config = NULL)` | Report missing/invalid files, integrity states, required tools and optionally full reference compatibility |
+| `neo_check_predictors(config = NULL, ...)` | Inspect native tools and runtimes; optional explicit synthetic execution check |
+| `neo_setup_predictor(provider, ...)` | Return ordinary predictor configuration; optionally prepare a new pinned MHCflurry environment with explicit consent |

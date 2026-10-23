@@ -1,0 +1,184 @@
+{
+  "source_commit": "30c8a88c2893cb82c05e9c231c37cda626249a89",
+  "note": "Published Phase 2 baseline; all twelve signatures are unchanged from v0.2.0.",
+  "functions": {
+    "neo_analyze_external": {
+      "arguments": [
+        "project",
+        "predictions",
+        "policy",
+        "converter",
+        "converter_id",
+        "registry",
+        "trust",
+        "timeout"
+      ],
+      "defaults": {
+        "project": "",
+        "predictions": "",
+        "policy": "",
+        "converter": "NULL",
+        "converter_id": "NULL",
+        "registry": "NULL",
+        "trust": "FALSE",
+        "timeout": "60"
+      }
+    },
+    "neo_config": {
+      "arguments": [
+        "file",
+        "...",
+        "env"
+      ],
+      "defaults": {
+        "file": "NULL",
+        "...": "",
+        "env": "Sys.getenv()"
+      }
+    },
+    "neo_events": {
+      "arguments": [
+        "project",
+        "sample_id",
+        "event_id"
+      ],
+      "defaults": {
+        "project": "",
+        "sample_id": "NULL",
+        "event_id": "NULL"
+      }
+    },
+    "neo_explain": {
+      "arguments": [
+        "project",
+        "candidate_id",
+        "reason",
+        "peptide",
+        "sample_id",
+        "format"
+      ],
+      "defaults": {
+        "project": "",
+        "candidate_id": "NULL",
+        "reason": "NULL",
+        "peptide": "NULL",
+        "sample_id": "NULL",
+        "format": "c(\"structured\", \"text\")"
+      }
+    },
+    "neo_export_bundle": {
+      "arguments": [
+        "project",
+        "dir"
+      ],
+      "defaults": {
+        "project": "",
+        "dir": "NULL"
+      }
+    },
+    "neo_external_explain": {
+      "arguments": [
+        "analysis",
+        "candidate_id",
+        "project"
+      ],
+      "defaults": {
+        "analysis": "",
+        "candidate_id": "",
+        "project": "NULL"
+      }
+    },
+    "neo_external_results": {
+      "arguments": [
+        "analysis",
+        "project"
+      ],
+      "defaults": {
+        "analysis": "",
+        "project": "NULL"
+      }
+    },
+    "neo_multisample": {
+      "arguments": [
+        "project",
+        "patient_id",
+        "peptide"
+      ],
+      "defaults": {
+        "project": "",
+        "patient_id": "NULL",
+        "peptide": "NULL"
+      }
+    },
+    "neo_origins": {
+      "arguments": [
+        "project",
+        "sample_id",
+        "origin_id",
+        "peptide"
+      ],
+      "defaults": {
+        "project": "",
+        "sample_id": "NULL",
+        "origin_id": "NULL",
+        "peptide": "NULL"
+      }
+    },
+    "neo_project": {
+      "arguments": [
+        "samples",
+        "hla",
+        "reference",
+        "config",
+        "path",
+        "mode",
+        "project_id",
+        "analysis_context",
+        "inputs",
+        "initialize",
+        "fixture_kind"
+      ],
+      "defaults": {
+        "samples": "NULL",
+        "hla": "NULL",
+        "reference": "NULL",
+        "config": "NULL",
+        "path": "NULL",
+        "mode": "\"somatic\"",
+        "project_id": "\"project\"",
+        "analysis_context": "NULL",
+        "inputs": "list()",
+        "initialize": "FALSE",
+        "fixture_kind": "\"real\""
+      }
+    },
+    "neo_results": {
+      "arguments": [
+        "project",
+        "grade",
+        "prediction_status",
+        "grading_status",
+        "reason",
+        "sample_id",
+        "candidate_id"
+      ],
+      "defaults": {
+        "project": "",
+        "grade": "NULL",
+        "prediction_status": "NULL",
+        "grading_status": "NULL",
+        "reason": "NULL",
+        "sample_id": "NULL",
+        "candidate_id": "NULL"
+      }
+    },
+    "neo_run": {
+      "arguments": [
+        "project"
+      ],
+      "defaults": {
+        "project": ""
+      }
+    }
+  }
+}
