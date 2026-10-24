@@ -38,8 +38,13 @@ results and explanations remain separate from native results.
 
 ## Installation
 
-Use **R 4.1.0 or later**. Install the pinned public
-[v0.2.0 release](https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0):
+**v0.3.0 is an unpublished release candidate.** Its local source archive includes
+the four R setup APIs. No v0.3.0 tag or GitHub Release exists yet; follow the
+[local candidate installation](docs/user/getting-started.md#install-the-local-release-candidate)
+to evaluate it.
+
+Use **R 4.1.0 or later**. The latest immutable public release is
+[v0.2.0](https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0):
 
 ```r
 install.packages("remotes")
@@ -62,8 +67,9 @@ validation on every platform or the minimum supported R version. See
 [getting started](docs/user/getting-started.md) and
 [resources and tools](docs/user/resources-and-tools.md).
 
-The Phase 3 development build adds [R-based resource and predictor setup](docs/user/setup.md).
-These setup APIs are not included in the immutable v0.2.0 release above.
+The v0.3.0 candidate includes [R-based resource and predictor setup](docs/user/setup.md).
+These functions also exist in the published development source, but are absent
+from the immutable v0.2.0 release above. The offline Quick Start works with both.
 
 ## Quick Start
 

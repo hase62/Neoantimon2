@@ -238,9 +238,9 @@ external_explanation
 external_example
 ```
 
-This example is added in the local release-validation source and is not in
-immutable v0.2.0 or the pinned Phase 3 setup commit. It builds on the bundled
-native Quick Start, imports an evaluated zero, an explicit unsupported result
+This example is included in the unpublished v0.3.0 candidate and the published
+Phase 4/5 source, but not in immutable v0.2.0 or the historical Phase 3 setup
+commit. It builds on the bundled native Quick Start, imports an evaluated zero, an explicit unsupported result
 and a peptide-intrinsic score, and leaves two candidates without predictions.
 A query with a different HLA remains unmatched. Candidate origins, native
 results/explanations and original artifact hashes are retained; reopening the
@@ -268,7 +268,8 @@ global events/provenance; requesting many candidates can produce large JSON.
 
 ## Release scope
 
-Version 0.2.0 requires a completed local `neo_project`; an export bundle alone
+Both the immutable v0.2.0 release and the v0.3.0 candidate require a completed
+local `neo_project`; an export bundle alone
 cannot execute downstream analysis. External ranking/explanation and eligible
 somatic grading are supported under their declared prerequisites. Other downstream
 modules retain native evidence. Synthetic workflow tests do not certify licensed

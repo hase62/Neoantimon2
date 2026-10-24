@@ -3,14 +3,22 @@
 [Resources and tools](resources-and-tools.md) · [Configuration](inputs.md) ·
 [API reference](api-reference.md)
 
-**Development build only.** These four setup functions are Phase 3 additions.
-They are not included in the immutable v0.2.0 release. Install a source build
-containing this guide before running them; no development repository is needed
-at runtime. Existing configurations and `neo_run()` still work independently.
+**v0.3.0 release candidate — not yet published.** The candidate includes these
+four R setup functions. They also exist in the published development source,
+but are absent from the immutable v0.2.0 release. No development repository is
+needed at runtime. Existing configurations and `neo_run()` work independently.
+
+## Install the local release candidate
+
+Use the [reviewed local source archive](getting-started.md#install-the-local-release-candidate)
+and verify package version 0.3.0 and all sixteen exports. This is separate from
+the historical public development snapshot below and does not imply a new tag.
 
 ## Install the development source
 
-This published source commit contains the four setup APIs. Restart R before
+For an existing public alternative, this historical development commit contains
+the four setup APIs. It reports package version 0.2.0, distinct from both the
+immutable release and the local 0.3.0 candidate. Restart R before
 installing if Neoantimon2 or one of its dependencies is already loaded.
 
 ```r
@@ -23,9 +31,9 @@ stopifnot(all(c("neo_download_resources", "neo_check_resources",
   getNamespaceExports("Neoantimon2")))
 ```
 
-The development DESCRIPTION still says 0.2.0; package version alone cannot
-distinguish this source from the immutable release. Record the source commit.
-No new release tag is implied by this example.
+This historical development snapshot reports 0.2.0; package version alone cannot
+distinguish it from the immutable release. Record its source commit. The local
+release candidate instead reports 0.3.0. No new tag is implied by either recipe.
 
 ## Inspect resources before downloading
 

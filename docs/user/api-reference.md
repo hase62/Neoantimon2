@@ -5,8 +5,10 @@
 The eight native functions below remain exported. Four additional external
 prediction APIs are also exported and listed separately below; optional
 workflows use their supported configuration and evidence inputs.
-The four [development setup APIs](#development-setup-apis) are listed at the end;
-they are not part of the immutable v0.2.0 release.
+The v0.3.0 candidate exports all sixteen interfaces below. Its four
+[R setup APIs](#r-setup-apis) also exist in the published development source,
+but are absent from the immutable v0.2.0 release. The candidate is not yet a
+published release; existing signatures and scientific contracts remain intact.
 
 | Function | Main arguments and purpose | Return / side effects |
 | --- | --- | --- |
@@ -49,11 +51,12 @@ The example's single sample has no configured multi-tumor overlay, so its
 multi-sample summary is empty. This does not mean a measured absence.
 
 
-## Development setup APIs
+## R setup APIs
 
-These functions require the Phase 3 development build and are absent from the
-immutable v0.2.0 release. Existing public API signatures and analysis contracts
-are unchanged. See [R setup](setup.md) and installed help `?neo_download_resources`.
+These functions are included in the v0.3.0 candidate and the earlier published
+development source; they are absent from the immutable v0.2.0 release. Existing
+public API signatures and analysis contracts are unchanged. See [R setup](setup.md)
+and installed help `?neo_download_resources`.
 
 | Function | Purpose |
 | --- | --- |

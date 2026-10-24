@@ -56,7 +56,7 @@ testthat::test_local(".", reporter = "summary")
 
 ```sh
 R CMD build .
-R CMD check --no-manual Neoantimon2_0.2.0.tar.gz
+R CMD check --no-manual Neoantimon2_0.3.0.tar.gz
 python3 scripts/development/test_public_data_acquisition.py
 ```
 

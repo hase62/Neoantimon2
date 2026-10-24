@@ -1,7 +1,7 @@
 Package: Neoantimon2
 Type: Package
 Title: Neoantigen Reconstruction and Scoped Evidence Analysis
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: person("Takanori", "Hasegawa", role = c("aut", "cre"),
     email = "takanorihasegawa@users.noreply.github.com")
 Description: Reconstructs genomic events, coding sequence origins, altered
