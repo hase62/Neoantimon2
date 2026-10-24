@@ -8,21 +8,19 @@
 R >= 4.1.0 is required. Non-commercial academic and research use is welcome under
 the [PolyForm Noncommercial License 1.0.0](../../LICENSE). See the
 [README licensing policy](../../README.md#license) for commercial licensing
-inquiries. **v0.3.0 is an unpublished local release candidate**; its installation
-is described below. **Neoantimon2 0.2.0 is released** on
-[GitHub](https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0). Install the
-pinned public version:
+inquiries. Install the pinned
+[Neoantimon2 v0.3.0 release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0):
 
 ```r
 install.packages("remotes")
-remotes::install_github("hase62/Neoantimon2@v0.2.0", upgrade = "never")
+remotes::install_github("hase62/Neoantimon2", ref = "v0.3.0", upgrade = "never")
 library(Neoantimon2)
-stopifnot(as.character(packageVersion("Neoantimon2")) == "0.2.0")
+stopifnot(as.character(packageVersion("Neoantimon2")) == "0.3.0")
 ```
 
 The public tag and release-archive installation were verified on macOS arm64
 with R 4.5.1. For a downloaded archive, use
-`R CMD INSTALL --library=/your/test/library Neoantimon2_0.2.0.tar.gz`.
+`R CMD INSTALL --library=/your/test/library Neoantimon2_0.3.0.tar.gz`.
 See the [installation notes](../../README.md#installation) for dependencies
 and platform limitations.
 
@@ -55,17 +53,19 @@ The example leaves objects `cfg`, `p`, `events`, `origins`, `results`,
 fresh temporary directory where it saved inputs and the run. Keep it during the
 session to inspect/reopen; R temporary storage is not durable storage.
 
-## Install the local release candidate
+## Install a source archive
 
-This section applies to the reviewed local v0.3.0 candidate, not a public tag or
-GitHub Release. From the candidate checkout root, build its source archive:
+Download the R source archive and SHA256 manifest from the
+[v0.3.0 release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) and
+verify the checksum before installation. To build it yourself instead, run the
+following from a checkout of the reviewed v0.3.0 source:
 
 ```sh
 R CMD build .
 ```
 
 Install the package Imports listed above first if needed. From the directory
-containing that reviewed archive, install it and verify the installed identity:
+containing that verified archive, install it and verify the installed identity:
 
 ```r
 install.packages("Neoantimon2_0.3.0.tar.gz", repos = NULL, type = "source")
@@ -75,24 +75,25 @@ stopifnot(length(getNamespaceExports("Neoantimon2")) == 16L)
 ```
 
 Restart R before replacing a loaded package. For an isolated installation, choose
-an empty library with `lib = candidate_library`, add it to `.libPaths()`, and
+an empty library with `lib = release_library`, add it to `.libPaths()`, and
 install the Imports there too. The installed Quick Start, cohort examples,
 external example and setup APIs work without the source checkout at runtime.
-Record the archive SHA256 and exact candidate commit. This does not publish it.
+Record the archive SHA256 and exact source commit. The earlier
+[v0.2.0 release](https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0)
+remains available with its original artifacts.
 
 ## Explore the completed run
 
 See the [public API reference](api-reference.md) for the twelve v0.2.0 functions,
-the four additional setup functions in the v0.3.0 candidate, selectors and
+the four additional setup functions in v0.3.0, selectors and
 runnable examples.
 The native workflow requires no
 external converter or Registry connection.
 
 ## Use R-based setup
 
-The v0.3.0 candidate includes resource downloads/checks and predictor
-configuration from R. These functions also exist in the published development
-source, but are absent from the immutable v0.2.0 release. Follow the
+Version 0.3.0 includes resource downloads/checks and predictor configuration
+from R. These functions are absent from the immutable v0.2.0 release. Follow the
 [R setup guide](setup.md), then choose an explicit resource profile and
 destination. Existing analysis configurations continue to work without these
 setup calls.
@@ -104,7 +105,7 @@ Choose original input, reference and output locations, for example
 `/analysis/sample01/runs/`. Absolute paths may be anywhere. Supply your actual
 paths; no Codex directory convention is required.
 
-With the v0.3.0 candidate, [R setup](setup.md) returns reference configuration
+With v0.3.0, [R setup](setup.md) returns reference configuration
 fragments directly and does not require a checkout or YAML template. The
 following existing file-based route remains available in both versions.
 

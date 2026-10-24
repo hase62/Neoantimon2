@@ -1,6 +1,6 @@
 # Inputs and configuration
 
-For the v0.3.0 release candidate, [R-based setup](setup.md) can supply
+In v0.3.0, [R-based setup](setup.md) can supply
 reference configuration fragments directly. The declarations below remain the
 analysis contract, including when resources were obtained by Python or shell.
 

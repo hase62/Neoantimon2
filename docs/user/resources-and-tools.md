@@ -3,12 +3,11 @@
 [README](../../README.md) · [Inputs/configuration](inputs.md) ·
 [Workflows](workflows.md)
 
-## R setup in the v0.3.0 candidate
+## R setup in v0.3.0
 
-The unpublished v0.3.0 candidate includes R-based reference acquisition, resource
-checks and native-predictor configuration. See the [R setup guide](setup.md).
-These APIs also exist in the published development source, but are absent from
-the immutable v0.2.0 release. The standalone Python/shell
+Version 0.3.0 includes R-based reference acquisition, resource checks and
+native-predictor configuration. See the [R setup guide](setup.md). These APIs
+are absent from the immutable v0.2.0 release. The standalone Python/shell
 route below is preserved, and existing analysis configurations remain valid.
 
 ## Public acquisition is separate from R installation

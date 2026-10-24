@@ -3,37 +3,27 @@
 [Resources and tools](resources-and-tools.md) · [Configuration](inputs.md) ·
 [API reference](api-reference.md)
 
-**v0.3.0 release candidate — not yet published.** The candidate includes these
-four R setup functions. They also exist in the published development source,
-but are absent from the immutable v0.2.0 release. No development repository is
-needed at runtime. Existing configurations and `neo_run()` work independently.
+Version 0.3.0 includes these four R setup functions. They are absent from the
+immutable v0.2.0 release. No development repository is needed at runtime.
+Existing configurations and `neo_run()` work independently.
 
-## Install the local release candidate
+## Install v0.3.0
 
-Use the [reviewed local source archive](getting-started.md#install-the-local-release-candidate)
-and verify package version 0.3.0 and all sixteen exports. This is separate from
-the historical public development snapshot below and does not imply a new tag.
-
-## Install the development source
-
-For an existing public alternative, this historical development commit contains
-the four setup APIs. It reports package version 0.2.0, distinct from both the
-immutable release and the local 0.3.0 candidate. Restart R before
-installing if Neoantimon2 or one of its dependencies is already loaded.
+Follow the [pinned release installation](getting-started.md#install-and-run-the-offline-example)
+or install the [verified source archive](getting-started.md#install-a-source-archive).
+Restart R before replacing a loaded package, then verify its identity:
 
 ```r
-install.packages("remotes")
-remotes::install_github("hase62/Neoantimon2",
-  ref = "97c13211b9fb211b6a26439efc7a32a8941dadb0", upgrade = "never")
 library(Neoantimon2)
+stopifnot(as.character(packageVersion("Neoantimon2")) == "0.3.0")
 stopifnot(all(c("neo_download_resources", "neo_check_resources",
   "neo_check_predictors", "neo_setup_predictor") %in%
   getNamespaceExports("Neoantimon2")))
 ```
 
-This historical development snapshot reports 0.2.0; package version alone cannot
-distinguish it from the immutable release. Record its source commit. The local
-release candidate instead reports 0.3.0. No new tag is implied by either recipe.
+Earlier development snapshots exposed the setup APIs while reporting version
+0.2.0. Record the source commit when reproducing those historical runs; the
+immutable v0.2.0 release itself does not contain these APIs.
 
 ## Inspect resources before downloading
 

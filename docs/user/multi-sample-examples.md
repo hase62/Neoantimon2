@@ -11,7 +11,7 @@ sample columns is rejected; this guide does not add support for it.
 
 ## Run the examples
 
-Install the [public v0.2.0 package](getting-started.md#install-and-run-the-offline-example).
+Install the [public v0.3.0 package](getting-started.md#install-and-run-the-offline-example).
 Then execute the shared setup below followed by any scenario. Each scenario is
 complete after that setup and can run independently of the other scenarios.
 All R code blocks on this page, in order, are also available in

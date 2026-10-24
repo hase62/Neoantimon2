@@ -5,10 +5,9 @@
 The eight native functions below remain exported. Four additional external
 prediction APIs are also exported and listed separately below; optional
 workflows use their supported configuration and evidence inputs.
-The v0.3.0 candidate exports all sixteen interfaces below. Its four
-[R setup APIs](#r-setup-apis) also exist in the published development source,
-but are absent from the immutable v0.2.0 release. The candidate is not yet a
-published release; existing signatures and scientific contracts remain intact.
+Version 0.3.0 exports all sixteen interfaces below. Its four
+[R setup APIs](#r-setup-apis) are absent from the immutable v0.2.0 release.
+Existing signatures and scientific contracts remain intact.
 
 | Function | Main arguments and purpose | Return / side effects |
 | --- | --- | --- |
@@ -53,8 +52,8 @@ multi-sample summary is empty. This does not mean a measured absence.
 
 ## R setup APIs
 
-These functions are included in the v0.3.0 candidate and the earlier published
-development source; they are absent from the immutable v0.2.0 release. Existing
+These functions are included in v0.3.0 and are absent from the immutable
+v0.2.0 release. Existing
 public API signatures and analysis contracts are unchanged. See [R setup](setup.md)
 and installed help `?neo_download_resources`.
 

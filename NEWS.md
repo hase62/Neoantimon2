@@ -1,4 +1,4 @@
-# Neoantimon2 0.3.0 (unreleased release candidate)
+# Neoantimon2 0.3.0
 
 * Make the README easier to navigate and add four complete, offline examples
   covering multiple patients and separately declared sample VCFs.
@@ -19,8 +19,7 @@
   and other platforms remain unvalidated. Research outputs do not establish
   clinical immunogenicity, treatment efficacy or clinical risk.
 
-This candidate is local pending owner approval; no v0.3.0 tag or GitHub Release
-has been created. The immutable v0.2.0 release and assets are unchanged.
+Release date: 2026-10-24. The immutable v0.2.0 release and assets are unchanged.
 
 # Neoantimon2 0.2.0
 

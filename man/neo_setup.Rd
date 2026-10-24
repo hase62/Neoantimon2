@@ -55,9 +55,8 @@ software is not downloaded or installed.}
 environment, for example an appropriate TensorFlow distribution for older releases.}
 }
 \description{Opt-in setup convenience. Existing configurations and analyses do
-not require these functions. These interfaces are included in the unpublished
-0.3.0 release candidate and were available in earlier development source; they
-are absent from the immutable v0.2.0 release.}
+not require these functions. These interfaces are included in version 0.3.0
+and are absent from the immutable v0.2.0 release.}
 \details{
 Minimum selects genome, GENCODE and MANE. R downloads the selected public
 resources, streams decompression and uses samtools when a genome FAI must be
