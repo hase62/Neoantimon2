@@ -28,7 +28,9 @@ candidate.
 
 Solid arrows show implemented processing or data flow. Dashed arrows show
 optional evidence, configured predictors, or the conditional export from a
-completed project. The reference arrow supplies the reconstruction pipeline;
+completed project boundary. Native prediction scores and somatic grades are not
+prerequisites for export: runs with `NOT_RUN` / `NOT_GRADED` can still provide
+a verified bundle. The reference arrow supplies the reconstruction pipeline;
 it is not a separate variant caller. Boxes and lettered lane titles distinguish
 the routes without relying on color.
 
@@ -86,7 +88,9 @@ The three gray boxes show separate capabilities, not automatic branches from
 external results:
 
 - **Longitudinal analysis** requires explicitly related contexts, settings and
-  completed sample runs. It preserves sample-specific native grades/ranks and
+  sample graphs from the current project or explicitly associated completed
+  sample runs. Informal timepoint labels alone do not activate it. It preserves
+  sample-specific native grades/ranks and
   distinguishes missing observations from supported absence. Ordinary cohort
   input is not a longitudinal analysis.
 - **Vaccine-set selection** uses native candidate/evidence projections and an

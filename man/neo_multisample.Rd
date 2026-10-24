@@ -10,7 +10,9 @@
 \description{Returns multi-sample summaries or configured longitudinal trajectories
 with scoped evidence and evaluability.}
 \details{Versioned settings declare subjects, contexts, relations, comparable
-time and completed sample runs. Missing observations are not negative assays.
+time and sample graphs from the current project or explicitly bound completed
+sample runs. Informal timepoint labels alone do not activate this workflow.
+Missing observations are not negative assays.
 Gain/loss requires chronology and supported absence. Imported provider prevalence
 is separate from event CCF; no de novo clustering, universal trajectory score or
 patient ranking is computed. Somatic priority/grade/rank are preserved.

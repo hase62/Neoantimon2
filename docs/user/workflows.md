@@ -74,7 +74,12 @@ Contexts may declare one time axis: ISO date/UTC `collection_time`, numeric
 explicit times establish order; absent/incompatible time stays unordered.
 Neither a filename nor row order asserts chronology.
 
-An aggregate project binds a completed sample run for **every** context. These
+Without `sample_runs`, the overlay uses sample graphs within the current
+completed project. Explicit longitudinal settings still declare the contexts and
+relationships; informal timepoint labels alone do not activate this workflow.
+
+When `sample_runs` is supplied, an aggregate project binds a completed sample run
+for **every** context. These
 are explicit reproducible inputs, with individual graphs retained; regenerate
 them from their original recipes if necessary. They are not accidental historic
 development dependencies. `neo_results()` adds contextual evidence while keeping
