@@ -152,3 +152,11 @@ input/resource integrity and safe paths. Retained intact output can be reused;
 corrupt or changed output is not silently accepted. Run directories can remain
 on disk for convenience. If a run was deleted, create a new project from the
 original inputs and recipe. See [troubleshooting](troubleshooting.md) for recovery.
+
+## Agent-assisted analysis
+
+Codex reads [AGENTS.md](../../AGENTS.md); Claude Code reads
+[CLAUDE.md](../../CLAUDE.md). Both follow the same
+[analysis playbook](../ai/ANALYSIS_PLAYBOOK.md), including an offline demonstration,
+validated sample/patient/HLA declarations and explanation-only inspection.
+The YAML manifest is an agent declaration, not a new package input format.

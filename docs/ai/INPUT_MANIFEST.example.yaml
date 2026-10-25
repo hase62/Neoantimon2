@@ -1,0 +1,25 @@
+# AI workflow declaration, NOT a neo_project() YAML input or a new package API.
+# Replace all placeholder paths with reviewed absolute paths. No predictor runs.
+workflow_declaration: neoantimon2-agent-v1
+mode: somatic
+reference_assembly: GRCh38.p14
+resource_config: /path/to/validated-reference-config.yaml
+run_directory: /path/to/new-analysis-session
+samples:
+  - sample_id: S1
+    patient_id: P1
+    vcf: /path/to/S1.vcf
+  - sample_id: S2
+    patient_id: P1
+    vcf: /path/to/S2.vcf
+  - sample_id: S3
+    patient_id: P2
+    vcf: /path/to/S3.vcf
+hla:
+  P1: ["HLA-A*02:01", "HLA-B*07:02"]
+  P2: ["HLA-A*02:01", "HLA-DRA*01:01~HLA-DRB1*15:01"]
+prediction_providers: [] # must agree with the existing config's predictor requests
+optional_evidence: [] # e.g. {kind: rna_expression, path: /path/to/RNA.tsv}; review input contract
+external_predictions: [] # e.g. {path: /path/to/predictions.tsv, converter_id: bigmhc-im@1.0.0}
+# Nonempty evidence/external records require the dedicated playbook workflow;
+# the conservative somatic helper refuses them instead of silently dropping them.

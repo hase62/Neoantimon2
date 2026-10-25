@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="workflow" name="Neoantimon2 — input and output examples">
+    <mxGraphModel grid="1" gridSize="8" page="1" pageScale="1" pageWidth="1200" pageHeight="840" figureTitle="Neoantimon2 — input and output examples" figureDescription="Independent illustrative snippets for declarations, VCF, HLA, explicit reference resources, optional observations, normalized events, origin provenance, peptide-HLA candidates, prediction states, separate external metrics and explanation links. No biological case or predictor execution is asserted.">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" vertex="1" value="Neoantimon2 — input and output examples" style="shape=text;html=0;align=left;fontSize=30;fontStyle=1;fontColor=#233746;spacing=0;">
+          <mxGeometry x="24" y="12" width="1152" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" vertex="1" value="Independent illustrative snippets • Not a single reconstructed case or actual predictor output" style="shape=text;html=0;align=left;fontSize=20;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="24" y="58" width="1152" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="in-title" parent="1" vertex="1" value="WHAT YOU PROVIDE" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#176487;spacing=0;">
+          <mxGeometry x="24" y="98" width="552" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="out-title" parent="1" vertex="1" value="WHAT YOU INSPECT" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#a34a09;spacing=0;">
+          <mxGeometry x="624" y="98" width="552" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="identity" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#f3f8fb;strokeColor=#176487;strokeWidth=1.5;">
+          <mxGeometry x="24" y="136" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="identity-title" parent="1" vertex="1" value="Patients, samples and VCF" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#176487;spacing=0;">
+          <mxGeometry x="38" y="148" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="identity-body" parent="1" vertex="1" value="P1 → S1, S2; P2 → S3 (explicit mappings)&#10;VCF columns: CHROM POS REF ALT FORMAT S1&#10;Example row: chr1 4 G A GT 0/1&#10;Each VCF has exactly one sample column." style="shape=text;html=0;align=left;fontSize=18;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="38" y="184" width="524" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="origins" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#fff8f1;strokeColor=#a34a09;strokeWidth=1.5;">
+          <mxGeometry x="624" y="136" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="origins-title" parent="1" vertex="1" value="Events and origins" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#a34a09;spacing=0;">
+          <mxGeometry x="638" y="148" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="origins-body" parent="1" vertex="1" value="Event: normalized chr1:4 G&gt;A&#10;Origin: transcript TA.1 + translation path&#10;Origins retain contributing event links.&#10;One event can participate in several paths." style="shape=text;html=0;align=left;fontSize=17.5;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="638" y="184" width="524" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="hla" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#f3f8fb;strokeColor=#176487;strokeWidth=1.5;">
+          <mxGeometry x="24" y="293" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="hla-title" parent="1" vertex="1" value="Patient-level HLA declarations" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#176487;spacing=0;">
+          <mxGeometry x="38" y="305" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="hla-body" parent="1" vertex="1" value="P1: HLA-A*02:01 / HLA-B*07:02&#10;Class II presenter requires both chains:&#10;HLA-DRA*01:01~HLA-DRB1*15:01&#10;User supplied; no automatic HLA typing." style="shape=text;html=0;align=left;fontSize=18;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="38" y="341" width="524" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="candidate" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#fff8f1;strokeColor=#a34a09;strokeWidth=1.5;">
+          <mxGeometry x="624" y="293" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="candidate-title" parent="1" vertex="1" value="Peptide and presenter" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#a34a09;spacing=0;">
+          <mxGeometry x="638" y="305" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="candidate-body" parent="1" vertex="1" value="Peptide: SIINFEKLA (illustrative sequence)&#10;Candidate: SIINFEKLA + HLA-A*02:01&#10;Distinct origins may share this peptide.&#10;Keep every origin and each sample occurrence." style="shape=text;html=0;align=left;fontSize=17.5;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="638" y="341" width="524" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="refs" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#f3f8fb;strokeColor=#176487;strokeWidth=1.5;">
+          <mxGeometry x="24" y="450" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="refs-title" parent="1" vertex="1" value="Versioned reference resources" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#176487;spacing=0;">
+          <mxGeometry x="38" y="462" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="refs-body" parent="1" vertex="1" value="GRCh38.p14 genome + matching FAI&#10;GENCODE 50 transcript / protein catalogs&#10;MANE Select 1.5 summary / GTF&#10;Explicit compatible files, not patient attributes." style="shape=text;html=0;align=left;fontSize=18;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="38" y="498" width="524" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="pred" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#fff8f1;strokeColor=#a34a09;strokeWidth=1.5;">
+          <mxGeometry x="624" y="450" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="pred-title" parent="1" vertex="1" value="Prediction examples — separate channels" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#a34a09;spacing=0;">
+          <mxGeometry x="638" y="462" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="pred-body" parent="1" vertex="1" value="Native: NOT_RUN when no provider ran&#10;BA: affinity_nM = 50 (nM; lower is better)&#10;EL: presentation_percentile = 0.8 (percent; lower)&#10;IM: score = 0.7 (unitless; higher)" style="shape=text;html=0;align=left;fontSize=17.5;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="638" y="498" width="524" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#f3f8fb;strokeColor=#176487;strokeWidth=1.5;">
+          <mxGeometry x="24" y="607" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence-title" parent="1" vertex="1" value="Optional supporting observations" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#176487;spacing=0;">
+          <mxGeometry x="38" y="619" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="evidence-body" parent="1" vertex="1" value="RNA read / expression evidence&#10;Cancer-cell fraction (CCF) / clonality inputs&#10;Mass-spectrometry (MS) observations&#10;Missing evidence is not a measured negative." style="shape=text;html=0;align=left;fontSize=18;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="38" y="655" width="524" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="result" parent="1" vertex="1" value="" style="shape=rectangle;rounded=1;fillColor=#fff8f1;strokeColor=#a34a09;strokeWidth=1.5;">
+          <mxGeometry x="624" y="607" width="552" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="result-title" parent="1" vertex="1" value="Results and explanations" style="shape=text;html=0;align=left;fontSize=22;fontStyle=1;fontColor=#a34a09;spacing=0;">
+          <mxGeometry x="638" y="619" width="524" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="result-body" parent="1" vertex="1" value="Native rank / somatic grade only where eligible&#10;NOT_GRADED is not grade E.&#10;External ranks are independent derived views.&#10;Explain: candidate → all origins → all events." style="shape=text;html=0;align=left;fontSize=17.5;fontStyle=0;fontColor=#233746;spacing=0;">
+          <mxGeometry x="638" y="655" width="524" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" parent="1" vertex="1" value="Cohort examples: P1/S1 · P1/{S1,S2} · P1/{S1,S2} + P2/S3 — see the executable cohort guide." style="shape=text;html=0;align=left;fontSize=18;fontStyle=0;fontColor=#52616d;spacing=0;">
+          <mxGeometry x="24" y="778" width="1152" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="clinical" parent="1" vertex="1" value="Synthetic scores demonstrate formats, not biological or clinical performance." style="shape=text;html=0;align=left;fontSize=19;fontStyle=1;fontColor=#52616d;spacing=0;">
+          <mxGeometry x="24" y="809" width="1152" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

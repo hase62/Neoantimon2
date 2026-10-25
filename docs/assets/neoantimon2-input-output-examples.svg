@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840" role="img" aria-labelledby="figure-title figure-description">
+  <title id="figure-title">Neoantimon2 — input and output examples</title>
+  <desc id="figure-description">Independent illustrative snippets for declarations, VCF, HLA, explicit reference resources, optional observations, normalized events, origin provenance, peptide-HLA candidates, prediction states, separate external metrics and explanation links. No biological case or predictor execution is asserted.</desc>
+  <defs>
+    <marker id="arrow-native" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4.5 L 0 9 Z" fill="#176487" />
+    </marker>
+    <marker id="arrow-external" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4.5 L 0 9 Z" fill="#a34a09" />
+    </marker>
+    <marker id="arrow-optional" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4.5 L 0 9 Z" fill="#52616d" />
+    </marker>
+  </defs>
+  <rect width="1200" height="840" fill="#ffffff" />
+  <g id="title">
+    <text x="24" y="40.2" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="30" text-anchor="start" data-box="24 12 1152 40" font-weight="700">
+      <tspan x="24" y="40.2">Neoantimon2 — input and output examples</tspan>
+    </text>
+  </g>
+  <g id="subtitle">
+    <text x="24" y="76.8" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="start" data-box="24 58 1152 28">
+      <tspan x="24" y="76.8">Independent illustrative snippets • Not a single reconstructed case or actual predictor output</tspan>
+    </text>
+  </g>
+  <g id="in-title">
+    <text x="24" y="118.68" fill="#176487" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="24 98 552 28" font-weight="700">
+      <tspan x="24" y="118.68">WHAT YOU PROVIDE</tspan>
+    </text>
+  </g>
+  <g id="out-title">
+    <text x="624" y="118.68" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="624 98 552 28" font-weight="700">
+      <tspan x="624" y="118.68">WHAT YOU INSPECT</tspan>
+    </text>
+  </g>
+  <g id="identity">
+    <rect x="24" y="136" width="552" height="141" fill="#f3f8fb" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="identity-title">
+    <text x="38" y="168.68" fill="#176487" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="38 148 524 56" font-weight="700">
+      <tspan x="38" y="168.68">Patients, samples and VCF</tspan>
+    </text>
+  </g>
+  <g id="identity-body">
+    <text x="38" y="200.92" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="38 184 524 88">
+      <tspan x="38" y="200.92">P1 → S1, S2; P2 → S3 (explicit mappings)</tspan>
+      <tspan x="38" y="222.52">VCF columns: CHROM POS REF ALT FORMAT S1</tspan>
+      <tspan x="38" y="244.12">Example row: chr1 4 G A GT 0/1</tspan>
+      <tspan x="38" y="265.72">Each VCF has exactly one sample column.</tspan>
+    </text>
+  </g>
+  <g id="origins">
+    <rect x="624" y="136" width="552" height="141" fill="#fff8f1" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="origins-title">
+    <text x="638" y="168.68" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="638 148 524 56" font-weight="700">
+      <tspan x="638" y="168.68">Events and origins</tspan>
+    </text>
+  </g>
+  <g id="origins-body">
+    <text x="638" y="200.45" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="17.5" text-anchor="start" data-box="638 184 524 84">
+      <tspan x="638" y="200.45">Event: normalized chr1:4 G&gt;A</tspan>
+      <tspan x="638" y="221.45">Origin: transcript TA.1 + translation path</tspan>
+      <tspan x="638" y="242.45">Origins retain contributing event links.</tspan>
+      <tspan x="638" y="263.45">One event can participate in several paths.</tspan>
+    </text>
+  </g>
+  <g id="hla">
+    <rect x="24" y="293" width="552" height="141" fill="#f3f8fb" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="hla-title">
+    <text x="38" y="325.68" fill="#176487" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="38 305 524 56" font-weight="700">
+      <tspan x="38" y="325.68">Patient-level HLA declarations</tspan>
+    </text>
+  </g>
+  <g id="hla-body">
+    <text x="38" y="357.92" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="38 341 524 88">
+      <tspan x="38" y="357.92">P1: HLA-A*02:01 / HLA-B*07:02</tspan>
+      <tspan x="38" y="379.52">Class II presenter requires both chains:</tspan>
+      <tspan x="38" y="401.12">HLA-DRA*01:01~HLA-DRB1*15:01</tspan>
+      <tspan x="38" y="422.72">User supplied; no automatic HLA typing.</tspan>
+    </text>
+  </g>
+  <g id="candidate">
+    <rect x="624" y="293" width="552" height="141" fill="#fff8f1" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="candidate-title">
+    <text x="638" y="325.68" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="638 305 524 56" font-weight="700">
+      <tspan x="638" y="325.68">Peptide and presenter</tspan>
+    </text>
+  </g>
+  <g id="candidate-body">
+    <text x="638" y="357.45" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="17.5" text-anchor="start" data-box="638 341 524 84">
+      <tspan x="638" y="357.45">Peptide: SIINFEKLA (illustrative sequence)</tspan>
+      <tspan x="638" y="378.45">Candidate: SIINFEKLA + HLA-A*02:01</tspan>
+      <tspan x="638" y="399.45">Distinct origins may share this peptide.</tspan>
+      <tspan x="638" y="420.45">Keep every origin and each sample occurrence.</tspan>
+    </text>
+  </g>
+  <g id="refs">
+    <rect x="24" y="450" width="552" height="141" fill="#f3f8fb" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="refs-title">
+    <text x="38" y="482.68" fill="#176487" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="38 462 524 56" font-weight="700">
+      <tspan x="38" y="482.68">Versioned reference resources</tspan>
+    </text>
+  </g>
+  <g id="refs-body">
+    <text x="38" y="514.92" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="38 498 524 88">
+      <tspan x="38" y="514.92">GRCh38.p14 genome + matching FAI</tspan>
+      <tspan x="38" y="536.52">GENCODE 50 transcript / protein catalogs</tspan>
+      <tspan x="38" y="558.12">MANE Select 1.5 summary / GTF</tspan>
+      <tspan x="38" y="579.72">Explicit compatible files, not patient attributes.</tspan>
+    </text>
+  </g>
+  <g id="pred">
+    <rect x="624" y="450" width="552" height="141" fill="#fff8f1" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="pred-title">
+    <text x="638" y="482.68" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="638 462 524 56" font-weight="700">
+      <tspan x="638" y="482.68">Prediction examples — separate channels</tspan>
+    </text>
+  </g>
+  <g id="pred-body">
+    <text x="638" y="514.45" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="17.5" text-anchor="start" data-box="638 498 524 84">
+      <tspan x="638" y="514.45">Native: NOT_RUN when no provider ran</tspan>
+      <tspan x="638" y="535.45">BA: affinity_nM = 50 (nM; lower is better)</tspan>
+      <tspan x="638" y="556.45">EL: presentation_percentile = 0.8 (percent; lower)</tspan>
+      <tspan x="638" y="577.45">IM: score = 0.7 (unitless; higher)</tspan>
+    </text>
+  </g>
+  <g id="evidence">
+    <rect x="24" y="607" width="552" height="141" fill="#f3f8fb" stroke="#176487" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="evidence-title">
+    <text x="38" y="639.68" fill="#176487" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="38 619 524 56" font-weight="700">
+      <tspan x="38" y="639.68">Optional supporting observations</tspan>
+    </text>
+  </g>
+  <g id="evidence-body">
+    <text x="38" y="671.92" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="38 655 524 88">
+      <tspan x="38" y="671.92">RNA read / expression evidence</tspan>
+      <tspan x="38" y="693.52">Cancer-cell fraction (CCF) / clonality inputs</tspan>
+      <tspan x="38" y="715.12">Mass-spectrometry (MS) observations</tspan>
+      <tspan x="38" y="736.72">Missing evidence is not a measured negative.</tspan>
+    </text>
+  </g>
+  <g id="result">
+    <rect x="624" y="607" width="552" height="141" fill="#fff8f1" stroke="#a34a09" stroke-width="1.5" rx="10" ry="10" />
+  </g>
+  <g id="result-title">
+    <text x="638" y="639.68" fill="#a34a09" font-family="Arial, Helvetica, sans-serif" font-size="22" text-anchor="start" data-box="638 619 524 56" font-weight="700">
+      <tspan x="638" y="639.68">Results and explanations</tspan>
+    </text>
+  </g>
+  <g id="result-body">
+    <text x="638" y="671.45" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="17.5" text-anchor="start" data-box="638 655 524 84">
+      <tspan x="638" y="671.45">Native rank / somatic grade only where eligible</tspan>
+      <tspan x="638" y="692.45">NOT_GRADED is not grade E.</tspan>
+      <tspan x="638" y="713.45">External ranks are independent derived views.</tspan>
+      <tspan x="638" y="734.45">Explain: candidate → all origins → all events.</tspan>
+    </text>
+  </g>
+  <g id="footer">
+    <text x="24" y="794.92" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="start" data-box="24 778 1152 25">
+      <tspan x="24" y="794.92">Cohort examples: P1/S1 · P1/{S1,S2} · P1/{S1,S2} + P2/S3 — see the executable cohort guide.</tspan>
+    </text>
+  </g>
+  <g id="clinical">
+    <text x="24" y="826.86" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="19" text-anchor="start" data-box="24 809 1152 25" font-weight="700">
+      <tspan x="24" y="826.86">Synthetic scores demonstrate formats, not biological or clinical performance.</tspan>
+    </text>
+  </g>
+</svg>

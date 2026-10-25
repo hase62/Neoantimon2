@@ -33,3 +33,5 @@
 ^id_(rsa|ed25519)$
 ^[.]DS_Store$
 ^CONTRIBUTING[.]md$
+
+^CLAUDE[.]md$

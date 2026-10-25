@@ -10,6 +10,12 @@
 [Vector PDF](../assets/neoantimon2-overview.pdf) ·
 [Editable diagrams.net source](../assets/source/neoantimon2-overview.drawio)
 
+The main figure now includes compact **illustrative** values. See the
+[Input and Output Examples](input-output-examples.md) for full presenter pairs,
+VCF/declaration snippets and separate BA/EL/IM channels. These independent
+snippets do not claim that one displayed variant produces the displayed peptide.
+Executable declarations remain in the [cohort guide](multi-sample-examples.md).
+
 ## Read the figure
 
 Read the blue **A — Native** row from left to right. Samples are explicitly
