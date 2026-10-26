@@ -35,8 +35,8 @@ def render(source,destination):
         return x,y,float(g.get('width','0')),float(g.get('height','0'))
     ET.register_namespace('',SVG)
     svg=ET.Element('{%s}svg'%SVG,dict(width=f'{width:g}',height=f'{height:g}',viewBox=f'0 0 {width:g} {height:g}',role='img',**{'aria-labelledby':'figure-title figure-description'}))
-    ET.SubElement(svg,'title',id='figure-title').text='Neoantimon2: variants to traceable peptide–HLA candidates'
-    ET.SubElement(svg,'desc',id='figure-description').text=('User-declared samples, patients and HLA plus explicit references support variant events, multiple sequence and translation paths, shared peptide sequences and peptide–HLA candidates. Separately acquired references and predictors are not bundled. Optional configured local prediction and supplied observations support native prioritization and explanations. Longitudinal sample graphs can belong to the current project or explicitly bound completed runs, with explicit settings. A completed project can export queries and all origins without native prediction scores or grades for a separately run external model, optional conversion, strict matching and an independent derived analysis. Native results are preserved. Longitudinal, vaccine-set and restricted indirect-HLA/allo views have separate opt-in requirements. Missing evidence is neither zero nor an evaluated negative. Research outputs do not establish clinical validation.')
+    ET.SubElement(svg,'title',id='figure-title').text=model.get('figureTitle','Neoantimon2: variants to traceable peptide–HLA candidates')
+    ET.SubElement(svg,'desc',id='figure-description').text=model.get('figureDescription',('User-declared samples, patients and HLA plus explicit references support variant events, multiple sequence and translation paths, shared peptide sequences and peptide–HLA candidates. Separately acquired references and predictors are not bundled. Optional configured local prediction and supplied observations support native prioritization and explanations. Longitudinal sample graphs can belong to the current project or explicitly bound completed runs, with explicit settings. A completed project can export queries and all origins without native prediction scores or grades for a separately run external model, optional conversion, strict matching and an independent derived analysis. Native results are preserved. Longitudinal, vaccine-set and restricted indirect-HLA/allo views have separate opt-in requirements. Missing evidence is neither zero nor an evaluated negative. Research outputs do not establish clinical validation.'))
     defs=ET.SubElement(svg,'defs')
     for color,name in [('#176487','native'),('#a34a09','external'),('#52616d','optional')]:
         m=ET.SubElement(defs,'marker',id='arrow-'+name,markerWidth='9',markerHeight='9',refX='8',refY='4.5',orient='auto',markerUnits='userSpaceOnUse')
@@ -104,7 +104,8 @@ def browser_exports(svg_path, png, pdf, browser, work_dir):
       p.textContent=JSON.stringify({issues,textElements:document.querySelectorAll('text').length});
       document.body.append(p);};</script>"""
     page = work_dir / 'figure.html'
-    page.write_text('<!doctype html><meta charset="utf-8"><title>Neoantimon2 workflow overview</title><style>@page{size:'+
+    figure_title = ET.parse(svg_path).getroot().find('{'+SVG+'}title').text
+    page.write_text('<!doctype html><meta charset="utf-8"><title>'+html.escape(figure_title)+'</title><style>@page{size:'+
       f'{width:g}px {height:g}px'+
       ';margin:0}html,body{margin:0;background:white}svg{display:block;width:100%;height:auto}pre{display:none}</style>'+
       svg+metrics_script, encoding='utf-8')

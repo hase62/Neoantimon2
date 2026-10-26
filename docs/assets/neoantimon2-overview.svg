@@ -71,8 +71,8 @@
     </text>
   </g>
   <g id="subtitle">
-    <text x="24" y="66.8" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="start" data-box="24 48 1152 26">
-      <tspan x="24" y="66.8">Native analysis and a separate External route; references and predictors are obtained separately</tspan>
+    <text x="24" y="65.39" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18.5" text-anchor="start" data-box="24 48 1152 26">
+      <tspan x="24" y="65.39">Native and independent External routes • Examples illustrative; references and predictors obtained separately</tspan>
     </text>
   </g>
   <g id="input-samples-box">
@@ -84,9 +84,9 @@
     </text>
   </g>
   <g id="input-samples-body">
-    <text x="150" y="141.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="36 124.4 228 43.2">
-      <tspan x="150" y="141.32">Explicit identity mapping</tspan>
-      <tspan x="150" y="162.92">Per-sample VCF inputs</tspan>
+    <text x="150" y="139.44" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" data-box="36 124.4 228 43.2">
+      <tspan x="150" y="139.44">P1 → S1, S2</tspan>
+      <tspan x="150" y="158.64">One sample column / VCF</tspan>
     </text>
   </g>
   <g id="input-references-box">
@@ -98,9 +98,9 @@
     </text>
   </g>
   <g id="input-references-body">
-    <text x="411" y="141.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="304 124.4 214 43.2">
-      <tspan x="411" y="141.32">Genome + annotation</tspan>
-      <tspan x="411" y="162.92">Transcript / protein</tspan>
+    <text x="411" y="138.03" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="14.5" text-anchor="middle" data-box="304 124.4 214 43.2">
+      <tspan x="411" y="138.03">GRCh38.p14 · GENCODE 50</tspan>
+      <tspan x="411" y="155.43">MANE Select 1.5</tspan>
     </text>
   </g>
   <g id="input-hla-box">
@@ -112,9 +112,9 @@
     </text>
   </g>
   <g id="input-hla-body">
-    <text x="665" y="141.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="558 124.4 214 43.2">
-      <tspan x="665" y="141.32">User supplied</tspan>
-      <tspan x="665" y="162.92">Applied to each sample</tspan>
+    <text x="665" y="137.372" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="13.8" text-anchor="middle" data-box="558 124.4 214 43.2">
+      <tspan x="665" y="137.372">HLA-A*02:01 / HLA-B*07:02</tspan>
+      <tspan x="665" y="153.932">Declared once per patient</tspan>
     </text>
   </g>
   <g id="native-tools-box">
@@ -135,9 +135,9 @@
     <rect x="992" y="180" width="184" height="48" fill="#f4f6f8" stroke="#8a98a4" stroke-width="1.5" rx="10" ry="10" stroke-dasharray="7 5" />
   </g>
   <g id="observations-label">
-    <text x="1084" y="197.92" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="1000 181 168 44">
-      <tspan x="1084" y="197.92">Optional evidence</tspan>
-      <tspan x="1084" y="219.52">RNA / DNA / MS</tspan>
+    <text x="1084" y="196.04" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" data-box="1000 181 168 44">
+      <tspan x="1084" y="196.04">Optional observations</tspan>
+      <tspan x="1084" y="215.24">RNA / CCF / MS</tspan>
     </text>
   </g>
   <g id="native-tab">
@@ -158,9 +158,9 @@
     </text>
   </g>
   <g id="events-body">
-    <text x="108" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="36 312.8 144 43.2">
-      <tspan x="108" y="329.72">Normalize</tspan>
-      <tspan x="108" y="351.32">REF / ALT</tspan>
+    <text x="108" y="327.84" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" data-box="36 312.8 144 43.2">
+      <tspan x="108" y="327.84">chr1:4 G&gt;A</tspan>
+      <tspan x="108" y="347.04">Normalized variant</tspan>
     </text>
   </g>
   <g id="origins-box">
@@ -173,9 +173,9 @@
     </text>
   </g>
   <g id="origins-body">
-    <text x="300" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="228 312.8 144 43.2">
-      <tspan x="300" y="329.72">Multiple paths</tspan>
-      <tspan x="300" y="351.32">per event</tspan>
+    <text x="300" y="327.84" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" data-box="228 312.8 144 43.2">
+      <tspan x="300" y="327.84">Transcript TA.1</tspan>
+      <tspan x="300" y="347.04">Translation path</tspan>
     </text>
   </g>
   <g id="peptides-box">
@@ -188,9 +188,9 @@
     </text>
   </g>
   <g id="peptides-body">
-    <text x="492" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="420 312.8 144 43.2">
-      <tspan x="492" y="329.72">Shared peptides</tspan>
-      <tspan x="492" y="351.32">Origins retained</tspan>
+    <text x="492" y="327.37" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="15.5" text-anchor="middle" data-box="420 312.8 144 43.2">
+      <tspan x="492" y="327.37">SIINFEKLA</tspan>
+      <tspan x="492" y="345.97">All origins retained</tspan>
     </text>
   </g>
   <g id="candidates-box">
@@ -203,9 +203,9 @@
     </text>
   </g>
   <g id="candidates-body">
-    <text x="684" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="612 312.8 144 43.2">
-      <tspan x="684" y="329.72">Sample + patient</tspan>
-      <tspan x="684" y="351.32">and presenter</tspan>
+    <text x="684" y="327.84" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" data-box="612 312.8 144 43.2">
+      <tspan x="684" y="327.84">SIINFEKLA +</tspan>
+      <tspan x="684" y="347.04">HLA-A*02:01</tspan>
     </text>
   </g>
   <g id="native-evidence-box">
@@ -218,9 +218,9 @@
     </text>
   </g>
   <g id="native-evidence-body">
-    <text x="876" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="804 312.8 144 43.2">
-      <tspan x="876" y="329.72">Local predictors</tspan>
-      <tspan x="876" y="351.32">Observations</tspan>
+    <text x="876" y="326.9" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" data-box="804 312.8 144 43.2">
+      <tspan x="876" y="326.9">e.g. NOT_RUN</tspan>
+      <tspan x="876" y="344.9">No score ≠ negative</tspan>
     </text>
   </g>
   <g id="native-results-box">
@@ -233,9 +233,9 @@
     </text>
   </g>
   <g id="native-results-body">
-    <text x="1080" y="329.72" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="996 312.8 168 43.2">
-      <tspan x="1080" y="329.72">Rank / eligible grade</tspan>
-      <tspan x="1080" y="351.32">Traceable results</tspan>
+    <text x="1080" y="327.37" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="15.5" text-anchor="middle" data-box="996 312.8 168 43.2">
+      <tspan x="1080" y="327.37">Rank / eligible grade</tspan>
+      <tspan x="1080" y="345.97">Candidate → origins</tspan>
     </text>
   </g>
   <g id="origin-retention">
@@ -288,9 +288,9 @@
     </text>
   </g>
   <g id="standard-format-body">
-    <text x="600" y="565.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="508 548.4 184 43.2">
-      <tspan x="600" y="565.32">Direct standard TSV</tspan>
-      <tspan x="600" y="586.92">or explicit converter</tspan>
+    <text x="600" y="562.5" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" data-box="508 548.4 184 43.2">
+      <tspan x="600" y="562.5">BA nM / EL rank / IM</tspan>
+      <tspan x="600" y="580.5">Separate metric identity</tspan>
     </text>
   </g>
   <g id="strict-import-box">
@@ -318,9 +318,9 @@
     </text>
   </g>
   <g id="external-results-body">
-    <text x="1072" y="565.32" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" data-box="980 548.4 184 43.2">
-      <tspan x="1072" y="565.32">Derived analysis</tspan>
-      <tspan x="1072" y="586.92">Native unchanged</tspan>
+    <text x="1072" y="563.44" fill="#233746" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" data-box="980 548.4 184 43.2">
+      <tspan x="1072" y="563.44">Independent ranks</tspan>
+      <tspan x="1072" y="582.64">Origins + event trace</tspan>
     </text>
   </g>
   <g id="completed-project-context">

@@ -34,7 +34,13 @@ results and explanations remain separate from native results.
 
 [Figure guide and accessible description](docs/user/workflow-overview.md) ·
 [Full-size SVG](docs/assets/neoantimon2-overview.svg) ·
-[PNG / PDF / editable source](docs/user/workflow-overview.md#maintain-or-reuse-the-figure)
+[PNG / PDF / editable source](docs/user/workflow-overview.md#maintain-or-reuse-the-figure) ·
+[Concrete input/output examples](docs/user/input-output-examples.md)
+
+For Codex or Claude Code, start with [agent instructions](docs/ai/AI_INSTRUCTIONS.md)
+and the [shared analysis playbook](docs/ai/ANALYSIS_PLAYBOOK.md). These repository
+guides use the released v0.3.0 APIs; they do not replace required inputs or
+authorization.
 
 ## Installation
 
