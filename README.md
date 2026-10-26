@@ -1,210 +1,234 @@
 # Neoantimon2
 
-Neoantimon2 is an R package for reconstructing **neoantigen candidates** from
-supported genomic inputs and interpreting them with prediction and experimental
-evidence. It connects each candidate peptide to its genomic events, sample,
-patient, sequence origins and declared HLA molecules, so you can trace how a
-candidate was produced and why it received a particular assessment.
+Turn supported genomic variants into **traceable neoantigen candidates**. Neoantimon2
+reconstructs altered peptide sequences, pairs them with the HLA molecules you declare,
+and helps you inspect predictions and supporting evidence in R. You can trace each
+candidate back to the sequence paths and variants that produced it.
 
-You can run configured predictors locally through the **native workflow**, or
-export peptide–HLA queries for other methods and import their predictions through
-the **external workflow**. Both preserve peptide origins and evidence provenance.
-Ranking and grading depend on the selected workflow and available evidence.
+This is a **research tool**: a candidate or prediction does not establish clinical
+immunogenicity or treatment efficacy.
 
-Neoantimon2 is a **research tool**. Generated candidates, predictions and grades
-do not establish clinical immunogenicity, treatment efficacy or clinical risk.
+![Five stages: inputs, variant and sequence reconstruction, peptide–HLA candidates, native or separate external prediction, and results with origin explanations.](docs/assets/neoantimon2-overview.svg)
 
-[Install](#installation) · [Quick Start](#quick-start) ·
-[Your own data](#analyze-your-own-data) ·
-[Multiple patients and samples](docs/user/multi-sample-examples.md) ·
-[Documentation](#documentation)
+[Try the example](#try-it-in-five-minutes) · [Your data](#analyze-your-own-data) ·
+[Read results](#understand-your-results) · [External predictions](#add-external-predictions-if-needed)
 
-## How it works
+## What goes in, and what comes out?
 
-![Neoantimon2 workflow: sample-linked variants and declared patient HLA become traceable peptide–HLA candidates. Native prediction and a separate external export/import route support interpretation; specialized workflows require explicit settings.](docs/assets/neoantimon2-overview.svg)
+| You provide | Concrete example | Important constraint |
+| --- | --- | --- |
+| Samples and patients | S1 and S2 belong to P1; S3 belongs to P2 | Declare the mapping explicitly |
+| Variant files | `S1.vcf`, `S2.vcf`, `S3.vcf` | One sample column per VCF; its name must match `sample_id` |
+| Patient HLA | P1: `HLA-A*02:01`, `HLA-B*07:02` | Supplied by you; no automatic HLA typing |
+| Compatible references | GRCh38.p14; GENCODE 50; MANE Select 1.5 | Genome + FAI, annotation + sequence catalogs/Sec metadata, MANE summary + GTF |
 
-Events lead to reconstruction/translation origins, peptide sequences and
-peptide–HLA candidates. Several origins can yield the same peptide; each
-candidate keeps its origin links for inspection.
+RNA, read counts, clonality and MS observations are **optional**, supplied through
+their supported evidence formats. Absent evidence remains unknown.
 
-**Native:** `neo_run()` uses configured local predictors and supplied evidence.
-**External:** export a completed project, run the model separately, and import
-standardized predictions by exact peptide or peptide–HLA matching. External
-results and explanations remain separate from native results.
+You get a saved run at `p$path`: **events** (variants), **origins**
+(sequence/translation paths) and **candidates** (peptide + HLA within a sample).
+Read them in R and trace their relationships with `neo_explain()`. Query and
+annotation files are saved in `results/export_bundle/`; native assessments are
+read through `neo_results()`.
 
-[Figure guide and accessible description](docs/user/workflow-overview.md) ·
-[Full-size SVG](docs/assets/neoantimon2-overview.svg) ·
-[PNG / PDF / editable source](docs/user/workflow-overview.md#maintain-or-reuse-the-figure) ·
-[Concrete input/output examples](docs/user/input-output-examples.md)
+## Try it in five minutes
 
-For Codex or Claude Code, start with [agent instructions](docs/ai/AI_INSTRUCTIONS.md)
-and the [shared analysis playbook](docs/ai/ANALYSIS_PLAYBOOK.md). These repository
-guides use the released v0.3.0 APIs; they do not replace required inputs or
-authorization.
+### Installation
 
-## Installation
-
-Use **R 4.1.0 or later**. Install the pinned
-[v0.3.0 release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0):
+Use R ≥ 4.1.0 and install the immutable public v0.3.0 release:
 
 ```r
 install.packages("remotes")
 remotes::install_github("hase62/Neoantimon2", ref = "v0.3.0", upgrade = "never")
 ```
 
-- **Offline Quick Start:** the package and its R dependencies are sufficient.
-  Tiny synthetic references are included for demonstration.
-- **Your genomic data:** obtain a compatible reference bundle and prepare your
-  input files, sample metadata and HLA declarations separately.
-- **Optional prediction:** obtain and configure the chosen predictors and their
-  models under their providers' terms. Licensed predictors and human reference
-  genomes are **not bundled** with the package.
+The example needs only the installed package and its R dependencies. It downloads
+no references and runs no predictor. Real human references, predictor programs
+and model weights are **not bundled**. Installation time depends on your network
+and dependencies; source builds can require compilers/system libraries.
 
-Runtime dependencies are `jsonlite`, `digest`, `stringi`, `yaml`, `xml2`, and R's
-`tools`. Source builds of dependencies may require compilers/system libraries.
-Suggested packages are for development/tests. Public tag and release-archive
-installation were verified on macOS arm64 with R 4.5.1; this does not establish
-validation on every platform or the minimum supported R version. See
-[getting started](docs/user/getting-started.md) and
-[resources and tools](docs/user/resources-and-tools.md).
-
-Version 0.3.0 includes [R-based resource and predictor setup](docs/user/setup.md).
-The earlier [v0.2.0 release](https://github.com/hase62/Neoantimon2/releases/tag/v0.2.0)
-remains available with its original artifacts; it does not include the four setup APIs.
-
-## Quick Start
-
-After installation, run this complete offline example:
+### Quick Start
 
 ```r
 library(Neoantimon2)
 source(system.file("examples", "quickstart.R", package = "Neoantimon2"), local = TRUE)
-neo_events(p)
-neo_origins(p)
-neo_results(p, prediction_status = "NOT_RUN")
+results[, c("sample_id", "ligand_sequence", "mhc_key",
+  "prediction_status", "grading_status")]
 neo_explain(p, candidate_id = results$candidate_id[[1L]], format = "text")
 ```
 
-The example creates **1 event, 7 peptide origins and 4 peptide–HLA candidates**.
-It checks that results remain identical after reopening the run. No predictor is
-requested: prediction is `NOT_RUN`, and grading is `NOT_GRADED`. The candidates
-are synthetic technical outputs, not biologically validated neoantigens.
+Expect **1 event → 7 origins → 4 candidates**. The candidate peptides are `KPK`,
+`MNK`, `NKP` and `MKP`, all paired with `HLA-A*02:01`. These tiny test windows and
+hand-authored references demonstrate the software; they are not human analysis
+settings or validated neoantigens.
 
-The script prints the temporary directory containing its inputs and run and
-leaves `p`, `events`, `origins` and `results` available for inspection. It needs no
-network or licensed software after installation. Its tiny references and 3-aa/5-aa
-peptide windows are test settings, not settings for real prediction. See
-[results and explanations](docs/user/results-and-explain.md) for interpretation.
+Prediction is **`NOT_RUN`** because no predictor was requested. Grading is
+**`NOT_GRADED`** because the required evidence was not supplied. The script prints
+the temporary location of its files and verifies identical results after
+reopening. It leaves `p`, `events`, `origins` and `results` ready to inspect.
 
 ## Analyze your own data
 
-Prepare the following before starting:
+First obtain a complete reference bundle in a durable data directory. From R,
+`neo_download_resources(profile = "minimum", dest = path.expand("~/neo-data"))`
+obtains the supported
+genome/GENCODE/MANE profile and reuses verified cached files. This is a **several-GB
+operation**, separate from the demo; creating a missing genome FAI requires
+`samtools`. Do it deliberately, with sufficient disk space. Other compatible
+reference configurations can be supplied explicitly.
 
-- A `samples` data frame with a unique `sample_id` for each sample and an explicit
-  `patient_id` linking it to its patient.
-- Patient-level `hla`, a named list keyed by `patient_id`, to construct
-  peptide–HLA candidates. HLA typing is supplied by you, not inferred.
-- An `inputs` list of separately declared records, each with `input_id`,
-  `input_role`, `sample_id` and `path`. For VCFs, use one single-sample file per
-  declared sample; its sample column, when present, must match `sample_id`.
-- A complete, compatible reference bundle and writable run location, configured
-  through `neo_config()`. The
-  [input guide](docs/user/inputs.md) specifies the reference roles and formats.
+The following recipe assumes that profile is already available. **Replace the
+three paths, the sample/patient IDs and the HLA values with your own declarations.**
+The VCF header must name S1 in this example; do not relabel a patient's file to
+make it match. Keep inputs/references outside the run directory.
 
-Create a project with `neo_project(samples = ..., hla = ..., inputs = ...,
-config = ...)`, execute it with `p <- neo_run(p)`, and inspect candidates with
-`neo_results(p, sample_id = "S1")`. This describes the API sequence; the
-[own-data recipe](docs/user/getting-started.md#configure-your-own-project)
-provides the configuration details.
+```r
+data_dir <- path.expand("~/neo-data")
+run_dir <- path.expand("~/neo-runs")
+vcf_path <- path.expand("~/samples/S1.vcf")
 
-**Several patients or samples can share one project.** See the
-[four complete, executable examples](docs/user/multi-sample-examples.md) for one
-patient/one sample through two patients/three samples, with generated VCFs and
-offline reference setup. Multiple separately bound VCFs are supported;
-**multiple samples inside one VCF are not supported**.
+refs <- neo_check_resources(profile = "minimum", dest = data_dir)
+stopifnot(refs$ok)
+cfg_user <- neo_config(env = character(),
+  paths = list(data_root = data_dir, run_root = run_dir),
+  scientific = refs$scientific, resources = refs$resources)
+p_user <- neo_project(
+  samples = data.frame(sample_id = "S1", patient_id = "P1"),
+  hla = list(P1 = c("HLA-A*02:01", "HLA-B*07:02")),
+  config = cfg_user,
+  inputs = list(list(input_id = "S1-somatic", input_role = "somatic_vcf",
+    sample_id = "S1", path = vcf_path)))
+p_user <- neo_run(p_user)
+r_user <- neo_results(p_user, sample_id = "S1")
+```
 
-Ordinary sample management does not imply a longitudinal comparison.
-`neo_multisample()` exposes configured subject-scoped longitudinal summaries;
-it is empty for the ordinary projects in those examples. See the
-[longitudinal workflow](docs/user/workflows.md#longitudinal-and-multi-sample-analysis)
-when you need trajectories, explicit time or evaluability across samples.
+`neo_project()` declares the project; `neo_run()` executes it. This recipe requests
+no predictor. To use native NetMHCpan, NetMHCIIpan or MHCflurry, configure a
+legitimately obtained installation first; `neo_check_predictors()` reports what
+is available. Missing predictions are not negative predictions.
 
-## Major capabilities
+For more samples, add rows to `samples` and separate records to `inputs`. HLA
+stays keyed by **patient**, so S1 and S2 can share `hla$P1`. Class II requires an
+explicit alpha~beta pair, e.g. `HLA-DRA*01:01~HLA-DRB1*15:01`.
+A single VCF with multiple sample columns is unsupported.
 
-- **Somatic analysis:** reconstruct peptides from supported variants, preserving
-  event, transcript, phase and normal-comparison provenance.
-- **Native prediction:** execute configured NetMHCpan, NetMHCIIpan or MHCflurry
-  adapters within their supported scope; software/models are acquired separately.
-- **External interoperability:** export verified queries and origins, import
-  standardized predictions, or explicitly select local R/Python converters.
-  Arbitrary raw scores are not percentiles and do not establish scientific grades.
-- **Evidence and explanations:** inspect provider provenance, missingness,
-  evaluability, somatic assessments and supported evidence overlays.
-- **Longitudinal analysis:** compare explicitly related samples within subjects,
-  retaining sample-specific evidence and distinguishing missing from negative.
-- **Vaccine-set selection:** select sets under declared constraints using the
-  supported deterministic heuristic; selections are not treatment recommendations
-  or a guaranteed global optimum.
-- **Restricted indirect-HLA/allo analysis:** use the separate literature-derived
-  profile and optional native allo evidence overlays. This is not an official
-  PIRCHE implementation; its scientific restrictions remain explicit.
+The [practical user guide](docs/user/getting-started.md) continues this exact
+recipe through reference checking, multiple samples, results and external import.
 
-These workflows have separate contracts and prerequisites. External imports do
-not automatically feed every vaccine, longitudinal, receptor, presentation or
-allo module. See [supported workflows](docs/user/workflows.md) and
-[methods and limitations](docs/user/methods-and-limitations.md).
+## Understand your results
 
-## Documentation
+```r
+neo_events(p)                         # normalized variant observations
+neo_origins(p)                        # peptide-producing paths
+neo_results(p, sample_id = "sample-1") # peptide–HLA candidates in the demo
+reopened <- neo_project(path = p$path)
+stopifnot(identical(neo_results(reopened), neo_results(p)))
+```
 
-Start with the [documentation index](docs/README.md), or go directly to:
+One event can contribute to several origins. Different origins can yield the
+same peptide; candidate deduplication retains **all** those links. A candidate
+is a possibility to investigate, not a measured immune response.
 
-- [Getting started](docs/user/getting-started.md) ·
-  [Multiple patients and samples](docs/user/multi-sample-examples.md)
-- [Inputs and configuration](docs/user/inputs.md) ·
-  [Resources and tools](docs/user/resources-and-tools.md)
-- [Workflow overview](docs/user/workflow-overview.md) ·
-  [Workflows](docs/user/workflows.md) ·
-  [External prediction interoperability](docs/user/external-predictions.md)
-- [Public API reference](docs/user/api-reference.md) ·
-  [Results and explanations](docs/user/results-and-explain.md)
-- [Methods and limitations](docs/user/methods-and-limitations.md) ·
-  [Reproducibility](docs/user/reproducibility.md) ·
-  [Troubleshooting](docs/user/troubleshooting.md)
-- [Contributing and bug reports](CONTRIBUTING.md)
+`prediction_status` says whether prediction evidence is available; inspect its
+reasons with `neo_explain()`. `NOT_RUN` can also reflect unavailable, unsupported
+or failed primary evidence. `NOT_GRADED` is not grade E. Numerical zero, missing
+values and explicitly evaluated negative evidence are different states.
 
-Installed help is available through `help(package = "Neoantimon2")`.
+The saved Export Bundle includes `events.tsv`, `origins.tsv`, `candidates.tsv`,
+unique `peptides.tsv` / `pmhc_queries.tsv` and `candidate_origin_links.tsv`.
+These are queries and annotations, not a substitute for native assessment.
 
-The optional, separately maintained
-[Community Converter Registry](https://www.hase62.jp/Neoantimon2-Converters/)
-provides converter discovery. Versioned IDs, SHA256 verification, explicit
-first-use execution consent and approved local cache reuse are supported.
-Downloaded converters run with your privileges; checksums and community OK/NG
-feedback are not security guarantees or official scientific validation. Native
-analysis and direct standardized import do not require the Registry. See the
-[external guide](docs/user/external-predictions.md) for its index and usage.
+Ranks and somatic A–E grades depend on evidence, technical eligibility and the
+active policy. They are not universal immunogenicity probabilities. Some sources
+have no somatic grading policy. Save whole R tables with `saveRDS()` to retain
+nested provenance; choose scalar columns explicitly for a flat CSV.
 
-## Scientific limitations
+## Add external predictions if needed
 
-Missing or unavailable evidence is distinct from a valid numerical zero or an
-evaluated negative. `NOT_RUN` does not establish a biological negative;
-`NOT_GRADED` is not grade E. No universal immunogenicity or clinical-risk score
-is supplied. Real licensed predictors, clinical outcomes and other platforms
-retain their documented validation limits. Read the
-[methods and limitations](docs/user/methods-and-limitations.md) before interpreting
-research outputs.
+Use this route when you want a method outside the configured native predictors:
+
+1. Export the completed project: `bundle <- neo_export_bundle(p)`.
+2. Run your chosen prediction engine **separately**, using its supported queries.
+3. Run a reviewed **Converter** if its output needs adaptation to the standard TSV.
+4. Import into the original project with `neo_analyze_external()`; inspect with
+   `neo_external_results()` and `neo_external_explain()`.
+
+| Target | What it models | Example measurement |
+| --- | --- | --- |
+| BA | HLA binding affinity | IC50 in nM; lower is better |
+| EL | Eluted ligands / antigen presentation | Provider score or percentile, each with its own direction |
+| IM | T-cell immunogenicity | Model score or percentile, not an EL percentile |
+
+The independent Converter Registry supplies **format adapters**, not prediction
+engines. It currently offers nine BA/EL/IM adapters across eight method families,
+plus a synthetic example. Its [conversion walkthrough](https://github.com/hase62/Neoantimon2-Converters#readme)
+shows selection, checksums, commands and import in one place.
+
+A completed project can export even without native scores or grades. Keep that
+project: the bundle is not a standalone replacement. Import uses strict peptide
+or peptide+HLA matching, retains every matched Origin and produces **separate**
+external results; native results stay unchanged. Raw scores do not automatically
+receive A–E grades. Do not compare BA, EL and IM as one score.
+
+For an entirely offline external example, run:
+
+```r
+source(system.file("examples", "external-predictions.R", package = "Neoantimon2"),
+  local = TRUE)
+```
+
+It uses synthetic model-format values and a local converter, not an upstream
+prediction engine. It checks independent results and preservation of origins.
+
+<a id="major-capabilities"></a>
+
+## Advanced capabilities and further reference
+
+These are explicit opt-ins, not automatic consequences of having several samples:
+longitudinal comparisons require sample graphs and settings; vaccine-set selection
+requires a selection policy; restricted indirect-HLA/allo analysis has separate
+inputs and scientific scope and is **not an official PIRCHE implementation**.
+They do not rewrite underlying somatic grades/ranks or automatically consume
+every external analysis.
+
+### Documentation
+
+Read the **[practical user guide](docs/user/getting-started.md)** for a continuous
+own-data workflow. Then use references for a specific question:
+
+- [Input specifications](docs/user/inputs.md), [resource/tool reference](docs/user/resources-and-tools.md),
+  [setup options](docs/user/setup.md) and [VCF limits](docs/user/vcf-compatibility.md).
+- [Result fields and grade rules](docs/user/results-and-explain.md),
+  [external import contract](docs/user/external-predictions.md),
+  [advanced workflows](docs/user/workflows.md) and [16 APIs](docs/user/api-reference.md).
+- [Executable cohort recipes](docs/user/multi-sample-examples.md),
+  [concrete file examples](docs/user/input-output-examples.md) and [troubleshooting](docs/user/troubleshooting.md).
+
+Codex and Claude Code use the shared [analysis playbook](docs/ai/ANALYSIS_PLAYBOOK.md)
+through `AGENTS.md` / `CLAUDE.md`. Instructions cannot supply missing data or consent.
+
+<a id="scientific-limitations"></a>
+
+## Scientific limitations and reproducibility
+
+Candidates, grades and model predictions do not establish clinical immunogenicity,
+treatment efficacy or risk. Converter tests establish format/import behavior, not
+model accuracy. Licensed predictor execution, actual MHCflurry installation and
+other platforms were not comprehensively validated; release validation used
+macOS arm64 / R 4.5.1. Record exact package, reference and model versions, input
+checksums and settings. Keep original inputs and completed runs.
+[Scientific scope](docs/user/methods-and-limitations.md) and
+[reproducibility details](docs/user/reproducibility.md) remain available.
 
 ## Citation
 
-Use [CITATION.cff](CITATION.cff) for the software citation and record the exact
-version/commit, input/reference versions and external providers. A dedicated
-Neoantimon2 paper is planned; the software citation is not a peer-reviewed
-validation publication. The predecessor Neoantimon paper does not validate this
-package.
+Use [CITATION.cff](CITATION.cff) and record the software version/commit. A dedicated
+paper is planned; the software citation and predecessor Neoantimon paper do not
+constitute validation of this package.
 
 ## License
 
-[PolyForm Noncommercial 1.0.0](LICENSE) governs this package; retain the required
-[NOTICE](NOTICE). Commercial use requires separate permission or licensing from
-Takanori Hasegawa: <hasegawa.t.d968@m.isct.ac.jp>. An inquiry does not grant permission.
-Third-party tools, resources and converters retain their own license boundaries.
-This GitHub release is not a CRAN submission.
+[PolyForm Noncommercial 1.0.0](LICENSE); retain [NOTICE](NOTICE).
+Commercial use requires separate permission/licensing from Takanori Hasegawa
+(<hasegawa.t.d968@m.isct.ac.jp>); an inquiry does not grant permission.
+Third-party tools/resources/converters retain their own terms. This is not a CRAN submission.
