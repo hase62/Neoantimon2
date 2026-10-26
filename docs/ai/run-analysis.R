@@ -77,8 +77,9 @@ agent_declare <- function(manifest) {
     hla = hla, inputs = inputs, config = cfg)
   list(project = project, config = cfg, output = output, paths = c(config_file, paths), resources = resources)
 }
-agent_execute <- function(manifest_path, execute = FALSE) {
+agent_execute <- function(manifest_path, execute = FALSE, helper_path = NULL) {
   manifest_path <- agent_absolute(manifest_path, 'manifest path')
+  if (!is.null(helper_path)) helper_path <- agent_absolute(helper_path, 'helper path')
   m <- yaml::read_yaml(manifest_path, eval.expr = FALSE)
   d <- agent_declare(m)
   cat('Preflight passed:', length(d$project$samples), 'samples. New run directory:', d$output, '\n')
@@ -89,8 +90,10 @@ agent_execute <- function(manifest_path, execute = FALSE) {
   if (!dir.create(d$output, recursive = TRUE)) stop('Cannot create fresh output directory')
   saveRDS(d$config, file.path(d$output, 'config.rds'))
   writeLines(capture.output(utils::sessionInfo()), file.path(d$output, 'sessionInfo.txt'))
-  helper_path <- normalizePath(file.path('docs', 'ai', 'run-analysis.R'), mustWork = FALSE)
-  writeLines(paste('Rscript --vanilla', shQuote(helper_path), shQuote(manifest_path), '--execute'),
+  invocation <- if (is.null(helper_path))
+    '# Rscript invocation unavailable: helper was sourced without an explicit helper_path.' else
+    paste('Rscript --vanilla', shQuote(helper_path), shQuote(manifest_path), '--execute')
+  writeLines(invocation,
     file.path(d$output, 'invocation.txt'))
   p <- Neoantimon2::neo_run(d$project)
   events <- Neoantimon2::neo_events(p); origins <- Neoantimon2::neo_origins(p); results <- Neoantimon2::neo_results(p)
@@ -117,5 +120,8 @@ if (sys.nframe() == 0L) {
   args <- commandArgs(TRUE)
   if (!length(args) || length(args) > 2L || (length(args) == 2L && args[[2L]] != '--execute'))
     stop('Usage: Rscript docs/ai/run-analysis.R MANIFEST.yaml [--execute]')
-  agent_execute(args[[1L]], execute = length(args) == 2L)
+  script <- grep('^--file=', commandArgs(FALSE), value = TRUE)
+  if (length(script) != 1L) stop('Cannot determine the Rscript helper location')
+  agent_execute(args[[1L]], execute = length(args) == 2L,
+    helper_path = normalizePath(sub('^--file=', '', script), mustWork = TRUE))
 }

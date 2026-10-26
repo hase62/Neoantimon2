@@ -90,6 +90,32 @@ stopifnot(summary$inputs_unchanged,summary$reopened_identical,
  identical(neo_results(p2),neo_results(neo_project(path=p2$path))))
 reject(helper$agent_execute(manifest,execute=TRUE),'already exists')
 pass('authorized helper execution, saved report, original hashes and completed run preservation')
+stopifnot(grepl('invocation unavailable: helper was sourced',
+  readLines(file.path(m$run_directory,'invocation.txt')),fixed=TRUE))
+pass('sourced execution explicitly records unavailable CLI provenance')
+# Each case uses its own manifest/output so neither originals nor completed runs
+# are overwritten. Both commands must resolve to this same actual helper.
+run_cli <- function(label, working_directory, script) {
+  declaration<-m;declaration$run_directory<-file.path(out,paste0(label,' output'))
+  declaration_path<-file.path(input,paste0(label,' manifest.yaml'))
+  yaml::write_yaml(declaration,declaration_path)
+  original<-digest::digest(file=declaration_path,algo='sha256',serialize=FALSE)
+  status<-local({
+    previous<-setwd(working_directory);on.exit(setwd(previous))
+    system2(file.path(R.home('bin'),'Rscript'),c('--vanilla',shQuote(script),
+      shQuote(declaration_path),'--execute'),stdout=file.path(out,paste0(label,'.log')),
+      stderr=file.path(out,paste0(label,'.log')))
+  })
+  expected<-paste('Rscript --vanilla',shQuote(normalizePath(file.path(root,'docs/ai/run-analysis.R'))),
+    shQuote(normalizePath(declaration_path)),'--execute')
+  stopifnot(status==0L,identical(readLines(file.path(declaration$run_directory,'invocation.txt')),expected),
+    identical(digest::digest(file=declaration_path,algo='sha256',serialize=FALSE),original))
+}
+run_cli('repository-root',root,'docs/ai/run-analysis.R')
+pass('CLI invocation from repository root resolves actual helper and original manifest')
+other_directory<-file.path(out,'different working directory');dir.create(other_directory)
+run_cli('different-cwd',other_directory,file.path(root,'docs/ai/run-analysis.R'))
+pass('absolute CLI invocation from another directory resolves same helper and supplied manifest')
 # Exact public export inventory and documented signature references.
 expected<-c('neo_project','neo_config','neo_run','neo_results','neo_events','neo_origins','neo_multisample','neo_explain',
  'neo_export_bundle','neo_analyze_external','neo_external_results','neo_external_explain',
