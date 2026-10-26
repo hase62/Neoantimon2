@@ -71,7 +71,8 @@ def render(source,destination):
         size=float(s.get('fontSize','18'));align=s.get('align','left')
         anchor={'left':'start','center':'middle','right':'end'}[align]
         tx=x if align=='left' else x+w/2 if align=='center' else x+w
-        attrs=dict(x=f'{tx:g}',y=f'{y+size*.94:g}',fill=s.get('fontColor','#233746'),**{'font-family':'Arial, Helvetica, sans-serif','font-size':f'{size:g}','text-anchor':anchor,'data-box':f'{x:g} {y:g} {w:g} {h:g}'})
+        attrs=dict(x=f'{tx:g}',y=f'{y+size*.94:g}',fill=s.get('fontColor','#233746'),**{'font-family':s.get('fontFamily','Arial, Helvetica, sans-serif'),'font-size':f'{size:g}','text-anchor':anchor,'data-box':f'{x:g} {y:g} {w:g} {h:g}'})
+        if s.get('fontFamily')=='monospace':attrs['{http://www.w3.org/XML/1998/namespace}space']='preserve'
         font_style=int(s.get('fontStyle','0'))
         if font_style&1:attrs['font-weight']='700'
         if font_style&2:attrs['font-style']='italic'

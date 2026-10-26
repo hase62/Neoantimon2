@@ -1,126 +1,47 @@
-# Workflow overview
+# Workflow figure reference
 
-[Getting started](getting-started.md) · [Supported workflows](workflows.md) ·
-[External predictions](external-predictions.md) · [Methods and limitations](methods-and-limitations.md)
+The [README](../../README.md) is the beginner explanation; the
+[practical guide](getting-started.md) is the continuous own-data workflow.
+This page maintains the figure's meaning, exports and implementation mapping.
 
-![Neoantimon2 workflow: declared samples, patients, references and HLA lead to events, origins, peptides and peptide–HLA candidates. Native interpretation and independent external prediction retain origin links; specialized workflows have separate prerequisites.](../assets/neoantimon2-overview.svg)
+![Five stages: user inputs, sequence reconstruction, peptide–HLA candidates, separate native/external prediction and results with explanations.](../assets/neoantimon2-overview.svg)
 
-[Full-size SVG](../assets/neoantimon2-overview.svg) ·
-[High-resolution PNG](../assets/neoantimon2-overview.png) ·
+[SVG](../assets/neoantimon2-overview.svg) · [PNG](../assets/neoantimon2-overview.png) ·
 [Vector PDF](../assets/neoantimon2-overview.pdf) ·
-[Editable diagrams.net source](../assets/source/neoantimon2-overview.drawio)
-
-The main figure now includes compact **illustrative** values. See the
-[Input and Output Examples](input-output-examples.md) for full presenter pairs,
-VCF/declaration snippets and separate BA/EL/IM channels. These independent
-snippets do not claim that one displayed variant produces the displayed peptide.
-Executable declarations remain in the [cohort guide](multi-sample-examples.md).
+[Editable source](../assets/source/neoantimon2-overview.drawio)
 
 ## Read the figure
 
-Read the blue **A — Native** row from left to right. Samples are explicitly
-assigned to patients, and each patient's supplied HLA declarations apply to that
-patient's samples. HLA typing is not performed automatically. VCF records are
-bound separately to samples; a VCF with multiple sample columns is unsupported.
-Reference resources are acquired separately and selected explicitly.
+Read the five stages left to right. Inputs bind sample variants to explicit
+patients, patient-level HLA and compatible references. The reconstruction fork
+illustrates multiple possible origins; it does not impose a one-event/one-path
+relationship. Several events may contribute to a path, and different paths may
+share a peptide. Candidates preserve every contributing Origin within their
+sample/context. The peptide strip is a conceptual sequence, not a prediction.
 
-An event can contribute to several reconstruction and translation paths. A path
-can contain several events, and several paths can yield the same peptide.
-Peptide–HLA candidates retain all contributing origin links within their sample
-and analysis context. A shared sequence does not merge sample occurrences.
-Follow `neo_events()`, `neo_origins()`, `neo_results()` and `neo_explain()` to
-inspect this trace, including uncertainty and contexts that cannot yield a
-candidate.
+Native prediction uses configured supported tools. External prediction instead
+exports a **completed project**, runs a model separately, converts its output if
+needed, and imports it strictly into that original project. Native scores or
+grades are not prerequisites for export. The two labeled channels stay separate;
+external evidence does not overwrite native results. Arrows show the conceptual
+processing order, not automatic execution of every optional step.
 
-Solid arrows show implemented processing or data flow. Dashed arrows show
-optional evidence, configured predictors, or the conditional export from a
-completed project boundary. Native prediction scores and somatic grades are not
-prerequisites for export: runs with `NOT_RUN` / `NOT_GRADED` can still provide
-a verified bundle. The reference arrow supplies the reconstruction pipeline;
-it is not a separate variant caller. Boxes and lettered lane titles distinguish
-the routes without relying on color.
+Results expose available assessment and explanations. The small bars symbolize
+prioritization only where eligible; they are not measured scores. Missing evidence
+is not zero or a negative; raw IM scores do not automatically get A–E grades.
+The README defines these terms before pointing to detailed contracts.
 
-The orange **B — External** row starts with a completed original project.
-`neo_export_bundle()` preserves queries, events, origins and their associations.
-Run the chosen model separately, then supply its output in the standard format
-to `neo_analyze_external()`, directly or through an explicitly selected converter.
-The optional [Converter Registry](external-predictions.md#local-and-registry-converters)
-helps obtain reusable converters; it does not run prediction models. Strict
-matching uses a literal peptide or literal peptide plus full presenter. Class II
-requires its complete alpha~beta declaration; missing chains are not guessed.
-
-External evidence and analyses persist separately. Inspect them with
-`neo_external_results()` and `neo_external_explain()`; they do not replace native
-results or automatically feed other evidence/selection overlays. External ranking
-requires an explicit policy. External somatic grading additionally requires
-truly declared binding/presentation percentiles and the original eligible core
-somatic technical/evidence prerequisites. Arbitrary raw scores cannot produce
-somatic A–E grades. See the [external guide](external-predictions.md) for the
-executable example and exact contract.
-
-## Prediction and evidence boundaries
-
-Native prediction uses separately obtained, configured software and models.
-These are the adapters summarized by the top-right box:
-
-| Native adapter | Supported family | HLA class / lengths | Implemented tasks and returned metrics |
-| --- | --- | --- | --- |
-| NetMHCpan | 4.1 / 4.2 | I / 8–14 aa | Binding and presentation; BA nM/rank, EL score/rank |
-| MHCflurry | 2.x | I / 8–15 aa | Binding and presentation; BA nM/rank, presentation score/percentile |
-| NetMHCIIpan | 4.3 | II / 9–25 aa | Binding and presentation; BA nM/rank, EL score/rank, supported core mapping |
-
-Presenter/residue, model and task checks still apply; the table is not a promise
-that every allele or installation is supported. Predictor configuration checks
-are distinct from successful scientific execution. NetMHCpan/NetMHCIIpan retain
-the vendor's license/registration requirements. The R package does not bundle
-them or human references. See [setup](setup.md) and
-[resources and tools](resources-and-tools.md).
-
-The optional evidence box summarizes supported observations such as RNA,
-read-count and mass-spectrometry evidence. These have explicit input/provider and
-scope requirements; not all are automatically computed. Presentation and
-recognition observations retain independent interpretations. Ranking and grades
-are conditional on technical eligibility and the applicable policy; a peptide
-alone is not a validated neoantigen.
-
-Missing/unavailable evidence is distinct from an evaluated zero or a measured
-negative. `NOT_RUN` is not a biological negative, and `NOT_GRADED` is not grade E.
-The figure groups evidence acquisition for readability without replacing the
-[documented evidence states](methods-and-limitations.md).
-
-## Specialized workflows are opt-ins
-
-The three gray boxes show separate capabilities, not automatic branches from
-external results:
-
-- **Longitudinal analysis** requires explicitly related contexts, settings and
-  sample graphs from the current project or explicitly associated completed
-  sample runs. Informal timepoint labels alone do not activate it. It preserves
-  sample-specific native grades/ranks and
-  distinguishes missing observations from supported absence. Ordinary cohort
-  input is not a longitudinal analysis.
-- **Vaccine-set selection** uses native candidate/evidence projections and an
-  explicit policy. Its deterministic heuristic does not change native grades or
-  ranks, guarantee a global optimum, or establish treatment suitability.
-- **Restricted indirect-HLA/allo analysis** has its own inputs, profile and
-  evidence boundaries. The executable strict profile covers solid-organ
-  donor-to-recipient analysis, source/self loci A/B/C/DRB1/DQB1 and explicitly
-  typed DRA~DRB1 presenters. It uses 15-mers, primary forward 9-aa cores and pinned
-  imported NetMHCIIpan 3.2-family BA evidence with a strict <1000 nM threshold.
-  The native somatic 4.3 adapter is not a substitute. Incomplete required scope
-  yields a null complete count, not zero. Native allo observations are independent
-  overlays. This is not official PIRCHE, PIRCHE-equivalent software or a clinical
-  risk model.
-
-See [supported workflows](workflows.md) for these prerequisites, the separate
-construction/query route and the absence of a no-event allo-only `neo_run()`.
-The diagram does not imply that each workflow connects to every other workflow.
+Advanced longitudinal, vaccine-set and restricted indirect-HLA/allo modules are
+intentionally outside the beginner figure. They retain their separate opt-in
+contracts in [advanced workflows](workflows.md), including original-source,
+presenter/metric restrictions and lack of automatic integration with all external
+analyses. Restricted indirect-HLA is not an official PIRCHE implementation.
 
 ## Maintain or reuse the figure
 
 The vector SVG is the primary artifact. Its text/shapes are editable and need no
 network, scripts, remote fonts or external images to render. The PNG is
-3600 × 2520 pixels (3×); the PDF retains vector objects and selectable text.
+3600 × 1320 pixels (3×); the PDF retains vector objects and selectable text.
 Open the uncompressed `.drawio` file in diagrams.net to edit individual groups,
 labels, boxes and connectors. No account or hosted copy is required if using a
 local diagrams.net installation. Edits are not sent to a service by the build
@@ -150,25 +71,26 @@ python3 scripts/development/build_workflow_figure.py \
   --output docs/assets/neoantimon2-overview.svg \
   --png docs/assets/neoantimon2-overview.png \
   --pdf docs/assets/neoantimon2-overview.pdf \
-  --work-dir ~/codex/runs/Neoantimon2/figure-preview
+  --work-dir ~/neo-figure-preview
 ```
 
 Use `--browser /path/to/chrome` if detection is insufficient. Browser export was
 verified with macOS Chrome; other browsers/platforms are not claimed tested.
 The script measures text bounds and retains 1200-, 900- and 600-pixel previews.
 Visual inspection is still necessary. SVG output is deterministic; browser/PDF
-metadata and font rendering can vary by environment. At narrow screen widths,
-open the full-size SVG or PNG to read the detailed notes. The accompanying text
+metadata and font rendering can vary by environment. The main figure is designed for 800–900 px README viewing. At narrow widths,
+open the full-size asset for labels. The accompanying text
 and README workflow description remain available to screen readers.
 
 The earlier [workflow.svg](../assets/workflow.svg) remains accessible for existing
-links. Use the current overview for the full Native/External boundaries. Reuse
+links. Use the current five-stage overview as the beginner figure. Reuse
 remains subject to the repository [license](../../LICENSE) and
 [attribution notice](../../NOTICE); third-party tools retain their own terms.
 
+
 ## Source-to-figure audit
 
-These implementation anchors support the main connections. The figure does not
+These implementation anchors support the main connections and documented boundaries. The figure does not
 add public APIs or change an analysis contract.
 
 | Figure connection or boundary | Implementation and maintained guide |
@@ -181,6 +103,6 @@ add public APIs or change an analysis contract.
 | Completed project → verified export graph with all origin links | [`external_export.R`](../../R/external_export.R): `external_completed()`, `external_graph()`, `external_merge_graph()`, `neo_export_bundle()` |
 | Separate model output → optional conversion → exact matching | [`external_converter.R`](../../R/external_converter.R), [`external_predictions.R`](../../R/external_predictions.R); [external schema](external-predictions.md) |
 | Imported evidence → separate derived view; eligible percentile grading only | [`external_analysis.R`](../../R/external_analysis.R): `external_policy()`, `external_derive()`, `neo_analyze_external()`; [policy boundaries](external-predictions.md#interpretation-policies) |
-| Longitudinal / selection preserve native priority | [`longitudinal_runtime.R`](../../R/longitudinal_runtime.R), [`vaccine_runtime.R`](../../R/vaccine_runtime.R), [`vaccine_selector.R`](../../R/vaccine_selector.R); [workflows](workflows.md) |
-| Indirect-HLA own profile, presenter/core/self scope and null-count semantics | [`indirect_contract.R`](../../R/indirect_contract.R), [`indirect_provider.R`](../../R/indirect_provider.R), [`indirect_baseline.R`](../../R/indirect_baseline.R); [restricted profile](workflows.md#allo-contexts-and-strict-indirect-hla) |
+| Advanced reference only (not shown): longitudinal / selection preserve native priority | [`longitudinal_runtime.R`](../../R/longitudinal_runtime.R), [`vaccine_runtime.R`](../../R/vaccine_runtime.R), [`vaccine_selector.R`](../../R/vaccine_selector.R); [workflows](workflows.md) |
+| Advanced reference only (not shown): indirect-HLA own profile and null-count semantics | [`indirect_contract.R`](../../R/indirect_contract.R), [`indirect_provider.R`](../../R/indirect_provider.R), [`indirect_baseline.R`](../../R/indirect_baseline.R); [restricted profile](workflows.md#allo-contexts-and-strict-indirect-hla) |
 | Missingness and research limitations | [`peptide_records.R`](../../R/peptide_records.R), [`external_predictions.R`](../../R/external_predictions.R); [methods and limitations](methods-and-limitations.md) |

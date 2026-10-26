@@ -1,45 +1,38 @@
-# Input and output examples
+# Recognize input and output files
 
-[Workflow overview](workflow-overview.md) · [Executable cohort examples](multi-sample-examples.md) ·
-[Agent playbook](../ai/ANALYSIS_PLAYBOOK.md)
+This is a visual supplement to the [practical user guide](getting-started.md),
+not another starting point. The guide contains the executable R declarations.
 
-![Illustrative Neoantimon2 inputs and outputs: explicit patients/samples and single-sample VCFs; patient HLA and full Class II pairs; versioned references and optional observations; normalized events, origins, peptide–HLA candidates, distinct prediction metrics and traceable results.](../assets/neoantimon2-input-output-examples.svg)
+![Independent synthetic panels: P1/S1/S2 and P2/S3 mapping, patient HLA, a valid single-sample VCF, versioned reference files and actual technical Quick Start output record examples.](../assets/neoantimon2-input-output-examples.svg)
 
 [SVG](../assets/neoantimon2-input-output-examples.svg) ·
 [PNG](../assets/neoantimon2-input-output-examples.png) ·
 [Vector PDF](../assets/neoantimon2-input-output-examples.pdf) ·
 [Editable source](../assets/source/neoantimon2-input-output-examples.drawio)
 
-The panels are independent illustrative snippets, **not one reconstructed
-biological case**. In particular, the illustrative nine-mer SIINFEKLA is not a
-claim about translation of chr1:4 G>A in a real human transcript. Transcript TA.1
-is a technical-fixture identifier. The prediction numbers are invented format
-examples; no upstream model generated them.
+The panels are **independent synthetic examples**, not a linked human analysis.
+The left declarations show P1/S1/S2 and P2/S3. HLA is declared once per patient;
+Class II shows both alpha and beta chains. The VCF has all ten columns, a valid
+FORMAT declaration and one sample S1. Display spacing expands real tab separators;
+the draw.io metadata and practical guide retain the tab-separated text.
 
-The VCF panel abbreviates columns for readability. A complete runnable VCF also
-needs its metadata and full header/fields, as provided in the cohort guide.
-Each supported VCF has one sample column; separate input records associate
-separate files with S1/S2/S3. Patient HLA applies to that patient's samples.
-Class II requires both presenter chains; the figure's DRA~DRB1 example is not
-interchangeable with a DR beta-only or an unspecified DP/DQ heterodimer.
+Reference filenames illustrate the required external resources: genome FASTA/FAI,
+GENCODE GTF and sequence catalogs/Sec metadata, and MANE summary/GTF. Versions
+are selected explicitly; they are not inferred patient properties. Optional
+RNA/CCF/MS evidence comes from its own supported tables; no file is not a
+measured negative.
 
-GRCh38.p14, GENCODE 50 and MANE Select 1.5 name explicit, compatible reference
-resources. They are not inferred from a VCF or patient ID. Tiny installed
-synthetic references carry contract-test labels and are not human reference
-files. RNA, CCF/clonality and MS observations have their own supported evidence
-schemas and optional settings; their absence is not an observed negative.
+The output panel uses values verified from the official hand-authored Quick Start:
+chr1:4 G>A, transcript TA, peptide KPK and HLA-A*02:01. Its original sample is
+`sample-1`, not the independent P1/S1 input panel. KPK is a **3-aa technical test
+window**, not a human predictor query or validated neoantigen. There are seven
+origins/four candidates overall; the figure shows record shapes, not all rows or
+one universal event→origin cardinality. `NOT_RUN` / `NOT_GRADED` reflect absent
+prediction/grading evidence, not zeros or negatives. Explain retains the full
+candidate→origins→events trace, not just the abbreviated display.
 
-Read results through the supported accessors and explanations. Several origins
-may share a peptide and each candidate retains their links. Native NOT_RUN and
-NOT_GRADED do not mean zero, biological negative or grade E. BA affinity_nM, EL
-presentation_percentile and IM score represent separate metric identities;
-IM evidence does not automatically generate a somatic A–E grade. External
-rankings and explanations remain separate from native results.
-
-Complete tested R declarations for all four cohorts are maintained in the
-[cohort guide](multi-sample-examples.md) and the installed
-`examples/multi-sample.R`. The [AI playbook](../ai/ANALYSIS_PLAYBOOK.md) provides
-reproducible agent-assisted modes without inventing a new package input format.
-
-Rebuild this supplementary figure with the [same renderer and instructions](workflow-overview.md#maintain-or-reuse-the-figure),
-substituting the `neoantimon2-input-output-examples` source/output basename.
+Regenerate with the [existing renderer](workflow-overview.md#maintain-or-reuse-the-figure),
+substituting the `neoantimon2-input-output-examples` basename. Full-size viewing is
+recommended for literal file columns; the main README diagram remains the compact
+conceptual entrypoint. [Four cohort recipes](multi-sample-examples.md) remain
+available for complete one-/two-patient executable setups.
