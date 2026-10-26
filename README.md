@@ -70,7 +70,8 @@ reopening. It leaves `p`, `events`, `origins` and `results` ready to inspect.
 ## Analyze your own data
 
 First obtain a complete reference bundle in a durable data directory. From R,
-`neo_download_resources(profile = "minimum", dest = data_dir)` obtains the supported
+`neo_download_resources(profile = "minimum", dest = path.expand("~/neo-data"))`
+obtains the supported
 genome/GENCODE/MANE profile and reuses verified cached files. This is a **several-GB
 operation**, separate from the demo; creating a missing genome FAI requires
 `samtools`. Do it deliberately, with sufficient disk space. Other compatible
