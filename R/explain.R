@@ -42,7 +42,9 @@ neo_explain_core <- function(project, candidate_id = NULL, reason = NULL,
                   snapshot$run_manifest$predictions))
     if (!is.null(inputs)) item$input_evidence <- list(vcf_sources=inputs$vcf_sources,
       event_evidence=Filter(function(x) x$event_id %in% event_ids,inputs$event_evidence),
-      expression_evidence=Filter(function(x) x$sample_id==result$sample_id,inputs$expression_evidence))
+      expression_evidence=Filter(function(x) x$sample_id==result$sample_id &&
+        !is.null(x$transcript_id) && sub("\\.[0-9]+$","",x$transcript_id) %in%
+          vapply(origins,`[[`,"","transcript_id"),inputs$expression_evidence))
     if (!is.null(biological)) item$somatic_evidence <- biological
     if (!is.null(priority)) {
       item$priority <- result[c("final_grade","grade_status","grade_reason_codes",

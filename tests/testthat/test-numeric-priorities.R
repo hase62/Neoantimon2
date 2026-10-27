@@ -44,6 +44,9 @@ test_that("one-run input/priority demonstrations retain identity and native outp
   expect_identical(results,neo_results(neo_project(path=demo$A$path)))
   q <- neo_explain(demo$A,candidate_id=results$candidate_id[[1]])
   expect_equal(q$candidates[[1]]$input_evidence$event_evidence[[1]]$tumor$vaf,.2)
+  explained <- neo_explain(demo$C,candidate_id=neo_results(demo$C)$candidate_id[[1]])$candidates[[1]]
+  expect_true(all(vapply(explained$input_evidence$expression_evidence,function(x)
+    sub("\\.[0-9]+$","",x$transcript_id) %in% vapply(explained$origins,`[[`,"","transcript_id"),TRUE)))
   expect_setequal(unique(demo$views$D_EL$origin_id),unique(unlist(neo_results(demo$A)$origin_ids)))
   for (id in unique(demo$views$D_EL$candidate_id)) {
     z <- demo$views$D_EL[demo$views$D_EL$candidate_id==id,]
