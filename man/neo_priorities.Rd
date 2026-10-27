@@ -22,7 +22,10 @@ and separately labelled evidence-adjusted values.}
 native Grades, native ranks or external analyses. See the source evidence user guide.}
 \details{Missing VAF remains an unavailable biological observation and contributes
 zero only to the adjusted calculation. Raw model scores are only comparable within
-the same provider, model, run and metric. Paper CCF singularities return unavailable
+the same provider, model, run and metric. The adjusted empirical-order-times-VAF
+value is exploratory and candidate-set dependent, not calibrated or comparable
+across cohorts. Disagreeing expression assertions are retained with unavailable
+TPM/conflict status, never resolved by selecting the largest value. Paper CCF singularities return unavailable
 scores; finite negative/unstable values are retained with diagnostic status.
 The paper method needs matching wild-type BA predictions and expression;
 without CCF, its separately labelled no-CCF value is not a complete paper score.}

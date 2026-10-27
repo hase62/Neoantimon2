@@ -60,8 +60,15 @@ merge source records with conflicting count/fraction assertions, the evidence
 is marked ambiguous with unavailable VAF, while supported reconstruction continues.
 An explicit evidence table can resolve precedence without pooling callers.
 
-Precedence is **explicit compatible table/canonical evidence → tumor VCF → DNA
-BAM fallback**. Conflicting explicit canonical/table values retain their existing
+Allele-bundle precedence is **complete explicit table/canonical allele evidence →
+tumor VCF → DNA BAM fallback**. A depth-only row never hides VCF AD or VAF.
+Depth is an independent measurement: an existing VCF/BAM depth stays with its
+count bundle; otherwise a same-unit explicit depth may be attached with its own
+provenance, without using it to recompute VAF. All explicit observations remain
+in `alternatives`, and depth/count or source discrepancies are flagged.
+Incomplete explicit allele assertions that contradict a complete source make
+assay REF/ALT counts and VAF unavailable, with the original bundle retained for
+audit; they are not averaged or made into negative evidence. Conflicting explicit canonical/table values retain their existing
 error behavior. Alternatives and disagreements between selected/VCF/BAM
 measurements are retained in explanation provenance; they are not pooled.
 `neo_explain(p, candidate_id = id)$candidates[[1]]$input_evidence` exposes the
@@ -87,14 +94,27 @@ higher-priority evidence. RNA BAM counts are obtained when supplied.
 Read-group SM must match sample identity. An independently verified upstream
 name can be declared with `options=list(sample_name="upstream_tumor_name")`;
 this is an explicit identity mapping, never automatic tumor/normal inference.
-Missing/unknown read groups, incompatible reference assembly, contig names or
-lengths, REF mismatches and unreadable indexes fail with a corrective message.
+Missing/unknown read groups, incompatible reference assembly, queried contig
+names/lengths, REF mismatches and unreadable indexes fail with a corrective message.
+Extra non-target ALT, decoy or unplaced contigs in a BAM header are permitted;
+every actually queried contig must exist in both BAM and reference with exactly
+the same name and length. This is locus compatibility, not genome-wide BAM identity.
 The assembly declaration and reference checks do not prove genome-wide sequence
-identity for BAMs lacking trustworthy reference metadata.
+identity for BAMs lacking trustworthy reference metadata. Previously completed
+runs retain their original serialized evidence and method provenance; reading
+them does not retroactively repair v1 BAM counts. To apply these corrected
+counting rules, run the same declared inputs into a new output project while
+preserving the old run. The new source-evidence checkpoint version prevents
+v1 results from being reused when this stage is explicitly executed.
 
 Queries use indexed random access. SNVs compare the observed base. Anchored
-insertions/deletions reconstruct local sequence from CIGAR including ten-base
-flanks and repeat-equivalent shifts; the whole required window must be observed.
+insertions/deletions assign the **target CIGAR edit**, normalized by the same
+reference-based algorithm as VCF Events. This recognizes repeat-equivalent
+placements and ignores unrelated aligned substitutions, including nearby SNVs;
+it does not require the entire read window to equal a pristine REF/ALT sequence.
+Ten-base flanks and the repeat context are still required for coverage/quality.
+A target edit with a conflicting anchor or multiple interacting local edits is
+ambiguous. A single clearly different indel is `other`, not the target ALT.
 `N` is a splice gap, never a deletion allele or REF base. Introns outside the
 variant window are allowed. Reads missing necessary context/quality are
 unusable. Repeat contexts exceeding 2,000 bases fail explicitly; complex/structural
@@ -102,11 +122,27 @@ events have unsupported status and no fabricated counts. This is not validation
 of arbitrary complex haplotypes, long-read alleles or structural variants.
 
 Fragments are keyed by read group and query name: agreeing overlapping mates
-count once; discordant mates are ambiguous. REF/ALT counts, other/ambiguous counts,
+count once; discordant mates are ambiguous. At an indel locus with unresolved
+fragments, primary assay REF/ALT counts and VAF are unavailable, so frozen Grade
+rules cannot mistake partial counts for negative evidence. Definitive partial
+counts remain in `resolved_ref_fragments`/`resolved_alt_fragments` for QC.
+REF/ALT counts, other/ambiguous counts,
 quality policy and unit `fragment` are retained. VAF uses REF+selected-ALT usable
 fragments; other alleles are excluded from this BAM denominator, unlike VCF AD's
 all-allele denominator. Preserve that method distinction when comparing sources.
 Zero coverage has zero counts and unavailable VAF; absent BAM has no measurement.
+REF means absence of the target indel edit under the supplied alignment; it does
+not require absence of every nearby substitution. Mutation-specific read support
+does not establish full peptide expression or multi-event haplotype phasing.
+
+Strong file provenance is unchanged: every declared BAM is fully SHA-256 hashed
+before checkpoint reuse, even if DNA fallback later skips all allele queries.
+For a WGS BAM this is O(file bytes) I/O and can dominate startup; indexed counting
+is not the same as avoiding that hash. Bound descriptors are reused by the next
+evidence stage, not rehashed there. No stat-only cache or partial hash is passed
+off as full integrity. If VCF evidence suffices and no independent measurement is
+needed, omit the optional DNA BAM declaration to avoid the full read. No WGS
+hash-throughput benchmark was performed for this correction.
 
 ## Expression from existing quantification
 
@@ -121,7 +157,13 @@ the source record because some native single-sample files contain no sample ID.
 Transcript versions and gene IDs are retained. Gene-level data joins to the
 selected reference-derived transcript models, rather than fuzzy gene symbols.
 No BAM expression quantification, transcript assembly or expression inference is
-performed. Unmatched identifiers remain unassigned; do not silently rename them.
+performed. In the additional numerical view, all nonmissing gene/transcript TPM
+assertions for an Origin must agree exactly. Different values yield unavailable
+TPM with `gene_tpm_status`/`transcript_tpm_status = "conflict"`, never the maximum,
+mean or first source. Original values and provenance remain in `expression_evidence`.
+Paper scores requiring conflicting gene TPM are unavailable with an explicit
+status; prediction-only and VAF-adjusted ordering still work. Existing native
+Grade/rank source-selection rules are not replaced by this view. Unmatched identifiers remain unassigned; do not silently rename them.
 
 ## ASCAT and conditional CCF
 
@@ -135,6 +177,14 @@ Run ASCAT externally. Supported native schemas are:
 
 The schema is verified against ASCAT's output-writing source at
 [61ddf3b / ascat.runAscat.R](https://github.com/VanLoo-lab/ascat/blob/61ddf3b24453eea91134798cc41d4e828a82fa90/ASCAT/R/ascat.runAscat.R).
+An explicitly verified upstream identity can be declared as
+`options=list(coordinate_system="1-based-inclusive", sample_name="tumor_A")`
+for Neoantimon2 sample `S1`. In a multi-sample ASCAT output, only that exact
+upstream sample's segments and named purity/ploidy are selected; both identities
+and the declared mapping are preserved. Without an explicit mapping, segment
+sample identity must match exactly; nothing is guessed from filenames. A
+multi-sample object with unnamed purity/ploidy is rejected as ambiguous.
+
 Declare the assembly and `coordinate_system="1-based-inclusive"`; these are
 SNP-position segments, not arbitrary BED intervals. Sample mismatch, overlapping
 segments, noninteger rounded copy numbers, minor>major and wrong assemblies fail.
@@ -175,7 +225,11 @@ sample/class/model/version/run/task/metric/unit/direction. No cross-model consen
 better, negative score for lower-is-better. Units remain original; this is not a
 probability or cross-model scale. A tie-preserving within-channel order quantile
 is `(N-rank)/(N-1)` (N=1 →1), based only on the submitted candidate set. It is
-cohort-dependent ordering, not model calibration. Evidence-adjusted priority is
+**exploratory, candidate-set-dependent ordering**, not model calibration.
+The adjusted number is **not comparable across cohorts/candidate sets**, and is
+not a biological probability or a BA+EL+IM composite. It is explicitly marked
+`adjusted_priority_status="exploratory_candidate_set_dependent"`.
+Evidence-adjusted priority is
 this quantile multiplied by chosen DNA/RNA VAF. Missing VAF uses zero **only in
 this calculation**, with an indicator. Biological missingness stays NA and is
 never passed as zero to CCF or Grade eligibility. Compound Origins lacking one
@@ -228,6 +282,51 @@ convention**, which is not unchanged historical missing-input behavior.
 Original `Mut_EL`/`Wt_EL` are affinity-like inputs to an IC50 equation, not modern
 EL scores. The original comparison P uses binding-rank L_R, A*tanh(E), WT/mismatch
 penalty and no CCF factor; it is the source's MuPeXI comparison, not P_I/P_R.
+
+## Generate paired mutant/WT BA queries explicitly
+
+`neo_priorities()` does not automatically execute a predictor while inspecting a
+completed run. For an already installed/licensed **configured native predictor**,
+the shipped version-pinned example generates both query sets, runs the same
+provider/model in a separate sidecar, and writes both standard TSVs. No manual
+WT table construction is needed:
+
+```r
+library(Neoantimon2)
+p <- neo_project(path = "/path/to/completed-project")
+source(system.file("examples", "paper-binding.R", package = "Neoantimon2"))
+# request selects an existing project$config$predictors record explicitly.
+plan <- run_paper_binding_queries(p, "/new/separate/paired-BA", request = 1L)
+print(plan) # Version/capability inspection; no prediction or output write.
+paired <- run_paper_binding_queries(p, "/new/separate/paired-BA",
+  request = 1L, metric = "BA_nM", execute = TRUE) # Explicit execution permission.
+a <- neo_analyze_external(p, paired$mutant, policy = list(
+  mode = "external_rank", provider = paired$plan$provider,
+  run_id = paired$run_id, task = paired$plan$task,
+  metric = paired$plan$metric, score_direction = "lower_is_better"))
+pi <- neo_priorities(p, analysis = a, method = "neoantimon-paper-2020-v1",
+  wild_type_predictions = paired$wild_type, expression_unit = "TPM")
+```
+
+Use `metric="BA_rank"` and a different output directory for P_R. Both BA inputs
+are genuinely obtained from the same explicitly requested provider execution;
+no raw EL/IM score is converted into BA. The workflow uses the package's internal
+native adapters and is a tested example, **not an additional public API**. It
+supports configured NetMHCpan, NetMHCIIpan or MHCflurry only to the extent their
+existing adapter/capability supports the requested class, sequence and metric.
+The original Native predictions/Grades/ranks are untouched; the imported sidecar
+is an independent External analysis. Missing WT/equal-length contexts are listed
+as excluded Origins; unavailable or ambiguous provider outputs fail and retain
+raw sidecar evidence rather than fabricate scores. WT sequences come from the
+Origin's normal context, which may be reference-derived; no matched-normal assay
+is implied. Gene TPM and supported CCF are still separate prerequisites for the
+complete paper score. No packages, predictors or model weights are installed.
+
+The commands above were exercised with a clearly labelled synthetic NetMHCpan
+stub, including both IC50 and binding-rank routes, strict import, explanation and
+native/input hash preservation. Real licensed execution and this example's real
+MHCflurry/NetMHCIIpan execution remain untested. Existing provider adapter tests
+remain separate evidence; synthetic scores are not predictor validation.
 
 ## Actually executable offline demonstrations
 
