@@ -205,6 +205,11 @@ implementation requires explicitly acknowledged gene TPM; counts/FPKM/transcript
 TPM are not substituted for gene E. Constants are exactly the published ones,
 not recalibrated cutoffs or modern EL/IM calibration.
 
+Paper IC50 inputs require a recognized metric (`BA_nM`, `affinity_nM`, `IC50`,
+`ic50`, `ic50_nM`), nM units and lower-is-better direction. Other nM measurements
+such as Kd are not silently interpreted as IC50. Binding ranks require actual
+binding-percentile semantics, not a raw percentage score.
+
 Supply `wild_type_predictions` as a standard TSV; joins use exact patient-normal
 peptide/HLA/provider/model/version/metric/unit/direction. These predictions must
 be legitimately obtained separately; the accessor never invents missing WT

@@ -96,6 +96,16 @@ test_that("native ASCAT saved object and segment tables preserve absolute CN", {
   src$options$coordinate_system <- "0-based";expect_error(Neoantimon2:::input_ascat(src,project),"coordinate")
   src$options$coordinate_system <- "1-based-inclusive";src$reference_build <- "GRCh37"
   expect_error(Neoantimon2:::input_ascat(src,project),"reference_build")
+  src$reference_build <- "GRCh38"
+  bad <- segments;bad$sample <- "S2"
+  utils::write.table(bad,src$resolved_path,sep="\t",quote=FALSE,row.names=FALSE)
+  expect_error(Neoantimon2:::input_ascat(src,project),"sample identities")
+  bad <- segments;bad$nMinor <- 3
+  utils::write.table(bad,src$resolved_path,sep="\t",quote=FALSE,row.names=FALSE)
+  expect_error(Neoantimon2:::input_ascat(src,project),"major")
+  bad <- rbind(segments,segments)
+  utils::write.table(bad,src$resolved_path,sep="\t",quote=FALSE,row.names=FALSE)
+  expect_error(Neoantimon2:::input_ascat(src,project),"overlap")
 })
 
 test_that("Salmon RSEM and featureCounts keep sample IDs and units", {
@@ -113,4 +123,13 @@ test_that("Salmon RSEM and featureCounts keep sample IDs and units", {
   writeLines(c("gene_id\ttranscript_id(s)\tTPM\tFPKM\texpected_count","G1\tTX1\t2\t3\t4"),source$resolved_path)
   x <- Neoantimon2:::input_expression(source,NULL)[[1]]
   expect_equal(x$gene_tpm,"2");expect_equal(x$fpkm,"3")
+  source$format <- "rsem_transcripts"
+  writeLines(c("transcript_id\tgene_id\tTPM\tFPKM\texpected_count","TX1.2\tG1\t0\t5\t4"),source$resolved_path)
+  x <- Neoantimon2:::input_expression(source,NULL)[[1]]
+  expect_equal(x$transcript_id,"TX1.2");expect_equal(x$transcript_tpm,"0");expect_null(x$gene_tpm)
+  source$rows <- list(x)
+  record <- Neoantimon2:::somatic_expression_records(list(source))[[1]]
+  expect_equal(record$transcript_tpm,0);expect_equal(record$fpkm,5)
+  source$rows[[1]]$transcript_tpm <- "NaN"
+  expect_error(Neoantimon2:::somatic_expression_records(list(source)),"numeric")
 })

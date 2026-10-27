@@ -68,6 +68,12 @@ test_that("one-run input/priority demonstrations retain identity and native outp
     source$kind <- "rna_bam";source$options$sample_name <- "wrong"
     expect_error(Neoantimon2:::input_bam_observations(source,list(event),demo$B),"read-group")
     source$options$sample_name <- NULL
+    source$reference_build <- "GRCh37"
+    expect_error(Neoantimon2:::input_bam_observations(source,list(event),demo$B),"reference_build")
+    source$reference_build <- "GRCh38.p14"
+    event$contig <- "1"
+    expect_error(Neoantimon2:::input_bam_observations(source,list(event),demo$B),"Contig")
+    event$contig <- "chr1"
     event$ref <- "T"
     expect_error(Neoantimon2:::input_bam_observations(source,list(event),demo$B),"REF mismatch")
     event$ref <- "A";event$alt <- "C";event$pos <- 32L;event$end <- 32L
@@ -102,9 +108,11 @@ test_that("one-run input/priority demonstrations retain identity and native outp
 
 test_that("paper binding rank requires actual binding-percentile semantics", {
   f <- Neoantimon2:::priority_paper_metric
-  expect_identical(f("BA","nM","raw_score","raw"),"IC50")
-  expect_identical(f("BA","percent","percentile_rank","mhc_binding_percentile"),"BA_rank")
-  expect_null(f("BA","percent","raw_score","raw"))
-  expect_null(f("IM","percent","percentile_rank","external_percentile"))
-  expect_null(f("EL","percent","percentile_rank","mhc_presentation_percentile"))
+  expect_null(f("BA","nM","raw_score","raw","Kd","lower_is_better"))
+  expect_null(f("BA","nM","raw_score","raw","IC50","higher_is_better"))
+  expect_identical(f("BA","nM","raw_score","raw","affinity_nM","lower_is_better"),"IC50")
+  expect_identical(f("BA","percent","percentile_rank","mhc_binding_percentile","rank","lower_is_better"),"BA_rank")
+  expect_null(f("BA","percent","raw_score","raw","score","lower_is_better"))
+  expect_null(f("IM","percent","percentile_rank","external_percentile","IMrank","lower_is_better"))
+  expect_null(f("EL","percent","percentile_rank","mhc_presentation_percentile","ELrank","lower_is_better"))
 })

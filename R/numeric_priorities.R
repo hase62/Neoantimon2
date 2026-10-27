@@ -29,9 +29,9 @@ priority_metric_category <- function(task) {
     if (identical(task,"external:immunogenicity")) "IM" else "unclassified"
 }
 
-priority_paper_metric <- function(category,unit,kind,semantics) {
-  if (!identical(category,"BA")) return(NULL)
-  if (identical(unit,"nM")) return("IC50")
+priority_paper_metric <- function(category,unit,kind,semantics,metric,direction) {
+  if (!identical(category,"BA") || !identical(direction,"lower_is_better")) return(NULL)
+  if (identical(unit,"nM") && metric %in% c("BA_nM","affinity_nM","IC50","ic50","ic50_nM")) return("IC50")
   if (identical(unit,"percent") && identical(kind,"percentile_rank") &&
       identical(semantics,"mhc_binding_percentile")) return("BA_rank")
   NULL
@@ -141,7 +141,7 @@ neo_priorities <- function(project, analysis = NULL,
         if (method=="neoantimon-paper-2020-v1") {
           row$paper_status <- "missing_or_incompatible_WT_BA_prediction"
           # Modern EL/IM outputs cannot be fed into an IC50/rank equation.
-          paper_metric <- priority_paper_metric(row$category,row$unit,row$metric_kind,row$metric_semantics)
+          paper_metric <- priority_paper_metric(row$category,row$unit,row$metric_kind,row$metric_semantics,row$metric,row$score_direction)
           if (!is.null(paper_metric)) row$paper_equation <- if(paper_metric=="IC50") "P_I" else "P_R"
           if (!is.null(paper_metric) && evaluated && !is.null(wt) &&
               !is.null(origin$wt_peptide_sequence) &&
