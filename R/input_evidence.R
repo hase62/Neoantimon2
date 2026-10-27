@@ -38,9 +38,11 @@ input_vcf_assay <- function(event) {
         reported <- somatic_number(values[[i]],"tumor FORMAT AF",0,1)
     }
     if (is.null(counted) && is.null(reported)) next
-    if (!is.null(counted) && (sum(counted,na.rm=TRUE)>.Machine$integer.max ||
-        (!is.null(dp) && sum(counted,na.rm=TRUE)>dp)))
-      stop("Tumor VCF allele depths exceed DP or supported integer range: ",event$event_id)
+    if (!is.null(counted) && sum(counted,na.rm=TRUE)>.Machine$integer.max)
+      stop("Tumor VCF allele depths exceed supported integer range: ",event$event_id)
+    # DP and AD can use different filters (e.g. GATK). Preserve a mismatch,
+    # but never replace the AD denominator by DP or reject valid caller data.
+    depth_discrepancy <- !is.null(counted) && !is.null(dp) && sum(counted,na.rm=TRUE)>dp
     denominator <- if (is.null(counted) || anyNA(counted)) NULL else as.integer(sum(counted))
     count_at <- function(j) if(is.null(counted) || is.na(counted[[j]])) NULL else as.integer(counted[[j]])
     value <- if (!is.null(denominator) && denominator>0) counted[[i+1L]]/denominator else NULL
@@ -61,7 +63,7 @@ input_vcf_assay <- function(event) {
       provenance=list(source="tumor_vcf",input_id=record$input_id,line=record$line,
         selected_alt_index=i,method=if (is.null(method)) "FORMAT/AF" else method,
         denominator_policy="sum_all_allele_depths",raw_format=record$raw_format,
-        counted_vaf=value,caller_estimated_vaf=reported,discrepancy=conflict))
+        counted_vaf=value,caller_estimated_vaf=reported,discrepancy=conflict,depth_discrepancy=depth_discrepancy))
     observations[[length(observations)+1L]] <- obs
   }
   if (!length(observations)) return(NULL)

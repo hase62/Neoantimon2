@@ -53,6 +53,8 @@ alone does not establish normal chromosome copy number or mutation multiplicity.
 Negative, nonfinite, impossible depths/fractions fail. AD has precedence over
 AO/RO. Reported AF disagreements remain in the VCF provenance alongside raw
 FORMAT, ALT index and count-derived value. No averaging or silent replacement.
+AD totals can exceed DP when their caller filters differ; this is retained as a
+depth discrepancy, not used to change the denominator. See [GATK allele depths](https://gatk.broadinstitute.org/hc/en-us/articles/360037421851-DepthPerAlleleBySample).
 Normal/germline sample values never become tumor VAF. When normalized Events
 merge source records with conflicting count/fraction assertions, import fails
 rather than arbitrarily selecting a caller.
