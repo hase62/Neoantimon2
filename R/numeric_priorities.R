@@ -101,14 +101,18 @@ neo_priorities <- function(project, analysis = NULL,
           patient_id=origin$patient_id,origin_id=origin_id,origin_ids=candidate$origin_ids,
           event_ids=as.list(ids),peptide_sequence=candidate$peptide_sequence,mhc_key=candidate$mhc_key,
           hla_class=candidate$hla_class,source=if(native) "Native" else "External",
+          native_grade=text(candidate$final_grade),
+          native_rank_within_sample_class=scalar(candidate$rank_within_sample_class),
+          native_technical_eligibility=text(candidate$technical_eligibility),
+          native_priority_origin_id=text(candidate$priority_origin_id),
           provider=text(if(native) prediction$predictor else prediction$provider),
           predictor_version=scalar(prediction$predictor_version,""),model_version=scalar(prediction$model_version,""),
           run_id=text(prediction$run_id),task=text(prediction$task),category=priority_metric_category(prediction$task),
           metric=text(prediction$metric),metric_kind=if(native)
             if(identical(prediction$unit,"percent")) "percentile_rank" else "raw_score" else text(prediction$metric_kind),
           metric_semantics=if(native) {
-            if(identical(prediction$metric,"BA_rank")) "mhc_binding_percentile" else
-              if(identical(prediction$metric,"EL_rank")) "mhc_presentation_percentile" else "raw"
+            if(identical(prediction$unit,"percent") && grepl("_binding$",prediction$task)) "mhc_binding_percentile" else
+              if(identical(prediction$unit,"percent") && grepl("_presentation$",prediction$task)) "mhc_presentation_percentile" else "raw"
           } else text(prediction$metric_semantics),raw_score=if(evaluated) score else NA_real_,
           unit=text(prediction$unit),score_direction=text(direction),
           prediction_status=if(is.null(prediction)) "NOT_RUN" else prediction$status,
@@ -119,7 +123,14 @@ neo_priorities <- function(project, analysis = NULL,
           prediction_algorithm="direction-only-v1",adjusted_algorithm="within-channel-order-vaf-v1",
           paper_algorithm=if(method=="neoantimon-paper-2020-v1") method else NA_character_,
           paper_equation=NA_character_,ccf_input_type=if(is.null(single)) "unavailable" else single$ccf$status,
-          dna_vaf=scalar(dna),rna_vaf=scalar(rna),vaf_used=if(a_missing) 0 else a,
+          dna_vaf=scalar(dna),rna_vaf=scalar(rna),
+          dna_ref_reads=scalar(single$tumor$ref_reads),dna_alt_reads=scalar(single$tumor$alt_reads),
+          dna_vaf_denominator=scalar(single$tumor$vaf_denominator),dna_count_unit=text(single$tumor$count_unit),
+          rna_ref_reads=scalar(single$rna$ref_reads),rna_alt_reads=scalar(single$rna$alt_reads),
+          rna_usable_depth=scalar(single$rna$usable_depth),rna_count_unit=text(single$rna$count_unit),
+          purity=scalar(single$purity$value),ploidy=scalar(single$purity$ploidy),
+          total_cn=scalar(single$cn$total_cn),major_cn=scalar(single$cn$major_cn),minor_cn=scalar(single$cn$minor_cn),
+          vaf_used=if(a_missing) 0 else a,
           vaf_channel=vaf,vaf_missing_substituted=a_missing,
           vaf_note=if(length(ids)>1L) "compound_origin_no_single_VAF" else if(a_missing) "unavailable_observation_remains_NA" else "observed",
           gene_tpm=scalar(gene),transcript_tpm=scalar(tx),ccf=scalar(ccf),
@@ -190,7 +201,9 @@ neo_priorities <- function(project, analysis = NULL,
     if (f=="vaf_missing_substituted") return(vapply(x,isTRUE,TRUE))
     numeric <- f %in% c("raw_score","prediction_only","prediction_rank","within_channel_quantile",
       "evidence_adjusted","dna_vaf","rna_vaf","vaf_used","gene_tpm","transcript_tpm",
-      "ccf","paper_without_ccf","paper_with_ccf","paper_ccf_factor")
+      "ccf","paper_without_ccf","paper_with_ccf","paper_ccf_factor",
+      "native_rank_within_sample_class","dna_ref_reads","dna_alt_reads","dna_vaf_denominator",
+      "rna_ref_reads","rna_alt_reads","rna_usable_depth","purity","ploidy","total_cn","major_cn","minor_cn")
     vapply(x,function(v)if(is.null(v)) if(numeric) NA_real_ else NA_character_ else v,
       if(numeric) 0 else "")
   });names(columns) <- fields

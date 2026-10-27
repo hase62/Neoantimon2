@@ -67,6 +67,8 @@ measurements are retained in explanation provenance; they are not pooled.
 `neo_explain(p, candidate_id = id)$candidates[[1]]$input_evidence` exposes the
 source-file evidence without a second analysis. `neo_priorities(p)` includes
 DNA/RNA VAF and biological evidence even when prediction status is `NOT_RUN`.
+It also exposes native Grade/rank, REF/ALT support, purity/ploidy and local
+copy number directly; users do not need to join these tables by internal IDs.
 
 ## Optional BAM allele evidence
 
@@ -163,7 +165,9 @@ v[, c("candidate_id", "origin_id", "category", "raw_score",
 
 Rows retain **each candidate–Origin–model channel**, with all Event relationships,
 sample, complete HLA, provider/model/run, task, metric, unit, direction and raw
-prediction/source provenance. BA, EL and IM remain separate. Duplicate Origins
+prediction/source provenance. Native Grade/rank remain candidate-level decisions;
+`native_priority_origin_id` identifies the original native selection while each
+row retains its own Origin-specific numerical inputs. BA, EL and IM remain separate. Duplicate Origins
 never inflate the prediction rank; ranks are computed on unique candidates per
 sample/class/model/version/run/task/metric/unit/direction. No cross-model consensus.
 

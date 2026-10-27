@@ -40,8 +40,11 @@ test_that("one-run input/priority demonstrations retain identity and native outp
   expect_true(all(demo$views$E$vaf_used==0));expect_true(all(is.na(demo$views$E$dna_vaf)))
   expect_true(all(demo$views$E$evidence_adjusted==0))
   expect_true(all(is.finite(demo$views$E$prediction_only)))
+  expect_equal(unique(demo$views$C$total_cn),2)
+  expect_equal(unique(demo$views$C$purity),.4)
   results <- neo_results(demo$A)
   expect_identical(results,neo_results(neo_project(path=demo$A$path)))
+  expect_identical(demo$views$D_EL$native_grade,results$final_grade[match(demo$views$D_EL$candidate_id,results$candidate_id)])
   q <- neo_explain(demo$A,candidate_id=results$candidate_id[[1]])
   expect_equal(q$candidates[[1]]$input_evidence$event_evidence[[1]]$tumor$vaf,.2)
   explained <- neo_explain(demo$C,candidate_id=neo_results(demo$C)$candidate_id[[1]])$candidates[[1]]
