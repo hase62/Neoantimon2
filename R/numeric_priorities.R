@@ -104,7 +104,10 @@ neo_priorities <- function(project, analysis = NULL,
           prediction_only=if(!evaluated) NA_real_ else if(direction=="lower_is_better") -score else score,
           prediction_transform="direction_only; original units retained; within-model only",
           prediction_rank=NA_real_,within_channel_quantile=NA_real_,evidence_adjusted=NA_real_,
-          algorithm=method,algorithm_version="1.0.0",
+          algorithm="model-v1",algorithm_version="1.0.0",requested_method=method,
+          prediction_algorithm="direction-only-v1",adjusted_algorithm="within-channel-order-vaf-v1",
+          paper_algorithm=if(method=="neoantimon-paper-2020-v1") method else NA_character_,
+          paper_equation=NA_character_,ccf_input_type=if(is.null(single)) "unavailable" else single$ccf$status,
           dna_vaf=scalar(dna),rna_vaf=scalar(rna),vaf_used=if(a_missing) 0 else a,
           vaf_channel=vaf,vaf_missing_substituted=a_missing,
           vaf_note=if(length(ids)>1L) "compound_origin_no_single_VAF" else if(a_missing) "unavailable_observation_remains_NA" else "observed",
@@ -118,6 +121,7 @@ neo_priorities <- function(project, analysis = NULL,
           # Modern EL/IM outputs cannot be fed into an IC50/rank equation.
           paper_metric <- if(identical(row$category,"BA") && row$unit=="nM") "IC50" else
             if(identical(row$category,"BA") && row$unit=="percent") "BA_rank" else NULL
+          if (!is.null(paper_metric)) row$paper_equation <- if(paper_metric=="IC50") "P_I" else "P_R"
           if (!is.null(paper_metric) && evaluated && !is.null(wt) &&
               !is.null(origin$wt_peptide_sequence) &&
               nchar(origin$wt_peptide_sequence)==nchar(candidate$peptide_sequence)) {

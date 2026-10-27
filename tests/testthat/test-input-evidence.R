@@ -34,6 +34,9 @@ test_that("tumor FORMAT counts/estimated fractions use correct ALT and denominat
   expect_error(f(input_fixture_event("-1,20","AD")),"integer")
   expect_error(f(input_fixture_event("Inf","AF")),"numeric")
   expect_error(f(input_fixture_event("1.1","AF")),"numeric")
+  population <- input_fixture_event(".2","AF")
+  population$event_details_json$source_records[[1]]$evidence_format_definitions$AF$Description <- "Population allele frequency in gnomAD"
+  expect_null(f(population))
   e$event_role <- "germline";expect_null(f(e))
 })
 

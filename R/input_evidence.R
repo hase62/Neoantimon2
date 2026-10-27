@@ -32,7 +32,8 @@ input_vcf_assay <- function(event) {
     definition <- record$evidence_format_definitions$AF
     if (!is.null(fields$AF) && fields$AF!="." && !is.null(definition) &&
         identical(definition$Number,"A") &&
-        grepl("allele.*(fraction|frequency)",definition$Description,ignore.case=TRUE)) {
+        grepl("allele.*(fraction|frequency)",definition$Description,ignore.case=TRUE) &&
+        !grepl("population|gnomad|1000.genome",definition$Description,ignore.case=TRUE)) {
       values <- event_vcf_allele_values(fields$AF,"A",n,"tumor FORMAT AF")
       if (!is.null(values) && values[[i]]!=".")
         reported <- somatic_number(values[[i]],"tumor FORMAT AF",0,1)

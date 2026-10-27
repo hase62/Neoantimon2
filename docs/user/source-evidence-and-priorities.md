@@ -204,9 +204,11 @@ Supply `wild_type_predictions` as a standard TSV; joins use exact patient-normal
 peptide/HLA/provider/model/version/metric/unit/direction. These predictions must
 be legitimately obtained separately; the accessor never invents missing WT
 binding or executes a predictor. Missing prerequisites have diagnostic status.
+`paper_equation` identifies P_I or P_R for each compatible channel.
 `paper_without_ccf` explicitly omits C; `paper_with_ccf` needs CCF. At x=0.8 the
 score is unavailable with singularity status. Finite negative or near-singular
-values are retained for mathematical auditing, labelled unsuitable for automatic
+values (absolute denominator <1e-6 is the diagnostic instability threshold) are
+retained for mathematical auditing, labelled unsuitable for automatic
 biological prioritization, and never used to replace native ranks.
 
 Pinned original source [2363e88](https://github.com/hase62/Neoantimon/blob/2363e88a22abf031cb3de7386d377f087cf72ff7/R/FunctionsCalculatePriorityScores.R)
