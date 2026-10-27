@@ -87,8 +87,16 @@ test_that("paired configured BA queries are explicit, typed and preserve native 
   bad_output <- tempfile("paired-failed-")
   expect_error(run_paper_binding_queries(p,bad_output,execute=TRUE),"unambiguous requested BA metric")
   expect_false(file.exists(file.path(bad_output,"completion.json")))
-  expect_true(dir.exists(file.path(bad_output,"prediction-runs")))
+  expect_true(dir.exists(file.path(bad_output,"intermediate","prediction_runs")))
   expect_identical(neo_results(p),before)
+  # Reuse the stub's own parser but make the returned affinity impossible.
+  original <- c("#!/bin/sh", "if [ \"$1\" = '-h' ]; then echo 'NetMHCpan version 4.2'; exit 0; fi",
+    "input='';allele='';while [ $# -gt 0 ];do case \"$1\" in -p) input=$2;shift 2;; -a) allele=$2;shift 2;; *) shift;; esac;done",
+    "echo 'Pos HLA Peptide Aff(nM) %Rank_BA';n=0;while IFS= read -r q;do n=$((n+1));printf '%s %s %s -1 0.5\\n' \"$n\" \"$allele\" \"$q\";done < \"$input\"")
+  writeLines(original,fixture$tool)
+  bad_negative <- tempfile("paired-negative-")
+  expect_error(run_paper_binding_queries(p,bad_negative,execute=TRUE),"negative BA")
+  expect_false(file.exists(file.path(bad_negative,"completion.json")))
 })
 
 test_that("public numerical view exposes conflicting expression without a maximum", {
@@ -100,5 +108,33 @@ test_that("public numerical view exposes conflicting expression without a maximu
   paper <- neo_priorities(p,method="neoantimon-paper-2020-v1",expression_unit="TPM")
   expect_true(all(is.na(paper$paper_with_ccf)))
   expect_true(all(paper$paper_status=="expression_conflict_no_paper_score"))
+  expect_identical(neo_results(p),before)
+})
+
+test_that("paired query provenance remains sample and Origin specific after deduplication", {
+  source(system.file("examples","paper-binding.R",package="Neoantimon2"),local=TRUE)
+  fixture <- postreview_binding_project();old <- fixture$p
+  vcf1 <- old$inputs[[1L]]$resolved_path;vcf2 <- tempfile(fileext=".vcf")
+  writeLines(sub("\tsample-1$","\tsample-2",readLines(vcf1)),vcf2)
+  cfg <- old$config;cfg$paths$run_root <- tempfile("paired-cohort-runs-")
+  p <- neo_run(neo_project(samples=data.frame(sample_id=c("sample-1","sample-2"),patient_id="patient-1"),
+    hla=list("patient-1"=c("HLA-A*02:01","HLA-B*07:02")),config=cfg,
+    inputs=list(list(input_id="S1",input_role="somatic_vcf",sample_id="sample-1",path=vcf1),
+      list(input_id="S2",input_role="somatic_vcf",sample_id="sample-2",path=vcf2))))
+  before <- neo_results(p)
+  paired <- run_paper_binding_queries(p,tempfile("paired-cohort-"),execute=TRUE)
+  map <- readRDS(file.path(paired$output,"query-origin-mapping.rds"))
+  raw <- Neoantimon2:::predictor_read_run(file.path(paired$output,"intermediate","prediction_runs"),paired$run_id)
+  expect_setequal(vapply(map,`[[`,"","sample_id"),c("sample-1","sample-2"))
+  for(e in raw$evidence) {
+    from <- Filter(function(x)x$query_id==e$candidate_id,map)
+    expect_setequal(unlist(e$biological_peptide_ids),vapply(from,`[[`,"","origin_id"))
+    expect_setequal(e$sample_id,vapply(from,`[[`,"","sample_id"))
+    expect_true(file.exists(file.path(paired$output,e$raw_output_ref)))
+  }
+  mutant <- Neoantimon2:::external_read_predictions(paired$mutant)
+  expected <- unique(vapply(Filter(function(x)x$kind=="mutant",map),function(x)
+    paste(x$peptide_sequence,x$mhc_key),""))
+  expect_equal(nrow(mutant),length(expected))
   expect_identical(neo_results(p),before)
 })

@@ -315,7 +315,11 @@ native adapters and is a tested example, **not an additional public API**. It
 supports configured NetMHCpan, NetMHCIIpan or MHCflurry only to the extent their
 existing adapter/capability supports the requested class, sequence and metric.
 The original Native predictions/Grades/ranks are untouched; the imported sidecar
-is an independent External analysis. Missing WT/equal-length contexts are listed
+is an independent External analysis. The native adapter deduplicates physical
+peptide/HLA queries while per-sample, per-Origin query records and the saved
+mapping retain every relationship. Raw sidecar paths resolve within its own
+`intermediate/prediction_runs/`; the completion manifest hashes both TSVs, the
+query-Origin mapping and the plan. Missing WT/equal-length contexts are listed
 as excluded Origins; unavailable or ambiguous provider outputs fail and retain
 raw sidecar evidence rather than fabricate scores. WT sequences come from the
 Origin's normal context, which may be reference-derived; no matched-normal assay
