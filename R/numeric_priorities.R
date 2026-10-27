@@ -29,6 +29,14 @@ priority_metric_category <- function(task) {
     if (identical(task,"external:immunogenicity")) "IM" else "unclassified"
 }
 
+priority_paper_metric <- function(category,unit,kind,semantics) {
+  if (!identical(category,"BA")) return(NULL)
+  if (identical(unit,"nM")) return("IC50")
+  if (identical(unit,"percent") && identical(kind,"percentile_rank") &&
+      identical(semantics,"mhc_binding_percentile")) return("BA_rank")
+  NULL
+}
+
 #' Additional model-specific priorities and source-file evidence
 #' @param project A completed neo_project.
 #' @param analysis Optional completed external analysis handle or ID.
@@ -98,7 +106,10 @@ neo_priorities <- function(project, analysis = NULL,
           run_id=text(prediction$run_id),task=text(prediction$task),category=priority_metric_category(prediction$task),
           metric=text(prediction$metric),metric_kind=if(native)
             if(identical(prediction$unit,"percent")) "percentile_rank" else "raw_score" else text(prediction$metric_kind),
-          metric_semantics=if(native) "native_provider_contract" else text(prediction$metric_semantics),raw_score=if(evaluated) score else NA_real_,
+          metric_semantics=if(native) {
+            if(identical(prediction$metric,"BA_rank")) "mhc_binding_percentile" else
+              if(identical(prediction$metric,"EL_rank")) "mhc_presentation_percentile" else "raw"
+          } else text(prediction$metric_semantics),raw_score=if(evaluated) score else NA_real_,
           unit=text(prediction$unit),score_direction=text(direction),
           prediction_status=if(is.null(prediction)) "NOT_RUN" else prediction$status,
           prediction_only=if(!evaluated) NA_real_ else if(direction=="lower_is_better") -score else score,
@@ -119,8 +130,7 @@ neo_priorities <- function(project, analysis = NULL,
         if (method=="neoantimon-paper-2020-v1") {
           row$paper_status <- "missing_or_incompatible_WT_BA_prediction"
           # Modern EL/IM outputs cannot be fed into an IC50/rank equation.
-          paper_metric <- if(identical(row$category,"BA") && row$unit=="nM") "IC50" else
-            if(identical(row$category,"BA") && row$unit=="percent") "BA_rank" else NULL
+          paper_metric <- priority_paper_metric(row$category,row$unit,row$metric_kind,row$metric_semantics)
           if (!is.null(paper_metric)) row$paper_equation <- if(paper_metric=="IC50") "P_I" else "P_R"
           if (!is.null(paper_metric) && evaluated && !is.null(wt) &&
               !is.null(origin$wt_peptide_sequence) &&
@@ -129,6 +139,7 @@ neo_priorities <- function(project, analysis = NULL,
               wt$peptide_sequence==origin$wt_peptide_sequence & wt$mhc_key==candidate$mhc_key &
               wt$provider==row$provider & wt$metric==row$metric & wt$task==row$task &
               wt$unit==row$unit & wt$score_direction==row$score_direction &
+              wt$metric_kind==row$metric_kind & wt$metric_semantics==row$metric_semantics &
               wt$predictor_version==row$predictor_version & wt$model_version==row$model_version,,drop=FALSE]
             if (nrow(target)>1L) stop("Ambiguous wild-type channel: retain one matching model/run")
             if (nrow(target)==1L) {
