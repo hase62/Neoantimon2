@@ -56,8 +56,9 @@ FORMAT, ALT index and count-derived value. No averaging or silent replacement.
 AD totals can exceed DP when their caller filters differ; this is retained as a
 depth discrepancy, not used to change the denominator. See [GATK allele depths](https://gatk.broadinstitute.org/hc/en-us/articles/360037421851-DepthPerAlleleBySample).
 Normal/germline sample values never become tumor VAF. When normalized Events
-merge source records with conflicting count/fraction assertions, import fails
-rather than arbitrarily selecting a caller.
+merge source records with conflicting count/fraction assertions, the evidence
+is marked ambiguous with unavailable VAF, while supported reconstruction continues.
+An explicit evidence table can resolve precedence without pooling callers.
 
 Precedence is **explicit compatible table/canonical evidence → tumor VCF → DNA
 BAM fallback**. Conflicting explicit canonical/table values retain their existing

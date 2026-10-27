@@ -45,7 +45,9 @@ test_that("tumor FORMAT counts/estimated fractions use correct ALT and denominat
   expect_equal(f(mixed)$vaf,.2)
   different <- input_fixture_event("0/1:50,50:100")
   mixed$event_details_json$source_records[[2]] <- different$event_details_json$source_records[[1]]
-  expect_error(f(mixed),"Conflicting")
+  ambiguous <- f(mixed)
+  expect_identical(ambiguous$status,"ambiguous");expect_null(ambiguous$vaf)
+  expect_true(ambiguous$provenance$source_observation_conflict)
   explicit <- Neoantimon2:::input_assay(mixed,list(tumor_ref_reads="50",tumor_alt_reads="50"),"tumor",somatic_test_source("dna_reads"))
   expect_equal(explicit$vaf,.5);expect_true(explicit$source_disagreement)
   e$event_role <- "germline";expect_null(f(e))

@@ -73,8 +73,6 @@ input_vcf_assay <- function(event,allow_conflict=FALSE) {
     known <- unlist(lapply(observations,`[[`,field))
     if (length(known)>1L && any(abs(known-known[[1L]])>1e-8)) conflict <- TRUE
   }
-  if (conflict && !allow_conflict)
-    stop("Conflicting tumor VCF observations for normalized event; select an explicit evidence table: ",event$event_id)
   # Missing fields do not contradict a more complete source observation.
   strength <- vapply(observations,function(x) if(!is.null(x$vaf))
     if(!is.null(x$alt_reads)) 3L else 2L else if(!is.null(x$alt_reads)) 1L else 0L,0L)
@@ -83,6 +81,13 @@ input_vcf_assay <- function(event,allow_conflict=FALSE) {
   depths <- unlist(lapply(observations,`[[`,"depth"))
   result$provenance$depth_source_disagreement <- length(unique(depths))>1L
   result$provenance$source_records <- lapply(observations,`[[`,"provenance")
+  if (conflict && !allow_conflict) {
+    # Two valid caller observations must not stop otherwise supported peptide
+    # reconstruction, nor be pooled or silently chosen as a measurement.
+    for(field in c("ref_reads","alt_reads","depth","usable_depth","other_reads",
+      "ambiguous_reads","vaf_denominator","vaf","reported_vaf")) result[field] <- list(NULL)
+    result$status <- "ambiguous";result$vaf_status <- "ambiguous"
+  }
   result
 }
 
