@@ -19,9 +19,11 @@ test_that("tumor FORMAT counts/estimated fractions use correct ALT and denominat
   partial <- f(input_fixture_event("50,20,.","AD",alts=list("A","C")))
   expect_equal(partial$alt_reads,20L);expect_null(partial$vaf);expect_null(partial$vaf_denominator)
   expect_error(f(input_fixture_event(".2:0","AF:DP")),"zero")
-  expect_null(f(input_fixture_event("100","DP")))
+  expect_null(f(input_fixture_event("100","DP"))$vaf)
+  expect_equal(f(input_fixture_event("100","DP"))$depth,100L)
+  expect_identical(f(input_fixture_event("0","DP"))$status,"insufficient_depth")
   pop <- input_fixture_event("100","DP");pop$event_details_json$source_records[[1]]$raw_info <- "AF=0.9"
-  expect_null(f(pop))
+  expect_null(f(pop)$vaf)
   expect_equal(f(input_fixture_event("0,20","AD"))$vaf,1)
   expect_equal(f(input_fixture_event("20,0","AD"))$vaf,0)
   expect_null(f(input_fixture_event("0,0:0","AD:DP"))$vaf)
@@ -37,6 +39,15 @@ test_that("tumor FORMAT counts/estimated fractions use correct ALT and denominat
   population <- input_fixture_event(".2","AF")
   population$event_details_json$source_records[[1]]$evidence_format_definitions$AF$Description <- "Population allele frequency in gnomAD"
   expect_null(f(population))
+  mixed <- input_fixture_event()
+  depth_only <- input_fixture_event("100","DP")
+  mixed$event_details_json$source_records[[2]] <- depth_only$event_details_json$source_records[[1]]
+  expect_equal(f(mixed)$vaf,.2)
+  different <- input_fixture_event("0/1:50,50:100")
+  mixed$event_details_json$source_records[[2]] <- different$event_details_json$source_records[[1]]
+  expect_error(f(mixed),"Conflicting")
+  explicit <- Neoantimon2:::input_assay(mixed,list(tumor_ref_reads="50",tumor_alt_reads="50"),"tumor",somatic_test_source("dna_reads"))
+  expect_equal(explicit$vaf,.5);expect_true(explicit$source_disagreement)
   e$event_role <- "germline";expect_null(f(e))
 })
 

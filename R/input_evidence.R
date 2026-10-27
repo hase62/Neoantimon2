@@ -1,7 +1,7 @@
 # Additive source-file evidence. No alteration of somatic grade/rank policies.
 input_evidence_version <- function() "source-evidence-v1"
 
-input_vcf_assay <- function(event) {
+input_vcf_assay <- function(event,allow_conflict=FALSE) {
   if (!identical(event$event_role,"somatic")) return(NULL)
   observations <- list()
   for (record in event$event_details_json$source_records) {
@@ -38,7 +38,7 @@ input_vcf_assay <- function(event) {
       if (!is.null(values) && values[[i]]!=".")
         reported <- somatic_number(values[[i]],"tumor FORMAT AF",0,1)
     }
-    if (is.null(counted) && is.null(reported)) next
+    if (is.null(counted) && is.null(reported) && is.null(dp)) next
     if (!is.null(counted) && sum(counted,na.rm=TRUE)>.Machine$integer.max)
       stop("Tumor VCF allele depths exceed supported integer range: ",event$event_id)
     # DP and AD can use different filters (e.g. GATK). Preserve a mismatch,
@@ -57,28 +57,39 @@ input_vcf_assay <- function(event) {
       ambiguous_reads=NULL,vaf_denominator=denominator,
       vaf=if (!is.null(value)) value else reported,reported_vaf=reported,
       vaf_status=if (!is.null(value)) "derived" else if (!is.null(reported)) "supplied" else "unavailable",
-      count_unit=if (is.null(counted)) NULL else "read",
-      status=if (!is.null(denominator) && denominator==0L) "insufficient_depth" else
+      count_unit=if (is.null(counted) && is.null(dp)) NULL else "read",
+      status=if ((!is.null(denominator) && denominator==0L) || (is.null(counted) && !is.null(dp) && dp==0L)) "insufficient_depth" else
         if (is.null(count_at(i+1L))) {if(!is.null(reported)) "fraction_only" else "not_evaluated"} else
         if (counted[[i+1L]]>0) "observed_support" else "observed_no_alt",
       provenance=list(source="tumor_vcf",input_id=record$input_id,line=record$line,
-        selected_alt_index=i,method=if (is.null(method)) "FORMAT/AF" else method,
+        selected_alt_index=i,method=if (is.null(method)) if(is.null(reported)) "FORMAT/DP_only" else "FORMAT/AF" else method,
         denominator_policy="sum_all_allele_depths",raw_format=record$raw_format,
         counted_vaf=value,caller_estimated_vaf=reported,discrepancy=conflict,depth_discrepancy=depth_discrepancy))
     observations[[length(observations)+1L]] <- obs
   }
   if (!length(observations)) return(NULL)
-  signatures <- vapply(observations,function(x) canonical_bytes(x[c("ref_reads","alt_reads","vaf_denominator","vaf")]),"")
-  if (length(unique(signatures))>1L)
+  conflict <- FALSE
+  for (field in c("ref_reads","alt_reads","vaf_denominator","vaf")) {
+    known <- unlist(lapply(observations,`[[`,field))
+    if (length(known)>1L && any(abs(known-known[[1L]])>1e-8)) conflict <- TRUE
+  }
+  if (conflict && !allow_conflict)
     stop("Conflicting tumor VCF observations for normalized event; select an explicit evidence table: ",event$event_id)
-  result <- observations[[1L]]
+  # Missing fields do not contradict a more complete source observation.
+  strength <- vapply(observations,function(x) if(!is.null(x$vaf))
+    if(!is.null(x$alt_reads)) 3L else 2L else if(!is.null(x$alt_reads)) 1L else 0L,0L)
+  result <- observations[[which.max(strength)]]
+  result$provenance$source_observation_conflict <- conflict
+  depths <- unlist(lapply(observations,`[[`,"depth"))
+  result$provenance$depth_source_disagreement <- length(unique(depths))>1L
   result$provenance$source_records <- lapply(observations,`[[`,"provenance")
   result
 }
 
 input_assay <- function(event,row,assay,source) {
   explicit <- somatic_assay(event,row,assay,source)
-  vcf <- if (assay=="tumor") input_vcf_assay(event) else NULL
+  measured <- !is.null(explicit$vaf) || !is.null(explicit$alt_reads) || !is.null(explicit$depth)
+  vcf <- if (assay=="tumor") input_vcf_assay(event,allow_conflict=measured) else NULL
   bam <- if (is.null(source)) NULL else source$bam_observations[[event$event_id]][[assay]]
   # Preserve existing table/canonical-event contract; an entirely unmeasured
   # table row does not hide available VCF evidence.
@@ -88,7 +99,7 @@ input_assay <- function(event,row,assay,source) {
   if (!is.null(vcf) || !is.null(bam)) {
     selected$alternatives <- list(vcf=vcf,bam=bam)
     selected$source_precedence <- "explicit_table_or_event > tumor_VCF > BAM_fallback"
-    selected$source_disagreement <- any(vapply(list(vcf,bam),function(x)
+    selected$source_disagreement <- isTRUE(vcf$provenance$source_observation_conflict) || any(vapply(list(vcf,bam),function(x)
       !is.null(x$vaf) && !is.null(selected$vaf) && abs(x$vaf-selected$vaf)>1e-8,TRUE))
   }
   selected
