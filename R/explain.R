@@ -4,6 +4,7 @@ neo_explain_core <- function(project, candidate_id = NULL, reason = NULL,
   snapshot <- read_runtime_snapshot(project)
   if (!isTRUE(project$longitudinal_accessor_guard) && longitudinal_aggregate(project))
     return(longitudinal_aggregate_explain(project, candidate_id, reason, peptide, sample_id, match.arg(format)))
+  inputs <- input_evidence_read(project)
   somatic <- somatic_read_sidecar(project)
   priority <- somatic_priority_read(project,snapshot)
   hla <- hla_loh_read(project)
@@ -39,6 +40,9 @@ neo_explain_core <- function(project, candidate_id = NULL, reason = NULL,
          prediction = if (is.null(result$primary_prediction_ref)) NULL else
            Filter(function(x) identical(x$prediction_ref, result$primary_prediction_ref),
                   snapshot$run_manifest$predictions))
+    if (!is.null(inputs)) item$input_evidence <- list(vcf_sources=inputs$vcf_sources,
+      event_evidence=Filter(function(x) x$event_id %in% event_ids,inputs$event_evidence),
+      expression_evidence=Filter(function(x) x$sample_id==result$sample_id,inputs$expression_evidence))
     if (!is.null(biological)) item$somatic_evidence <- biological
     if (!is.null(priority)) {
       item$priority <- result[c("final_grade","grade_status","grade_reason_codes",

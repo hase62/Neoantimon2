@@ -8,11 +8,11 @@ somatic_evidence_policy <- function(x) {
   sources <- if (is.null(x$sources)) list() else x$sources
   if (!is.list(sources) || !is.null(names(sources)))
     stop("somatic evidence sources must be a record array")
-  kinds <- c("dna_reads","rna_reads","expression","purity","facets_cn","ccf","loh")
+  kinds <- c("dna_reads","rna_reads","expression","purity","facets_cn","ccf","loh","dna_bam","normal_dna_bam","rna_bam","ascat")
   for (i in seq_along(sources)) {
     s <- sources[[i]]
     strict_keys(s,c("kind","sample_id","path","source","source_version",
-      "reference_build","checksum"),"somatic evidence source")
+      "reference_build","checksum","format","options"),"somatic evidence source")
     if (is.null(s$kind) || !s$kind %in% kinds) stop("Unknown somatic evidence source kind")
     scalar_text(s$sample_id,"evidence sample_id")
     scalar_text(s$path,"evidence path")
@@ -24,6 +24,12 @@ somatic_evidence_policy <- function(x) {
       stop("Evidence checksum must be SHA256 hex")
     if (s$kind=="facets_cn" && is.null(s$reference_build))
       stop("FACETS source requires reference_build")
+    if (!is.null(s$format)) scalar_text(s$format,"evidence format")
+    if (s$kind %in% c("dna_bam","normal_dna_bam","rna_bam")) {
+      s$options <- input_bam_options(s$options)
+      scalar_text(s$reference_build,"BAM reference_build")
+    }
+    if (s$kind=="ascat") scalar_text(s$reference_build,"ASCAT reference_build")
     sources[[i]] <- s
   }
   keys <- vapply(sources,function(s) paste(s$kind,s$sample_id,sep="\037"),"")

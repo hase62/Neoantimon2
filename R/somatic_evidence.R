@@ -82,7 +82,7 @@ somatic_purity <- function(event,source,facets_source=NULL) {
     if (length(ploidies)>1L) stop("Conflicting FACETS ploidy metadata")
     if (length(values) || length(ploidies)) {
       row <- list(sample_id=event$sample_id,purity=if (length(values)) values[[1L]] else NULL,
-        ploidy=if (length(ploidies)) ploidies[[1L]] else NULL,method="FACETS")
+        ploidy=if (length(ploidies)) ploidies[[1L]] else NULL,method=if (identical(facets_source$adapter,"ASCAT-segments-v1")) "ASCAT" else "FACETS")
       source <- facets_source
     }
   }
@@ -280,6 +280,14 @@ somatic_expression_records <- function(sources,origins=list()) {
         gene_tpm=gene_tpm,transcript_tpm=transcript_tpm,
         status=if (is.null(gene_tpm) && is.null(transcript_tpm)) "unavailable" else "available",
         provenance=somatic_source_provenance(source))
+      if (!is.null(row$quantification_method)) {
+        record$quantification_method <- row$quantification_method
+        record$expression_unit <- row$expression_unit
+        record$estimated_count <- somatic_number(row$estimated_count,"expression count",minimum=0)
+        record$fpkm <- somatic_number(row$fpkm,"expression FPKM",minimum=0)
+        record$measurement_status <- if(!is.null(record$estimated_count)) "observed_count" else "unavailable_count"
+        record$tpm_status <- record$status
+      }
       record$evidence_id <- paste0("expression-evidence:",infra_hash(record))
       out[[length(out)+1L]] <- record
     }
@@ -362,9 +370,9 @@ somatic_event_record <- function(event,sources,segments_by_sample) {
   dna_source <- source("dna_reads"); rna_source <- source("rna_reads")
   cn_source <- source("facets_cn"); ccf_source <- source("ccf")
   loh_source <- source("loh")
-  tumor <- somatic_assay(event,somatic_match_event_row(dna_source,event),"tumor",dna_source)
-  normal <- somatic_assay(event,somatic_match_event_row(dna_source,event),"normal",dna_source)
-  rna <- somatic_assay(event,somatic_match_event_row(rna_source,event),"rna",rna_source)
+  tumor <- input_assay(event,somatic_match_event_row(dna_source,event),"tumor",dna_source)
+  normal <- input_assay(event,somatic_match_event_row(dna_source,event),"normal",dna_source)
+  rna <- input_assay(event,somatic_match_event_row(rna_source,event),"rna",rna_source)
   purity <- somatic_purity(event,source("purity"),cn_source)
   cn <- somatic_cn_map(event,segments_by_sample[[event$sample_id]],cn_source)
   ccf <- somatic_ccf(event,somatic_match_event_row(ccf_source,event),ccf_source,

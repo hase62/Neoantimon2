@@ -11,6 +11,13 @@ somatic_source_files <- function(project) {
       stop("Evidence source checksum mismatch")
     s$resolved_path <- path
     s$sha256 <- sha
+    if (s$kind %in% c("dna_bam","normal_dna_bam","rna_bam")) {
+      indexes <- c(paste0(path,".bai"),sub("[.]bam$",".bai",path),paste0(path,".csi"))
+      indexes <- unique(indexes[file.exists(indexes)])
+      if (length(indexes)!=1L) stop("BAM requires exactly one existing unambiguous BAI/CSI index; index it externally")
+      s$index_path <- indexes[[1L]]
+      s$index_sha256 <- digest::digest(file=s$index_path,algo="sha256",serialize=FALSE)
+    }
     s$source_id <- paste0("somatic-source:",infra_hash(list(kind=s$kind,
       sample_id=s$sample_id,source=s$source,version=s$source_version,
       reference_build=s$reference_build,sha256=sha)))
@@ -65,7 +72,7 @@ somatic_row_value <- function(row,name) {
 
 somatic_source_provenance <- function(source) {
   if (is.null(source)) return(NULL)
-  list(source_id=source$source_id,kind=source$kind,source=source$source,
+  list(source_id=source$source_id,kind=if(is.null(source$original_kind)) source$kind else source$original_kind,source=source$source,
     source_version=source$source_version,artifact=source$resolved_path,
     sha256=source$sha256,reference_build=source$reference_build,
     sample_id=source$sample_id)

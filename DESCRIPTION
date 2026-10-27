@@ -15,5 +15,5 @@ License: file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1.0)
 Imports: jsonlite, digest, stringi, yaml, xml2, tools
-Suggests: testthat (>= 3.0.0), jsonvalidate, pkgload
+Suggests: testthat (>= 3.0.0), jsonvalidate, pkgload, Rsamtools, GenomicRanges, IRanges
 Config/testthat/edition: 3
