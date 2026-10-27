@@ -91,9 +91,7 @@ input_assay <- function(event,row,assay,source) {
   measured <- !is.null(explicit$vaf) || !is.null(explicit$alt_reads) || !is.null(explicit$depth)
   vcf <- if (assay=="tumor") input_vcf_assay(event,allow_conflict=measured) else NULL
   bam <- if (is.null(source)) NULL else source$bam_observations[[event$event_id]][[assay]]
-  # Preserve existing table/canonical-event contract; an entirely unmeasured
-  # table row does not hide available VCF evidence.
-  measured <- !is.null(explicit$vaf) || !is.null(explicit$alt_reads) || !is.null(explicit$depth)
+  # An entirely unmeasured table row does not hide available VCF evidence.
   selected <- if (measured) explicit else if (!is.null(vcf$vaf)) vcf else
     if (!is.null(bam)) bam else if (!is.null(vcf)) vcf else explicit
   if (!is.null(vcf) || !is.null(bam)) {

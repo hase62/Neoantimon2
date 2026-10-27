@@ -69,6 +69,8 @@ reopening. It leaves `p`, `events`, `origins` and `results` ready to inspect.
 
 ## Analyze your own data
 
+Local development: [source-file evidence and numerical priorities](docs/user/source-evidence-and-priorities.md) are unreleased additions and are not part of immutable v0.3.0.
+
 First obtain a complete reference bundle in a durable data directory. From R,
 `neo_download_resources(profile = "minimum", dest = path.expand("~/neo-data"))`
 obtains the supported
@@ -232,5 +234,3 @@ constitute validation of this package.
 Commercial use requires separate permission/licensing from Takanori Hasegawa
 (<hasegawa.t.d968@m.isct.ac.jp>); an inquiry does not grant permission.
 Third-party tools/resources/converters retain their own terms. This is not a CRAN submission.
-
-Local development: [source-file evidence and numerical priorities](docs/user/source-evidence-and-priorities.md) are unreleased additions and are not part of immutable v0.3.0.
