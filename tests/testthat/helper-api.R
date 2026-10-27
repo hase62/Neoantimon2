@@ -8,10 +8,11 @@ public_api_by_milestone <- list(
                "neo_external_results", "neo_external_explain"),
   phase3_setup = c("neo_download_resources", "neo_check_resources",
                    "neo_check_predictors", "neo_setup_predictor"),
+  source_evidence = c("neo_priorities"),
   later = c("neo_regrade", "neo_import_prediction", "neo_doctor")
 )
 approved_public_api <- unlist(public_api_by_milestone, use.names = FALSE)
 t004_public_api <- unlist(public_api_by_milestone[c("T003", "T004")],
                           use.names = FALSE)
-current_public_api <- unlist(public_api_by_milestone[c("T003", "T004", "T058_T063", "phase3_setup")],
+current_public_api <- unlist(public_api_by_milestone[c("T003", "T004", "T058_T063", "phase3_setup", "source_evidence")],
                             use.names = FALSE)

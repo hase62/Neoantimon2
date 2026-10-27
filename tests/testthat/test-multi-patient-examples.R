@@ -191,3 +191,27 @@ test_that("ordinary timepoint labels do not activate longitudinal semantics", {
   expect_false(dir.exists(file.path(p$path, "results", "longitudinal")))
   expect_setequal(neo_results(p)$candidate_id, neo_results(cohort_example$p2)$candidate_id)
 })
+
+
+test_that("VCF-derived VAF stays separate across three samples and two patients", {
+  root <- tempfile();dir.create(root);dir.create(file.path(root,"inputs"))
+  cfg <- cohort_example$cfg
+  cfg$paths$input_root <- cfg$paths$data_root <- file.path(root,"inputs")
+  cfg$paths$run_root <- file.path(root,"runs")
+  for (i in 1:3) writeLines(c("##fileformat=VCFv4.2",
+    "##FORMAT=<ID=AD,Number=R,Type=Integer,Description=Allelic depths>",
+    paste0("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS",i),
+    paste0("chr1\t4\t.\tG\tA\t.\tPASS\t.\tAD\t",100-10*i,",",10*i)),
+    file.path(root,"inputs",paste0("S",i,".vcf")))
+  p <- neo_run(neo_project(samples=data.frame(sample_id=paste0("S",1:3),patient_id=c("P1","P1","P2")),
+    hla=list(P1="HLA-A*02:01",P2="HLA-B*07:02"),config=cfg,
+    inputs=lapply(1:3,function(i)list(input_id=paste0("vcf-",i),input_role="somatic_vcf",
+      sample_id=paste0("S",i),path=paste0("S",i,".vcf")))))
+  z <- neo_priorities(p)
+  for(i in 1:3) {
+    rows <- z[z$sample_id==paste0("S",i),]
+    expect_true(nrow(rows)>0L);expect_equal(unique(rows$dna_vaf),i/10)
+    expect_identical(unique(rows$patient_id),if(i==3) "P2" else "P1")
+    expect_identical(unique(rows$mhc_key),if(i==3) "HLA-B*07:02" else "HLA-A*02:01")
+  }
+})
