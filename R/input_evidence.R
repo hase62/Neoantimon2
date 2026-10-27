@@ -13,8 +13,8 @@ input_vcf_assay <- function(event) {
       x <- fields[[key]]
       if (is.null(x) || x==".") return(NULL)
       v <- event_vcf_allele_values(x,number,n,paste("tumor FORMAT",key))
-      if (is.null(v) || any(v==".")) return(NULL)
-      lapply(v,function(x) somatic_integer(x,paste("tumor FORMAT",key)))
+      if (is.null(v)) return(NULL)
+      lapply(v,function(x) if(x==".") NA_integer_ else somatic_integer(x,paste("tumor FORMAT",key)))
     }
     ad <- parse("AD","R"); ao <- parse("AO","A")
     ro <- if (is.null(fields$RO) || fields$RO==".") NULL else
@@ -23,7 +23,7 @@ input_vcf_assay <- function(event) {
       somatic_integer(fields$DP,"tumor FORMAT DP")
     counted <- NULL; method <- NULL
     if (!is.null(ad)) { counted <- unlist(ad); method <- "FORMAT/AD" }
-    if (is.null(counted) && !is.null(ao) && !is.null(ro)) {
+    if ((is.null(counted) || anyNA(counted)) && !is.null(ao) && !anyNA(unlist(ao)) && !is.null(ro)) {
       counted <- c(ro,unlist(ao)); method <- "FORMAT/AO+RO"
     }
     reported <- NULL
@@ -38,24 +38,26 @@ input_vcf_assay <- function(event) {
         reported <- somatic_number(values[[i]],"tumor FORMAT AF",0,1)
     }
     if (is.null(counted) && is.null(reported)) next
-    if (!is.null(counted) && (sum(counted)>.Machine$integer.max ||
-        (!is.null(dp) && sum(counted)>dp)))
+    if (!is.null(counted) && (sum(counted,na.rm=TRUE)>.Machine$integer.max ||
+        (!is.null(dp) && sum(counted,na.rm=TRUE)>dp)))
       stop("Tumor VCF allele depths exceed DP or supported integer range: ",event$event_id)
-    denominator <- if (is.null(counted)) NULL else as.integer(sum(counted))
+    denominator <- if (is.null(counted) || anyNA(counted)) NULL else as.integer(sum(counted))
+    count_at <- function(j) if(is.null(counted) || is.na(counted[[j]])) NULL else as.integer(counted[[j]])
     value <- if (!is.null(denominator) && denominator>0) counted[[i+1L]]/denominator else NULL
-    if (!is.null(reported) && !is.null(denominator) && denominator==0L)
+    if (!is.null(reported) && ((!is.null(denominator) && denominator==0L) || (!is.null(dp) && dp==0L)))
       stop("Tumor FORMAT AF conflicts with zero allele depth")
     conflict <- !is.null(value) && !is.null(reported) && abs(value-reported)>1e-8
-    obs <- list(ref_reads=if (is.null(counted)) NULL else as.integer(counted[[1L]]),
-      alt_reads=if (is.null(counted)) NULL else as.integer(counted[[i+1L]]),
-      depth=dp,usable_depth=denominator,other_reads=if (is.null(counted)) NULL else
+    obs <- list(ref_reads=count_at(1L),
+      alt_reads=count_at(i+1L),
+      depth=dp,usable_depth=denominator,other_reads=if (is.null(counted) || anyNA(counted)) NULL else
         as.integer(sum(counted)-counted[[1L]]-counted[[i+1L]]),
       ambiguous_reads=NULL,vaf_denominator=denominator,
       vaf=if (!is.null(value)) value else reported,reported_vaf=reported,
       vaf_status=if (!is.null(value)) "derived" else if (!is.null(reported)) "supplied" else "unavailable",
       count_unit=if (is.null(counted)) NULL else "read",
       status=if (!is.null(denominator) && denominator==0L) "insufficient_depth" else
-        if (is.null(counted)) "fraction_only" else if (counted[[i+1L]]>0) "observed_support" else "observed_no_alt",
+        if (is.null(count_at(i+1L))) {if(!is.null(reported)) "fraction_only" else "not_evaluated"} else
+        if (counted[[i+1L]]>0) "observed_support" else "observed_no_alt",
       provenance=list(source="tumor_vcf",input_id=record$input_id,line=record$line,
         selected_alt_index=i,method=if (is.null(method)) "FORMAT/AF" else method,
         denominator_policy="sum_all_allele_depths",raw_format=record$raw_format,
@@ -78,8 +80,8 @@ input_assay <- function(event,row,assay,source) {
   # Preserve existing table/canonical-event contract; an entirely unmeasured
   # table row does not hide available VCF evidence.
   measured <- !is.null(explicit$vaf) || !is.null(explicit$alt_reads) || !is.null(explicit$depth)
-  selected <- if (measured) explicit else if (!is.null(vcf)) vcf else
-    if (!is.null(bam)) bam else explicit
+  selected <- if (measured) explicit else if (!is.null(vcf$vaf)) vcf else
+    if (!is.null(bam)) bam else if (!is.null(vcf)) vcf else explicit
   if (!is.null(vcf) || !is.null(bam)) {
     selected$alternatives <- list(vcf=vcf,bam=bam)
     selected$source_precedence <- "explicit_table_or_event > tumor_VCF > BAM_fallback"

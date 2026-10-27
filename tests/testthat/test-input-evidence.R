@@ -16,6 +16,9 @@ test_that("tumor FORMAT counts/estimated fractions use correct ALT and denominat
   multi$event_details_json$source_records[[1]]$selected_alt_index <- 1L
   expect_equal(f(multi)$vaf,.2)
   expect_equal(f(input_fixture_event("20:80","AO:RO"))$vaf,.2)
+  partial <- f(input_fixture_event("50,20,.","AD",alts=list("A","C")))
+  expect_equal(partial$alt_reads,20L);expect_null(partial$vaf);expect_null(partial$vaf_denominator)
+  expect_error(f(input_fixture_event(".2:0","AF:DP")),"zero")
   expect_null(f(input_fixture_event("100","DP")))
   pop <- input_fixture_event("100","DP");pop$event_details_json$source_records[[1]]$raw_info <- "AF=0.9"
   expect_null(f(pop))
@@ -39,6 +42,9 @@ test_that("explicit evidence retains precedence and all alternative provenance",
   x <- Neoantimon2:::input_assay(event,list(tumor_ref_reads="50",tumor_alt_reads="50"),"tumor",source)
   expect_equal(x$vaf,.5);expect_equal(x$alternatives$vcf$vaf,.2);expect_true(x$source_disagreement)
   expect_equal(Neoantimon2:::input_assay(event,NULL,"tumor",NULL)$vaf,.2)
+  partial <- input_fixture_event("50,20,.","AD",alts=list("A","C"))
+  source$bam_observations <- list();source$bam_observations[[partial$event_id]] <- list(tumor=list(vaf=.5,status="observed_support"))
+  expect_equal(Neoantimon2:::input_assay(partial,NULL,"tumor",source)$vaf,.5)
 })
 
 test_that("CIGAR haplotype classification handles indels, splicing and quality", {
