@@ -37,6 +37,8 @@ input_bam_haplotype <- function(pos,cigar,sequence,qualities,start,end,min_baseq
       rp <- rp+len; qp <- qp+len
     } else if (op=="I") {
       anchor <- rp-1L
+      if (op=="D" && anchor<start && anchor+n>=event$pos)
+        return("ambiguous") # A spanning deletion is not target REF evidence.
       if (anchor>=start && anchor<=end) {
         qi <- seq.int(qp,qp+len-1L)
         if (any(qi>length(bases)) || any(qual[qi]<min_baseq)) return(NULL)
@@ -53,6 +55,48 @@ input_bam_haplotype <- function(pos,cigar,sequence,qualities,start,end,min_baseq
     } else if (op=="S") qp <- qp+len
   }
   if (!all(covered)) NULL else paste(hap,collapse="")
+}
+
+# Target-specific indel edits are normalized with the same reference/VCF
+# normalizer as Events. Unrelated aligned substitutions do not negate an indel.
+# Full window coverage/quality remains required; N is never a deletion.
+input_bam_indel_call <- function(pos,cigar,sequence,qualities,start,end,
+    core_end,event,reference,min_baseq) {
+  if (is.null(input_bam_haplotype(pos,cigar,sequence,qualities,start,end,min_baseq)))
+    return("unusable")
+  tokens <- regmatches(cigar,gregexpr("[0-9]+[MIDNSHP=X]",cigar))[[1L]]
+  rp <- pos;qp <- 1L;edits <- list()
+  for (token in tokens) {
+    op <- substring(token,nchar(token));n <- as.integer(substr(token,1L,nchar(token)-1L))
+    if (op %in% c("I","D")) {
+      anchor <- rp-1L
+      if (op=="D" && anchor<start && anchor+n>=event$pos)
+        return("ambiguous") # A spanning deletion is not target REF evidence.
+      if (anchor>=start && anchor<=end) {
+        if (anchor<1L) return("ambiguous")
+        ref <- event_reference_fetch(reference,event$contig,anchor,
+          if(op=="D") anchor+n else anchor)
+        alt <- if(op=="I") paste0(ref,substr(sequence,qp,qp+n-1L)) else substr(ref,1L,1L)
+        edit <- tryCatch(event_normalize(reference,event$contig,anchor,ref,alt),error=function(e)NULL)
+        if (is.null(edit)) return("ambiguous")
+        original_end <- anchor + if(op=="D") n else 0L
+        relevant <- (anchor<=core_end && original_end>=event$pos) ||
+          (edit$pos<=core_end && edit$end>=event$pos)
+        if (relevant) {
+          observed_anchor <- input_bam_haplotype(pos,cigar,sequence,qualities,anchor,anchor,min_baseq)
+          if (is.null(observed_anchor) || substr(observed_anchor,1L,1L)!=substr(ref,1L,1L))
+            return("ambiguous")
+          edits[[length(edits)+1L]] <- edit
+        }
+      }
+    }
+    if(op %in% c("M","=","X","D","N")) rp <- rp+n
+    if(op %in% c("M","=","X","I","S")) qp <- qp+n
+  }
+  if (!length(edits)) return("ref")
+  if (length(edits)!=1L) return("ambiguous")
+  edit <- edits[[1L]]
+  if (edit$pos==event$pos && edit$ref==event$ref && edit$alt==event$alt) "alt" else "other"
 }
 
 input_bam_observations <- function(source,events,project) {
@@ -74,9 +118,8 @@ input_bam_observations <- function(source,events,project) {
   bundle <- reference_bundle(project);reference <- event_reference_open(bundle)
   on.exit(event_reference_close(reference))
   target <- header$targets
-  ix <- match(names(target),reference$fai$contig)
-  if (anyNA(ix) || any(as.numeric(target)!=reference$fai$length[ix]))
-    stop("BAM contig names/lengths incompatible with selected reference")
+  # Non-target ALT/decoy/unplaced sequences do not invalidate a queried locus.
+  # Validate every actually queried contig exactly, not unrelated header targets.
   flag <- Rsamtools::scanBamFlag(isUnmappedQuery=FALSE,isSecondaryAlignment=FALSE,
     isSupplementaryAlignment=FALSE,isNotPassingQualityControls=FALSE,
     isDuplicate=if (options$include_duplicates) NA else FALSE)
@@ -95,6 +138,9 @@ input_bam_observations <- function(source,events,project) {
     } else {
       event_validate_ref(reference,event$contig,event$pos,event$ref)
       if (!event$contig %in% names(target)) stop("BAM lacks required variant contig: ",event$contig)
+      ri <- match(event$contig,reference$fai$contig)
+      if (is.na(ri) || as.numeric(target[[event$contig]])!=reference$fai$length[[ri]])
+        stop("Queried BAM contig length incompatible with selected reference: ",event$contig)
       flank <- if (event$event_type=="SNV") 0L else 10L
       start <- max(1L,event$pos-flank)
       right <- event$pos+nchar(event$ref)-1L
@@ -121,6 +167,9 @@ input_bam_observations <- function(source,events,project) {
       if (length(bam$qname) && (is.null(bam$tag$RG) || anyNA(bam$tag$RG) || any(!bam$tag$RG %in% ids)))
         stop("BAM alignment has missing/unknown read group")
       classifications <- lapply(seq_along(bam$qname),function(i) {
+        if (event$event_type %in% c("INS","DEL")) return(input_bam_indel_call(
+          bam$pos[[i]],bam$cigar[[i]],as.character(bam$seq[[i]]),as.character(bam$qual[[i]]),
+          start,end,right,event,reference,options$min_baseq))
         h <- input_bam_haplotype(bam$pos[[i]],bam$cigar[[i]],as.character(bam$seq[[i]]),
           as.character(bam$qual[[i]]),start,end,options$min_baseq)
         if (is.null(h)) "unusable" else if (h==ref) "ref" else if (h==alt) "alt" else "other"
@@ -132,19 +181,23 @@ input_bam_observations <- function(source,events,project) {
         if (!length(x)) "unusable" else if (length(x)>1L) "ambiguous" else x[[1L]]
       },"")
       nref <- sum(calls=="ref");nalt <- sum(calls=="alt");den <- nref+nalt
-      counts <- list(ref_reads=as.integer(nref),alt_reads=as.integer(nalt),
+      unresolved <- event$event_type %in% c("INS","DEL") && any(calls=="ambiguous")
+      counts <- list(ref_reads=if(unresolved) NULL else as.integer(nref),
+        alt_reads=if(unresolved) NULL else as.integer(nalt),
+        resolved_ref_fragments=as.integer(nref),resolved_alt_fragments=as.integer(nalt),
         depth=as.integer(length(calls)),usable_depth=as.integer(den),
         other_reads=as.integer(sum(calls=="other")),ambiguous_reads=as.integer(sum(calls=="ambiguous")),
-        vaf_denominator=as.integer(den),vaf=if (den>0) nalt/den else NULL,
-        reported_vaf=NULL,count_unit="fragment",vaf_status=if(den>0) "derived" else "unavailable",
-        status=if (den==0) "insufficient_depth" else if(nalt>0) "observed_support" else "observed_no_alt")
+        vaf_denominator=as.integer(den),vaf=if (den>0 && !unresolved) nalt/den else NULL,
+        reported_vaf=NULL,count_unit="fragment",vaf_status=if(den>0 && !unresolved) "derived" else "unavailable",
+        status=if(unresolved) "ambiguous" else if (den==0) "insufficient_depth" else if(nalt>0) "observed_support" else "observed_no_alt")
     }
     counts$provenance <- c(somatic_source_provenance(source),list(
-      method="indexed-CIGAR-local-haplotype-fragments-v1",options=options,
+      method="indexed-CIGAR-normalized-target-edit-fragments-v2",options=options,
       alignment_reader="Rsamtools",alignment_reader_version=as.character(utils::packageVersion("Rsamtools")),
       read_group_ids=as.list(ids),index_sha256=source$index_sha256,
       overlap_policy="one_RG_qname_fragment; discordant mates ambiguous",
-      reference_check="declared_assembly+contig_lengths+VCF_REF; not whole-genome BAM base verification"))
+      indel_policy="normalized_target_edit; unrelated substitutions ignored; unresolved local edits withhold assay counts/VAF; resolved fragment counts retained for QC",
+      reference_check="declared_assembly+queried_contig_lengths+VCF_REF; non-target header contigs ignored"))
     out[[event$event_id]] <- stats::setNames(list(counts),assay)
   }
   out

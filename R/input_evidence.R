@@ -1,5 +1,5 @@
 # Additive source-file evidence. No alteration of somatic grade/rank policies.
-input_evidence_version <- function() "source-evidence-v1"
+input_evidence_version <- function() "source-evidence-v2-postreview"
 
 input_vcf_assay <- function(event,allow_conflict=FALSE) {
   if (!identical(event$event_role,"somatic")) return(NULL)
@@ -93,17 +93,46 @@ input_vcf_assay <- function(event,allow_conflict=FALSE) {
 
 input_assay <- function(event,row,assay,source) {
   explicit <- somatic_assay(event,row,assay,source)
-  measured <- !is.null(explicit$vaf) || !is.null(explicit$alt_reads) || !is.null(explicit$depth)
-  vcf <- if (assay=="tumor") input_vcf_assay(event,allow_conflict=measured) else NULL
+  # Allele measurements are selected as a coherent bundle. Depth alone is an
+  # independent observation, not evidence that ALT fraction was measured.
+  complete <- !is.null(explicit$vaf) ||
+    (!is.null(explicit$ref_reads) && !is.null(explicit$alt_reads)) ||
+    identical(explicit$status,"invalid_counts")
+  vcf <- if (assay=="tumor") input_vcf_assay(event,allow_conflict=complete) else NULL
   bam <- if (is.null(source)) NULL else source$bam_observations[[event$event_id]][[assay]]
-  # An entirely unmeasured table row does not hide available VCF evidence.
-  selected <- if (measured) explicit else if (!is.null(vcf$vaf)) vcf else
+  selected <- if (complete) explicit else if (!is.null(vcf$vaf)) vcf else
     if (!is.null(bam)) bam else if (!is.null(vcf)) vcf else explicit
   if (!is.null(vcf) || !is.null(bam)) {
-    selected$alternatives <- list(vcf=vcf,bam=bam)
-    selected$source_precedence <- "explicit_table_or_event > tumor_VCF > BAM_fallback"
-    selected$source_disagreement <- isTRUE(vcf$provenance$source_observation_conflict) || any(vapply(list(vcf,bam),function(x)
-      !is.null(x$vaf) && !is.null(selected$vaf) && abs(x$vaf-selected$vaf)>1e-8,TRUE))
+    known <- function(x) any(vapply(x[c("ref_reads","alt_reads","depth","vaf")],
+      function(v)!is.null(v),TRUE))
+    alternatives <- list(vcf=vcf,bam=bam)
+    if (known(explicit)) alternatives$explicit <- explicit
+    differs <- function(x,y,fields) any(vapply(fields,function(f)
+      !is.null(x[[f]]) && !is.null(y[[f]]) && abs(x[[f]]-y[[f]])>1e-8,TRUE))
+    comparable <- function(x,y) c("vaf",if(!is.null(x$count_unit) &&
+      identical(x$count_unit,y$count_unit)) c("ref_reads","alt_reads","depth"))
+    conflict <- !complete && differs(explicit,selected,intersect(
+      comparable(explicit,selected),c("ref_reads","alt_reads","vaf")))
+    selected$measurement_sources <- list(alleles=selected$provenance,depth=selected$provenance)
+    # Attach an independently sourced depth only when the selected bundle lacks
+    # it and its unit agrees. Never use this depth to derive or replace VAF.
+    if (!complete && is.null(selected$depth) && !is.null(explicit$depth) &&
+        identical(explicit$count_unit,selected$count_unit)) {
+      selected$depth <- explicit$depth
+      selected$measurement_sources$depth <- explicit$provenance
+    }
+    selected$depth_count_disagreement <- !is.null(selected$depth) &&
+      !is.null(selected$vaf_denominator) && selected$vaf_denominator>selected$depth
+    selected$alternatives <- alternatives
+    selected$source_precedence <- "complete_explicit_alleles > tumor_VCF > BAM_fallback; independent_depth"
+    selected$source_disagreement <- isTRUE(vcf$provenance$source_observation_conflict) ||
+      selected$depth_count_disagreement ||
+      any(vapply(alternatives,function(x)differs(x,selected,comparable(x,selected)),TRUE))
+    if (conflict) {
+      selected$ambiguous_allele_observation <- selected[c("ref_reads","alt_reads","vaf_denominator","vaf")]
+      selected$ref_reads <- NULL;selected$alt_reads <- NULL
+      selected$vaf <- NULL;selected$vaf_status <- "ambiguous";selected$status <- "ambiguous"
+    }
   }
   selected
 }

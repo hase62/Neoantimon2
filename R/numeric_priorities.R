@@ -37,6 +37,16 @@ priority_paper_metric <- function(category,unit,kind,semantics,metric,direction)
   NULL
 }
 
+priority_expression_value <- function(rows,field) {
+  values <- unlist(lapply(rows,`[[`,field))
+  if (!length(values)) return(list(value=NULL,status="unavailable"))
+  if (any(!is.finite(values) | values<0)) stop("Invalid expression measurement")
+  # No source is declared universally superior. Even small disagreements are
+  # retained as conflicts, never resolved by max(), averaging or source order.
+  if (length(unique(values))>1L) return(list(value=NULL,status="conflict"))
+  list(value=values[[1L]],status="consistent")
+}
+
 #' Additional model-specific priorities and source-file evidence
 #' @param project A completed neo_project.
 #' @param analysis Optional completed external analysis handle or ID.
@@ -84,8 +94,9 @@ neo_priorities <- function(project, analysis = NULL,
       a_missing <- is.null(a)
       expr <- Filter(function(x)x$sample_id==candidate$sample_id &&
         !is.null(x$transcript_id) && sub("\\.[0-9]+$","",x$transcript_id)==origin$transcript_id,raw$expression_evidence)
-      best <- function(field) {x <- unlist(lapply(expr,`[[`,field));if(length(x)) max(x) else NULL}
-      gene <- best("gene_tpm");tx <- best("transcript_tpm")
+      gene_value <- priority_expression_value(expr,"gene_tpm")
+      tx_value <- priority_expression_value(expr,"transcript_tpm")
+      gene <- gene_value$value;tx <- tx_value$value
       expression <- gene # Paper E is corresponding gene expression, never silently transcript abundance.
       ccf <- if(!is.null(single) && single$ccf$status %in% c("external","conditional")) single$ccf$bounded_value else NULL
       for (prediction in own) {
@@ -134,7 +145,10 @@ neo_priorities <- function(project, analysis = NULL,
           vaf_channel=vaf,vaf_missing_substituted=a_missing,
           vaf_note=if(length(ids)>1L) "compound_origin_no_single_VAF" else if(a_missing) "unavailable_observation_remains_NA" else "observed",
           gene_tpm=scalar(gene),transcript_tpm=scalar(tx),ccf=scalar(ccf),
-          evidence_adjustment="within-channel empirical order quantile * VAF; no probability interpretation",
+          evidence_adjustment="EXPLORATORY candidate-set-dependent within-channel order quantile * VAF; not calibrated or cross-cohort comparable",
+          adjusted_priority_status="exploratory_candidate_set_dependent",
+          gene_tpm_status=gene_value$status,transcript_tpm_status=tx_value$status,
+          expression_selection="require_consistent_measurements; conflicts_unavailable; originals_retained",
           biological_evidence=ev,expression_evidence=expr,prediction_provenance=prediction,
           paper_without_ccf=NA_real_,paper_with_ccf=NA_real_,paper_ccf_factor=NA_real_,
           paper_status="not_requested",paper_wt_provenance=NULL)
@@ -166,6 +180,8 @@ neo_priorities <- function(project, analysis = NULL,
             }
           }
         }
+        if (method=="neoantimon-paper-2020-v1" && gene_value$status=="conflict")
+          row$paper_status <- "expression_conflict_no_paper_score"
         rows[[length(rows)+1L]] <- row
       }
     }

@@ -72,10 +72,12 @@ somatic_row_value <- function(row,name) {
 
 somatic_source_provenance <- function(source) {
   if (is.null(source)) return(NULL)
-  list(source_id=source$source_id,kind=if(is.null(source$original_kind)) source$kind else source$original_kind,source=source$source,
+  result <- list(source_id=source$source_id,kind=if(is.null(source$original_kind)) source$kind else source$original_kind,source=source$source,
     source_version=source$source_version,artifact=source$resolved_path,
     sha256=source$sha256,reference_build=source$reference_build,
     sample_id=source$sample_id)
+  if (!is.null(source$sample_mapping)) result$sample_mapping <- source$sample_mapping
+  result
 }
 
 somatic_source_index <- function(sources,kind,sample_id) {

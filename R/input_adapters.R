@@ -37,7 +37,7 @@ input_ascat <- function(source,project) {
   if (!identical(source$reference_build,project$config$scientific$genome_assembly))
     stop("ASCAT reference_build mismatch; genome lift-over is not implicit")
   opts <- source$options
-  strict_keys(if(is.null(opts)) list() else opts,c("coordinate_system","normal_cn"),"ASCAT options")
+  strict_keys(if(is.null(opts)) list() else opts,c("coordinate_system","normal_cn","sample_name"),"ASCAT options")
   if (is.null(opts$coordinate_system) || opts$coordinate_system!="1-based-inclusive")
     stop("ASCAT requires explicit coordinate_system='1-based-inclusive' for SNP-position segments")
   format <- source$format
@@ -51,15 +51,25 @@ input_ascat <- function(source,project) {
   else stop("Unsupported ASCAT schema; raw LogR/BAF is not absolute copy number")
   required <- c("sample","chr","startpos","endpos","nMajor","nMinor")
   if (!all(required %in% names(tab))) stop("ASCAT segments need sample, chr, startpos, endpos, nMajor, nMinor")
-  if (anyNA(tab[required]) || any(as.character(tab$sample)!=source$sample_id))
-    stop("ASCAT segments contain missing values or conflicting sample identities")
+  if (anyNA(tab[required])) stop("ASCAT segments contain missing values or conflicting sample identities")
+  upstream_samples <- unique(as.character(tab$sample))
+  expected <- if(is.null(opts$sample_name)) source$sample_id else opts$sample_name
+  scalar_text(expected,"ASCAT sample_name")
+  if (!expected %in% upstream_samples ||
+      (is.null(opts$sample_name) && any(upstream_samples!=expected)))
+    stop("ASCAT sample identities mismatch; declare a verified options$sample_name mapping explicitly")
+  tab <- tab[as.character(tab$sample)==expected,,drop=FALSE]
+  source$sample_mapping <- list(upstream_sample=expected,neo_sample=source$sample_id,
+    policy=if(is.null(opts$sample_name)) "exact_identity" else "explicit_verified_declaration")
   metadata <- function(name,old=NULL) {
     value <- object[[name]]
     if (is.null(value) && !is.null(old)) value <- object[[old]]
     if (is.null(value)) return(NULL)
+    if (is.null(names(value)) && length(upstream_samples)>1L)
+      stop("ASCAT multi-sample metadata must be named by upstream sample")
     if (!is.null(names(value))) {
-      if (!source$sample_id %in% names(value)) stop("ASCAT metadata sample mismatch")
-      value <- value[[source$sample_id]]
+      if (anyDuplicated(names(value)) || !expected %in% names(value)) stop("ASCAT metadata sample mismatch")
+      value <- value[[expected]]
     }
     somatic_number(value,paste("ASCAT",name),minimum=0,maximum=if(name=="purity") 1 else Inf)
   }
