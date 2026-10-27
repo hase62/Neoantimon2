@@ -48,6 +48,8 @@ test_that("tumor FORMAT counts/estimated fractions use correct ALT and denominat
   ambiguous <- f(mixed)
   expect_identical(ambiguous$status,"ambiguous");expect_null(ambiguous$vaf)
   expect_true(ambiguous$provenance$source_observation_conflict)
+  raw <- Neoantimon2:::somatic_raw_construct(list(mixed),somatic_test_peptide(),list())
+  expect_identical(raw$event_evidence[[1L]]$tumor$status,"ambiguous")
   explicit <- Neoantimon2:::input_assay(mixed,list(tumor_ref_reads="50",tumor_alt_reads="50"),"tumor",somatic_test_source("dna_reads"))
   expect_equal(explicit$vaf,.5);expect_true(explicit$source_disagreement)
   e$event_role <- "germline";expect_null(f(e))
