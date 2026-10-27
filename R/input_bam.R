@@ -37,8 +37,6 @@ input_bam_haplotype <- function(pos,cigar,sequence,qualities,start,end,min_baseq
       rp <- rp+len; qp <- qp+len
     } else if (op=="I") {
       anchor <- rp-1L
-      if (op=="D" && anchor<start && anchor+n>=event$pos)
-        return("ambiguous") # A spanning deletion is not target REF evidence.
       if (anchor>=start && anchor<=end) {
         qi <- seq.int(qp,qp+len-1L)
         if (any(qi>length(bases)) || any(qual[qi]<min_baseq)) return(NULL)
