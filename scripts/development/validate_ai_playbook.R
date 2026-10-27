@@ -120,7 +120,10 @@ pass('absolute CLI invocation from another directory resolves same helper and su
 expected<-c('neo_project','neo_config','neo_run','neo_results','neo_events','neo_origins','neo_multisample','neo_explain',
  'neo_export_bundle','neo_analyze_external','neo_external_results','neo_external_explain',
  'neo_download_resources','neo_check_resources','neo_check_predictors','neo_setup_predictor')
-stopifnot(setequal(getNamespaceExports('Neoantimon2'),expected))
+# The released signatures remain fixed; the local source-evidence branch adds
+# only the separately documented read-only numerical accessor.
+additional<-intersect('neo_priorities',getNamespaceExports('Neoantimon2'))
+stopifnot(setequal(getNamespaceExports('Neoantimon2'),c(expected,additional)))
 signatures<-lapply(expected,function(n) names(formals(getExportedValue('Neoantimon2',n))));names(signatures)<-expected
 pass('16 released public API signatures inspected')
 jsonlite::write_json(list(status='PASS',checks=checks,pass=length(checks),fail=0L,

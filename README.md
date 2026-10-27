@@ -232,3 +232,5 @@ constitute validation of this package.
 Commercial use requires separate permission/licensing from Takanori Hasegawa
 (<hasegawa.t.d968@m.isct.ac.jp>); an inquiry does not grant permission.
 Third-party tools/resources/converters retain their own terms. This is not a CRAN submission.
+
+Local development: [source-file evidence and numerical priorities](docs/user/source-evidence-and-priorities.md) are unreleased additions and are not part of immutable v0.3.0.
