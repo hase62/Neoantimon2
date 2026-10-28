@@ -105,6 +105,18 @@ test_that("documented ASCAT workspaces and companion fits preserve identity and 
   bad <- f$source;bad$options$metadata_format <- NULL;expect_error(bind(bad),"metadata_format")
   bad <- f$source;bad$options$sample_name <- NULL
   expect_error(Neoantimon2:::input_ascat(bind(bad),p),"sample identities")
+  # A one-sample segment file cannot disambiguate unnamed multi-sample metadata.
+  single <- f$object$segments[1L,,drop=FALSE]
+  single_path <- file.path(f$root,"one-sample.segments.txt")
+  write.table(single,single_path,sep="\t",quote=FALSE,row.names=FALSE)
+  ascat.output <- f$object;ascat.output$purity <- .4;save(ascat.output,file=f$workspace)
+  one <- f$source;one$path <- single_path
+  expect_error(Neoantimon2:::input_ascat(bind(one),p),"must be named")
+  ascat.output <- f$object;save(ascat.output,file=f$workspace)
+  rds <- file.path(f$root,"ascat-output.rds");saveRDS(ascat.output,rds)
+  with_rds <- f$source;with_rds$options$metadata_path <- rds
+  with_rds$options$metadata_format <- "ascat_rds"
+  expect_identical(Neoantimon2:::input_ascat(bind(with_rds),p)$rows,x$rows)
   # Direct workspace import needs no hand-built conversion file.
   direct <- f$source;direct$path <- f$workspace;direct$format <- "ascat_rdata"
   direct$options$metadata_path <- direct$options$metadata_format <- NULL

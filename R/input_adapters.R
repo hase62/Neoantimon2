@@ -100,7 +100,8 @@ input_ascat <- function(source,project) {
     value <- object[[name]]
     if (is.null(value) && !is.null(old)) value <- object[[old]]
     if (is.null(value)) return(NULL)
-    if (is.null(names(value)) && length(upstream_samples)>1L)
+    metadata_samples <- unique(as.character(object$segments$sample))
+    if (is.null(names(value)) && length(metadata_samples)>1L)
       stop("ASCAT multi-sample metadata must be named by upstream sample")
     if (!is.null(names(value))) {
       if (anyDuplicated(names(value)) || !expected %in% names(value)) stop("ASCAT metadata sample mismatch")
