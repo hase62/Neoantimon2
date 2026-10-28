@@ -53,7 +53,8 @@ priority_expression_value <- function(rows,field) {
 #' @param method model-v1 or neoantimon-paper-2020-v1.
 #' @param vaf DNA or RNA VAF channel for the designated adjusted score.
 #' @param wild_type_predictions Optional standard prediction TSV for patient-normal
-#'   peptides, matched by exact peptide, HLA, provider, model, metric and unit.
+#'   peptides, matched by exact peptide, HLA, provider, model, metric, unit and
+#'   nonempty run_id. Cross-run pairing is not supported.
 #' @param expression_unit Explicit TPM acknowledgement for historical scoring.
 #' @return A data frame with one candidate-origin-prediction row, biological
 #'   observations, model-specific numerical priorities and full provenance lists.
@@ -166,6 +167,14 @@ neo_priorities <- function(project, analysis = NULL,
               wt$unit==row$unit & wt$score_direction==row$score_direction &
               wt$metric_kind==row$metric_kind & wt$metric_semantics==row$metric_semantics &
               wt$predictor_version==row$predictor_version & wt$model_version==row$model_version,,drop=FALSE]
+            # A run identifies the configured execution, not merely a model name.
+            # Missing/mismatched IDs cannot establish an exact paired comparison.
+            valid_run <- length(prediction$run_id)==1L && !is.na(prediction$run_id) &&
+              nzchar(trimws(prediction$run_id))
+            row$paper_status <- if (!valid_run) "missing_mutant_run_identity" else
+              if (nrow(target)) "WT_run_identity_mismatch" else row$paper_status
+            target <- target[if (valid_run) target$run_id==prediction$run_id else
+              rep(FALSE,nrow(target)),,drop=FALSE]
             if (nrow(target)>1L) stop("Ambiguous wild-type channel: retain one matching model/run")
             if (nrow(target)==1L) {
               mm <- sum(strsplit(candidate$peptide_sequence,"",fixed=TRUE)[[1L]]!=
@@ -175,7 +184,8 @@ neo_priorities <- function(project, analysis = NULL,
               row$paper_without_ccf <- p$without_ccf;row$paper_with_ccf <- p$with_ccf
               row$paper_ccf_factor <- p$ccf_factor;row$paper_status <- p$status
               row$paper_wt_provenance <- list(row=as.list(target[1,,drop=FALSE]),
-                artifact_sha256=external_sha(wild_type_predictions),mismatch=mm,
+                artifact_sha256=external_sha(wild_type_predictions),pairing="exact_run_and_model_identity",
+                paired_run_id=prediction$run_id,mismatch=mm,
                 expression_unit="TPM",expression_level=if(is.null(gene)) "transcript" else "gene")
             }
           }

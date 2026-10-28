@@ -1,3 +1,25 @@
+# Normalize only validated policy fields whose numeric storage can change in JSON.
+# Do not use tolerant numeric comparison, discard fields or bypass version checks.
+somatic_priority_policy_equal <- function(a,b) {
+  canonical <- function(x) {
+    shape <- somatic_priority_policy()
+    if (!is.list(x) || !setequal(names(x),names(shape)))
+      stop("Incomplete persisted priority policy")
+    for (field in c("thresholds","primary")) {
+      if (!is.list(x[[field]]) || !setequal(names(x[[field]]),names(shape[[field]])))
+        stop("Incomplete persisted priority policy")
+      for (cl in names(shape[[field]]))
+        if (!is.list(x[[field]][[cl]]) ||
+            !setequal(names(x[[field]][[cl]]),names(shape[[field]][[cl]])))
+          stop("Incomplete persisted priority policy")
+    }
+    x <- somatic_priority_policy(x)
+    x$thresholds <- lapply(x$thresholds,function(cl) lapply(cl,as.double))
+    x
+  }
+  identical(canonical(a),canonical(b))
+}
+
 somatic_priority_path <- function(project)
   file.path(project$path,"intermediate","somatic_priority.rds")
 
@@ -189,7 +211,7 @@ somatic_priority_variant_verify <- function(project,fp,snapshot=NULL) {
       serialize=FALSE),record$sha256)) stop("Priority variant output integrity failure")
   }
   result <- readRDS(file.path(root,"priority.rds"))
-  if (!identical(result$policy,project$config$somatic_priority) ||
+  if (!somatic_priority_policy_equal(result$policy,project$config$somatic_priority) ||
       !identical(result$run_id,project$run_id))
     stop("Priority variant policy identity mismatch")
   if (!is.null(snapshot) && !setequal(vapply(result$rows,`[[`,"","candidate_id"),
@@ -201,7 +223,7 @@ somatic_priority_variant_verify <- function(project,fp,snapshot=NULL) {
 somatic_priority_postrun <- function(project,snapshot) {
   if (is.null(project$config$somatic_evidence)) return(invisible(NULL))
   original <- somatic_priority_original_read(project,snapshot)
-  if (identical(original$policy,project$config$somatic_priority)) return(invisible(original))
+  if (somatic_priority_policy_equal(original$policy,project$config$somatic_priority)) return(invisible(original))
   stored <- do.call(neo_config,c(read_manifest(project$path)$config,list(env=character())))
   if (!identical(infra_hash(stored$somatic_evidence),
     infra_hash(project$config$somatic_evidence)))
@@ -234,7 +256,7 @@ somatic_priority_postrun <- function(project,snapshot) {
 somatic_priority_read <- function(project,snapshot=NULL,allow_original=FALSE) {
   original <- somatic_priority_original_read(project,snapshot)
   if (is.null(original) || allow_original ||
-      identical(original$policy,project$config$somatic_priority)) return(original)
+      somatic_priority_policy_equal(original$policy,project$config$somatic_priority)) return(original)
   runs <- somatic_prediction_runs(project)
   fp <- somatic_priority_fingerprints(project,project$config$somatic_priority,runs)
   somatic_priority_variant_verify(project,fp,snapshot)

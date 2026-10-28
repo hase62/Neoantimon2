@@ -113,7 +113,7 @@ run_source_evidence_demo <- function(output) {
     if(nrow(o)==1L && !is.na(o$wt_peptide_sequence) && nzchar(o$wt_peptide_sequence)) {
       row <- predictions(cc,"mhc1_binding","affinity_nM","synthetic-BA")[i,,drop=FALSE]
       row$peptide_sequence <- o$wt_peptide_sequence;row$score <- 800;row$unit <- "nM"
-      row$score_direction <- "lower_is_better";row$run_id <- "synthetic-WT";row$source_row <- "synthetic-WT"
+      row$score_direction <- "lower_is_better";row$run_id <- "synthetic-run";row$source_row <- "synthetic-WT"
       wt <- rbind(wt,row)
     }
   }

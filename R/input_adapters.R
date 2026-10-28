@@ -33,22 +33,42 @@ input_expression <- function(source,project) {
   })
 }
 
+# Native saveRDS(ascat.output) or the documented ASCAT_objects.Rdata workspace.
+# Load workspaces into a private environment; never guess which object to use.
+input_ascat_object <- function(path,format) {
+  if (identical(format,"ascat_rds")) object <- readRDS(path) else if (identical(format,"ascat_rdata")) {
+    env <- new.env(parent=emptyenv())
+    names <- load(path,envir=env)
+    if (!"ascat.output" %in% names) stop("ASCAT workspace requires exact object name 'ascat.output'")
+    object <- get("ascat.output",envir=env,inherits=FALSE)
+  } else stop("ASCAT metadata_format must be ascat_rds or ascat_rdata")
+  if (!is.list(object) || !is.data.frame(object$segments))
+    stop("Expected saved ASCAT output list with segments data.frame")
+  object
+}
+
 input_ascat <- function(source,project) {
   if (!identical(source$reference_build,project$config$scientific$genome_assembly))
     stop("ASCAT reference_build mismatch; genome lift-over is not implicit")
   opts <- source$options
-  strict_keys(if(is.null(opts)) list() else opts,c("coordinate_system","normal_cn","sample_name"),"ASCAT options")
+  strict_keys(if(is.null(opts)) list() else opts,c("coordinate_system","normal_cn","sample_name","metadata_path","metadata_format","metadata_checksum"),"ASCAT options")
   if (is.null(opts$coordinate_system) || opts$coordinate_system!="1-based-inclusive")
     stop("ASCAT requires explicit coordinate_system='1-based-inclusive' for SNP-position segments")
   format <- source$format
-  if (is.null(format)) stop("ASCAT format must be ascat_segments or ascat_rds")
+  if (is.null(format)) stop("ASCAT format must be ascat_segments, ascat_rds or ascat_rdata")
   object <- NULL
-  if (format=="ascat_rds") {
-    object <- readRDS(source$resolved_path)
-    if (!is.list(object) || !is.data.frame(object$segments)) stop("Expected saved ASCAT output list with segments data.frame")
+  if (format %in% c("ascat_rds","ascat_rdata")) {
+    object <- input_ascat_object(source$resolved_path,format)
     tab <- object$segments
   } else if (format=="ascat_segments") tab <- input_table(source$resolved_path)
   else stop("Unsupported ASCAT schema; raw LogR/BAF is not absolute copy number")
+  if (!is.null(opts$metadata_path)) {
+    if (format!="ascat_segments") stop("ASCAT companion metadata is only for ascat_segments")
+    if (is.null(source$metadata_path) || is.null(source$metadata_sha256))
+      stop("ASCAT companion must be bound and checksummed before import")
+    object <- input_ascat_object(source$metadata_path,opts$metadata_format)
+  } else if (!is.null(opts$metadata_format) || !is.null(opts$metadata_checksum))
+    stop("ASCAT metadata_format/checksum require metadata_path")
   required <- c("sample","chr","startpos","endpos","nMajor","nMinor")
   if (!all(required %in% names(tab))) stop("ASCAT segments need sample, chr, startpos, endpos, nMajor, nMinor")
   if (anyNA(tab[required])) stop("ASCAT segments contain missing values or conflicting sample identities")
@@ -61,6 +81,21 @@ input_ascat <- function(source,project) {
   tab <- tab[as.character(tab$sample)==expected,,drop=FALSE]
   source$sample_mapping <- list(upstream_sample=expected,neo_sample=source$sample_id,
     policy=if(is.null(opts$sample_name)) "exact_identity" else "explicit_verified_declaration")
+  if (!is.null(opts$metadata_path)) {
+    # A companion from another fit must not supply purity/ploidy to these segments.
+    other <- object$segments
+    if (!all(required %in% names(other))) stop("ASCAT companion segments schema mismatch")
+    other <- other[as.character(other$sample)==expected,,drop=FALSE]
+    canonical <- function(x) {
+      x <- x[required]
+      x[] <- lapply(x,as.character)
+      for (key in c("startpos","endpos","nMajor","nMinor"))
+        x[[key]] <- suppressWarnings(as.numeric(x[[key]]))
+      x <- x[do.call(order,x),,drop=FALSE];rownames(x) <- NULL;x
+    }
+    if (!identical(canonical(tab),canonical(other)))
+      stop("ASCAT companion segments do not match the declared sample/fit")
+  }
   metadata <- function(name,old=NULL) {
     value <- object[[name]]
     if (is.null(value) && !is.null(old)) value <- object[[old]]
@@ -71,6 +106,7 @@ input_ascat <- function(source,project) {
       if (anyDuplicated(names(value)) || !expected %in% names(value)) stop("ASCAT metadata sample mismatch")
       value <- value[[expected]]
     }
+    if (length(value)==1L && is.na(value)) return(NULL)
     somatic_number(value,paste("ASCAT",name),minimum=0,maximum=if(name=="purity") 1 else Inf)
   }
   purity <- metadata("purity","aberrantcellfraction");ploidy <- metadata("ploidy")

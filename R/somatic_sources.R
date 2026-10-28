@@ -18,9 +18,22 @@ somatic_source_files <- function(project) {
       s$index_path <- indexes[[1L]]
       s$index_sha256 <- digest::digest(file=s$index_path,algo="sha256",serialize=FALSE)
     }
+    if (s$kind=="ascat" && !is.null(s$options$metadata_path)) {
+      if (!identical(s$format,"ascat_segments")) stop("ASCAT companion metadata is only for ascat_segments")
+      if (length(s$options$metadata_format)!=1L ||
+          !s$options$metadata_format %in% c("ascat_rds","ascat_rdata")) stop("Declare ASCAT metadata_format explicitly")
+      scalar_text(s$options$metadata_path,"ASCAT metadata_path")
+      s$metadata_path <- resolve_path(s$options$metadata_path,project$config$paths$input_root)
+      if (!file.exists(s$metadata_path) || dir.exists(s$metadata_path)) stop("ASCAT companion file missing")
+      s$metadata_sha256 <- digest::digest(file=s$metadata_path,algo="sha256",serialize=FALSE)
+      if (!is.null(s$options$metadata_checksum) &&
+          !identical(tolower(s$options$metadata_checksum),s$metadata_sha256)) stop("ASCAT companion checksum mismatch")
+    }
     s$source_id <- paste0("somatic-source:",infra_hash(list(kind=s$kind,
       sample_id=s$sample_id,source=s$source,version=s$source_version,
       reference_build=s$reference_build,sha256=sha)))
+    if (!is.null(s$metadata_sha256)) s$source_id <- paste0("somatic-source:",
+      infra_hash(list(primary_source_id=s$source_id,metadata_sha256=s$metadata_sha256)))
     s
   })
 }
@@ -76,6 +89,8 @@ somatic_source_provenance <- function(source) {
     source_version=source$source_version,artifact=source$resolved_path,
     sha256=source$sha256,reference_build=source$reference_build,
     sample_id=source$sample_id)
+  if (!is.null(source$metadata_sha256)) result$companion <- list(artifact=source$metadata_path,
+    sha256=source$metadata_sha256,format=source$options$metadata_format)
   if (!is.null(source$sample_mapping)) result$sample_mapping <- source$sample_mapping
   result
 }
