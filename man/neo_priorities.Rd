@@ -12,7 +12,7 @@ neo_priorities(project, analysis = NULL,
 \item{analysis}{Optional completed external analysis handle or ID.}
 \item{method}{Versioned numerical scoring method.}
 \item{vaf}{DNA or RNA measurement for adjusted priorities.}
-\item{wild_type_predictions}{Optional standard TSV for exact patient-normal peptide/HLA predictions.}
+\item{wild_type_predictions}{Optional standard TSV for exact patient-normal peptide/HLA predictions with matching nonempty run identity.}
 \item{expression_unit}{Explicit \code{"TPM"} acknowledgement for paper scoring.}
 }
 \value{Data frame with one row per candidate, origin and prediction channel,
@@ -27,7 +27,9 @@ value is exploratory and candidate-set dependent, not calibrated or comparable
 across cohorts. Disagreeing expression assertions are retained with unavailable
 TPM/conflict status, never resolved by selecting the largest value. Paper CCF singularities return unavailable
 scores; finite negative/unstable values are retained with diagnostic status.
-The paper method needs matching wild-type BA predictions and expression;
+The paper method needs matching wild-type BA predictions, including the same
+nonempty run ID and model/metric semantics, and expression. Cross-run pairing
+is unavailable; imported IDs remain user provenance assertions, not proof of execution;
 without CCF, its separately labelled no-CCF value is not a complete paper score.}
 \references{Hasegawa et al. (2020), Bioinformatics 36:4813--4816,
 \doi{10.1093/bioinformatics/btaa616}.}

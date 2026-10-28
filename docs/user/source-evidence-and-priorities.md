@@ -174,6 +174,10 @@ Run ASCAT externally. Supported native schemas are:
 - `format="ascat_rds"`: `saveRDS(ascat.output, ...)`, containing the native
   `segments` data frame and named `purity` (or older `aberrantcellfraction`)
   and `ploidy` vectors. ASCAT need not be installed to read this data.
+- `format="ascat_rdata"`: the native `ASCAT_objects.Rdata` workspace saved in
+  upstream examples. It must contain the exact object `ascat.output`; no object
+  or sample is guessed. Other workspace objects are not imported into R's global
+  environment. Read only trusted R serializations.
 
 The schema is verified against ASCAT's output-writing source at
 [61ddf3b / ascat.runAscat.R](https://github.com/VanLoo-lab/ascat/blob/61ddf3b24453eea91134798cc41d4e828a82fa90/ASCAT/R/ascat.runAscat.R).
@@ -190,7 +194,32 @@ SNP-position segments, not arbitrary BED intervals. Sample mismatch, overlapping
 segments, noninteger rounded copy numbers, minor>major and wrong assemblies fail.
 Total CN is nMajor+nMinor; raw LogR/BAF are never treated as absolute CN. Assay
 origin (array/WGS/etc.) does not alter the import schema. A TSV without purity
-metadata does not invent purity/ploidy; use a saved native output when available.
+metadata does not invent purity/ploidy. A saved native output provides those
+measurements when present. For segments and a separate native workspace:
+
+```r
+# Inside neo_config(somatic_evidence=list(sources=list(...))):
+ascat_source <- list(kind="ascat", format="ascat_segments", sample_id="S1",
+  path="tumor.segments.txt", reference_build="GRCh38.p14",
+  options=list(coordinate_system="1-based-inclusive", sample_name="tumor_A",
+    metadata_path="ASCAT_objects.Rdata", metadata_format="ascat_rdata"))
+```
+
+The companion can alternatively be `saveRDS(ascat.output, ...)` with
+`metadata_format="ascat_rds"`. Paths resolve against `input_root`. Both files are
+fully SHA-256 bound to provenance/checkpoints; optional `metadata_checksum`
+verifies an expected hash. The selected sample's complete segment table must
+match the companion fit exactly (row order is immaterial). Wrong fits, ambiguous
+identities and checksum mismatches fail. Missing purity/ploidy stays unavailable.
+No generic two-number purity/ploidy file is guessed: no canonical companion text
+schema was verified. The upstream documented workspace is supported instead.
+
+Source evidence: [ASCAT example saving instructions](https://github.com/VanLoo-lab/ascat/blob/61ddf3b24453eea91134798cc41d4e828a82fa90/ExampleData/README.md).
+A small genuine upstream A17 segment artifact was parsed during hardening; its
+original assembly/assay is not established by the file alone, so it was not
+joined to a fabricated biological project. Workspace/companion end-to-end tests
+use explicitly synthetic objects faithful to the inspected v3.2.0 writer. No
+ASCAT inference was executed. Other version-specific formats remain unverified.
 
 Existing conditional CCF uses
 `VAF * (purity * tumor_CN + (1-purity) * normal_CN) / (purity * multiplicity)`.
@@ -265,8 +294,18 @@ such as Kd are not silently interpreted as IC50. Binding ranks require actual
 binding-percentile semantics, not a raw percentage score.
 
 Supply `wild_type_predictions` as a standard TSV; joins use exact patient-normal
-peptide/HLA/provider/model/version/metric/unit/direction. These predictions must
-be legitimately obtained separately; the accessor never invents missing WT
+peptide/HLA/provider/model/version/metric/unit/direction **and nonempty matching
+`run_id`**. A run ID must identify the same configured execution, not just a
+shared model label; the paired helper supplies it to both files. Native run
+identity fingerprints the query set, provider/version, model-file hashes,
+executable hash, adapter/schema and execution options. Imported IDs are user
+provenance assertions, not cryptographic proof that an engine ran. Do not relabel
+independent runs to force a match. Cross-run paper pairing is not supported.
+Mismatched IDs produce unavailable paper scores (`WT_run_identity_mismatch`);
+missing required WT run IDs and duplicate logical rows fail standard import
+validation. Missing native run identity is unavailable. Other valid metrics and
+prediction-only priorities remain usable. These predictions must be legitimately
+obtained in a paired execution; the accessor never invents missing WT
 binding or executes a predictor. Missing prerequisites have diagnostic status.
 `paper_equation` identifies P_I or P_R for each compatible channel.
 `paper_without_ccf` explicitly omits C; `paper_with_ccf` needs CCF. At x=0.8 the
@@ -353,3 +392,36 @@ weights, real patient data, large download or expression quantifier is used.
 No synthetic test establishes biological accuracy or clinical efficacy. See
 [inputs](inputs.md) for existing technical contracts and [results](getting-started.md)
 for the released workflow. This guide describes local unreleased additions.
+
+
+## Reopen saved results without running the pipeline
+
+```r
+library(Neoantimon2)
+p <- neo_project(path="/path/to/completed-project")
+r <- neo_results(p)
+e <- neo_explain(p, candidate_id=r$candidate_id[[1L]])
+v <- neo_priorities(p)
+```
+
+These are read-only operations: no `neo_run()`, reconstruction, prediction or
+policy-view writing is required for an already materialized compatible policy.
+The reader normalizes validated integer/double storage of numeric thresholds,
+not changed threshold values, versions, identity fields or corrupted records.
+A genuinely different policy still requires its own explicitly materialized
+results. Existing manifest/output checksums remain enforced.
+
+An executable synthetic A--E plus reopening check is shipped:
+
+```r
+source(system.file("examples", "reopen-evidence.R", package="Neoantimon2"))
+demo <- run_reopen_evidence_demo(tempfile("neo-reopen-demo-"))
+```
+
+It includes VCF-first DNA VAF, optional RNA BAM, external expression/ASCAT,
+independent BA/EL/IM, paper scores and missing-VAF examples, then directly reopens
+and hashes saved results/explanations/priorities. The full hardening tests also
+use a synthetic native-provider stub. No functioning real NetMHCpan,
+NetMHCIIpan or MHCflurry executable was available in the tested environment:
+`REAL_NATIVE_PREDICTOR_NOT_AVAILABLE`. Real proprietary/model execution remains
+unvalidated; synthetic parsing and scoring are separate evidence.
