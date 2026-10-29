@@ -3,7 +3,7 @@ reconstruction_stage_path <- function(project)
 
 reconstruction_stage_fingerprints <- function(project) checkpoint_fingerprints(
   inputs = list(phase_output = phase_stage_output(project)),
-  config = list(policy = reconstruction_policy(), analysis_id = project$analysis_id),
+  config = list(policy = reconstruction_policy(), annotation_projection = "gene-name-v1", analysis_id = project$analysis_id),
   dependencies = list(reference = sorted_records(identity_records(project$resources))))
 
 reconstruction_stage_output <- function(project) list(

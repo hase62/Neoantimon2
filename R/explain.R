@@ -17,6 +17,7 @@ neo_explain_core <- function(project, candidate_id = NULL, reason = NULL,
     stop("At least one explanation query is required", call. = FALSE)
   results <- filter_records(if (is.null(priority)) snapshot$neoantigen_results else priority$rows,
     list(candidate_id = candidate_id, peptide_sequence = peptide, sample_id = sample_id), reason)
+  if (!is.null(inputs)) results <- input_display_candidates(results,snapshot$peptide_origins,inputs$event_evidence)
   candidates <- lapply(results, function(result) {
     origins <- Filter(function(x) x$origin_id %in% unlist(result$origin_ids),
                       snapshot$peptide_origins)

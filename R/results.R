@@ -54,7 +54,10 @@ neo_results <- function(project, grade = NULL, prediction_status = NULL,
   rows <- filter_records(rows, list(final_grade = grade,
     prediction_status = prediction_status, grading_status = grading_status,
     sample_id = sample_id, candidate_id = candidate_id), reason)
+  rows <- input_display_rows(project,rows,snapshot$peptide_origins)
   out <- schema_table_frame(rows, "neoantigen_results")
+  if (any(vapply(rows,function(r)!is.null(r$dna_vaf_display),TRUE)))
+    out$dna_vaf_provenance <- I(lapply(rows, `[[`, "dna_vaf_display"))
   if (!is.null(priority)) {
     fields <- c("grade_status","grade_reason_codes","technical_eligibility",
       "primary_prediction_status","primary_predictor","primary_metric","primary_rank",

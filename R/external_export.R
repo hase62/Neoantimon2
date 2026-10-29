@@ -55,7 +55,9 @@ external_graph <- function(project) {
     peptide <- if (file.exists(peptide_stage_path(project))) readRDS(peptide_stage_path(project)) else NULL
     annotations <- list(core_peptides = peptide$peptides, source = source, long_read = lr)
   }
-  external_merge_graph(candidates, origins, events, annotations)
+  graph <- external_merge_graph(candidates, origins, events, annotations)
+  graph$candidates <- input_display_rows(project,graph$candidates,graph$origins)
+  graph
 }
 
 external_merge_graph <- function(candidates, origins, events = list(), annotations = list()) {

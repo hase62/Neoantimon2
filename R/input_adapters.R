@@ -134,7 +134,14 @@ input_ascat <- function(source,project) {
 }
 
 input_source_rows <- function(sources,events,project) {
-  parsed <- list();bams <- list()
+  parsed <- list();bams <- list(); coordinate_ref <- NULL; coordinate_bundle <- NULL
+  on.exit(if (!is.null(coordinate_ref)) event_reference_close(coordinate_ref), add=TRUE)
+  coordinate_key <- function(sample,contig,pos,ref,alt)
+    paste(sample,contig,pos,ref,alt,sep="\037")
+  keys <- vapply(events,function(e) if(is.null(e$contig) || is.null(e$ref) || is.null(e$alt))
+    paste0("non-coordinate:",e$event_id) else
+    coordinate_key(e$sample_id,e$contig,e$pos,e$ref,e$alt),"")
+  event_lookup <- external_group_index(keys)
   for (s in sources) {
     if (s$kind %in% c("dna_bam","normal_dna_bam","rna_bam")) { bams[[length(bams)+1L]] <- s;next }
     if (s$kind=="ascat") s <- input_ascat(s,project) else
@@ -146,14 +153,16 @@ input_source_rows <- function(sources,events,project) {
           stop("Evidence rows require event_id or contig,pos,ref,alt")
         if (!identical(s$reference_build,project$config$scientific$genome_assembly))
           stop("Coordinate evidence requires matching reference_build")
-        ref <- event_reference_open(reference_bundle(project))
-        canonical <- tryCatch(event_normalize(ref,row$contig,somatic_integer(row$pos,"evidence pos"),row$ref,row$alt),
-          finally=event_reference_close(ref))
-        matches <- Filter(function(e)e$sample_id==s$sample_id &&
-          identical(e$contig,canonical$contig) && identical(e$pos,canonical$pos) &&
-          identical(e$ref,canonical$ref) && identical(e$alt,canonical$alt),events)
+        if (is.null(coordinate_ref)) {
+          coordinate_bundle <- reference_bundle(project)
+          coordinate_ref <- event_reference_open(coordinate_bundle)
+        }
+        canonical <- event_normalize(coordinate_ref,row$contig,
+          somatic_integer(row$pos,"evidence pos"),row$ref,row$alt)
+        matches <- external_index_get(event_lookup,coordinate_key(s$sample_id,canonical$contig,
+          canonical$pos,canonical$ref,canonical$alt))
         if(length(matches)!=1L) stop("Coordinate evidence must match exactly one sample Event")
-        s$rows[[j]]$event_id <- matches[[1L]]$event_id
+        s$rows[[j]]$event_id <- events[[matches]]$event_id
       }
     }
     parsed[[length(parsed)+1L]] <- s
@@ -193,6 +202,14 @@ input_source_rows <- function(sources,events,project) {
       } else expanded[[length(expanded)+1L]] <- row
     }
     parsed[[i]]$rows <- expanded
+  }
+  # Revalidate the bound reference at the operation boundary; reuse is local
+  # to this call, never a persistent cache or a weaker checksum policy.
+  if (!is.null(coordinate_bundle)) for (r in coordinate_bundle$resources) {
+    current <- integrity_record(r$resolved_path,r$integrity$mode,r$integrity$declared)
+    if (!identical(current,r$integrity)) stop("Reference changed during coordinate evidence import")
+    if (!is.null(r$integrity$declared) && r$integrity$mode!="sha256")
+      integrity_record(r$resolved_path,"sha256",r$integrity$declared)
   }
   parsed
 }
