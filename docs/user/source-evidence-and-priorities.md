@@ -522,3 +522,12 @@ package records the actual execution status and includes the full-callset driver
 its presence alone is not evidence that the full sample completed. Preserve enough
 storage for provenance-rich outputs and a fresh rerun. The normal human reference
 bundle size is expected and is not itself a usability defect.
+
+Large result JSON files are written incrementally to a temporary sibling file,
+then parsed for completeness before atomic replacement. This avoids R's
+2-GiB limit on a single character string without dropping evidence or changing
+result schemas. Small metadata keeps its existing serialization. Incremental
+writing does not make the entire analysis memory-free: result objects and JSON
+validation still require memory. A failed export is a failed end-to-end run,
+even when reconstruction checkpoints have completed; retain diagnostics and
+validate a fresh complete execution after a correction.
