@@ -425,3 +425,95 @@ use a synthetic native-provider stub. No functioning real NetMHCpan,
 NetMHCIIpan or MHCflurry executable was available in the tested environment:
 `REAL_NATIVE_PREDICTOR_NOT_AVAILABLE`. Real proprietary/model execution remains
 unvalidated; synthetic parsing and scoring are separate evidence.
+
+## Requested peptide lengths and ordinary evidence display
+
+Set the lengths explicitly in `neo_config()`; the historical defaults are unchanged:
+
+```r
+peptides = list(class_i_lengths = 8:12, class_ii_lengths = 15L)
+```
+
+For each supported reconstructed transcript, the package enumerates every window
+at each requested length that intersects an altered amino-acid interval or crosses
+an altered deletion junction. A protein shorter than the requested length produces
+no window at that length. Unsupported translation contexts remain unavailable;
+this configuration does not make unsupported splice or stop-loss reconstruction
+supported. Identical mutant/normal proteins generate no altered ligand. Exact
+reference-proteome matches are retained as self-match evidence under the existing
+eligibility policy, not silently removed from the provenance graph.
+
+Origins are transcript/haplotype/window observations. Identical sequences can have
+many Origins. Prediction queries are deduplicated by peptide and compatible HLA
+presenter, while each candidate retains all `origin_ids`. Declaring the same HLA
+allele twice does not create a second presenter. Candidate generation does not
+require an installed predictor: `NOT_RUN` is not a predicted negative, and a
+provider's unsupported length/HLA combination must not be reported as evaluated.
+Class II 15-mer Origins can exist with no Class II candidates if no Class II
+presenter was declared. Count these separately from Class I candidates.
+
+`neo_results(p)$tumor_vaf` now projects the available source measurement without
+changing stored Grades or native ranking. If the frozen priority policy selected
+one Origin, that Origin defines the scalar. Otherwise all linked Origins must
+have a single applicable Event and agreeing measured fractions. Conflicting or
+compound-Event measurements remain unavailable as a candidate scalar; they are
+retained separately in `dna_vaf_provenance`, `neo_explain()` and the source evidence.
+No averaging or maximum selection is used. Zero is an observed zero; unavailable
+VAF remains `NA`. Numerical-priority zero substitution does not modify this view.
+
+A supplied fraction such as SEQC2's pooled `INFO/TVAF` must be explicitly declared
+through coordinate evidence with its source. It is not automatically interpreted
+as FORMAT/AD, a BAM recount, or an ALT-read count. Coordinate evidence validates
+and opens one reference bundle per import operation, then rechecks bound reference
+integrity before returning. This avoids one full annotation parse per evidence row
+without weakening reference identity checks.
+
+`neo_origins(p)$gene_symbol` carries the bound GTF `gene_name` when present.
+`genes_json` retains the stable gene identifier and annotation identity; symbols
+are labels, not unique join keys. Candidates retain the union of their Origins'
+gene symbols. A missing annotation stays missing. Old saved Origins are not
+silently rewritten: rerun a newly declared analysis to materialize annotations
+that were absent from the old artifact.
+
+### Fast synthetic length-policy example
+
+This uses the installed synthetic Quick Start resources and a fresh project. Its
+short proteins demonstrate that requested lengths need not all yield candidates;
+independent longer-protein tests cover the complete 8–12mer window union.
+
+```r
+library(Neoantimon2)
+e <- new.env()
+sys.source(system.file("examples", "quickstart.R", package = "Neoantimon2"), envir = e)
+cfg <- neo_config(env = character(), checksum = "sha256", resources = e$resources,
+  paths = list(input_root = e$input_root, data_root = e$input_root,
+               run_root = tempfile("length-range-runs-")),
+  scientific = list(genome_assembly = "GRCh38.p14"),
+  peptides = list(class_i_lengths = 8:12, class_ii_lengths = 15L))
+p <- neo_project(samples = data.frame(sample_id = "sample-1", patient_id = "P1"),
+  hla = list(P1 = "HLA-A*02:01"), config = cfg,
+  inputs = list(list(input_id = "range-demo", input_role = "somatic_vcf",
+                     sample_id = "sample-1", path = e$vcf)))
+p <- neo_run(p)
+table(neo_origins(p)$peptide_length)
+neo_results(p)
+stopifnot(identical(neo_results(p), neo_results(neo_project(path = p$path))))
+```
+
+### Full-scale HCC1395 research validation
+
+The full target is **41,072 source records**: all 39,447 SEQC2 v1.2.1 SNVs and
+1,625 indels, including HighConf and MedConf. HCC1395 is the tumor cell line;
+HCC1395BL is matched-normal source context, not an additional analyzed tumor.
+Use complete GENCODE 50 primary annotation and sequence catalogs with GRCh38.p14
+and MANE 1.5; the previous five-variant affected-gene view is not sufficient.
+No liftover, fabricated genotype, or REF correction is permitted.
+
+A valid full-scale claim requires a frozen driver, fresh output directory, source
+record/ALT-to-Event reconciliation, per-length counts, complete exports, read-only
+reopening and process exit zero. A five-record display test is only a pilot.
+Generated Origins and candidates are not real binding predictions. The review
+package records the actual execution status and includes the full-callset driver;
+its presence alone is not evidence that the full sample completed. Preserve enough
+storage for provenance-rich outputs and a fresh rerun. The normal human reference
+bundle size is expected and is not itself a usability defect.
