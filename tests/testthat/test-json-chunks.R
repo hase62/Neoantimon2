@@ -15,6 +15,7 @@ test_that("chunked JSON preserves nested jsonlite value semantics", {
     Neoantimon2:::json_write_chunks(value,con,leaf_bytes=1)
     close(con)
     expect_identical(jsonlite::read_json(f),expected)
+    expect_identical(Neoantimon2:::json_plain_chunks(value,leaf_bytes=1),expected)
     unlink(f)
   }
 })
@@ -29,4 +30,5 @@ test_that("large atomic JSON retains validation and old destination on failure",
   expect_identical(jsonlite::read_json(f),list(old=TRUE))
   Neoantimon2:::atomic_json(value,f)
   expect_identical(jsonlite::read_json(f),value)
+  expect_identical(Neoantimon2:::external_plain(value),value)
 })

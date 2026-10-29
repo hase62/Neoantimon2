@@ -1,7 +1,10 @@
 # Independent interoperability envelopes; never part of biological identity.
 external_version <- function() "1.0.0"
-external_plain <- function(x) jsonlite::fromJSON(jsonlite::toJSON(x,
-  auto_unbox = TRUE, null = "null", digits = NA), simplifyVector = FALSE)
+external_plain <- function(x) {
+  if (as.numeric(utils::object.size(x)) > 64 * 1024^2) return(json_plain_chunks(x))
+  jsonlite::fromJSON(jsonlite::toJSON(x, auto_unbox = TRUE, null = "null", digits = NA),
+    simplifyVector = FALSE)
+}
 external_sha <- function(path) digest::digest(file = path, algo = "sha256", serialize = FALSE)
 external_error <- function(code, message) {
   e <- simpleError(paste0(code, ": ", message))
