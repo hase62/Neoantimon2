@@ -478,13 +478,18 @@ that were absent from the old artifact.
 ### Fast synthetic length-policy example
 
 This uses the installed synthetic Quick Start resources and a fresh project. Its
-short proteins demonstrate that requested lengths need not all yield candidates;
+nine-residue protein yields 8- and 9-mers; longer requested windows do not fit;
 independent longer-protein tests cover the complete 8–12mer window union.
 
 ```r
 library(Neoantimon2)
 e <- new.env()
 sys.source(system.file("examples", "quickstart.R", package = "Neoantimon2"), envir = e)
+range_vcf <- file.path(e$input_root, "range-demo.vcf")
+writeLines(c("##fileformat=VCFv4.2",
+  "##FORMAT=<ID=AD,Number=R,Type=Integer,Description=Allelic depths>",
+  "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tsample-1",
+  "chrF\t4\t.\tA\tG\t.\tPASS\t.\tAD\t80,20"), range_vcf)
 cfg <- neo_config(env = character(), checksum = "sha256", resources = e$resources,
   paths = list(input_root = e$input_root, data_root = e$input_root,
                run_root = tempfile("length-range-runs-")),
@@ -493,10 +498,10 @@ cfg <- neo_config(env = character(), checksum = "sha256", resources = e$resource
 p <- neo_project(samples = data.frame(sample_id = "sample-1", patient_id = "P1"),
   hla = list(P1 = "HLA-A*02:01"), config = cfg,
   inputs = list(list(input_id = "range-demo", input_role = "somatic_vcf",
-                     sample_id = "sample-1", path = e$vcf)))
+                     sample_id = "sample-1", path = range_vcf)))
 p <- neo_run(p)
 table(neo_origins(p)$peptide_length)
-neo_results(p)
+neo_results(p)[, c("peptide_sequence", "mhc_key", "tumor_vaf", "prediction_status")]
 stopifnot(identical(neo_results(p), neo_results(neo_project(path = p$path))))
 ```
 
