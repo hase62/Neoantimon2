@@ -531,3 +531,8 @@ writing does not make the entire analysis memory-free: result objects and JSON
 validation still require memory. A failed export is a failed end-to-end run,
 even when reconstruction checkpoints have completed; retain diagnostics and
 validate a fresh complete execution after a correction.
+
+Snapshot validation indexes Event identifiers and sample-peptide Origin groups
+once per validation pass. This avoids repeated full-table scans while retaining
+exact matching, duplicate/missing-key rejection, original record order and every
+Origin relationship check. It does not skip validation when reopening results.

@@ -63,6 +63,25 @@ validate_record <- function(row, def, contract, path = "record") {
   invisible(TRUE)
 }
 
+# Internal indexes preserve Filter's multiplicity, ordering and exact matching.
+# Call only after schema validation has established scalar character keys.
+schema_row_index <- function(rows, field) {
+  keys <- vapply(rows, `[[`, "", field)
+  groups <- split(seq_along(rows), paste0("key:", keys))
+  index <- new.env(hash = TRUE, parent = emptyenv())
+  if (length(groups)) list2env(groups, envir = index)
+  list(rows = rows, field = field, index = index)
+}
+
+schema_index_rows <- function(index, value) {
+  if (!is.character(value) || length(value) != 1L || is.na(value))
+    return(list())
+  positions <- get0(paste0("key:", value), envir = index$index, inherits = FALSE,
+    ifnotfound = integer())
+  rows <- index$rows[positions]
+  Filter(function(row) identical(row[[index$field]], value), rows)
+}
+
 validate_table <- function(rows, name, contract = schema_contract()) {
   def <- contract$tables[[name]]
   if (is.null(def)) stop("Unknown table")

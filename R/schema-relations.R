@@ -19,6 +19,15 @@ validate_snapshot <- function(x, contract = schema_contract()) {
       contract$schema_version else contract$output_schema_versions[[t]]
     if (!identical(m$output_schema_versions[[t]], expected_version)) fail("Output schema version mismatch")
   }
+  # Index already validated records once; preserve every match and its order.
+  event_index <- schema_row_index(x$events, "event_id")
+  origin_index <- schema_row_index(x$peptide_origins, "sample_peptide_id")
+  event_lookup <- function(value) {
+    hits <- schema_index_rows(event_index, value)
+    if (length(hits) != 1L)
+      fail(paste("Unresolved/ambiguous foreign key", "event_id", value))
+    hits[[1L]]
+  }
   contexts <- m$analysis_contexts
   ids <- vapply(contexts, `[[`, "", "context_id")
   if (anyDuplicated(ids)) fail("Duplicate context")
@@ -81,7 +90,7 @@ validate_snapshot <- function(x, contract = schema_contract()) {
     eq(ii$scenario_id,ct$scenario_id,"Origin scenario mismatch")
     keys <- character()
     for (n in c("source_event_ids", "context_event_ids", "germline_context_ids")) for (eid in o[[n]]) {
-      e <- lookup(x$events, "event_id", eid)
+      e <- event_lookup(eid)
       eq(e$sample_id, o$sample_id, "Origin event sample mismatch")
       eq(e$analysis_context, o$analysis_context, "Origin event context mismatch")
       if (n == "source_event_ids") keys <- c(keys, e$event_key)
@@ -105,7 +114,7 @@ validate_snapshot <- function(x, contract = schema_contract()) {
     expect_id(r$candidate_key,"candidate_key",r[c("species","hla_class","ligand_sequence","mhc_key")])
     expect_id(r$candidate_id,"candidate_id",list(context_id=r$analysis_context,sample_id=r$sample_id,candidate_key=r$candidate_key))
     if (ct$mode != "somatic" && r$final_grade != "NOT_GRADED") fail("Allo grade not implemented")
-    os <- Filter(function(o) identical(o$sample_peptide_id,r$sample_peptide_id),x$peptide_origins)
+    os <- schema_index_rows(origin_index, r$sample_peptide_id)
     if (!length(os) || !setequal(unlist(r$origin_ids),vapply(os,`[[`,"","origin_id")) || r$n_origins != length(os)) fail("All origins must be preserved")
     for (o in os) {
       eq(o$analysis_context,r$analysis_context,"Origin/result context mismatch")
@@ -121,7 +130,7 @@ validate_snapshot <- function(x, contract = schema_contract()) {
         if (n %in% c("gene_tpm","transcript_tpm")) eq(r[[n]],o[[n]],"Cross-origin expression projection")
         else {
           if (length(o$source_event_ids) != 1L) fail("Multi-event projection requires future explicit evaluation; scalar must be null")
-          e <- lookup(x$events,"event_id",o$source_event_ids[[1L]])
+          e <- event_lookup(o$source_event_ids[[1L]])
           eq(r[[n]],e[[n]],"Cross-origin evidence projection")
         }
       }
