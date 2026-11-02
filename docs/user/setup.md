@@ -7,15 +7,15 @@ Version 0.3.0 includes these four R setup functions. They are absent from the
 immutable v0.2.0 release. No development repository is needed at runtime.
 Existing configurations and `neo_run()` work independently.
 
-## Install v0.3.0
+## Install the development package or v0.3.0
 
-Follow the [pinned release installation](getting-started.md#install-and-run-the-offline-example)
+Follow the [development/pinned release installation](getting-started.md#install-and-run-the-offline-example)
 or install the [verified source archive](getting-started.md#install-a-source-archive).
 Restart R before replacing a loaded package, then verify its identity:
 
 ```r
 library(Neoantimon2)
-stopifnot(as.character(packageVersion("Neoantimon2")) == "0.3.0")
+stopifnot(as.character(packageVersion("Neoantimon2")) %in% c("0.3.0", "0.3.0.9000"))
 stopifnot(all(c("neo_download_resources", "neo_check_resources",
   "neo_check_predictors", "neo_setup_predictor") %in%
   getNamespaceExports("Neoantimon2")))

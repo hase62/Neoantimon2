@@ -1,7 +1,7 @@
-# Offline documentation acceptance against an existing installed v0.3.0 package.
+# Offline documentation acceptance against an explicitly supported installed package.
 args <- commandArgs(TRUE); root <- normalizePath(args[[1L]]); out <- args[[2L]]
 stopifnot(!dir.exists(out));dir.create(out,recursive=TRUE);out<-normalizePath(out)
-library(Neoantimon2);stopifnot(as.character(packageVersion('Neoantimon2'))=='0.3.0')
+library(Neoantimon2);stopifnot(as.character(packageVersion('Neoantimon2')) %in% c('0.3.0','0.3.0.9000'))
 helper <- new.env();sys.source(file.path(root,'docs/ai/run-analysis.R'),helper)
 checks <- list()
 pass <- function(name) {checks[[name]] <<- 'PASS';cat('PASS:',name,'\n')}
@@ -120,14 +120,14 @@ pass('absolute CLI invocation from another directory resolves same helper and su
 expected<-c('neo_project','neo_config','neo_run','neo_results','neo_events','neo_origins','neo_multisample','neo_explain',
  'neo_export_bundle','neo_analyze_external','neo_external_results','neo_external_explain',
  'neo_download_resources','neo_check_resources','neo_check_predictors','neo_setup_predictor')
-# The released signatures remain fixed; the local source-evidence branch adds
-# only the separately documented read-only numerical accessor.
-additional<-intersect('neo_priorities',getNamespaceExports('Neoantimon2'))
+# Released signatures remain fixed; only four explicit development additions
+# are permitted. Unknown exports still fail this inventory check.
+additional<-intersect(c('neo_priorities','neo_experimental_yield','neo_yield_evidence','neo_report_bundle'),getNamespaceExports('Neoantimon2'))
 stopifnot(setequal(getNamespaceExports('Neoantimon2'),c(expected,additional)))
 signatures<-lapply(expected,function(n) names(formals(getExportedValue('Neoantimon2',n))));names(signatures)<-expected
 pass('16 released public API signatures inspected')
 jsonlite::write_json(list(status='PASS',checks=checks,pass=length(checks),fail=0L,
  agent_sessions_launched=FALSE,agent_specific_limit='Entrypoint traversal and R execution tested; no independent Codex/Claude Code session',
- package_version='0.3.0',package_commit=packageDescription('Neoantimon2')$RemoteSha,
+ package_version=as.character(packageVersion('Neoantimon2')),package_commit=packageDescription('Neoantimon2')$RemoteSha,
  signatures=signatures,manifest=manifest,helper_report=file.path(m$run_directory,'report.json')),
  file.path(out,'validation.json'),pretty=TRUE,auto_unbox=TRUE)

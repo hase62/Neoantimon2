@@ -1,0 +1,35 @@
+{
+  "schema_version": "experimental-yield-profile-0.1.0",
+  "id": "improve-exploratory",
+  "version": "0.1.0",
+  "mode": "scenario",
+  "endpoint": "T_cell_recognition",
+  "assay": "DNA_barcoded_pMHC_multimer",
+  "population": "Owner-supplied reanalysis of the published IMPROVE cross-validation score distribution; illustrative planning only",
+  "limitations": "These four rates were supplied as a reference scenario, not independently reconstructed calibration. They are not BigMHC, BA, EL, ELISpot or tumor-recognition probabilities.",
+  "provenance": {
+    "citation": "10.3389/fimmu.2024.1360281",
+    "source": "Owner-approved IMPROVE-derived bin-rate reanalysis; assumed rates in Neoantimon2",
+    "raw_counts_available": false
+  },
+  "model": {
+    "provider": "IMPROVE",
+    "predictor_version": "2024-paper",
+    "model_version": "published-cross-validation",
+    "task": "external:immunogenicity",
+    "metric": "IMPROVE_score",
+    "metric_kind": "raw_score",
+    "metric_semantics": "raw",
+    "unit": "unitless",
+    "score_direction": "higher_is_better"
+  },
+  "binning": {
+    "basis": "cohort_relative"
+  },
+  "rates": [
+    0.0139,
+    0.023,
+    0.0306,
+    0.0639
+  ]
+}

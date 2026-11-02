@@ -56,7 +56,7 @@ testthat::test_local(".", reporter = "summary")
 
 ```sh
 R CMD build .
-R CMD check --no-manual Neoantimon2_0.3.0.tar.gz
+R CMD check --no-manual --install-tests Neoantimon2_0.3.0.9000.tar.gz
 python3 scripts/development/test_public_data_acquisition.py
 ```
 
@@ -65,3 +65,28 @@ operating systems require separate validation. The standalone Community Converte
 Registry is maintained at https://github.com/hase62/Neoantimon2-Converters and
 served at https://www.hase62.jp/Neoantimon2-Converters/. Its infrastructure is not
 part of this package; the Registry client and synthetic integration fixtures are.
+
+## Development version and integration checks
+
+The default branch uses 0.3.0.9000 as an explicit R development marker; the
+published v0.3.0 tag, source archive and release assets are immutable. This does
+not change scientific schema or identity versions. Record the Git revision as
+well as DESCRIPTION because earlier unpublished snapshots still reported 0.3.0.
+The sixteen released APIs remain compatible; four additive development APIs
+are listed in the [API reference](api-reference.md).
+
+After installing this source snapshot into an isolated library, run focused
+`testthat::test_local()` filters `experimental-yield`, `result-reporting` and
+relevant provenance tests, then the full source suite. Build and run
+`R CMD check --no-manual --install-tests` for the full installed suite. The
+repository-only [AI acceptance script](../../scripts/development/validate_ai_playbook.R)
+checks the preserved baseline helper on the release or explicitly supported
+current development version. [Historical evidence](../development/validation-evidence.md)
+is distinct from a fresh integration test receipt.
+
+The public R modules, tests/fixtures, man pages, runtime resources and installed
+examples retain their conventional paths. Supplementary guides remain in docs;
+there is no duplicate vignette hierarchy. Figure SVG/PNG/PDF/drawio files are
+intentional documented source/exports, not disposable scientific outputs.
+Generated caches, local libraries, raw datasets and internal audit reports stay
+outside Git; `.gitignore` and `.Rbuildignore` already exclude their usual locations.

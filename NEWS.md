@@ -1,3 +1,23 @@
+# Neoantimon2 0.3.0.9000 (development)
+
+- Add optional `neo_report_bundle()` with Event representatives per Native/exact external channel, complete peptide/pMHC/Origin links, and unchanged Experimental Yield tables (`result-report-0.1.0`). No scientific scoring or reconstruction changes.
+
+* Add optional Experimental Yield Estimation v0.1: independent A–D evidence
+  labels (both B1 and B2), explicitly assumed or model-specific empirical
+  four-bin rates, peptide/HLA deduplication, stable cumulative yield curves
+  and target reachability. Evidence labels never change probabilities.
+  Existing Native Grades, ranking, predictions and Origin semantics are unchanged.
+
+* Integrate the previously reviewed source-evidence development history: VCF-first
+  DNA VAF, optional allele-aware DNA/RNA BAM evidence, external expression and
+  ASCAT imports, read-only numerical priorities and published-paper scores.
+* Preserve paired WT/MT run provenance, saved-project reopening, source VAF/gene
+  projection and complete configurable peptide ranges. Retain large-output JSON
+  streaming and indexed relationship validation without changing scientific IDs.
+* Update README/API/validation navigation; distinguish this development snapshot
+  from immutable v0.3.0. No release or tag is created. Scientific reconstruction,
+  scoring and evidence-classification policies are unchanged in this integration.
+
 # Neoantimon2 0.3.0
 
 * Make the README easier to navigate and add four complete, offline examples

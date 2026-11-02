@@ -1,6 +1,7 @@
 # Source-file evidence and numerical priorities (unreleased)
 
-These additions exist on the local development branch, **not immutable v0.3.0**.
+These additions are in default-branch development version **0.3.0.9000**,
+not the immutable v0.3.0 tag.
 The 16 released function signatures and somatic Grade/rank algorithms are retained;
 `neo_priorities()` is one additional read-only accessor. Research use only.
 
@@ -391,7 +392,7 @@ weights, real patient data, large download or expression quantifier is used.
 
 No synthetic test establishes biological accuracy or clinical efficacy. See
 [inputs](inputs.md) for existing technical contracts and [results](getting-started.md)
-for the released workflow. This guide describes local unreleased additions.
+for the released workflow. This guide describes the default-branch development additions.
 
 
 ## Reopen saved results without running the pipeline
@@ -536,3 +537,10 @@ Snapshot validation indexes Event identifiers and sample-peptide Origin groups
 once per validation pass. This avoids repeated full-table scans while retaining
 exact matching, duplicate/missing-key rejection, original record order and every
 Origin relationship check. It does not skip validation when reopening results.
+
+## Optional experimental-yield planning
+
+See [Experimental Yield Estimation v0.1](experimental-yield.md) for independent
+A–D/B1/B2 experimental evidence lookup and explicitly assumed or compatible
+empirical four-bin rates. These optional outputs never change the numerical
+priorities, Native Grades or ranks described above.

@@ -2,9 +2,11 @@
 
 [Authoritative playbook](ANALYSIS_PLAYBOOK.md) · [Example requests](EXAMPLE_REQUESTS.md)
 
-Use the installed immutable Neoantimon2 **v0.3.0** package (16 public R functions).
-These repository instructions and the optional helper are documentation utilities,
-not additions to that release. Never infer an assembly, sample identity, HLA
+Record the installed package version, API inventory and source commit. The
+default development package **0.3.0.9000** has 20 public functions; the immutable
+**v0.3.0** release has 16. Select the version appropriate to the requested feature.
+These instructions and the optional helper are repository documentation utilities,
+not installed package APIs. Never infer an assembly, sample identity, HLA
 allele, absent observation, predictor result or unsupported file meaning.
 
 Read the playbook, inspect the requested mode and available declarations, and

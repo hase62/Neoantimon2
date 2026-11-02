@@ -4,7 +4,8 @@
 [Requests](EXAMPLE_REQUESTS.md) · [Inputs](../user/inputs.md) · [Setup](../user/setup.md)
 
 This is the authoritative workflow for both Codex and Claude Code. Use R 4.1+
-and the already installed v0.3.0 package/dependencies. The instructions work with
+and an already installed supported package/dependencies (immutable v0.3.0 or
+current development 0.3.0.9000). The instructions work with
 an installed package; repository utilities are explicitly labeled. No specific
 home directory, development library or hidden environment variable is required.
 
@@ -14,7 +15,7 @@ Locate the manifest, configuration, reference provenance, VCFs and any completed
 project. Read the original declarations, not normalized internal project records.
 Check `packageVersion("Neoantimon2")` and `getNamespaceExports("Neoantimon2")`.
 Record the source commit if available, R/platform and `sessionInfo()`.
-The 16 exports are listed in [API reference](../user/api-reference.md).
+The 20 current / 16 released exports are listed in [API reference](../user/api-reference.md).
 
 The YAML example is an **agent declaration**. The agent translates it into the
 real API: samples data frame, patient-keyed HLA list, unnamed list of input
@@ -39,7 +40,7 @@ Do not infer chronology or turn absent evidence into evaluated absence.
 
 ```r
 library(Neoantimon2)
-stopifnot(as.character(packageVersion("Neoantimon2")) == "0.3.0")
+stopifnot(as.character(packageVersion("Neoantimon2")) %in% c("0.3.0", "0.3.0.9000"))
 e <- new.env()
 source(system.file("examples", "quickstart.R", package = "Neoantimon2"), local = e)
 p <- e$p

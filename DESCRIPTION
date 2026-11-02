@@ -1,7 +1,7 @@
 Package: Neoantimon2
 Type: Package
 Title: Neoantigen Reconstruction and Scoped Evidence Analysis
-Version: 0.3.0
+Version: 0.3.0.9000
 Authors@R: person("Takanori", "Hasegawa", role = c("aut", "cre"),
     email = "takanorihasegawa@users.noreply.github.com")
 Description: Reconstructs genomic events, coding sequence origins, altered
@@ -11,6 +11,8 @@ Description: Reconstructs genomic events, coding sequence origins, altered
     vaccine-set selection and literature-derived indirect-HLA analysis with
     independent native allo-HLA evidence overlays. Research outputs do not
     provide clinical interpretation or a universal immunogenicity score.
+    Optional assumption-based experimental yield planning and linked result
+    reporting retain independent predictor and molecular provenance.
 License: file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1.0)
