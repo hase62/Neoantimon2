@@ -48,6 +48,12 @@ peptide_origin <- function(p, context, project, events, contract = peptide_contr
     peptide_length = p$peptide_length, peptide_start_aa = p$peptide_start_aa,
     peptide_end_aa = p$peptide_end_aa, transcript_id = identity$transcript_id,
     transcript_version = version, protein_id = context$protein_id,
+    gene_symbol = context$gene_symbol,
+    genes_json = if (is.null(context$gene_id)) list() else list(list(
+      gene_id = context$gene_id, gene_symbol = context$gene_symbol,
+      annotation_source = "BOUND_TRANSCRIPT_ANNOTATION",
+      reference_identity = Filter(function(r) identical(r$id,"reference.annotation_gtf"),
+        context$reference_resources))),
     mane_status = if (length(context$mane_status))
       paste(sort(unique(context$mane_status), method = "radix"), collapse = ";") else NULL,
     consequence = context$translation$protein_effect,
@@ -87,6 +93,7 @@ peptide_candidate <- function(origins, presenter, project, self, contract = pept
     candidate_key = key, sample_peptide_id = first$sample_peptide_id,
     peptide_key = first$peptide_key, peptide_sequence = first$peptide_sequence,
     ligand_sequence = first$ligand_sequence, peptide_length = first$peptide_length,
+    gene_symbols = as.list(sort(unique(as.character(unlist(lapply(origins, `[[`, "gene_symbol")))), method = "radix")),
     n_origins = as.integer(length(origins)),
     origin_ids = as.list(sort(vapply(origins, `[[`, "", "origin_id"), method = "radix")),
     mhc_key = presenter$mhc_key, hla_class = presenter$hla_class,

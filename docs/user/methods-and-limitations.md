@@ -43,3 +43,14 @@ the minimum supported R version have not all been independently validated.
 Acquire licensed tools and reference data separately under their provider terms;
 see [resources and tools](resources-and-tools.md). The software citation is not a
 peer-reviewed Neoantimon2 validation publication.
+
+## Development evidence and planning boundaries
+
+The default branch includes later [versioned software/data evidence](../development/validation-evidence.md)
+and optional [yield planning](experimental-yield.md) / [complete reporting](result-reporting.md).
+These do not revise historical release validation, Native Grades, raw prediction
+semantics or molecular identities. A–D/B1/B2 are descriptive evidence labels;
+scenario probabilities are assumptions and independent outcomes are not assured.
+Reporting representatives retain every alternative; joint multi-Event Origins
+are not independent single-Event causal experiments. No clinical or experimental
+immunogenicity performance follows from reconstruction agreement or model execution.

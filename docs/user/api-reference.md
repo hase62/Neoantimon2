@@ -2,12 +2,11 @@
 
 [Documentation index](../README.md) · [Quickstart](getting-started.md)
 
-The eight native functions below remain exported. Four additional external
-prediction APIs are also exported and listed separately below; optional
-workflows use their supported configuration and evidence inputs.
-Version 0.3.0 exports all sixteen interfaces below. Its four
-[R setup APIs](#r-setup-apis) are absent from the immutable v0.2.0 release.
-Existing signatures and scientific contracts remain intact.
+The current default-branch development package (0.3.0.9000) exports **20 APIs**.
+The immutable published v0.3.0 exports the sixteen baseline interfaces below.
+The four additions (`neo_priorities`, `neo_experimental_yield`,
+`neo_yield_evidence`, `neo_report_bundle`) are development features, not additions
+to that tag. Existing baseline signatures and scientific contracts remain intact.
 
 | Function | Main arguments and purpose | Return / side effects |
 | --- | --- | --- |
@@ -63,3 +62,17 @@ and installed help `?neo_download_resources`.
 | `neo_check_resources(..., config = NULL)` | Report missing/invalid files, integrity states, required tools and optionally full reference compatibility |
 | `neo_check_predictors(config = NULL, ...)` | Inspect native tools and runtimes; optional explicit synthetic execution check |
 | `neo_setup_predictor(provider, ...)` | Return ordinary predictor configuration; optionally prepare a new pinned MHCflurry environment with explicit consent |
+
+## Development evidence, planning and reporting APIs
+
+| Function | Actual signature and behavior |
+| --- | --- |
+| `neo_priorities(project, analysis = NULL, method = c("model-v1", "neoantimon-paper-2020-v1"), vaf = c("dna", "rna"), wild_type_predictions = NULL, expression_unit = NULL)` | Read existing Native/External numeric priorities with model and Origin provenance; paper methods have separate prerequisites |
+| `neo_yield_evidence(x, reference = NULL, endpoint = NULL, assay = NULL, min_records = 100L, min_patients = 3L)` | Descriptive A–D/B1/B2 evidence; no probability adjustment; explicit unavailable status |
+| `neo_experimental_yield(x, profile, reference = NULL, analysis = NULL, channel = NULL, unit = c("peptide", "peptide_hla"), ordering = c("score", "input"), primary_hla = c("best_score", "lexicographic"), min_records = 100L, min_patients = 3L)` | Existing predictor evidence or compatible score table; independent scenario/empirical profile; units, curve, targets and provenance |
+| `neo_report_bundle(project, dir = NULL, analyses = list(), candidate_id = NULL, yield_plan = NULL, external_channels = NULL, reference = NULL, endpoint = NULL, assay = NULL)` | Read-only four-level report; separate channel representatives and all links; optional unchanged planning tables |
+
+See installed help for defaults and validation, [source evidence/priorities](source-evidence-and-priorities.md),
+[Experimental Yield](experimental-yield.md) and [complete reporting](result-reporting.md).
+No function executes a predictor merely to read a saved result. The reporting
+export has its own contract; `neo_export_bundle()` remains unchanged.

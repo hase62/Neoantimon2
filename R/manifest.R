@@ -4,10 +4,18 @@ atomic_json <- function(value, path, before_rename = NULL) {
   if (!dir.exists(dirname(path))) stop("Metadata parent directory missing")
   tmp <- tempfile(".metadata-", tmpdir = dirname(path))
   on.exit(unlink(tmp), add = TRUE)
-  # Complete serialization precedes opening any file; destination is never truncated.
-  json <- jsonlite::toJSON(value, auto_unbox = TRUE, null = "null", digits = NA, pretty = TRUE)
-  con <- file(tmp, open = "wb")
-  tryCatch({writeBin(charToRaw(paste0(enc2utf8(json), "\n")), con); flush(con)}, finally = close(con))
+  # Small metadata keeps its existing byte representation. Large nested result
+  # graphs must not be assembled into one R string (limited to 2^31-1 bytes).
+  # Both routes write only a sibling temporary file and validate before commit.
+  if (as.numeric(utils::object.size(value)) > 64 * 1024^2) {
+    con <- file(tmp, open = "wb")
+    tryCatch({json_write_chunks(value, con); writeBin(as.raw(10L), con); flush(con)},
+      finally = close(con))
+  } else {
+    json <- jsonlite::toJSON(value, auto_unbox = TRUE, null = "null", digits = NA, pretty = TRUE)
+    con <- file(tmp, open = "wb")
+    tryCatch({writeBin(charToRaw(paste0(enc2utf8(json), "\n")), con); flush(con)}, finally = close(con))
+  }
   jsonlite::read_json(tmp) # reject an incomplete serialization before commit
   if (!is.null(before_rename)) before_rename(tmp, path)
   if (!file.rename(tmp, path)) stop("Atomic metadata rename failed; old destination retained")

@@ -306,6 +306,8 @@ event_parse_vcf <- function(project, input, reference) {
         prov <- event_source_record(input, "VCF", line_number, original, i, caller,
           fields[["INFO"]], raw_format,
           event_vcf_fields(fields[["INFO"]], info_defs, i, length(alts)), projected_format(i))
+        if (!is.null(format_values$AF) && !is.null(format_defs$AF))
+          prov$evidence_format_definitions <- list(AF=format_defs$AF)
         prov$declared_reference <- declared_reference
         if (identical(input$input_role, "germline_vcf"))
           prov$genotype_status <- if (is.null(raw_format) ||

@@ -11,9 +11,29 @@ somatic_source_files <- function(project) {
       stop("Evidence source checksum mismatch")
     s$resolved_path <- path
     s$sha256 <- sha
+    if (s$kind %in% c("dna_bam","normal_dna_bam","rna_bam")) {
+      indexes <- c(paste0(path,".bai"),sub("[.]bam$",".bai",path),paste0(path,".csi"))
+      indexes <- unique(indexes[file.exists(indexes)])
+      if (length(indexes)!=1L) stop("BAM requires exactly one existing unambiguous BAI/CSI index; index it externally")
+      s$index_path <- indexes[[1L]]
+      s$index_sha256 <- digest::digest(file=s$index_path,algo="sha256",serialize=FALSE)
+    }
+    if (s$kind=="ascat" && !is.null(s$options$metadata_path)) {
+      if (!identical(s$format,"ascat_segments")) stop("ASCAT companion metadata is only for ascat_segments")
+      if (length(s$options$metadata_format)!=1L ||
+          !s$options$metadata_format %in% c("ascat_rds","ascat_rdata")) stop("Declare ASCAT metadata_format explicitly")
+      scalar_text(s$options$metadata_path,"ASCAT metadata_path")
+      s$metadata_path <- resolve_path(s$options$metadata_path,project$config$paths$input_root)
+      if (!file.exists(s$metadata_path) || dir.exists(s$metadata_path)) stop("ASCAT companion file missing")
+      s$metadata_sha256 <- digest::digest(file=s$metadata_path,algo="sha256",serialize=FALSE)
+      if (!is.null(s$options$metadata_checksum) &&
+          !identical(tolower(s$options$metadata_checksum),s$metadata_sha256)) stop("ASCAT companion checksum mismatch")
+    }
     s$source_id <- paste0("somatic-source:",infra_hash(list(kind=s$kind,
       sample_id=s$sample_id,source=s$source,version=s$source_version,
       reference_build=s$reference_build,sha256=sha)))
+    if (!is.null(s$metadata_sha256)) s$source_id <- paste0("somatic-source:",
+      infra_hash(list(primary_source_id=s$source_id,metadata_sha256=s$metadata_sha256)))
     s
   })
 }
@@ -65,10 +85,14 @@ somatic_row_value <- function(row,name) {
 
 somatic_source_provenance <- function(source) {
   if (is.null(source)) return(NULL)
-  list(source_id=source$source_id,kind=source$kind,source=source$source,
+  result <- list(source_id=source$source_id,kind=if(is.null(source$original_kind)) source$kind else source$original_kind,source=source$source,
     source_version=source$source_version,artifact=source$resolved_path,
     sha256=source$sha256,reference_build=source$reference_build,
     sample_id=source$sample_id)
+  if (!is.null(source$metadata_sha256)) result$companion <- list(artifact=source$metadata_path,
+    sha256=source$metadata_sha256,format=source$options$metadata_format)
+  if (!is.null(source$sample_mapping)) result$sample_mapping <- source$sample_mapping
+  result
 }
 
 somatic_source_index <- function(sources,kind,sample_id) {

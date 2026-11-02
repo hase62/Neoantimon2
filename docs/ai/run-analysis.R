@@ -37,7 +37,7 @@ agent_vcf_header <- function(path, sample_id) {
   stop('Missing/oversized VCF header; no inferred sample mapping')
 }
 agent_declare <- function(manifest) {
-  stopifnot(as.character(utils::packageVersion('Neoantimon2')) == '0.3.0')
+  stopifnot(as.character(utils::packageVersion('Neoantimon2')) %in% c('0.3.0', '0.3.0.9000'))
   allowed <- c('workflow_declaration', 'mode', 'reference_assembly', 'resource_config',
     'run_directory', 'samples', 'hla', 'prediction_providers', 'optional_evidence', 'external_predictions')
   if (!is.list(manifest) || any(!names(manifest) %in% allowed) ||

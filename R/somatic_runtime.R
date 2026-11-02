@@ -9,7 +9,9 @@ somatic_stage_output <- function(path,relative) list(path=relative,
     file=path,algo="sha256",serialize=FALSE)))
 
 somatic_raw_fingerprints <- function(project,sources) checkpoint_fingerprints(
-  inputs=list(events=phase_stage_output(project),peptides=peptide_stage_output(project),
+  inputs=list(input_evidence=if(file.exists(input_evidence_path(project)))
+      somatic_stage_output(input_evidence_path(project),"intermediate/input_evidence.rds") else NULL,
+    events=phase_stage_output(project),peptides=peptide_stage_output(project),
     sources=lapply(sources,function(s) list(kind=s$kind,sample_id=s$sample_id,
       source=s$source,version=s$source_version,reference_build=s$reference_build,
       sha256=s$sha256))),
@@ -24,9 +26,10 @@ somatic_eligibility_fingerprints <- function(project,policy) checkpoint_fingerpr
   dependencies=list())
 
 somatic_stage_run <- function(project,events,peptide) {
+  automatic <- input_evidence_stage_run(project,events,peptide)
   policy <- project$config$somatic_evidence
   if (is.null(policy)) return(NULL)
-  sources <- somatic_source_files(project)
+  sources <- automatic$bound_source_files
   raw_fp <- somatic_raw_fingerprints(project,sources)
   raw_cp <- Filter(function(x) x$step_id=="somatic_evidence_raw",
     read_manifest(project$path)$checkpoints)
@@ -37,7 +40,7 @@ somatic_stage_run <- function(project,events,peptide) {
     if (!length(raw_cp)) checkpoint_update(project,"somatic_evidence_raw",fingerprints=raw_fp)
     checkpoint_update(project,"somatic_evidence_raw","RUNNING",raw_fp)
     tryCatch({
-      raw <- somatic_raw_construct(events,peptide,somatic_source_rows(sources),project$run_id)
+      raw <- automatic
       somatic_validate_raw(raw,events,peptide)
       tmp <- tempfile("somatic-raw-",tmpdir=dirname(somatic_raw_path(project)))
       on.exit(if (file.exists(tmp)) unlink(tmp),add=TRUE)

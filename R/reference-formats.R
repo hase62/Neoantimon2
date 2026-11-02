@@ -82,7 +82,7 @@ reference_gtf <- function(path, genome = NULL, collect = c("transcripts", "all")
     pattern <- '[A-Za-z_][A-Za-z0-9_]*[[:space:]]+("[^"\\r\\n]*"|[0-9]+)[[:space:]]*;'
     residue <- trimws(gsub(pattern, "", x$raw_attributes, perl = TRUE))
     if (any(nzchar(residue))) stop("Malformed GTF attributes")
-    keys <- c("gene_id", "transcript_id", "protein_id", "gene_type", "transcript_type",
+    keys <- c("gene_id", "gene_name", "transcript_id", "protein_id", "gene_type", "transcript_type",
       "gene_biotype", "transcript_biotype", "exon_id", "exon_number")
     for (key in keys) {
       pat <- paste0('(?:^|(?<=;))[[:space:]]*', key, '[[:space:]]+(?:"([^"]+)"|([0-9]+));')

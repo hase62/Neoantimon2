@@ -1,0 +1,134 @@
+{
+  "schema_version": "neoantimon2-validation-inventory-1",
+  "development_version": "0.3.0.9000",
+  "scope": "Historical measured evidence inventory; fresh integration receipts are separate. Local audit locators are not public download URLs.",
+  "raw_data_and_model_weights_included": false,
+  "records": [
+    {
+      "evidence_id": "molecular_oracle",
+      "local_audit_locator": "application-note-evidence/evidence/current-oracle-summary.json",
+      "sha256": "041a4691142c3ee76a88b19dc1f7a3a9f0315855d8b30c23129ba64536c07f74",
+      "bytes": 2303,
+      "source_revision": "35eeed33b6abb4963c8f3c49ede9c3f95a4ba8eb",
+      "status": null,
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "historical_oracle_inventory",
+      "local_audit_locator": "application-note-evidence/evidence/historical-oracle-inventory.json",
+      "sha256": "d3337222ab572fa8c8693d1420cc296a4f8df3d7c8814ead746ac920a0f910ae",
+      "bytes": 1083,
+      "source_revision": "35eeed33b6abb4963c8f3c49ede9c3f95a4ba8eb",
+      "status": null,
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "full_HCC1395_graph",
+      "local_audit_locator": "full-hcc1395-and-storage-audit/saved-result-recovery/checkpoints.json",
+      "sha256": "b9f181dbdb31aa09e1fae19ec470b887848c59086ea5125fbb969970c57b95c7",
+      "bytes": 233,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "PASS",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "full_HCC1395_final_recovery",
+      "local_audit_locator": "full-hcc1395-and-storage-audit/saved-result-recovery/comparison-correction/verification-outcome.json",
+      "sha256": "88e7557d033ee246ac7ba191be5b26db5f8ea5940b591f3344bd577c89163606",
+      "bytes": 195,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "HCC1395_SAVED_SCIENTIFIC_RESULTS_VERIFIED \u2014 ORIGINAL_DRIVER_EXIT_143_PRESERVED",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "full_HCC1395_Origin_comparison",
+      "local_audit_locator": "full-hcc1395-and-storage-audit/saved-result-recovery/comparison-correction/origin-comparison.json",
+      "sha256": "acfffe7082a787a8f093f33ec59ab7200658eb9286125f12f400b7fd0612498e",
+      "bytes": 3317,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "PASS",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "full_HCC1395_Grade_rank",
+      "local_audit_locator": "full-hcc1395-and-storage-audit/saved-result-recovery/comparison-correction/grade-rank-projection.json",
+      "sha256": "4b356c0882bc00c24f099552e7b4f1e538191a8714b01d99225cc2243db9a884",
+      "bytes": 3205,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "PASS",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "full_HCC1395_links",
+      "local_audit_locator": "full-hcc1395-and-storage-audit/saved-result-recovery/comparison-correction/public-candidate-links.json",
+      "sha256": "c4606599b8d8ef757417efb4780c1140d2ec2fa3777be7e399f58257b0694e56",
+      "bytes": 85,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": null,
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "real_BA",
+      "local_audit_locator": "real-predictor-pilot/import-verification.json",
+      "sha256": "79296a221cb6233a97793ee6e098af13160b9c4976a21354ca2432a6214c4cb9",
+      "bytes": 2215,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "PASS",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "real_EL_IM",
+      "local_audit_locator": "real-bigmhc-pilot/final-verification.json",
+      "sha256": "ed5b30c45407cf8bd3560d1b9507ebae6724896e88b678a21e903f5f12d1d21c",
+      "bytes": 2780,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": null,
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "pVACseq_cohort",
+      "local_audit_locator": "pvacseq-extended/cohort-summary.json",
+      "sha256": "3d217f13c2adabc4f18299184c397b54fb17467dabc3da7c4af03a8ee4ee88c4",
+      "bytes": 1167,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "COHORT_FROZEN_NO_PVAC_EXECUTION",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "pVACseq_comparison",
+      "local_audit_locator": "pvacseq-extended/results/comparison-verification.json",
+      "sha256": "782aeccf75cccb1e825cbdc8bb729be1a5f1b32f6949647ea790194f2f3d9d08",
+      "bytes": 1258,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "COMPARISON_EXECUTED_AUDIT_COMPLETED",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "result_reporting",
+      "local_audit_locator": "result-reporting-audit/real-report-verification.json",
+      "sha256": "f4091967604b2509f50e7c35e3236799b29f38266845b16ecf4a402bb6508f60",
+      "bytes": 3528,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "PASS_REAL_SAVED_REPORTING",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "independent_reporting_check",
+      "local_audit_locator": "result-reporting-audit/independent-report-verification.json",
+      "sha256": "57431d90b78239065d8a2cb68fb0f46474fd36896e112b2094c428f9fe15ff3d",
+      "bytes": 1234,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "PASS_INDEPENDENT_PYTHON_EXPORTED_REPORT_CHECK",
+      "not_reexecuted_for_this_integration": true
+    },
+    {
+      "evidence_id": "previous_package_validation",
+      "local_audit_locator": "result-reporting-audit/package-receipts.json",
+      "sha256": "3e6a788cd276ae3c0d5ebc8cfb0d8237dcba5bd03e1b63b21b914b5a22ab01bf",
+      "bytes": 1649,
+      "source_revision": "11c68160609fc08f7303e07425f5cebfaf6af4a9",
+      "status": "stage receipts",
+      "not_reexecuted_for_this_integration": true
+    }
+  ]
+}

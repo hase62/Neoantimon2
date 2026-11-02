@@ -11,11 +11,13 @@ single-sample VCFs. Advanced input/analysis modes have their own contracts.
 
 ## Install and run the offline example
 
-Use R ≥ 4.1.0. Install the released package, then run the small example:
+Use R ≥ 4.1.0. Install the default-branch development package (0.3.0.9000), then run the small example.
+For the immutable 16-API published release instead, set `ref = "v0.3.0"`;
+new priority/planning/reporting APIs require the development version:
 
 ```r
 install.packages("remotes")
-remotes::install_github("hase62/Neoantimon2", ref = "v0.3.0", upgrade = "never")
+remotes::install_github("hase62/Neoantimon2", ref = "main", upgrade = "never")
 library(Neoantimon2)
 source(system.file("examples", "quickstart.R", package = "Neoantimon2"), local = TRUE)
 results[, c("sample_id", "ligand_sequence", "mhc_key",
@@ -306,7 +308,7 @@ The end-to-end path above is the recommended own-data guide. Open these only
 for the exact contract you need: [input roles](inputs.md), [setup options](setup.md),
 [resource/tool inventory](resources-and-tools.md), [result/grade rules](results-and-explain.md),
 [external schema/policies](external-predictions.md), [VCF scope](vcf-compatibility.md),
-[16 APIs](api-reference.md), [advanced workflows](workflows.md),
+[20 current / 16 released APIs](api-reference.md), [advanced workflows](workflows.md),
 [limits](methods-and-limitations.md) and [troubleshooting](troubleshooting.md).
 
 Longitudinal, vaccine-set and restricted indirect-HLA/allo workflows are distinct

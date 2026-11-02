@@ -15,7 +15,7 @@ peptide_reference_checksum <- function(project) {
 
 peptide_stage_fingerprints <- function(project) checkpoint_fingerprints(
   inputs = list(translation_output = translation_stage_output(project)),
-  config = list(implementation = "peptide-candidate-v1", policy = peptide_policy(project$config$peptides),
+  config = list(implementation = "peptide-candidate-v2-gene-annotation", policy = peptide_policy(project$config$peptides),
     contract = peptide_contract()$peptide_version, hla = project$hla),
   dependencies = list(reference = sorted_records(identity_records(project$resources)),
     self_proteome_content = peptide_reference_checksum(project)))
