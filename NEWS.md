@@ -1,5 +1,9 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Add an optional sourceable publication-workflow example composing existing
+  unique-peptide selection and Yield curves for model/set and explicit scenario
+  comparisons. No new public API or scientific scoring policy.
+
 - Add optional `neo_report_bundle()` with Event representatives per Native/exact external channel, complete peptide/pMHC/Origin links, and unchanged Experimental Yield tables (`result-report-0.1.0`). No scientific scoring or reconstruction changes.
 
 * Add optional Experimental Yield Estimation v0.1: independent A–D evidence

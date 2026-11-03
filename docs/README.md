@@ -22,6 +22,7 @@ reading chain.
 | Longitudinal, vaccine, indirect-HLA and other extensions | [Advanced workflows](user/workflows.md) |
 | Source VAF/BAM, expression/ASCAT and numerical priorities | [Source evidence](user/source-evidence-and-priorities.md) |
 | Experimental planning and independent evidence categories | [Experimental Yield](user/experimental-yield.md) |
+| Multi-model unique-peptide selection and scenario composition | [Selection/planning](user/model-selection-and-planning.md) |
 | Event representatives and complete four-level export | [Reporting](user/result-reporting.md) |
 | Measured validation and its limits | [Validation evidence](development/validation-evidence.md) |
 | Arguments and return values | [20 current / 16 released APIs](user/api-reference.md) |
