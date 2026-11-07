@@ -1,5 +1,13 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Make NetMHCIIpan 4.3k the standard indirect autorun target, with explicit BA
+  execution, independent EL/BA metrics, orientation-aware primary-core/self
+  comparison and a separately versioned BA1000 assumption profile. Retain
+  the legacy 3.2 adapter/profile via predictor_version="3.2". Pin the official
+  platform layout/internal data link, use vendor temporary-directory templates,
+  and reject EL-only, wrong-version and incomplete outputs. No Frost or clinical
+  equivalence is claimed.
+
 - Add optional `neo_indirect_autorun()` v0.1 for explicit SOT donor-to-recipient
   DRA~DRB1 workflows: pinned HLA reference, donor/self 15mer query planning,
   authorized local NetMHCIIpan 3.2 BA execution/import, saved coverage/trace

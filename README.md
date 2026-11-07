@@ -282,41 +282,33 @@ Third-party tools, resources and converters retain their own terms.
 
 ### Optional indirect-HLA autorun (development branch)
 
-`neo_indirect_autorun()` runs the existing literature-derived SOT donor-to-recipient
-workflow from explicit HLA typing and a pinned protein reference. It plans donor
-and recipient-self 15mers, invokes a user-authorized NetMHCIIpan **3.2 BA**
-installation, validates primary 9mer cores, and exports the existing strict
-core–presenter count and complete provenance. Dry-run and completed-run
-hash-checked resume are available. No vendor software or models are downloaded.
-See [setup, one-command use and limitations](docs/user/indirect-autorun.md).
-This API is local development work after `cmpb-code-v1`; it is not part of that
-frozen tag or immutable `v0.3.0`. It is not official PIRCHE v4/Frost or a clinical
-risk predictor. The bundled end-to-end example is explicitly synthetic/mock.
-
-
-After supplying complete typed HLA/reference inputs and a legitimate local 3.2
-installation, one call performs prediction, raw-output conversion and reporting;
-users do **not** prepare or edit prediction result files manually:
+`neo_indirect_autorun()` automatically plans donor/self 15mers, executes a
+legitimate local predictor, imports BA/EL/core output and saves a linked result.
+**NetMHCIIpan 4.3k is now standard**; the 3.2 adapter remains available through
+`predictor_version="3.2"`. No manual predictor-result preparation/conversion is
+needed. Configure typed HLA, a pinned normalized precursor reference and the
+licensed installation once, then call:
 
 ```r
 run <- neo_indirect_autorun(
-  allo = list(donor = donor_typing, recipient = recipient_typing),
-  presenters = recipient_dr_presenters,
-  reference = list(path = "hla-reference.json", sha256 = reference_sha256),
-  executable = netmhciipan32_executable,
-  model = list(path = model_root, identity = model_release_id),
-  authorization = list(status = "authorized_local_installation",
-                       terms = accepted_local_license_description),
-  output_dir = "indirect-run")
+  allo=list(donor=donor_typing, recipient=recipient_typing),
+  presenters=recipient_dr_presenters,
+  reference=list(path="hla-reference.json", sha256=reference_sha256),
+  executable=file.path(netmhciipan_root,"netMHCIIpan"),
+  model=list(path=netmhciipan_root, identity=model_release_id),
+  authorization=list(status="authorized_local_installation",
+                     terms=accepted_local_license_description),
+  predictor_version="4.3k", output_dir="indirect-run")
 run$result$contexts[[1]]$complete_count
 ```
 
-The named typing, presenter, executable/model and license variables above are
-explicit user-supplied setup, not inferred patient data. See the
-[complete input and offline mock example](docs/user/indirect-autorun.md),
-[3.2 acquisition and Mac architecture checks](docs/user/netmhciipan32-setup.md)
-and [scope and future candidates](docs/user/indirect-autorun-scope.md).
-The current autorun scope is human **SOT donor-to-recipient**, explicit
-**DRA*01:01–DRB1**, and the literature-derived **NetMHCIIpan 3.2 BA** baseline.
-Official PIRCHE v4 uses Frost; numerical agreement and clinical performance
-have not been established. A successful mock run is software validation only.
+4.3k explicitly requests BA (`-BA`); EL scores remain separate. Its named
+BA1000 assumption profile counts exact core/orientation/presenter units, with
+correct reversed-ligand offset mapping for Inverted cores. This is not numerical
+compatibility with 3.2/classical PIRCHE-II v3 or official PIRCHE v4/Frost, and no
+clinical performance is established. Scope remains human SOT donor-to-recipient,
+explicit DRA*01:01–DRB1. Model choice, settings, raw scores and all source links
+are retained. Dry-run and exact hash-checked completed-run reopening are available.
+See [setup, migration and runnable examples](docs/user/indirect-autorun.md) and
+[scope/future candidates](docs/user/indirect-autorun-scope.md).
+The frozen `cmpb-code-v1` and immutable `v0.3.0` do not include this local work.

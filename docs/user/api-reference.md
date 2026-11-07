@@ -80,6 +80,6 @@ export has its own contract; `neo_export_bundle()` remains unchanged.
 
 ## Optional standalone indirect-HLA autorun
 
-`neo_indirect_autorun(allo, presenters, reference, executable = NULL, model = NULL, output_dir, dry_run = FALSE, resume = FALSE, authorization = NULL, timeout = 600L, batch_size = 256L)`
+`neo_indirect_autorun(allo, presenters, reference, executable = NULL, model = NULL, output_dir, dry_run = FALSE, resume = FALSE, authorization = NULL, timeout = 600L, batch_size = 256L, predictor_version = c("4.3k", "3.2", "auto"), inversion = c("vendor_default", "all"))`
 
-[Setup and exact examples](indirect-autorun.md). Reuses the existing strict 3.2 BA baseline; completed-run resume is hash checked, and mock runs are explicitly synthetic. This API is not in immutable `v0.3.0` or frozen `cmpb-code-v1`.
+[Setup and exact examples](indirect-autorun.md). Standard 4.3k BA uses its own orientation-aware assumption profile; explicit 3.2 preserves the original strict baseline; completed-run resume is hash checked, and mock runs are explicitly synthetic. This API is not in immutable `v0.3.0` or frozen `cmpb-code-v1`.

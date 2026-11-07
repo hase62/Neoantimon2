@@ -63,13 +63,13 @@ ia_plan <- function(foundation, presenters) {
   }
   evidence <- allo_records(evidence)
   queries <- allo_records(lapply(evidence, function(x) x[c("query_id", "peptide_sequence", "presenter")]))
-  list(version = "indirect-autorun-plan-0.1.0", profile = indirect_profile(), presenters = presenters,
+  list(version = "indirect-autorun-plan-0.2.0", profile = indirect_profile(), presenters = presenters,
     queries = queries, query_links = evidence, generation = generation,
     self_catalog_complete = catalog$complete, self_window_count = length(catalog$windows),
     self_reason_codes = catalog$reason_codes, self_catalog = catalog)
 }
 
-#' Run the literature-derived indirect-HLA Class II workflow
+#' Run indirect-HLA Class II analysis with a pinned predictor profile
 #'
 #' Reuses the frozen SOT donor-to-recipient molecular baseline; not official
 #' PIRCHE reproduction, Frost, or a clinical risk score. No vendor acquisition.
@@ -78,9 +78,9 @@ ia_plan <- function(foundation, presenters) {
 #' @param presenters Explicit recipient DRA*01:01~DRB1 pairs (two-field DRB1).
 #' @param reference List with path and SHA-256 of a versioned literal precursor
 #'   hla-reference-1.0.0 manifest. No nearest-allele resolution is performed.
-#' @param executable Authorized local NetMHCIIpan 3.2 command; never downloaded.
-#' @param model List with path (installed -rdir containing data/), identity and
-#'   optional expected tree SHA-256. Symlinked model trees are rejected.
+#' @param executable Authorized local NetMHCIIpan 4.3k (standard) or 3.2 command; never downloaded.
+#' @param model List with full installation path containing data/, identity and
+#'   optional expected tree SHA-256. 4.3k additionally permits runtime_subdir and pinned internal data links; 3.2 keeps physical-tree validation.
 #' @param output_dir New output directory. Existing files are never overwritten.
 #' @param dry_run Plan donor and self queries without executing any command.
 #' @param resume Reopen a completed run/plan only after exact request/tool and
@@ -89,13 +89,19 @@ ia_plan <- function(foundation, presenters) {
 #'   authorized_local_installation, or mock_only for controlled software tests.
 #' @param timeout Per-command timeout in seconds.
 #' @param batch_size Maximum unique peptides per presenter invocation.
+#' @param predictor_version Exact 4.3k (default), explicit legacy 3.2, or opt-in auto detection.
+#' @param inversion Vendor default (DP inversion only), or all loci for 4.3k.
 #' @return A list with status, manifest, plan, output_dir and, when complete,
 #'   existing public result and explanation projections. Missing evidence never
 #'   becomes a definitive zero. Raw output, imports and checksums are persisted.
 #' @export
 neo_indirect_autorun <- function(allo, presenters, reference, executable = NULL,
                                 model = NULL, output_dir, dry_run = FALSE, resume = FALSE,
-                                authorization = NULL, timeout = 600L, batch_size = 256L) {
+                                authorization = NULL, timeout = 600L, batch_size = 256L,
+                                predictor_version = c("4.3k", "3.2", "auto"), inversion = c("vendor_default", "all")) {
+  predictor_version <- match.arg(predictor_version); inversion <- match.arg(inversion)
+  if (predictor_version == "3.2" && inversion != "vendor_default") stop("3.2 cannot use 4.3k inversion settings")
+  selected_profile <- if (predictor_version == "3.2") indirect_profile() else if (predictor_version == "4.3k") ia43_profile() else "auto-resolve-pinned-NetMHCIIpan-profile"
   setup_flag(dry_run, "dry_run"); setup_flag(resume, "resume")
   for (n in list(timeout = timeout, batch_size = batch_size))
     if (!is.numeric(n) || length(n) != 1L || !is.finite(n) || n < 1 || n != floor(n)) stop("timeout/batch_size must be positive integers")
@@ -105,6 +111,7 @@ neo_indirect_autorun <- function(allo, presenters, reference, executable = NULL,
   if (!is.null(allo$reference$sha256) && allo$reference$sha256 != reference$sha256) stop("Conflicting reference bindings")
   allo$reference <- reference; bound <- allo_config(allo, getwd()); foundation <- allo_foundation(bound)
   plan <- ia_plan(foundation, presenters)
+  plan$profile <- selected_profile; plan$requested_predictor_version <- predictor_version
   tool <- NULL; pinned <- NULL; mock <- FALSE
   if (!dry_run) {
     allo_keys(authorization, c("status", "terms"), label = "explicit local authorization")
@@ -112,14 +119,15 @@ neo_indirect_autorun <- function(allo, presenters, reference, executable = NULL,
     scalar_text(authorization$terms, "local license/authorization terms")
     mock <- authorization$status == "mock_only"
     exe <- setup_executable(executable, "netMHCIIpan")
-    if (is.null(exe)) stop("NetMHCIIpan 3.2 unavailable: install a licensed local executable and model data; use dry_run=TRUE to plan")
+    if (is.null(exe)) stop("NetMHCIIpan unavailable: install a licensed local executable and model data; use dry_run=TRUE to plan")
     tool <- list(path = exe, sha256 = ia_hash(exe), authorization = authorization)
-    pinned <- ia_model(model)
+    pinned <- if (predictor_version == "3.2") ia_model(model) else ia43_model(model)
   }
-  request <- list(version = "indirect-autorun-0.1.0", code_sha256 = ia_code_hash(), profile = indirect_profile(),
+  request <- list(version = "indirect-autorun-0.2.0", code_sha256 = ia_code_hash(), profile = selected_profile,
+    predictor_version = predictor_version, inversion = inversion,
     foundation_id = foundation$allo_analysis_id, reference_sha256 = reference$sha256,
     presenters = plan$presenters, query_ids = lapply(plan$queries, `[[`, "query_id"), dry_run = dry_run,
-    executable = tool, model = if (is.null(pinned)) NULL else pinned[c("path", "identity", "tree_sha256")],
+    executable = tool, model = if (is.null(pinned)) NULL else pinned[intersect(c("path", "rdir", "identity", "tree_sha256"), names(pinned))],
     batch_size = as.integer(batch_size), timeout = as.integer(timeout))
   request_id <- infra_hash(request); root <- setup_dest(output_dir)
   if (dir.exists(root)) {
@@ -137,7 +145,7 @@ neo_indirect_autorun <- function(allo, presenters, reference, executable = NULL,
   if (!dir.create(lock, showWarnings = FALSE)) stop("Autorun output is locked")
   writeLines(as.character(Sys.getpid()), file.path(lock, "owner"))
   on.exit(unlink(lock, recursive = TRUE), add = TRUE) # Our own transient lock only.
-  manifest <- list(version = "indirect-autorun-run-0.1.0", request_id = request_id, request = request,
+  manifest <- list(version = "indirect-autorun-run-0.2.0", request_id = request_id, request = request,
     status = "RUNNING", real_predictor_executed = FALSE, execution_kind = if (dry_run) "NOT_EXECUTED" else if (mock) "MOCK_EXECUTION" else "AUTHORIZED_LOCAL_PROVIDER",
     created_utc = format(Sys.time(), tz = "UTC", usetz = TRUE), claim = "Literature-derived molecular baseline; not official PIRCHE or clinical risk")
   ia_json(manifest, file.path(root, "run.json"))
@@ -155,7 +163,11 @@ neo_indirect_autorun <- function(allo, presenters, reference, executable = NULL,
     if (!dry_run) {
       ia_json(tool, file.path(root, "execution/executable.json")); ia_json(pinned, file.path(root, "execution/model-tree.json"))
       pp <- vapply(plan$presenters, `[[`, "", "presenter")
-      probe <- ia_probe(tool$path, pinned, pp, root, timeout, mock)
+      probe <- if (predictor_version == "3.2") ia_probe(tool$path, pinned, pp, root, timeout, mock) else
+        ia43_probe(tool$path, pinned, pp, root, timeout, mock, predictor_version, inversion)
+      modern <- identical(probe$version, "4.3k")
+      plan$profile <- if (modern) ia43_profile() else indirect_profile()
+      ia_json(plan, file.path(root, "plan.json"))
       probe$presenter_map <- stats::setNames(vapply(pp, ia_vendor_allele, ""), pp)
       rows <- list(); commands <- probe$commands; raw_index <- list(); batch <- 0L
       for (p in pp) {
@@ -164,19 +176,22 @@ neo_indirect_autorun <- function(allo, presenters, reference, executable = NULL,
         for (g in groups) {
           batch <- batch + 1L; stem <- sprintf("raw/batch-%05d", batch)
           input <- file.path(root, paste0(stem, ".pep")); dir.create(dirname(input), recursive = TRUE, showWarnings = FALSE); writeLines(g, input)
-          args <- c("-rdir", pinned$path, "-inptype", "1", "-f", input, "-a", probe$presenter_map[[p]])
-          if (probe$temp_flag) { dir.create(file.path(root, "temporary"), showWarnings = FALSE); args <- c(args, "-tdir", file.path(root, "temporary")) }
+          args <- c("-rdir", if (is.null(pinned$rdir)) pinned$path else pinned$rdir, "-inptype", "1", "-f", input, "-a", probe$presenter_map[[p]])
+          if (modern) args <- c(args, "-BA", if (inversion == "all") "-inv_all" else character())
+          # 4.3k keeps its official TMPDIR template: long output-derived -tdir paths
+          # overflow the native nnmultipred command buffer on Darwin arm64.
+          if (!modern && probe$temp_flag) { dir.create(file.path(root, "temporary"), showWarnings = FALSE); args <- c(args, "-tdir", file.path(root, "temporary")) }
           ran <- ia_exec(tool$path, args, root, stem, timeout); commands <- c(commands, list(ran$record))
-          parsed <- ia_parse(ran$output, g, p)
+          parsed <- if (modern) ia43_parse(ran$output, g, p) else ia_parse(ran$output, g, p)
           parsed <- lapply(parsed, function(r) { r$raw_output$artifact <- paste0(stem, ".stdout"); r })
           rows <- c(rows, parsed); raw_index[[length(raw_index) + 1L]] <- list(path = paste0(stem, ".stdout"), sha256 = ia_hash(file.path(root, paste0(stem, ".stdout"))))
         }
       }
-      if (!identical(ia_hash(tool$path), tool$sha256) || !identical(ia_model(model)$tree_sha256, pinned$tree_sha256)) stop("Executable/model changed during execution")
+      if (!identical(ia_hash(tool$path), tool$sha256) || !identical((if (predictor_version == "3.2") ia_model(model) else ia43_model(model))$tree_sha256, pinned$tree_sha256)) stop("Executable/model changed during execution")
       ia_json(raw_index, file.path(root, "execution/raw-output-index.json")); ia_json(commands, file.path(root, "execution/commands.json"))
-      imported <- ia_import(rows, file.path(root, "queries.tsv"), file.path(root, "execution/raw-output-index.json"), tool, pinned, probe, commands, mock)
+      imported <- (if (modern) ia43_import else ia_import)(rows, file.path(root, "queries.tsv"), file.path(root, "execution/raw-output-index.json"), tool, pinned, probe, commands, mock)
       ia_json(imported, file.path(root, "binding.json"))
-      config <- list(version = "indirect-hla-baseline-1.0.0", profile = indirect_profile(), presenters = plan$presenters,
+      config <- list(version = if (modern) "indirect-hla-netmhciipan43k-ba-1.0.0" else "indirect-hla-baseline-1.0.0", profile = plan$profile, presenters = plan$presenters,
         provider = list(path = "binding.json", sha256 = ia_hash(file.path(root, "binding.json"))))
       ia_json(config, file.path(root, "indirect-config.json"))
       existing <- indirect_baseline(foundation, indirect_config(config, root))
@@ -191,10 +206,18 @@ neo_indirect_autorun <- function(allo, presenters, reference, executable = NULL,
       ia_table(existing$summaries, file.path(root, "summary.tsv"))
       manifest$real_predictor_executed <- !mock && length(plan$queries) > 0L
       manifest$provider_version <- probe$version
+      manifest$resolved_profile <- existing$profile; manifest$threshold_policy <- existing$policy$threshold
+      manifest$counting_policy <- existing$policy$counting
+      if (modern) {
+        manifest$execution_settings <- list(BA = TRUE, context_encoding = FALSE, inversion = inversion,
+          temporary_policy = "vendor TMPDIR default; resolved template retained in raw stdout",
+          decision_metric = "Affinity(nM)", retained_nondecision_metrics = list("Score_EL", "%Rank_EL", "Core_Rel"))
+        ia_table(ia43_metrics_table(rows), file.path(root, "model-metrics.tsv"))
+      }
     }
-    writeLines(c("Neoantimon2 indirect autorun v0.1; not official PIRCHE or clinical risk.",
+    writeLines(c("Neoantimon2 indirect autorun v0.2; not official PIRCHE or clinical risk.",
       "Inputs: allo-config.json + pinned reference.json; queries.tsv includes donor AND recipient self queries.",
-      "binding.json is the existing indirect-binding-import-1.0.0 contract; never synthesized real scores.",
+      "binding.json uses the explicit version-specific BA import contract; EL is retained separately, never used as nM.",
       "See execution/*.command.json for exact argv/exit/stdout and execution/model-tree.json for data hashes.",
       "Reopen with neo_indirect_autorun using identical inputs/tool and resume=TRUE; changed inputs/artifacts fail closed.",
       "Failed/interrupted runs are preserved and cannot resume in place; use a new output directory.",

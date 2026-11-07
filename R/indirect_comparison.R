@@ -31,13 +31,14 @@ indirect_self_prediction <- function(catalog, presenter, provider) {
     row <- indirect_query(provider, peptide, presenter)
     state <- row$status
     primary <- NULL
-    if (state == "evaluated" && row$affinity_nM < 1000) {
-      primary <- indirect_primary(row)
+    if (state == "evaluated" && row$affinity_nM < indirect_provider_threshold(provider)$value) {
+      primary <- indirect_primary(row, allow_reverse = ia43_is_provider(provider))
       state <- primary$status
       if (state == "evaluated") hits[[length(hits) + 1L]] <- list(
         core_sequence = primary$core$core_sequence, presenter = presenter,
         peptide_sequence = peptide, evidence_id = row$evidence_id,
         matches = allo_records(Filter(function(w) w$peptide_sequence == peptide, catalog$windows)))
+      if (state == "evaluated" && ia43_is_provider(provider)) hits[[length(hits)]]$orientation <- primary$core$orientation
     }
     if (state != "evaluated") complete <- FALSE
     ledger[[length(ledger) + 1L]] <- list(peptide_sequence = peptide, presenter = presenter,
@@ -47,15 +48,21 @@ indirect_self_prediction <- function(catalog, presenter, provider) {
   list(hits = allo_records(hits), ledger = allo_records(ledger), complete = complete)
 }
 indirect_compare <- function(query_identity, type, sequence, presenter, catalog, search,
-                             provider, occurrence_ids = list()) {
+                             provider, occurrence_ids = list(), orientation = "forward") {
   algorithm <- list(version = "exact-literal-same-presenter-primary-core-1.0.0",
     matching = "literal_exact", wildcard = FALSE, il_equivalence = FALSE,
     comparison_level = type, presenter = presenter)
   self_policy <- if (type == "core_pmhc") list(provider_configuration_id = provider$provider_configuration_id,
-    threshold = indirect_threshold(), registers = "designated_primary_forward_only") else NULL
+    threshold = indirect_provider_threshold(provider), registers = if (ia43_is_provider(provider))
+      "designated_primary_same_orientation" else "designated_primary_forward_only") else NULL
+  if (type == "core_pmhc" && ia43_is_provider(provider)) {
+    algorithm$version <- "exact-literal-same-presenter-orientation-primary-core-1.0.0"
+    algorithm$orientation <- orientation
+  }
   payload <- indirect_comparison_payload(query_identity, type,
     if (is.null(catalog$universe)) NULL else catalog$universe$self_universe_id, algorithm, self_policy)
-  matches <- if (type == "core_pmhc") Filter(function(h) h$core_sequence == sequence && h$presenter == presenter, search$hits) else
+  matches <- if (type == "core_pmhc") Filter(function(h) h$core_sequence == sequence && h$presenter == presenter &&
+    (!ia43_is_provider(provider) || identical(h$orientation, orientation)), search$hits) else
     Filter(function(w) grepl(sequence, w$peptide_sequence, fixed = TRUE), catalog$windows)
   complete <- if (type == "core_pmhc") search$complete else catalog$complete
   ambiguous <- !is.null(catalog$universe) && any(vapply(catalog$universe$typing_evidence,

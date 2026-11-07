@@ -1,4 +1,7 @@
-# NetMHCIIpan 3.2 — acquisition and Mac setup
+# NetMHCIIpan 3.2 — legacy acquisition and Mac setup
+
+The current standard is 4.3k. This page is specifically for legacy
+`predictor_version="3.2"`; see the [current autorun guide](indirect-autorun.md).
 
 ## Actual environment and result
 

@@ -1,209 +1,164 @@
-# Literature-derived indirect-HLA autorun v0.1
+# Indirect-HLA autorun: NetMHCIIpan 4.3k standard, explicit 3.2 legacy
 
-This optional **local development** API automates the existing strict molecular
-baseline. It is not official PIRCHE, Frost/PIRCHE v4 numerical reproduction,
-clinical rejection-risk prediction or immune-response validation. The frozen
-`cmpb-code-v1` source has 20 APIs; this branch adds one optional API. No existing
-Native Grade, somatic/external score, Yield mathematics or Origin ID changes.
+`neo_indirect_autorun()` executes the configured local predictor, imports its raw
+output and reports molecular counts in one call. Users do not manually create,
+edit or convert prediction result files. This is research software, not official
+PIRCHE/Frost or a clinical risk model. Version alone is insufficient: record the
+source commit, exact predictor/model identity and analysis profile.
 
-## One command after explicit setup
-
-Supply either the existing `allo-foundation-1.0.0` declaration or a compact list
-of `donor` and `recipient` typing. Compact typing requires **two explicit copies**
-per locus A/B/C/DRB1/DQB1 and recipient DRA; repeat an allele only for explicitly
-known homozygosity. One allele is not silently completed into a genotype.
+## One command after setup
 
 ```r
+library(Neoantimon2)
 run <- neo_indirect_autorun(
   allo = list(donor = donor_typing, recipient = recipient_typing),
   presenters = c("HLA-DRA*01:01~HLA-DRB1*01:01"),
   reference = list(path = "hla-reference.json", sha256 = reference_sha256),
-  executable = "netMHCIIpan",
-  model = list(path = "licensed-netMHCIIpan-3.2", identity = model_release_id),
+  executable = file.path(netmhciipan_root, "netMHCIIpan"),
+  model = list(path = netmhciipan_root, identity = model_release_id),
   authorization = list(status = "authorized_local_installation",
-                       terms = "My legitimately installed local provider; applicable vendor terms"),
-  output_dir = "indirect-run")
+                       terms = accepted_local_license_description),
+  predictor_version = "4.3k", output_dir = "indirect-run")
 run$result$contexts[[1]]$complete_count
 ```
 
-The typing variables are named lists such as `A = c("A*01:01", "A*02:01")`;
-all required loci must be supplied. Declare all typed recipient DRB1 presenters.
-The alpha/beta pair is never inferred. The first autorun profile accepts explicit
-DRA*01:01 with two-field DRB1 only. Other DRA alleles, extra-resolution beta names,
-DRB3/4/5, DQ/DP presentation, HSCT/reverse directions and PIRCHE-I are not silently
-mapped into this profile. The underlying import/foundation workflows remain
-available independently with their existing uncertainty semantics.
+The variables are explicit setup values, not inferred patient data.
+`donor_typing` and `recipient_typing` are named lists: A, B, C, DRB1, DQB1, plus
+recipient DRA. Each locus has **two explicit character allele copies** (e.g.
+`A=c("A*01:01","A*02:01")`). Repeat only for known homozygosity. Declare every
+typed recipient DR presenter as an explicit alpha/beta pair. The existing
+`allo-foundation-1.0.0` configuration is also accepted.
 
-## Reference setup
+The scope remains human SOT donor-to-recipient, source/self A/B/C/DRB1/DQB1,
+15mer ligands and DRA*01:01 with DRB1 names having two two-digit fields. DQ/DP,
+DRB3/4/5 presentation, other alpha chains and HSCT/reverse directions are not
+silently enabled. The internal parser's DP documentation example is not an
+advertisement of DP autorun support.
 
-Use the existing normalized `hla-reference-1.0.0` manifest with exact allele to
-literal precursor-protein mappings. Acquire an appropriate versioned
-[IPD-IMGT/HLA](https://www.ebi.ac.uk/ipd/imgt/hla/) resource under its terms and
-retain source/release, sequence identifiers and normalization provenance. A raw
-FASTA or alignment download alone is not a complete reference manifest. Do not
-strip gaps, complete partial sequences, select a nearest allele or assert full
-coverage without evidence.
+## Reference and vendor setup
 
-The manifest records `reference_source`, `reference_release`, nomenclature
-source/release, species, provider/parser versions, `sequence_policy="precursor"`,
-`completion_policy="none"`, coordinate convention and per-allele sequence,
-coverage and domain intervals. The compact input convention requires a
-`full_precursor` interval spanning each supported complete sequence. Keep partial
-or unavailable entries explicit. An example of the **format only**, using
-synthetic sequences, is installed as
-`extdata/indirect-autorun/synthetic-reference.json`; it is not a real IPD dataset.
-The original field definitions are in `inst/schema/allo-foundation-1.0.0.json`.
+Supply a versioned normalized `hla-reference-1.0.0` manifest with exact allele
+mappings, literal precursor sequences, release/source/nomenclature provenance,
+coverage/domain intervals and `completion_policy="none"`. No nearest allele,
+partial-sequence completion or genotype imputation is performed. Raw FASTA alone
+is not a complete manifest. Acquire appropriate [IPD-IMGT/HLA](https://www.ebi.ac.uk/ipd/imgt/hla/)
+resources under their terms. Compute the reference file SHA-256 explicitly:
 
 ```r
-reference_sha256 <- digest::digest(file = "hla-reference.json",
-                                   algo = "sha256", serialize = FALSE)
+reference_sha256 <- digest::digest(file="hla-reference.json",
+                                   algo="sha256", serialize=FALSE)
 ```
 
-Typing is conservatively normalized, then resolved by the existing foundation.
-Autorun requires exact reference allele mappings for evaluable calls; it rejects
-an otherwise sequence-equivalent but differently named allele substitution.
-Full foundation declarations can preserve incomplete/unknown typing. The existing
-baseline then returns an unavailable complete count rather than a definitive zero.
+Use the legitimately acquired [DTU 4.3 distribution](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/)
+for the host architecture (this verification uses **4.3k Darwin_arm64**).
+Follow its README's site settings for the launcher NMHOME/TMPDIR. Neoantimon2
+never obtains a license or downloads vendor assets. Supply the **full installation
+root**, with physical `data/` and its host-platform directory. The 4.3k adapter
+automatically selects `Darwin_arm64`/`Darwin_x86_64` (or matching installed host
+platform) when a platform `bin/` is present; `model$runtime_subdir` can state it
+explicitly. The resolved runtime path is pinned. Internal data links are recorded
+without traversal; their physical files are hashed once. Any link escaping the
+installation root is rejected. The legacy model validator remains strict about
+symlinks.
 
-## Licensed NetMHCIIpan 3.2 setup
+Executables and the complete supplied model tree are hashed before/after use.
+An expected `model$sha256` can be supplied. Actual help and allele-list execution
+must establish the exact release and requested DR support. 4.3k help does not
+print a version banner; the executed list and prediction outputs do. Unpatched
+4.3, 4.3j or other releases are not silently accepted as 4.3k.
 
-Obtain the executable and matching model data through the official
-[DTU NetMHCIIpan 3.2](https://services.healthtech.dtu.dk/services/NetMHCIIpan-3.2/)
-registration/download process. Neoantimon2 never downloads vendor binaries,
-weights or accepts the license. `authorization` is an explicit user declaration,
-not an automated legal-license check.
+## BA and EL stay separate
 
-Supply the physical installed `-rdir` root containing `data/`, a versioned model
-identity and optionally its expected tree SHA-256. A computed tree pin is always
-saved; a supplied pin is checked. Internal model-tree symlinks are rejected
-rather than followed outside the declared tree. Use a physical installation
-root, not a directory of unrelated tools. The executable and every model file
-are hashed before prediction and checked again afterward.
+The 4.3k adapter always explicitly requests **`-BA`** for this BA analysis.
+Plain peptide input uses `-inptype 1` with context encoding off (actual help's
+0 default is checked). `inversion="vendor_default"` keeps the vendor default
+(DP-only inversion); `inversion="all"` explicitly adds `-inv_all` for 4.3k.
+Filtering/sorting/unique-core options are not enabled. Source/self query coverage
+is checked in full. Batches and OMP/BLAS threads are bounded; every argv, exit,
+stdout and stderr is retained. 4.3k retains its official TMPDIR-based temporary-name template, recorded in
+raw stdout. An output-derived long `-tdir` caused a native buffer overflow in
+the Darwin arm64 verification; no such override is passed.
+A zero process exit is insufficient: errors/no rows, missing columns/queries,
+conflicting duplicates, invalid numbers/cores and wrong alleles fail closed.
 
-Actual `-h` output must identify the 3.2 family and advertise `-f`, `-a`,
-`-inptype`, `-rdir` plus `-list` or `-listMHC`. The supported allele list is
-executed and each declared beta checked exactly (e.g. DRB1_0101). Prediction uses
-peptide input (`-inptype 1`), one explicit recipient DR per invocation and sorted
-bounded batches (default 256). A supported `-tdir` is used if advertised. BA is
-3.2's affinity output; the modern 4.3 `-BA` switch is not blindly passed. Threads
-are bounded with OMP/BLAS environment values 1. Each command has a timeout and
-separate retained stdout/stderr. Argument values are individually quoted through
-base R `system2`; no `sh -c` or user-interpolated command string is used.
+Normalized affinity and percentile_rank mean **BA nM and %Rank_BA**. Raw
+`Score_BA`, `Score_EL`, `%Rank_EL`, `Core_Rel`, `Inverted`, peptide/MHC/Core/Of
+are retained as original strings and exported in `model-metrics.tsv`. EL-only
+output cannot complete this BA analysis. EL, binding affinity and experimental
+positivity are different quantities. Neither rank nor Score_EL becomes nM.
 
-The parser accepts the legacy `Seq/Allele/Pos/Core/Affinity(nM)` BA layout and
-the `Pos/MHC/Of/Core/Affinity(nM)` BA layout, with optional percentile output.
-It requires a 3.2 banner, literal 15mer, exact requested allele, explicit zero-based
-core offset 0–6 and a nine-residue forward core matching that ligand register.
-No missing or ambiguous core is inferred. Unknown columns, changed versions,
-invalid numbers/cores, unexpected queries, conflicting duplicates, missing self
-rows and failed/truncated output stop with retained diagnostics. Harmless identical
-duplicate evidence is normalized by the existing provider contract. Rank, when
-absent, remains NULL. Raw numeric strings are preserved in raw_output.
+## Explicit model-specific counting policy
 
-DTU's 3.2 webpage documents the legacy BA columns but labels its displayed example
-as 3.1. The mock tests exercise these explicit layouts; they are not an authentic
-3.2 execution receipt. Until a licensed 3.2 engine is tested locally, real vendor
-CLI/model integration remains **REAL_PREDICTOR_E2E_NOT_TESTED**. An incompatible
-wrapper fails with an actionable setup message rather than falling back to 4.3.
+4.3k uses `neo-netmhciipan43k-indirect-hla-ii-dr-ba1000-orientation-v1` and its
+own versioned evidence/result schemas. Its **affinity <1000 nM** cutoff is an
+explicit exploratory assumption carried from a familiar numerical cutoff; it
+is not cross-model calibration or numerical compatibility with classical
+PIRCHE-II v3. Exactly 1000 is excluded. Official PIRCHE v4/Frost is different.
 
-## What is generated and counted
+A reported inverted core is retained in **model binding direction**. When
+`Inverted=1`, Of indexes the ligand **after reversal**. The forward physical
+zero-based start is `15 - 9 - Of`; for forward cores it is Of. The reported
+nine residues must match that orientation/register exactly. No core is guessed.
+The binding reliability is retained, without imposing an invented reliability
+threshold or interpreting it as an immune-response probability.
 
-The runner calls existing `allo_foundation`, `indirect_generate` and
-`indirect_self_catalog`. It retains donor peptide Occurrences, including repeated
-sequences and coordinates, and every self-window mapping. Only exact
-`(15mer, recipient presenter)` predictor queries are deduplicated. A peptide shared
-by donor and self is queried once but retains both roles. All eligible recipient
-self 15mers are included, not just donor ligands.
+For this new profile, self matches require exact **core sequence + orientation +
+presenter**, and the count is the union of those triples. Forward and inverted
+binding contexts are not silently collapsed. This is an explicit conservative
+engineering policy, not a validated TCR-recognition rule. Each qualifying self
+15mer is predicted against the same DR. Incomplete source/self/presenter evidence
+makes complete_count unavailable, never a falsely definitive zero. Self means
+the supplied HLA precursor universe, not the whole human proteome.
 
-The output is converted to the unchanged `indirect-binding-import-1.0.0`, then
-passed through existing `indirect_config`, `indirect_baseline` and public reporting.
-The frozen strict policy uses **affinity <1000 nM** (exactly 1000 is excluded),
-same-presenter designated primary 9mer self comparison, and a unique
-`(core, DR presenter)` union. Missing/incomplete self evidence cannot establish
-nonself or a definitive zero. An inspectable conditional result is separate from
-the complete count; binding is not presentation or clinical risk.
+Only exact `(15mer, presenter)` predictor queries are deduplicated. All donor
+Occurrences, allele/source coordinates and self-window links remain. Molecular
+generation policy/IDs are reused independently of model choice. Selecting a new
+analysis profile does not replace Event/Origin semantics, Native Grade/rank or
+Experimental Yield calculations.
 
-## Dry run, repeat and failure handling
+## Legacy compatibility and reopening
+
+4.3k is the new default. For the unchanged 3.2 adapter, explicitly add
+`predictor_version="3.2"`. Its profile, strictly <1000 nM rule, forward-only
+primary-core self policy and unique `(core,presenter)` count are preserved.
+`predictor_version="auto"` opts into executed 3.2/4.3k detection, with the actual
+profile/version recorded; it does not relabel either model as the other.
 
 ```r
 plan <- neo_indirect_autorun(allo, presenters, reference,
-                            output_dir = "indirect-plan", dry_run = TRUE)
-# No executable, authorization or models are needed; no provider command runs.
-
-same <- neo_indirect_autorun(allo, presenters, reference, executable = tool,
-  model = model, authorization = authorization,
-  output_dir = "indirect-run", resume = TRUE)
+  predictor_version="4.3k", output_dir="indirect-plan", dry_run=TRUE)
+# No predictor/model/authorization is required for this plan.
+# Reopen a completed run with the identical full argument list plus resume=TRUE.
 ```
 
-Use a fresh directory initially. Completed runs/plans may be reopened only with
-`resume=TRUE`, identical input/reference/tool/model/code identity and verified
-saved artifact/checksum files. Ordinary repeated calls refuse an existing target;
-they never overwrite it or repeat inference. Changing ordering alone does not
-change semantic query identities. Changing a pin or artifact is rejected.
-Failed/interrupted runs retain logs and a FAILED manifest. Partial-run resumption
-is deliberately not supported in v0.1; choose a new directory after diagnosis.
-No failed query is reported as a zero-epitope analysis.
+Existing target directories are never overwritten. Completed-run/plan resume
+requires identical code, inputs, tool/model and all artifact hashes, and never
+re-executes inference. Failed/interrupted batches are retained but cannot resume
+in place. Previously frozen 113f801 runs retain their old code fingerprint; use
+that revision for their exact resume, or start a fresh directory under this update.
+Do not rewrite old manifests to bypass an identity mismatch.
 
-## Outputs
+## Outputs and executable examples
 
-- `run.json`, `SHA256SUMS.txt`: request/tool/data/code identity, process state and
-  all persisted artifact hashes.
-- `allo-config.json`, `reference.json`, `foundation.json`, `plan.json`: frozen
-  supplied inputs and existing foundation/generation semantics.
-- `queries.tsv`, `query-origin-links.tsv`, `donor-occurrences.tsv`, `self-windows.tsv`,
-  `generation-coverage.tsv`: all molecular and self links, independent of query dedup.
-- `raw/`, `execution/`: exact argv, bounded environment, exit status, stdout/stderr,
-  executable identity, model-tree and raw-result hashes. Vendor assets are not copied.
-- `binding.json`, `indirect-config.json`: normalized evidence and existing import config.
-- `query-coverage.tsv`, `summary.tsv`, `result.json`, `explanation.json`, `result.txt`:
-  imported status, complete/conditional counts and existing evidence graph.
+`run.json` and SHA256SUMS record resolved model/profile, actual BA settings,
+cutoff and counting policy. `queries.tsv`, `query-origin-links.tsv`,
+`donor-occurrences.tsv`, `self-windows.tsv` and coverage tables preserve all paths.
+`raw/` and `execution/` retain original evidence and exact argv/tool/model hashes.
+`binding.json` and `indirect-config.json` declare the selected versioned contract;
+`summary.tsv`, `result.json`, `explanation.json` and `result.txt` expose the result.
+List-valued TSV cells are JSON. Physical argv metadata may contain local paths;
+review before sharing. Vendor assets are never copied into reporting output.
 
-List-valued TSV cells are JSON. Scientific result references are portable relative
-artifact links. Execution argv and original reference bindings may retain local
-installation locations as historical metadata; inspect them before sharing results.
-The JSON/RDS-like in-memory list can be reopened through this API's completed-run
-resume without executing the provider again. This is a standalone workflow, not
-an unsupported no-event somatic `neo_run()` invocation.
-
-## Installed synthetic end-to-end demonstration
+After installing this local source and dependencies (including Python 3 for mocks):
 
 ```sh
-Rscript --vanilla -e 'source(system.file("examples", "indirect-autorun.R", package="Neoantimon2"))'
+Rscript --vanilla -e 'source(system.file("examples","indirect-autorun43.R",package="Neoantimon2"))'
+# The old indirect-autorun.R example remains an explicitly selected 3.2 mock.
 ```
 
-It uses only installed toy reference/typing and a clearly labeled Python 3 mock,
-creates temporary files and prints a five-unit synthetic molecular result. The
-fixture is not NetMHCIIpan, an IPD dataset, an authentic predictor score or a clinical
-example. `execution_kind="MOCK_EXECUTION"` and `real_predictor_executed=FALSE`
-are explicit. The existing synthetic-provider schema's `execution="not_executed"`
-means no genuine predictor execution; metadata separately records the actual mock
-process. Both source and installed package tests cover the orchestration.
-
-
-## Practical use and scope checklist
-
-1. Install this local development source (`R CMD INSTALL /path/to/Neoantimon2`)
-   with its DESCRIPTION dependencies. Frozen `cmpb-code-v1` does not include this API.
-2. Supply known donor/recipient HLA copies, every typed recipient DR presenter,
-   and a complete versioned normalized precursor manifest; compute its SHA-256.
-3. Obtain and validate the legitimate **3.2** binary and data as described in
-   [NetMHCIIpan setup](netmhciipan32-setup.md). Set the setup variables used above.
-4. Call `neo_indirect_autorun()` once. The API writes the donor/self query files,
-   invokes the tool, parses raw BA/core output, creates `binding.json`, performs
-   self comparison and writes the final result and checksums automatically.
-   **No manual predictor-result creation, score editing or conversion is required.**
-5. Inspect `run$status`, `run$result$contexts[[1]]$completeness_status`,
-   `complete_count`, coverage and reason codes. Operational COMPLETED with an
-   unavailable complete_count is not a complete scientific estimate.
-
-The installed synthetic example shown above is runnable without a licensed tool;
-it requires Python 3 and clearly reports mock-only execution. Production requires
-real HLA sequences and a working licensed tool. Do not reuse toy reference
-proteins as biological HLA resources.
-
-This profile supports **SOT donor-to-recipient, DRA*01:01–two-field DRB1** and
-NetMHCIIpan **3.2 BA** only. Official PIRCHE v4/Frost has different prediction
-semantics; numerical equivalence and clinical performance are unverified.
-[Scope and future candidates](indirect-autorun-scope.md) lists the remaining areas;
-they are not silently enabled by a successful run. Self coverage concerns the
-explicit HLA precursor universe, not the entire human proteome.
+The mock is a controlled software fixture, not an actual predictor or real HLA
+protein dataset. Its five units are an artificial golden expectation. Genuine
+model execution on the existing synthetic HLA fixture is a separate technical
+E2E; its result is not forced to match a mock. Neither is clinical validation.
+See [scope and future candidates](indirect-autorun-scope.md) and the
+[legacy 3.2 acquisition guide](netmhciipan32-setup.md).

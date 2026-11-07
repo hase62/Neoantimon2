@@ -35,30 +35,28 @@ indirect_context <- function(foundation, config, context, provider) {
           assignment_semantics = list(primary = core$primary, status = core$status))
         list(indirect_core_assignment_id = indirect_id("indirect-core-assignment-id-v1", cp),
           mismatch_annotation = list(status = "not_evaluated", reason_codes = list("alignment_not_performed")),
-          semantics = cp, epitope_key = if (core$orientation == "forward" && core$status == "evaluated")
-            biological_id("epitope_key", list(species = foundation$reference$semantics$species,
-              hla_class = "II", binding_core = core$core_sequence, mhc_key = p$presenter), peptide_contract()) else NULL)
+          semantics = cp, epitope_key = if ((core$orientation == "forward" || (ia43_is_provider(provider) && core$orientation == "reverse")) && core$status == "evaluated")
+            indirect_core_key(provider, core, p$presenter, foundation$reference$semantics$species) else NULL)
       })
       links <- allo_set(lapply(origins, `[[`, "indirect_peptide_occurrence_id"))
-      pmhcs[[length(pmhcs) + 1L]] <- list(schema_version = "indirect-pmhc-evidence-1.0.0",
+      pmhcs[[length(pmhcs) + 1L]] <- list(schema_version = if (ia43_is_provider(provider)) "indirect-pmhc-netmhciipan43k-ba-1.0.0" else "indirect-pmhc-evidence-1.0.0",
         indirect_pmhc_id = id, semantics = payload, candidate_key = key, peptide_key = peptide_key,
         peptide_sequence = ligand, presenter = p$presenter, hla_class = presenter$hla_class,
         occurrence_ids = links, provider_configuration_id = provider$provider_configuration_id,
-        binding_evidence = evidence, threshold_policy = indirect_threshold(),
+        binding_evidence = evidence, threshold_policy = indirect_provider_threshold(provider),
         core_assignments = allo_records(assignments), status = row$status)
       full <- indirect_compare(peptide_key, "full_peptide", ligand, NULL, catalog, search, provider, links)
       comparisons[[length(comparisons) + 1L]] <- full
       state <- "unevaluable"; reason <- row$reason_codes; core_key <- NULL; comparison_id <- NULL
       if (row$status == "evaluated") {
-        if (row$affinity_nM >= 1000) { state <- "excluded_nonbinder"; reason <- list("strict_affinity_not_met") }
+        if (row$affinity_nM >= indirect_provider_threshold(provider)$value) { state <- "excluded_nonbinder"; reason <- list("strict_affinity_not_met") }
         else {
-          primary <- indirect_primary(row)
+          primary <- indirect_primary(row, allow_reverse = ia43_is_provider(provider))
           reason <- primary$reason_codes
           if (primary$status == "evaluated") {
-            core_key <- biological_id("epitope_key", list(species = foundation$reference$semantics$species,
-              hla_class = "II", binding_core = primary$core$core_sequence, mhc_key = p$presenter), peptide_contract())
+            core_key <- indirect_core_key(provider, primary$core, p$presenter, foundation$reference$semantics$species)
             comparison <- indirect_compare(core_key, "core_pmhc", primary$core$core_sequence, p$presenter,
-              catalog, search, provider, links)
+              catalog, search, provider, links, orientation = primary$core$orientation)
             comparison_id <- comparison$self_comparison_id
             comparisons[[length(comparisons) + 1L]] <- comparison
             state <- if (comparison$status == "self_match") "excluded_self" else
@@ -128,9 +126,15 @@ indirect_baseline <- function(foundation, config) {
   provider <- indirect_provider(config$provider$manifest)
   policy <- list(profile = indirect_profile(), version = "1.0.0", generation = indirect_generation_policy(),
     reference_policy_id = foundation$reference$reference_policy_id, presenters = allo_records(config$presenters),
-    provider_configuration_id = provider$provider_configuration_id, threshold = indirect_threshold(),
+    provider_configuration_id = provider$provider_configuration_id, threshold = indirect_provider_threshold(provider),
     self = "primary_forward_core_same_presenter_from_qualifying_self_15mers",
     counting = "unique_core_presenter_union", uncertainty = "fail_closed_no_imputation")
+  modern <- ia43_is_provider(provider)
+  if (modern) {
+    if (config$profile != ia43_profile()) stop("4.3k requires its separate analysis profile")
+    policy$profile <- ia43_profile(); policy$self <- "primary_core_same_presenter_and_orientation_from_BA_qualifying_self_15mers"
+    policy$counting <- "unique_core_orientation_presenter_union"
+  }
   policy_id <- allo_id("policy", policy)
   contexts <- allo_records(lapply(foundation$contexts, function(c) indirect_context(foundation, config, c, provider)))
   payload <- list(context_ids = allo_set(lapply(contexts, `[[`, "allo_context_id")),
@@ -138,9 +142,9 @@ indirect_baseline <- function(foundation, config) {
     universe_ids = allo_set(lapply(foundation$self_universes, `[[`, "self_universe_id")),
     policy_id = policy_id, provider_configuration_ids = list(provider$provider_configuration_id),
     input_evidence_ids = allo_set(c(list(foundation$allo_analysis_id), lapply(provider$rows, `[[`, "evidence_id"))))
-  list(schema_version = "indirect-hla-baseline-1.0.0", phase = "B", profile = indirect_profile(),
-    profile_version = "1.0.0", specification_id = "neo-allo-indirect-spec-0.1",
-    claim = "Neoantimon2 literature-derived molecular baseline; not official PIRCHE reproduction or a clinical risk score",
+  list(schema_version = if (modern) "indirect-hla-netmhciipan43k-ba-1.0.0" else "indirect-hla-baseline-1.0.0", phase = "B", profile = policy$profile,
+    profile_version = "1.0.0", specification_id = if (modern) "neo-netmhciipan43k-indirect-spec-0.1" else "neo-allo-indirect-spec-0.1",
+    claim = if (modern) "Neoantimon2 NetMHCIIpan 4.3k BA orientation-aware analysis with assumed 1000 nM cutoff; not official PIRCHE reproduction; not classical PIRCHE-II v3, Frost or clinical risk" else "Neoantimon2 literature-derived molecular baseline; not official PIRCHE reproduction or a clinical risk score",
     allo_analysis_id = allo_id("analysis", payload), allo_policy_id = policy_id, policy = policy,
     provider = provider, contexts = contexts,
     summaries = lapply(contexts, function(c) c(list(allo_context_id = c$allo_context_id), c$summary)),

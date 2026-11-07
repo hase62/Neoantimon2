@@ -1,0 +1,8 @@
+{
+  "kind": "public_documentation_example_not_executed_prediction",
+  "source": "https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/",
+  "example": "first row, optional binding-level annotation omitted",
+  "version": "4.3k",
+  "score_mode": "EL only; not a BA analysis fixture",
+  "copyright_note": "single factual output row and field labels; no upstream source or model assets"
+}

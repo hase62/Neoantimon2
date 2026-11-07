@@ -40,8 +40,9 @@ ia_model <- function(x) {
 }
 ia_code_hash <- function() {
   env <- environment(ia_code_hash)
-  names <- sort(c(grep("^ia_", ls(env, all.names = TRUE), value = TRUE),
-    "neo_indirect_autorun", "indirect_baseline", "indirect_generate", "indirect_self_catalog", "indirect_provider"))
+  names <- sort(c(grep("^ia(_|43_)", ls(env, all.names = TRUE), value = TRUE),
+    "neo_indirect_autorun", "indirect_baseline", "indirect_context", "indirect_generate", "indirect_self_catalog", "indirect_provider",
+    "indirect_provider_threshold", "indirect_core_key", "indirect_primary", "indirect_compare", "indirect_self_prediction"))
   infra_hash(lapply(names, function(n) {
     f <- get(n, envir = env); list(name = n, formals = as.list(deparse(formals(f))), body = as.list(deparse(body(f))))
   }))

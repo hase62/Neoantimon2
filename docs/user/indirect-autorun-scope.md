@@ -5,12 +5,12 @@ an exhaustive product parity audit. No numerical/clinical equivalence is establi
 
 | Area | Current autorun | Future candidate / evidence boundary |
 |---|---|---|
-| Binding model | NetMHCIIpan 3.2 BA, strict affinity <1000 nM | Official v4 uses proprietary Frost and different rank semantics; any authorized integration needs a separately named/validated profile, not copied weights/formulas |
+| Binding model | 4.3k BA standard with explicit BA1000 assumption; separately selected 3.2 strict legacy | Official v4 uses proprietary Frost and different rank semantics; any authorized integration needs a separately named/validated profile, not copied weights/formulas |
 | Presentation | Explicit DRA*01:01–two-field DRB1 | DQ, DP, DRB3/4/5 and additional explicit alpha/beta combinations require new scope validation; broader presentation has been described in PIRCHE literature |
 | Direction | Human SOT donor-to-recipient | HSCT/reverse/bidirectional contexts need separately justified self/presenter roles and profiles |
-| MHC class | Class II, 15mer ligand / 9mer primary core | Class I/PIRCHE-I would need an independent workflow, not reinterpretation of Class II counts |
+| MHC class | Class II, 15mer ligand / 9mer primary core; 4.3k retains orientation | Class I/PIRCHE-I would need an independent workflow, not reinterpretation of Class II counts |
 | HLA/reference uncertainty | Exact typed alleles and literal supplied precursor sequences; no guessed completion | Ambiguous typing, missing sequence completion and alternative resource policies require explicit uncertainty handling and independent evidence |
-| Self universe | Supplied scoped HLA precursor set, same presenter | Broader protein universes/minor antigens are separate scope choices; not established as current product parity here |
+| Self universe | Supplied scoped HLA precursor set; 4.3k exact core/orientation/presenter, legacy forward core/presenter | Broader protein universes/minor antigens are separate scope choices; not established as current product parity here |
 | Official numerical agreement | Not tested | Authorized matched-input comparison is needed; matching a count alone would not validate clinical performance |
 | Clinical use | Not evaluated | Independent clinical evidence and appropriate approvals are required; no clinical score/risk claim |
 | Execution recovery | Dry-run and checksum-verified completed-run reopening | Interrupted-batch recovery is a software enhancement; not a claim about official PIRCHE capabilities |
