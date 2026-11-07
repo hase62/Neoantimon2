@@ -18,7 +18,7 @@ test_that('the twelve released API signatures remain unchanged alongside explici
   baseline <- jsonlite::read_json(test_path('..','fixtures','setup','released-api-signatures.json'))$functions
   expect_length(baseline,12L)
   expect_setequal(setdiff(getNamespaceExports('Neoantimon2'),names(baseline)),
-    c('neo_download_resources','neo_check_resources','neo_check_predictors','neo_setup_predictor','neo_priorities','neo_experimental_yield','neo_yield_evidence','neo_report_bundle','neo_indirect_autorun'))
+    c('neo_download_resources','neo_check_resources','neo_check_predictors','neo_setup_predictor','neo_priorities','neo_experimental_yield','neo_yield_evidence','neo_report_bundle','neo_indirect_autorun','neo_indirect_class2'))
   for(name in names(baseline)) {
     f <- getExportedValue('Neoantimon2',name)
     expect_identical(as.list(names(formals(f))),baseline[[name]]$arguments)

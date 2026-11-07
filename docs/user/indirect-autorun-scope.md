@@ -1,4 +1,4 @@
-# Indirect autorun scope and future development candidates
+# Legacy DRB1 autorun scope and development boundaries
 
 This is a limited literature-derived workflow, not official PIRCHE software or
 an exhaustive product parity audit. No numerical/clinical equivalence is established.
@@ -29,3 +29,5 @@ The external sources establish selected reported capabilities, not this package'
 implementation or accuracy. Current local behavior is defined by code/tests and
 the verified profile. No new predictor, clinical study or scientific algorithm
 was implemented for this checklist.
+
+The separate [expanded class II wrapper](indirect-class2.md) now covers configured 13-locus sources and DRB3/4/5 plus explicitly paired exploratory DQ/DP. The table above describes the unchanged neo_indirect_autorun contract, not the full wrapper scope.

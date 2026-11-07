@@ -35,3 +35,5 @@ reading chain.
 [citation](../CITATION.cff). The independent Converter Registry handles format
 adapter selection/conversion; the user guide explains that boundary before
 linking its walkthrough.
+
+[Expanded indirect class II research workflow](user/indirect-class2.md): official local IPD preparation, 13 configured sources, DRB1/3/4/5 and explicit exploratory DQ/DP.

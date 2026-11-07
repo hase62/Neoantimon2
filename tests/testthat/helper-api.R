@@ -11,7 +11,7 @@ public_api_by_milestone <- list(
   source_evidence = c("neo_priorities"),
   experimental_yield = c("neo_experimental_yield", "neo_yield_evidence"),
   result_reporting = c("neo_report_bundle"),
-  indirect_autorun = c("neo_indirect_autorun"),
+  indirect_autorun = c("neo_indirect_autorun", "neo_indirect_class2"),
   later = c("neo_regrade", "neo_import_prediction", "neo_doctor")
 )
 approved_public_api <- unlist(public_api_by_milestone, use.names = FALSE)

@@ -1,5 +1,12 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Add optional `neo_indirect_class2()` with configured 13-locus donor/self
+  provenance, explicit absence/unknown states, DRB1/3/4/5 and separately scoped
+  exploratory DQ/DP pairing. Reuse strict 4.3k BA/core parsing and unchanged
+  legacy autorun; locally prepare pinned official IPD protein references with
+  completeness metadata and no sequence imputation. Reference/model assets are
+  not redistributed. These are research assumptions, not official PIRCHE parity.
+
 - Make NetMHCIIpan 4.3k the standard indirect autorun target, with explicit BA
   execution, independent EL/BA metrics, orientation-aware primary-core/self
   comparison and a separately versioned BA1000 assumption profile. Retain

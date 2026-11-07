@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "indirect-class2-dqdp-exploratory-1.0.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "profile",
+    "status",
+    "source_complete",
+    "self_complete",
+    "official_pirche_reproduction",
+    "clinical_risk_score",
+    "candidates",
+    "candidate_origin_links",
+    "group_summary",
+    "presenter_scope",
+    "presenter_scope_complete"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "indirect-class2-dqdp-exploratory-1.0.0"
+    },
+    "profile": {
+      "const": "dqdp-exploratory-v1"
+    },
+    "status": {
+      "enum": [
+        "COMPLETED",
+        "INCOMPLETE",
+        "DRY_RUN"
+      ]
+    },
+    "provider_version": {
+      "enum": [
+        "4.3k",
+        null
+      ]
+    },
+    "source_complete": {
+      "type": "boolean"
+    },
+    "self_complete": {
+      "type": "boolean"
+    },
+    "official_pirche_reproduction": {
+      "const": false
+    },
+    "clinical_risk_score": {
+      "type": "null"
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "peptide_sequence",
+          "peptide_length",
+          "presenter",
+          "prediction_status",
+          "affinity_nM",
+          "origin_ids"
+        ],
+        "properties": {
+          "peptide_sequence": {
+            "type": "string",
+            "pattern": "^[ACDEFGHIKLMNPQRSTVWY]{15}$"
+          },
+          "peptide_length": {
+            "const": 15
+          },
+          "affinity_nM": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "origin_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "candidate_origin_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "origin_id",
+          "source_occurrence_id",
+          "locus",
+          "presenter"
+        ]
+      }
+    },
+    "group_summary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "group",
+          "complete_count",
+          "conditional_count",
+          "clinical_risk_score"
+        ],
+        "properties": {
+          "group": {
+            "enum": [
+              "DQ",
+              "DP"
+            ]
+          },
+          "complete_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "conditional_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "clinical_risk_score": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    "presenter_scope": {
+      "type": "string"
+    },
+    "presenter_scope_complete": {
+      "type": "boolean"
+    }
+  }
+}

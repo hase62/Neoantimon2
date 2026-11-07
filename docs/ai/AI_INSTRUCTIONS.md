@@ -3,7 +3,7 @@
 [Authoritative playbook](ANALYSIS_PLAYBOOK.md) · [Example requests](EXAMPLE_REQUESTS.md)
 
 Record the installed package version, API inventory and source commit. The
-current autorun development branch **0.3.0.9000** has 21 public functions; the immutable
+current autorun development branch **0.3.0.9000** has 22 public functions; the immutable
 **v0.3.0** release has 16. Select the version appropriate to the requested feature.
 These instructions and the optional helper are repository documentation utilities,
 not installed package APIs. Never infer an assembly, sample identity, HLA

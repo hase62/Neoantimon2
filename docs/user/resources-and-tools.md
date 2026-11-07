@@ -157,3 +157,5 @@ provider needs an account, email registration, license acceptance or credentials
 complete that process manually. Keep vendor binaries/models intact; Neoantimon2
 compatibility belongs in its own wrappers. Never put credentials in committed
 configuration, shared reports or acquisition metadata.
+
+The optional [expanded class II wrapper](indirect-class2.md) can explicitly acquire a pinned official IPD protein cache, then run an already licensed local 4.3k installation. It never downloads the predictor or weights, and does not redistribute processed reference data.

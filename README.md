@@ -280,35 +280,43 @@ requires separate permission/licensing from Takanori Hasegawa
 (<hasegawa.t.d968@m.isct.ac.jp>); an inquiry does not grant permission.
 Third-party tools, resources and converters retain their own terms.
 
-### Optional indirect-HLA autorun (development branch)
+## Indirect HLA / PIRCHE-inspired analysis
 
-`neo_indirect_autorun()` automatically plans donor/self 15mers, executes a
-legitimate local predictor, imports BA/EL/core output and saves a linked result.
-**NetMHCIIpan 4.3k is now standard**; the 3.2 adapter remains available through
-`predictor_version="3.2"`. No manual predictor-result preparation/conversion is
-needed. Configure typed HLA, a pinned normalized precursor reference and the
-licensed installation once, then call:
+The development-only `neo_indirect_class2()` automates a research workflow:
+explicit donor/recipient typing → pinned official IPD reference → full-precursor
+15mers → local NetMHCIIpan 4.3k BA → oriented 9mer self comparison → linked results.
+No manual predictor TSV conversion is required.
 
 ```r
-run <- neo_indirect_autorun(
-  allo=list(donor=donor_typing, recipient=recipient_typing),
-  presenters=recipient_dr_presenters,
-  reference=list(path="hla-reference.json", sha256=reference_sha256),
-  executable=file.path(netmhciipan_root,"netMHCIIpan"),
-  model=list(path=netmhciipan_root, identity=model_release_id),
-  authorization=list(status="authorized_local_installation",
-                     terms=accepted_local_license_description),
-  predictor_version="4.3k", output_dir="indirect-run")
-run$result$contexts[[1]]$complete_count
+run <- neo_indirect_class2(donor=donor_typing, recipient=recipient_typing,
+  profile="dr-expanded-v1",
+  installation=list(path=netmhciipan_root,
+    authorization=list(status="authorized_local_installation",
+                       terms=accepted_local_license_description)),
+  reference=list(release="3.66.0",cache="ipd-cache"),
+  output_dir="indirect-expanded-run")
+run$result$group_summary
 ```
 
-4.3k explicitly requests BA (`-BA`); EL scores remain separate. Its named
-BA1000 assumption profile counts exact core/orientation/presenter units, with
-correct reversed-ligand offset mapping for Inverted cores. This is not numerical
-compatibility with 3.2/classical PIRCHE-II v3 or official PIRCHE v4/Frost, and no
-clinical performance is established. Scope remains human SOT donor-to-recipient,
-explicit DRA*01:01–DRB1. Model choice, settings, raw scores and all source links
-are retained. Dry-run and exact hash-checked completed-run reopening are available.
-See [setup, migration and runnable examples](docs/user/indirect-autorun.md) and
-[scope/future candidates](docs/user/indirect-autorun-scope.md).
-The frozen `cmpb-code-v1` and immutable `v0.3.0` do not include this local work.
+[Typing examples, setup, results and complete instructions](docs/user/indirect-class2.md)
+define these setup values. Sources are configurable A/B/C, DRB1/3/4/5,
+DQA1/DQB1, DPA1/DPB1 and MICA/MICB. Missing, absent and partial loci remain distinct;
+DRB1 never implies an additional DR gene or its copy count. DRA–DRB1/3/4/5 is
+separate from the exploratory `dqdp-exploratory-v1` profile, which requires
+explicit typed and expression-confirmed DQA1–DQB1 / DPA1–DPB1 pairs.
+No Cartesian pairing or fuzzy allele substitution is performed.
+
+The reference is retrieved or hash-verified from a versioned cache; processed
+IPD data remain local under [upstream terms](https://github.com/ANHIG/IMGTHLA/blob/3660/LICENCE.md).
+Install the [licensed predictor](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/)
+separately; code/weights are never downloaded or redistributed by Neoantimon2.
+BA is explicitly requested and EL remains separate. The isotype-specific
+1000 nM cutoffs are declared assumptions, not calibrated clinical probabilities.
+Counts retain exact core/orientation/presenter and every source Origin/link.
+Incomplete results expose NULL counts and reasons; DQ/DP are never a pooled risk.
+
+This is not official PIRCHE v4/Frost, PIRCHE-I or B-cell matching, and no clinical
+or official numerical equivalence is established. The [legacy DRB1 autorun](docs/user/indirect-autorun.md)
+remains unchanged, including explicit NetMHCIIpan 3.2 support. These optional
+features are not part of immutable v0.3.0 or frozen cmpb-code-v1. The installed
+`examples/indirect-class2.R` provides a clearly labeled synthetic mock workflow.

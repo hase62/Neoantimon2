@@ -1,0 +1,223 @@
+{
+  "status": "PASS",
+  "reference_release": "3.66.0",
+  "reference_commit": "b2055ea33ef464781b9e8ecab20b275b6704f878",
+  "reference_file_sha256": {
+    "LICENCE.md": "8c93368c1abd89ba88b416981b3c559c63841685def42f3151e6e7b5d892c637",
+    "release_version.txt": "58ab5f99837bbac0d7b055cd99fd9085c529dabf826c777aa0a7987c7208400b",
+    "Allele_status.txt": "e9cd62585b79f1ff8bd60000cddbe3bba933608ac722637151471b7455a37cff",
+    "hla_prot.fasta": "d5da882fca6427fb9c27fa4c27045ba8246b117a1d367566b4b35fb79bbbbe3a"
+  },
+  "software_version": "0.3.0.9000",
+  "public_api": "neo_indirect_class2",
+  "public_api_count": 22,
+  "model": "NetMHCIIpan 4.3k Darwin_arm64",
+  "evidence_kind": "Genuine pretrained model on official IPD proteins with explicitly fictional typing",
+  "new_assertions": 92,
+  "full_source": {
+    "passed": 12280,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "installed_focused": {
+    "passed": 421,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full_installed": {
+    "passed": 12274,
+    "failed": 0,
+    "warnings": 0,
+    "skipped": 1
+  },
+  "r_cmd_check": "0 errors, 0 warnings, 0 notes (--no-manual; all tests enabled)",
+  "cases": {
+    "DQ_DP": {
+      "status": "PASS",
+      "source_loci_with_origins": [
+        "A"
+      ],
+      "donor_origins": 351,
+      "self_origins": 351,
+      "unique_queries": 1188,
+      "pmhc_candidates": 702,
+      "candidate_origin_links": 702,
+      "raw_prediction_rows": 1188,
+      "inverted_rows": {
+        "HLA-DPA1*02:02~HLA-DPB1*19:01": 98,
+        "HLA-DQA1*01:01~HLA-DQB1*05:01": 0
+      },
+      "group_summary": [
+        {
+          "group": "DP",
+          "complete_count": 31,
+          "conditional_count": 31,
+          "unit": "unique(core,orientation,exact_presenter)",
+          "clinical_risk_score": null
+        },
+        {
+          "group": "DQ",
+          "complete_count": 6,
+          "conditional_count": 6,
+          "unit": "unique(core,orientation,exact_presenter)",
+          "clinical_risk_score": null
+        }
+      ],
+      "raw_stdout_sha256": {
+        "batch-00001.stdout": "38d16efe1566cf9e85b6f47670fd288610e42183769781797630a3216552385d",
+        "batch-00002.stdout": "acee9a94633d102a08a34d3ae0cf966af79e934e5bda9b3beefc3af7f01332a3"
+      }
+    },
+    "DRB1": {
+      "status": "PASS",
+      "source_loci_with_origins": [
+        "A"
+      ],
+      "donor_origins": 351,
+      "self_origins": 351,
+      "unique_queries": 594,
+      "pmhc_candidates": 351,
+      "candidate_origin_links": 351,
+      "raw_prediction_rows": 594,
+      "inverted_rows": {
+        "HLA-DRA*01:01~HLA-DRB1*01:01": 0
+      },
+      "group_summary": [
+        {
+          "group": "DR",
+          "complete_count": 44,
+          "conditional_count": 44,
+          "unit": "unique(core,orientation,exact_presenter)",
+          "clinical_risk_score": null
+        }
+      ],
+      "raw_stdout_sha256": {
+        "batch-00001.stdout": "068c9312f81c74f79a7288db1a5fa4fcf636ff7a31a76157a54118fdd33fd1d8"
+      }
+    },
+    "DRB3_all13": {
+      "status": "PASS",
+      "source_loci_with_origins": [
+        "A",
+        "B",
+        "C",
+        "DPA1",
+        "DPB1",
+        "DQA1",
+        "DQB1",
+        "DRB1",
+        "DRB3",
+        "MICA",
+        "MICB"
+      ],
+      "donor_origins": 3271,
+      "self_origins": 3271,
+      "unique_queries": 3198,
+      "pmhc_candidates": 2994,
+      "candidate_origin_links": 3271,
+      "raw_prediction_rows": 3198,
+      "inverted_rows": {
+        "HLA-DRA*01:01~HLA-DRB3*01:01": 0
+      },
+      "group_summary": [
+        {
+          "group": "DR",
+          "complete_count": 3,
+          "conditional_count": 3,
+          "unit": "unique(core,orientation,exact_presenter)",
+          "clinical_risk_score": null
+        }
+      ],
+      "raw_stdout_sha256": {
+        "batch-00001.stdout": "7655f2a66c49ccf257225d295e8cbb3c70a1c9ae8b0dac0f5b497072faa4642f",
+        "batch-00002.stdout": "572be364094f8e2de5048605047b1ccb0d45fedacae98899a8e86b653534aceb",
+        "batch-00003.stdout": "6a80c410de2d5b02ba29b34af92437744be192bc70a4b6292ab5d07f8cc8d586",
+        "batch-00004.stdout": "1d8b9870bcbfbf474b3a9b70180b50a39592c086afd9d20cc4d5a9cb2a088c5c"
+      }
+    },
+    "DRB4": {
+      "status": "PASS",
+      "source_loci_with_origins": [
+        "A",
+        "DRB4"
+      ],
+      "donor_origins": 603,
+      "self_origins": 603,
+      "unique_queries": 846,
+      "pmhc_candidates": 603,
+      "candidate_origin_links": 603,
+      "raw_prediction_rows": 846,
+      "inverted_rows": {
+        "HLA-DRA*01:01~HLA-DRB4*01:01": 0
+      },
+      "group_summary": [
+        {
+          "group": "DR",
+          "complete_count": 21,
+          "conditional_count": 21,
+          "unit": "unique(core,orientation,exact_presenter)",
+          "clinical_risk_score": null
+        }
+      ],
+      "raw_stdout_sha256": {
+        "batch-00001.stdout": "00bf36c630cedc890b3ab7fbdcc8b606cdce837678a8b7cd95d963db09a21d6e"
+      }
+    },
+    "DRB5": {
+      "status": "PASS",
+      "source_loci_with_origins": [
+        "A",
+        "DRB5"
+      ],
+      "donor_origins": 603,
+      "self_origins": 603,
+      "unique_queries": 846,
+      "pmhc_candidates": 603,
+      "candidate_origin_links": 603,
+      "raw_prediction_rows": 846,
+      "inverted_rows": {
+        "HLA-DRA*01:01~HLA-DRB5*01:01": 0
+      },
+      "group_summary": [
+        {
+          "group": "DR",
+          "complete_count": 23,
+          "conditional_count": 23,
+          "unit": "unique(core,orientation,exact_presenter)",
+          "clinical_risk_score": null
+        }
+      ],
+      "raw_stdout_sha256": {
+        "batch-00001.stdout": "a472eb05b47100a24a940a70ae0643d2799e7a5dc015f9a2dd60c34f63e06b13"
+      }
+    }
+  },
+  "all_13_sources_independently_verified": true,
+  "reopening_and_legacy": {
+    "status": "PASS",
+    "all_five_cases_independently_verified": true,
+    "all_13_sources_verified": true,
+    "fresh_process_reopen_bytes_mtimes_unchanged": true,
+    "old_6836_43_result_unchanged": true,
+    "old_32_baseline_unchanged": true,
+    "earlier_molecular_outputs_exactly_equal_after_nomenclature_guard_extension": true,
+    "negative_cases": "real partial dry-run and exact model-unsupported allele; no fabricated GT/scores"
+  },
+  "negative_probes": {
+    "partial": {
+      "status": "PASS",
+      "execution": "dry-run only",
+      "allele": "A*01:01:04",
+      "score": null
+    },
+    "unsupported": {
+      "status": "PASS",
+      "execution": "actual model list checked; inference not run",
+      "allele": "DRB1*01:142",
+      "score": null
+    }
+  },
+  "rights": "No processed IPD sequences, derived peptide/raw-output tables or vendor assets redistributed. Reproduce locally from official pinned source; see IPD LICENCE."
+}
