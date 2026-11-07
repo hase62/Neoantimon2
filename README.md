@@ -12,7 +12,8 @@ That paper describes the predecessor; it does not validate every Neoantimon2
 extension. Candidates and model scores are research outputs, not clinical or
 experimental proof of immunogenicity.
 
-**This default branch is development version 0.3.0.9000, with 20 public APIs.**
+**This local autorun development branch is version 0.3.0.9000, with 21 public APIs.**
+The frozen `cmpb-code-v1` snapshot has 20 APIs; this work does not modify main.
 The immutable published [v0.3.0](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0)
 has 16 APIs and does not contain the new numerical-priority, Experimental Yield
 or reporting APIs. Record both package version and commit.
@@ -260,7 +261,7 @@ actual analysis. Preserve inputs, versions, hashes and all completed outputs.
 ## Documentation and references
 
 - [Documentation index](docs/README.md), [practical guide](docs/user/getting-started.md),
-  [20 current / 16 released APIs](docs/user/api-reference.md).
+  [Public API reference](docs/user/api-reference.md).
 - [Inputs](docs/user/inputs.md), [VCF limits](docs/user/vcf-compatibility.md),
   [setup](docs/user/setup.md), [cohort examples](docs/user/multi-sample-examples.md).
 - [Grades/explanations](docs/user/results-and-explain.md),
@@ -278,3 +279,44 @@ actual analysis. Preserve inputs, versions, hashes and all completed outputs.
 requires separate permission/licensing from Takanori Hasegawa
 (<hasegawa.t.d968@m.isct.ac.jp>); an inquiry does not grant permission.
 Third-party tools, resources and converters retain their own terms.
+
+### Optional indirect-HLA autorun (development branch)
+
+`neo_indirect_autorun()` runs the existing literature-derived SOT donor-to-recipient
+workflow from explicit HLA typing and a pinned protein reference. It plans donor
+and recipient-self 15mers, invokes a user-authorized NetMHCIIpan **3.2 BA**
+installation, validates primary 9mer cores, and exports the existing strict
+core–presenter count and complete provenance. Dry-run and completed-run
+hash-checked resume are available. No vendor software or models are downloaded.
+See [setup, one-command use and limitations](docs/user/indirect-autorun.md).
+This API is local development work after `cmpb-code-v1`; it is not part of that
+frozen tag or immutable `v0.3.0`. It is not official PIRCHE v4/Frost or a clinical
+risk predictor. The bundled end-to-end example is explicitly synthetic/mock.
+
+
+After supplying complete typed HLA/reference inputs and a legitimate local 3.2
+installation, one call performs prediction, raw-output conversion and reporting;
+users do **not** prepare or edit prediction result files manually:
+
+```r
+run <- neo_indirect_autorun(
+  allo = list(donor = donor_typing, recipient = recipient_typing),
+  presenters = recipient_dr_presenters,
+  reference = list(path = "hla-reference.json", sha256 = reference_sha256),
+  executable = netmhciipan32_executable,
+  model = list(path = model_root, identity = model_release_id),
+  authorization = list(status = "authorized_local_installation",
+                       terms = accepted_local_license_description),
+  output_dir = "indirect-run")
+run$result$contexts[[1]]$complete_count
+```
+
+The named typing, presenter, executable/model and license variables above are
+explicit user-supplied setup, not inferred patient data. See the
+[complete input and offline mock example](docs/user/indirect-autorun.md),
+[3.2 acquisition and Mac architecture checks](docs/user/netmhciipan32-setup.md)
+and [scope and future candidates](docs/user/indirect-autorun-scope.md).
+The current autorun scope is human **SOT donor-to-recipient**, explicit
+**DRA*01:01–DRB1**, and the literature-derived **NetMHCIIpan 3.2 BA** baseline.
+Official PIRCHE v4 uses Frost; numerical agreement and clinical performance
+have not been established. A successful mock run is software validation only.

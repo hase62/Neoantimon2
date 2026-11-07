@@ -181,8 +181,9 @@ evidence of clinical suitability.
 
 ## Allo contexts and strict indirect-HLA
 
-Allo support is enabled through configuration; there is no additional public
-function or `mode = "allo"`. `neo_project()` still uses its supported `somatic`
+Allo support remains available through configuration; there is no `mode = "allo"`.
+The optional [`neo_indirect_autorun()`](indirect-autorun.md) now provides standalone
+local orchestration without invoking the somatic `neo_run()` route. `neo_project()` still uses its supported `somatic`
 mode. Construction validates and derives the separate opt-in graph, which
 query-free `neo_explain()` can inspect before ordinary execution. A real
 no-event allo-only `neo_run()` is not supported by the current run route.

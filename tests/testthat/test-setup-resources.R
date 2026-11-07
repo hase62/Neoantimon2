@@ -14,11 +14,11 @@ test_that('the installed catalog preserves profiles, identities and runtime asse
   expect_match(text,attr(c,'sha256'),fixed=TRUE)
 })
 
-test_that('the twelve released API signatures remain unchanged alongside four explicit setup additions', {
+test_that('the twelve released API signatures remain unchanged alongside explicitly listed additions', {
   baseline <- jsonlite::read_json(test_path('..','fixtures','setup','released-api-signatures.json'))$functions
   expect_length(baseline,12L)
   expect_setequal(setdiff(getNamespaceExports('Neoantimon2'),names(baseline)),
-    c('neo_download_resources','neo_check_resources','neo_check_predictors','neo_setup_predictor','neo_priorities','neo_experimental_yield','neo_yield_evidence','neo_report_bundle'))
+    c('neo_download_resources','neo_check_resources','neo_check_predictors','neo_setup_predictor','neo_priorities','neo_experimental_yield','neo_yield_evidence','neo_report_bundle','neo_indirect_autorun'))
   for(name in names(baseline)) {
     f <- getExportedValue('Neoantimon2',name)
     expect_identical(as.list(names(formals(f))),baseline[[name]]$arguments)

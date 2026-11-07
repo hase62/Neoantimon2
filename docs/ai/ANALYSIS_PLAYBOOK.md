@@ -15,7 +15,7 @@ Locate the manifest, configuration, reference provenance, VCFs and any completed
 project. Read the original declarations, not normalized internal project records.
 Check `packageVersion("Neoantimon2")` and `getNamespaceExports("Neoantimon2")`.
 Record the source commit if available, R/platform and `sessionInfo()`.
-The 20 current / 16 released exports are listed in [API reference](../user/api-reference.md).
+The current and released exports are listed in [API reference](../user/api-reference.md).
 
 The YAML example is an **agent declaration**. The agent translates it into the
 real API: samples data frame, patient-keyed HLA list, unnamed list of input

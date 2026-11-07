@@ -25,7 +25,7 @@ reading chain.
 | Multi-model unique-peptide selection and scenario composition | [Selection/planning](user/model-selection-and-planning.md) |
 | Event representatives and complete four-level export | [Reporting](user/result-reporting.md) |
 | Measured validation and its limits | [Validation evidence](development/validation-evidence.md) |
-| Arguments and return values | [20 current / 16 released APIs](user/api-reference.md) |
+| Arguments and return values | [Public API reference](user/api-reference.md) |
 | Scientific scope and reproducibility | [Limitations](user/methods-and-limitations.md), [reproducibility](user/reproducibility.md) |
 | An error or an unclear result | [Troubleshooting](user/troubleshooting.md) |
 | Figure meaning, exports and rebuild instructions | [Figure reference](user/workflow-overview.md) |

@@ -2,11 +2,12 @@
 
 [Documentation index](../README.md) · [Quickstart](getting-started.md)
 
-The current default-branch development package (0.3.0.9000) exports **20 APIs**.
+This local autorun development branch (0.3.0.9000) exports **21 APIs**.
+The frozen `cmpb-code-v1` development snapshot has 20; main is not changed by this work.
 The immutable published v0.3.0 exports the sixteen baseline interfaces below.
-The four additions (`neo_priorities`, `neo_experimental_yield`,
-`neo_yield_evidence`, `neo_report_bundle`) are development features, not additions
-to that tag. Existing baseline signatures and scientific contracts remain intact.
+The four CMPB development additions (`neo_priorities`, `neo_experimental_yield`,
+`neo_yield_evidence`, `neo_report_bundle`) and this branch's optional
+`neo_indirect_autorun` are not additions to that tag. Existing baseline signatures and scientific contracts remain intact.
 
 | Function | Main arguments and purpose | Return / side effects |
 | --- | --- | --- |
@@ -76,3 +77,9 @@ See installed help for defaults and validation, [source evidence/priorities](sou
 [Experimental Yield](experimental-yield.md) and [complete reporting](result-reporting.md).
 No function executes a predictor merely to read a saved result. The reporting
 export has its own contract; `neo_export_bundle()` remains unchanged.
+
+## Optional standalone indirect-HLA autorun
+
+`neo_indirect_autorun(allo, presenters, reference, executable = NULL, model = NULL, output_dir, dry_run = FALSE, resume = FALSE, authorization = NULL, timeout = 600L, batch_size = 256L)`
+
+[Setup and exact examples](indirect-autorun.md). Reuses the existing strict 3.2 BA baseline; completed-run resume is hash checked, and mock runs are explicitly synthetic. This API is not in immutable `v0.3.0` or frozen `cmpb-code-v1`.

@@ -1,5 +1,12 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Add optional `neo_indirect_autorun()` v0.1 for explicit SOT donor-to-recipient
+  DRA~DRB1 workflows: pinned HLA reference, donor/self 15mer query planning,
+  authorized local NetMHCIIpan 3.2 BA execution/import, saved coverage/trace
+  and hash-checked completed-run resume. Existing molecular/counting contracts
+  and Native/External/Yield policies are reused unchanged. Includes explicit
+  mock-only integration; no real-provider or official PIRCHE parity claim.
+
 - Add an optional sourceable publication-workflow example composing existing
   unique-peptide selection and Yield curves for model/set and explicit scenario
   comparisons. No new public API or scientific scoring policy.
