@@ -1,7 +1,12 @@
 # Documentation: choose the depth you need
 
-**1. Understand and start:** the [README](../README.md) explains inputs, runs the
-offline demo, reads its results and introduces optional external prediction inline.
+**Choose a version first:** [v0.3.0 (16 APIs), cmpb-code-v1 (20), or main (22)](../README.md#choose-a-version).
+Main includes the integrated indirect-HLA workflows; the immutable tags do not.
+
+**1. Understand and start:** the [five-minute offline Quick Start](../README.md#quick-start)
+needs no predictor or genome download after installation. For indirect-HLA work,
+go directly to the [class II one-command guide](user/indirect-class2.md); for the
+paper's saved tables, use [CMPB reproduction](user/reproducibility.md#cmpb-saved-result-reproduction).
 
 **2. Analyze your data:** follow the [practical user guide](user/getting-started.md)
 from top to bottom: files/identities → references → configuration → execution →
@@ -19,7 +24,10 @@ reading chain.
 | Resource/tool identities and advanced acquisition | [Resources](user/resources-and-tools.md), [R setup](user/setup.md) |
 | Result fields, missingness, grades and ranks | [Results](user/results-and-explain.md) |
 | Standard external TSV, policies and execution consent | [External contract](user/external-predictions.md) |
-| Longitudinal, vaccine, indirect-HLA and other extensions | [Advanced workflows](user/workflows.md) |
+| Indirect HLA: 13 sources, DRB1/3/4/5 and explicit exploratory DQ/DP | [Class II workflow](user/indirect-class2.md) |
+| Existing five-source DRB1 runner, 4.3k or explicit 3.2 | [Standalone autorun](user/indirect-autorun.md) |
+| CMPB eight-table saved-result reproduction | [Package and commands](user/reproducibility.md#cmpb-saved-result-reproduction) |
+| Longitudinal, vaccine and other extensions | [Advanced workflows](user/workflows.md) |
 | Source VAF/BAM, expression/ASCAT and numerical priorities | [Source evidence](user/source-evidence-and-priorities.md) |
 | Experimental planning and independent evidence categories | [Experimental Yield](user/experimental-yield.md) |
 | Multi-model unique-peptide selection and scenario composition | [Selection/planning](user/model-selection-and-planning.md) |
@@ -35,5 +43,3 @@ reading chain.
 [citation](../CITATION.cff). The independent Converter Registry handles format
 adapter selection/conversion; the user guide explains that boundary before
 linking its walkthrough.
-
-[Expanded indirect class II research workflow](user/indirect-class2.md): official local IPD preparation, 13 configured sources, DRB1/3/4/5 and explicit exploratory DQ/DP.

@@ -11,9 +11,11 @@ single-sample VCFs. Advanced input/analysis modes have their own contracts.
 
 ## Install and run the offline example
 
-Use R ≥ 4.1.0. Install the default-branch development package (0.3.0.9000), then run the small example.
-For the immutable 16-API published release instead, set `ref = "v0.3.0"`;
-new priority/planning/reporting APIs require the development version:
+Use R ≥ 4.1.0. Install main (0.3.0.9000, 22 APIs), then run the small example.
+For the immutable published release (16 APIs), set `ref = "v0.3.0"`; the fixed
+CMPB snapshot (20 APIs) uses `ref = "cmpb-code-v1"`. Both development snapshots
+include priority/planning/reporting; only main includes the later indirect-HLA
+autorun extensions. See [version choices](../../README.md#choose-a-version):
 
 ```r
 install.packages("remotes")
@@ -32,7 +34,7 @@ leaves `p`, `cfg`, `events`, `origins`, `results` and `reopened` in R and prints
 temporary input/run location. Temporary storage is not a permanent archive.
 
 Runtime R dependencies are `jsonlite`, `digest`, `stringi`, `yaml`, `xml2` and
-R's `tools`; source builds can require system libraries/compilers. Predictors,
+R's `tools` and `utils`; source builds can require system libraries/compilers. Predictors,
 models and human reference data are acquired separately. macOS arm64 / R 4.5.1
 was validated; this is not a claim of validation on every R version/platform.
 

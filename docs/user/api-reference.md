@@ -2,12 +2,16 @@
 
 [Documentation index](../README.md) · [Quickstart](getting-started.md)
 
-This local autorun development branch (0.3.0.9000) exports **22 APIs**.
-The frozen `cmpb-code-v1` development snapshot has 20; main is not changed by this work.
-The immutable published v0.3.0 exports the sixteen baseline interfaces below.
-The four CMPB development additions (`neo_priorities`, `neo_experimental_yield`,
-`neo_yield_evidence`, `neo_report_bundle`) and this branch's optional
-`neo_indirect_autorun` / `neo_indirect_class2` are not additions to that tag. Existing baseline signatures and scientific contracts remain intact.
+Current **main (0.3.0.9000) exports 22 APIs**, counted from NAMESPACE `export()`
+entries; S3 registrations and imports are not additional public functions.
+The immutable published **v0.3.0 has 16 APIs**. The frozen **cmpb-code-v1 has
+20 APIs**, adding `neo_priorities`, `neo_experimental_yield`, `neo_yield_evidence`
+and `neo_report_bundle`. Main additionally includes
+[`neo_indirect_autorun()`](indirect-autorun.md) and
+[`neo_indirect_class2()`](indirect-class2.md). These do not change either tag.
+See [which version to install](../../README.md#choose-a-version); record its
+commit as well as version. Existing baseline signatures and scientific contracts
+remain intact.
 
 | Function | Main arguments and purpose | Return / side effects |
 | --- | --- | --- |

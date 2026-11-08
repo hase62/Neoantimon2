@@ -1,20 +1,30 @@
 # Indirect HLA / PIRCHE-inspired class II research workflow
 
-This development branch adds `neo_indirect_class2()` without altering the frozen
+Current main includes `neo_indirect_class2()` without altering the frozen
 `neo_indirect_autorun()` 3.2/DRB1 contracts, somatic reconstruction, Origin
 identities, Native Grade/rank or Experimental Yield. It is not official PIRCHE,
 Frost, PIRCHE-I, B-cell matching or a clinical risk model.
 
-## Install this Draft development branch
+## Install from main
+
+The expanded workflow is integrated into main (PR #4, merge commit
+`aed846337c65807cde8f451a954c8c58e9661d02`). Use the latest development package:
 
 ```r
-remotes::install_github("hase62/Neoantimon2", ref="feat/indirect-hla-expanded")
+remotes::install_github("hase62/Neoantimon2", ref="main", upgrade="never")
 ```
 
-For an exact scientific reproduction, replace ref with the reviewed commit SHA
-reported by the Draft PR. Package version alone is insufficient: verify that
-`neo_indirect_class2` is exported. The default main and historical tags are not
-changed by this Draft PR. No predictor or IPD data is installed by this command.
+For exact reproduction, replace `main` with the recorded commit SHA. Package
+version alone is insufficient: main (22 APIs) and the frozen CMPB snapshot
+(20 APIs) both use 0.3.0.9000. This workflow is not present in `cmpb-code-v1` or
+`v0.3.0`; see [version choices](../../README.md#choose-a-version). No predictor or
+IPD data is installed by the package installation command.
+
+Genuine 4.3k Darwin_arm64 E2E was verified for selected exact DRB1/3/4/5, DQ and
+DP presenters with official IPD proteins and fictional typing. This is scoped
+technical interoperability evidence, not clinical validation, universal model
+allele coverage or numerical compatibility with official PIRCHE. See the
+[validation scope and receipts](../development/indirect-class2-validation.md).
 
 ## One command after typing and licensed installation
 
