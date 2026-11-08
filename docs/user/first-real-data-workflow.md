@@ -183,6 +183,25 @@ include explicitly selected `analyses` for a full external-evidence report.
 For large projects, use a bounded `candidate_id` report when appropriate;
 do not automatically create an unbounded interoperability export just to count.
 
+### Open the same saved results without R
+
+```r
+source(system.file("examples", "report-html.R", package="Neoantimon2"), local=TRUE)
+html_view <- write_neo_report_html(p, tempfile(fileext=".html"),
+  label="Authored synthetic 65-candidate tutorial; no real predictions")
+html_view$path  # open this local file in your browser
+```
+
+This adds no analysis. In the browser, inspect the counts, search a peptide/HLA,
+select a Candidate, expand **all** its Origins and inspect linked Events and
+existing evidence. This tutorial has no model measurements; NOT_RUN / NOT_GRADED
+must remain visible. Native and explicitly selected External records are separate.
+See [HTML privacy and limits](result-reporting.md#offline-html-viewer) before sharing:
+the file embeds data; default aliases and the local `html_view$private_id_map`
+provide a privacy-aware path back to original IDs. Keep that mapping private.
+
+For a durable report, choose a fresh filename in an existing protected folder outside the project, or copy the HTML there before closing R. The `tempfile()` examples live in R temporary storage and may disappear when R exits.
+
 ## 8. Trace the Origin rather than trusting the rank alone
 
 ```r

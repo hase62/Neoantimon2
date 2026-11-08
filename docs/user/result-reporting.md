@@ -80,3 +80,98 @@ origin_ids <- jsonlite::fromJSON(candidates$origin_ids[[1]])
 ```
 
 Only explicitly requested analyses/references are included. An absent reference gives evidence-unavailable rather than a fabricated D or negative result. Reporting does not download reference databases. Keep confidential or restricted experimental records out of shared bundles unless redistribution is permitted.
+
+
+## Offline HTML viewer
+
+The installed example utility `write_neo_report_html()` composes the existing
+`neo_report_bundle()` tables. It is **not a new exported API**. Existing reporting
+arguments, return values, TSV/JSON and identity/hash semantics remain unchanged.
+No reconstruction, predictor or import is run to create HTML.
+
+```r
+source(system.file("examples", "report-html.R", package="Neoantimon2"), local=TRUE)
+view <- write_neo_report_html(p, tempfile(fileext=".html"),
+  label="Saved research results")
+view$path
+# Optional explicit local browser action: browseURL(view$path)
+# Keep this R-only mapping private; it is NOT embedded in sharing-mode HTML:
+view$private_id_map
+```
+
+Open the file directly in a local browser. No server, CDN, external JavaScript,
+CSS, fonts or network connection is required. The file embeds its displayed data;
+there is no upload function. It includes keyboard-accessible search, status/class
+filters, display sorting, 50-row pages and Candidate details. Selecting a candidate
+shows **every** linked Origin and the authoritative generation/context Event links,
+transcript/sequence annotations, existing reasons and separate Native/External
+prediction records. Native status is copied from `native_public_result` when
+present; the original graph snapshot status remains available separately. A display
+sort never defines a new biological ranking, and model scores are not combined.
+The table inspector and JSON download contain the same embedded view.
+
+Overview distinguishes source graph counts from report-scope counts, distinct
+sequences from per-sample peptide units, and prediction measurements from coverage/
+status rows. Missing values remain null / “Not supplied”; observed numeric zero
+remains zero. NOT_RUN, NOT_GRADED, failed and unsupported states are not negatives.
+The original raw score string remains separate from its numeric representation.
+
+For a durable report, choose a fresh filename in an existing protected folder outside the project, or copy the HTML there before closing R. The `tempfile()` examples live in R temporary storage and may disappear when R exits.
+
+### Privacy choices
+
+- Default `privacy="share"`: known identity fields receive consistent aliases;
+  local paths and non-allowlisted free-form/original source fields are withheld.
+  All selected Origin **rows and links** remain. The manifest lists withheld-field
+  counts; this is a presentation projection, not the lossless scientific archive.
+  Biological sequences, mutation coordinates, HLA and biological annotations remain
+  sensitive and can identify people. Review the file before sharing. Arbitrary
+  personal text in a biological field cannot be certified anonymous automatically.
+- `privacy="private", confirm_private=TRUE`: preserve all table columns and the
+  original reporting manifest, including available nested records and paths. A
+  warning and prominent private-data banner are shown. This is for trusted local
+  inspection; never distribute without a separate privacy/licensing review.
+
+```r
+private_view <- write_neo_report_html(p, tempfile(fileext=".html"),
+  privacy="private", confirm_private=TRUE)
+```
+
+Sharing aliases never replace persisted biological IDs. The returned
+`view$private_id_map` maps them back to original IDs **only in the local R object**;
+do not distribute that object/mapping with the sharing HTML. Original TSV/JSON
+exports are still available by an explicit `neo_report_bundle(p, dir=...)` call;
+they may contain private values and are not automatically linked or anonymized.
+The viewer names the corresponding TSV tables without embedding filesystem URLs.
+
+### Bounds and optional evidence
+
+The default limit is **500 candidates and 10 MiB HTML**. No row is silently
+truncated. A larger scope requires explicit candidate selection or a deliberate
+limit increase (`max_candidates` at most 5000, `max_bytes` at most 50 MiB).
+Every selected Origin remains; a byte-limit failure requires a smaller selection
+or a larger explicit limit. HTML limits do not bound the existing accessor's
+memory while opening the original saved project/reporting graph.
+
+```r
+view <- write_neo_report_html(p, tempfile(fileext=".html"),
+  candidate_id=exact_candidate_ids, max_candidates=100,
+  analyses=list(existing_external_analysis_id))
+```
+
+`analyses` means existing explicitly selected External analyses, never automatic
+prediction. `report_options` may pass the existing `yield_plan`,
+`external_channels`, `reference`, `endpoint`, `assay` arguments. Yield mathematics
+and probabilities are copied, not recalculated or calibrated by the viewer.
+Full private mode retains all supplied columns; the sharing allowlist prioritizes
+core sequence/link/status/score annotations and explicitly withholds other fields.
+
+A bounded HTML uses the existing Origin–Event table to display associated Events;
+its banner identifies **EXPLICIT_CANDIDATE_SELECTION** and reports original source
+counts separately. It makes no full-sample completeness claim. With no selection,
+all report Origins/Events remain, including orphan Origins and Events without a
+candidate. The table inspector exposes those records even when no Candidate can
+be selected. Existing files cannot be overwritten; use a fresh output filename
+outside projects, inputs, references and the repository. The writer uses a local
+exclusive file link for publication; a filesystem that cannot create file links
+fails safely rather than replacing an existing file.
