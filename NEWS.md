@@ -1,5 +1,8 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Retain superseded documentation snapshot commits in default-branch ancestry
+  while preserving current content and immutable release/snapshot tags.
+
 - Add an optional sourceable offline HTML viewer over existing reporting tables:
   bounded, read-only, no network/CDN, sharing aliases/private confirmation, complete
   Origin links and distinct Native/External statuses. Reorder first-use README
