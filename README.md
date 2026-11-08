@@ -31,7 +31,7 @@ That paper describes the predecessor; it does not validate every Neoantimon2
 extension. Candidates and model scores are research outputs, not clinical or
 experimental proof of immunogenicity.
 
-**This default branch is development version 0.3.0.9000, with 20 public APIs.**
+**This fixed snapshot is development version 0.3.0.9000, with 20 public APIs.**
 The immutable published [v0.3.0](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0)
 has 16 APIs and does not contain the new numerical-priority, Experimental Yield
 or reporting APIs. Record both package version and commit.
@@ -63,11 +63,11 @@ and [scientific limitations](docs/user/methods-and-limitations.md).
 
 ## Installation
 
-Use R ≥ 4.1.0. Install the current default-branch development package:
+Use R ≥ 4.1.0. Install this fixed 20-API reproducibility snapshot:
 
 ```r
 install.packages("remotes")
-remotes::install_github("hase62/Neoantimon2", ref = "main", upgrade = "never")
+remotes::install_github("hase62/Neoantimon2", ref = "reproducibility-v1", upgrade = "never")
 ```
 
 For a reproducible published release instead:
