@@ -1,28 +1,36 @@
 # Neoantimon2
 
-Neoantimon2 is an R package for **somatic-variant-derived neoantigen reconstruction
-and prioritization with molecular provenance**. It connects declared variants to
-transcript/protein paths, mutant peptides, peptide–HLA candidates and independent
-prediction/evidence records.
-
-It succeeds the original [Neoantimon](https://github.com/hase62/Neoantimon), described
-by Hasegawa et al., *Bioinformatics* (2020),
-[doi:10.1093/bioinformatics/btaa616](https://doi.org/10.1093/bioinformatics/btaa616).
-That paper describes the predecessor; it does not validate every Neoantimon2
-extension. Candidates and model scores are research outputs, not clinical or
+An R package for somatic-variant-derived **neoantigen reconstruction, traceable
+predictor integration and assumption-aware experimental planning**. Optional
+PIRCHE-inspired workflows also analyze indirect HLA class II presentation.
+Candidates and model scores are research outputs, not clinical predictions or
 experimental proof of immunogenicity.
 
-**This local autorun development branch is version 0.3.0.9000, with 21 public APIs.**
-The frozen `cmpb-code-v1` snapshot has 20 APIs; this work does not modify main.
-The immutable published [v0.3.0](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0)
-has 16 APIs and does not contain the new numerical-priority, Experimental Yield
-or reporting APIs. Record both package version and commit.
+## Choose a version
 
-![Inputs, reconstruction, peptide–HLA candidates, independent prediction channels and traceable results.](docs/assets/neoantimon2-overview.svg)
+| Version | Public APIs | Choose it for |
+| --- | ---: | --- |
+| [v0.3.0 — published release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) | 16 | The immutable released baseline; excludes later priority, Yield, reporting and indirect-autorun APIs |
+| [Reproducibility Snapshot — reproducibility-v1](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1) | 20 | Fixed research code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
+| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.0.9000**, including the integrated indirect-HLA extensions |
 
-[Quick start](#quick-start) · [Inputs](#inputs-and-reconstruction) ·
-[External predictors](#external-predictor-workflow) · [Experimental Yield](#experimental-yield-estimation) ·
-[Reporting](#complete-result-reporting) · [Validation](#validation-and-scientific-boundaries)
+Counts are the `export()` entries in each version's NAMESPACE, excluding S3
+methods/imports. Main and the fixed snapshot share a development version number;
+record the **commit as well as the package version**. Main is a moving branch.
+
+## Start here
+
+| Your goal | Entry point |
+| --- | --- |
+| Try the package in five minutes after installation | [Quick Start: small offline synthetic example](#quick-start) |
+| Analyze somatic variants | [Inputs and reconstruction](#inputs-and-reconstruction) → [practical user guide](docs/user/getting-started.md) |
+| Import external BA / EL / IM predictions | [External predictor workflow](#external-predictor-workflow) |
+| Plan experiments or export complete results | [Experimental Yield](#experimental-yield-estimation) · [Reporting](#complete-result-reporting) |
+| Analyze indirect HLA / PIRCHE-inspired presentation | [Scope and one-command workflow](#indirect-hla--pirche-inspired-analysis) |
+| Reproduce the Reproducibility Snapshot saved tables | [Package and exact reproduction commands](#reproducibility-snapshot) |
+
+[Installation](#installation) · [Documentation](docs/README.md) ·
+[Citation](#citation) · [License](#license)
 
 ## Key capabilities
 
@@ -37,11 +45,14 @@ or reporting APIs. Record both package version and commit.
 | Numerical priorities | `neo_priorities()` keeps prediction-only, exploratory adjusted ordering and original-paper PI/PR methods separate |
 | Experiment planning | Optional evidence A–D/B1/B2, independent score-bin rates, yield curves and target candidate counts |
 | Reporting | Complete Event, unique-peptide, pMHC and Origin views, independent channel representatives and explicit linkage tables |
+| Indirect HLA | One-command local 4.3k BA; DRB1/3/4/5, separately scoped exploratory DQ/DP and 13 configurable precursor loci |
 
 Specialized structural/source, long-read, longitudinal and indirect-HLA workflows
 have explicit prerequisites and limited contracts. This is not arbitrary SV,
 splice-event or complex-mutation support. See [advanced workflows](docs/user/workflows.md)
 and [scientific limitations](docs/user/methods-and-limitations.md).
+
+![Inputs, reconstruction, peptide–HLA candidates, independent prediction channels and traceable results.](docs/assets/neoantimon2-overview.svg)
 
 ## Installation
 
@@ -52,11 +63,15 @@ install.packages("remotes")
 remotes::install_github("hase62/Neoantimon2", ref = "main", upgrade = "never")
 ```
 
-For a reproducible published release instead:
+For the immutable published release instead:
 
 ```r
 remotes::install_github("hase62/Neoantimon2", ref = "v0.3.0", upgrade = "never")
 ```
+
+For the fixed fixed reproducibility source, use `ref = "reproducibility-v1"` instead. To
+reaggregate its saved tables, download the [reproduction asset](#reproducibility-snapshot);
+installing the R package alone does not provide those eight tables.
 
 Restart R before replacing a loaded package. The commands use normal R package
 installation; local source build, isolated installation and examples are checked
@@ -231,11 +246,78 @@ See [complete reporting](docs/user/result-reporting.md) for selection policies,
 full table schemas, precision boundaries, bounded output and current limitations.
 Longitudinal aggregate handles require reporting individual underlying projects.
 
+## Indirect HLA / PIRCHE-inspired analysis
+
+Available in **main**, `neo_indirect_class2()` automates a research workflow:
+explicit donor/recipient typing → pinned official IPD reference → full-precursor
+15mers → local NetMHCIIpan 4.3k BA → oriented 9mer self comparison → linked results.
+No manual predictor TSV conversion is required. Genuine **NetMHCIIpan 4.3k
+Darwin_arm64 technical E2E** has been verified for selected exact DRB1/3/4/5,
+DQ and DP presenters, using official IPD proteins and fictional typing. This is
+not patient-expression or clinical validation; see [scoped evidence](docs/development/indirect-class2-validation.md).
+
+```r
+run <- neo_indirect_class2(donor=donor_typing, recipient=recipient_typing,
+  profile="dr-expanded-v1",
+  installation=list(path=netmhciipan_root,
+    authorization=list(status="authorized_local_installation",
+                       terms=accepted_local_license_description)),
+  reference=list(release="3.66.0",cache="ipd-cache"),
+  output_dir="indirect-expanded-run")
+run$result$group_summary
+```
+
+[Typing examples, setup, results and complete instructions](docs/user/indirect-class2.md)
+define these setup values. Sources are configurable A/B/C, DRB1/3/4/5,
+DQA1/DQB1, DPA1/DPB1 and MICA/MICB. Missing, absent and partial loci remain distinct;
+DRB1 never implies an additional DR gene or its copy count. DRA–DRB1/3/4/5 is
+separate from the exploratory `dqdp-exploratory-v1` profile, which requires
+explicit typed DQA1–DQB1 / DPA1–DPB1 pairs with user-declared expression.
+No Cartesian pairing or fuzzy allele substitution is performed.
+Automatic DR pairing assumes expression from explicitly typed chains; it does
+not establish experimental expression. Presenter metadata distinguishes
+`expression_basis="typing_based_assumption"` from `"user_declaration"` and records
+`experimental_expression_status="not_verified_by_workflow"` in both cases.
+The retained `expression_confirmed` flag is an analysis-admission declaration,
+not proof of measured expression; eligibility and counting are unchanged.
+
+The reference is retrieved or hash-verified from a versioned cache; processed
+IPD data remain local under [upstream terms](https://github.com/ANHIG/IMGTHLA/blob/3660/LICENCE.md).
+Install the [licensed predictor](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/)
+separately; code/weights are never downloaded or redistributed by Neoantimon2.
+BA is explicitly requested and EL remains separate. The isotype-specific
+1000 nM cutoffs are declared assumptions, not calibrated clinical probabilities.
+Counts retain exact core/orientation/presenter and every source Origin/link.
+Incomplete results expose NULL counts and reasons; DQ/DP are never a pooled risk.
+
+This is not official PIRCHE v4/Frost, PIRCHE-I or B-cell matching, and no clinical
+or official numerical equivalence is established. The [legacy DRB1 autorun](docs/user/indirect-autorun.md)
+remains unchanged, including explicit NetMHCIIpan 3.2 support. These optional
+features are not part of immutable v0.3.0 or frozen reproducibility-v1. The installed
+`examples/indirect-class2.R` provides a clearly labeled synthetic mock workflow.
+
+## Reproducibility Snapshot
+
+A versioned research reproducibility snapshot with supporting data and verification scripts.
+
+Use the [reproducibility-v1 GitHub pre-release](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1)
+and its **Neoantimon2_Reproducibility_v1.zip** asset, rather than the
+automatically generated source-code ZIP. It contains eight preserved HCC1395
+tables, pinned source archives, checksums and read-only standard-Python scripts.
+They reaggregate **15 peptides, 75 pMHCs, 36 Origins, 180 links and 300 external
+measurements**. No R, genome reference or model weights are needed for that replay.
+See [download, SHA-256 and exact commands](docs/user/reproducibility.md#snapshot-saved-result-reproduction).
+
+This is saved-result reaggregation, separate from molecular reconstruction,
+new predictor inference or a complete VCF-to-results rerun. The fixed snapshot
+has 20 APIs and does not include main's later indirect-HLA autorun extensions.
+
 <a id="scientific-limitations"></a>
 ## Validation and scientific boundaries
 
 [Versioned validation evidence](docs/development/validation-evidence.md) distinguishes
-historical evidence from the final integration checks:
+historical evidence from version-specific integration checks. GitHub Actions CI
+is not configured; no CI badge or automated CI success is claimed:
 
 - Independent synthetic molecular oracles cover supported sequence reconstruction;
   qualified/unsupported cases remain qualified, not rewritten as unconditional PASS.
@@ -273,56 +355,20 @@ actual analysis. Preserve inputs, versions, hashes and all completed outputs.
   [original Neoantimon paper](https://doi.org/10.1093/bioinformatics/btaa616),
   [software citation](CITATION.cff), [Converter Registry](https://github.com/hase62/Neoantimon2-Converters).
 
+## Citation
+
+Use [CITATION.cff](CITATION.cff) and record the exact tag/commit used. The current
+main is unreleased development software; the Neoantimon2 manuscript is not a
+published validation paper and no manuscript DOI is assigned here.
+
+Neoantimon2 succeeds the original [Neoantimon](https://github.com/hase62/Neoantimon),
+described by Hasegawa et al., *Bioinformatics* (2020),
+[doi:10.1093/bioinformatics/btaa616](https://doi.org/10.1093/bioinformatics/btaa616).
+That publication describes the predecessor, not every Neoantimon2 extension.
+
 ## License
 
 [PolyForm Noncommercial 1.0.0](LICENSE); retain [NOTICE](NOTICE). Commercial use
 requires separate permission/licensing from Takanori Hasegawa
 (<hasegawa.t.d968@m.isct.ac.jp>); an inquiry does not grant permission.
 Third-party tools, resources and converters retain their own terms.
-
-## Indirect HLA / PIRCHE-inspired analysis
-
-The development-only `neo_indirect_class2()` automates a research workflow:
-explicit donor/recipient typing → pinned official IPD reference → full-precursor
-15mers → local NetMHCIIpan 4.3k BA → oriented 9mer self comparison → linked results.
-No manual predictor TSV conversion is required.
-
-```r
-run <- neo_indirect_class2(donor=donor_typing, recipient=recipient_typing,
-  profile="dr-expanded-v1",
-  installation=list(path=netmhciipan_root,
-    authorization=list(status="authorized_local_installation",
-                       terms=accepted_local_license_description)),
-  reference=list(release="3.66.0",cache="ipd-cache"),
-  output_dir="indirect-expanded-run")
-run$result$group_summary
-```
-
-[Typing examples, setup, results and complete instructions](docs/user/indirect-class2.md)
-define these setup values. Sources are configurable A/B/C, DRB1/3/4/5,
-DQA1/DQB1, DPA1/DPB1 and MICA/MICB. Missing, absent and partial loci remain distinct;
-DRB1 never implies an additional DR gene or its copy count. DRA–DRB1/3/4/5 is
-separate from the exploratory `dqdp-exploratory-v1` profile, which requires
-explicit typed and expression-confirmed DQA1–DQB1 / DPA1–DPB1 pairs.
-No Cartesian pairing or fuzzy allele substitution is performed.
-Automatic DR pairing assumes expression from explicitly typed chains; it does
-not establish experimental expression. Presenter metadata distinguishes
-`expression_basis="typing_based_assumption"` from `"user_declaration"` and records
-`experimental_expression_status="not_verified_by_workflow"` in both cases.
-The retained `expression_confirmed` flag is an analysis-admission declaration,
-not proof of measured expression; eligibility and counting are unchanged.
-
-The reference is retrieved or hash-verified from a versioned cache; processed
-IPD data remain local under [upstream terms](https://github.com/ANHIG/IMGTHLA/blob/3660/LICENCE.md).
-Install the [licensed predictor](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/)
-separately; code/weights are never downloaded or redistributed by Neoantimon2.
-BA is explicitly requested and EL remains separate. The isotype-specific
-1000 nM cutoffs are declared assumptions, not calibrated clinical probabilities.
-Counts retain exact core/orientation/presenter and every source Origin/link.
-Incomplete results expose NULL counts and reasons; DQ/DP are never a pooled risk.
-
-This is not official PIRCHE v4/Frost, PIRCHE-I or B-cell matching, and no clinical
-or official numerical equivalence is established. The [legacy DRB1 autorun](docs/user/indirect-autorun.md)
-remains unchanged, including explicit NetMHCIIpan 3.2 support. These optional
-features are not part of immutable v0.3.0 or frozen cmpb-code-v1. The installed
-`examples/indirect-class2.R` provides a clearly labeled synthetic mock workflow.

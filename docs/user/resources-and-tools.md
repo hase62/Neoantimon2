@@ -150,7 +150,7 @@ FACETS. Fixture providers are for explicit synthetic tests, not production model
 
 Official starting points: [NetMHCpan 4.2](https://services.healthtech.dtu.dk/services/NetMHCpan-4.2/),
 [NetMHCIIpan 4.3](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/),
-[MHCflurry](https://openvax.github.io/mhcflurry/commandline_tools.html),
+[MHCflurry](https://www.openvax.org/mhcflurry/commandline_tools.html),
 [ANNOVAR acquisition](https://www.openbioinformatics.org/annovar/annovar_download_form.php).
 These links are not substitute licenses or personalized download links. If a
 provider needs an account, email registration, license acceptance or credentials,

@@ -170,7 +170,7 @@ Python environment is changed. Failed new environments remain marked incomplete;
 successful package preparation records a requirements snapshot and still reports
 missing models separately. Models are not fetched automatically. Choose Python,
 package/backend versions and models using the
-[provider's documentation](https://openvax.github.io/mhcflurry/).
+[provider's documentation](https://www.openvax.org/mhcflurry/).
 
 Only macOS arm64 with R 4.5.1 was validated in this development cycle. Mock-tool
 tests do not establish compatibility with every vendor build or platform.
