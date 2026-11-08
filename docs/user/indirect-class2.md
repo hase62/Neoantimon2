@@ -15,8 +15,8 @@ remotes::install_github("hase62/Neoantimon2", ref="main", upgrade="never")
 ```
 
 For exact reproduction, replace `main` with the recorded commit SHA. Package
-version alone is insufficient: main (22 APIs) and the frozen CMPB snapshot
-(20 APIs) both use 0.3.0.9000. This workflow is not present in `cmpb-code-v1` or
+version alone is insufficient: main (22 APIs) and the frozen fixed snapshot
+(20 APIs) both use 0.3.0.9000. This workflow is not present in `reproducibility-v1` or
 `v0.3.0`; see [version choices](../../README.md#choose-a-version). No predictor or
 IPD data is installed by the package installation command.
 

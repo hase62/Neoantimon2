@@ -11,11 +11,11 @@ experimental proof of immunogenicity.
 | Version | Public APIs | Choose it for |
 | --- | ---: | --- |
 | [v0.3.0 — published release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) | 16 | The immutable released baseline; excludes later priority, Yield, reporting and indirect-autorun APIs |
-| [cmpb-code-v1 — CMPB reproduction](https://github.com/hase62/Neoantimon2/releases/tag/cmpb-code-v1) | 20 | Fixed paper code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
+| [Reproducibility Snapshot — reproducibility-v1](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1) | 20 | Fixed research code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
 | [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.0.9000**, including the integrated indirect-HLA extensions |
 
 Counts are the `export()` entries in each version's NAMESPACE, excluding S3
-methods/imports. Main and the CMPB snapshot share a development version number;
+methods/imports. Main and the fixed snapshot share a development version number;
 record the **commit as well as the package version**. Main is a moving branch.
 
 ## Start here
@@ -27,7 +27,7 @@ record the **commit as well as the package version**. Main is a moving branch.
 | Import external BA / EL / IM predictions | [External predictor workflow](#external-predictor-workflow) |
 | Plan experiments or export complete results | [Experimental Yield](#experimental-yield-estimation) · [Reporting](#complete-result-reporting) |
 | Analyze indirect HLA / PIRCHE-inspired presentation | [Scope and one-command workflow](#indirect-hla--pirche-inspired-analysis) |
-| Reproduce the CMPB saved tables | [Package and exact reproduction commands](#cmpb-reproducibility-package) |
+| Reproduce the Reproducibility Snapshot saved tables | [Package and exact reproduction commands](#reproducibility-snapshot) |
 
 [Installation](#installation) · [Documentation](docs/README.md) ·
 [Citation](#citation) · [License](#license)
@@ -69,8 +69,8 @@ For the immutable published release instead:
 remotes::install_github("hase62/Neoantimon2", ref = "v0.3.0", upgrade = "never")
 ```
 
-For the fixed CMPB source snapshot, use `ref = "cmpb-code-v1"` instead. To
-reaggregate its saved tables, download the [reproduction asset](#cmpb-reproducibility-package);
+For the fixed fixed reproducibility source, use `ref = "reproducibility-v1"` instead. To
+reaggregate its saved tables, download the [reproduction asset](#reproducibility-snapshot);
 installing the R package alone does not provide those eight tables.
 
 Restart R before replacing a loaded package. The commands use normal R package
@@ -293,21 +293,23 @@ Incomplete results expose NULL counts and reasons; DQ/DP are never a pooled risk
 This is not official PIRCHE v4/Frost, PIRCHE-I or B-cell matching, and no clinical
 or official numerical equivalence is established. The [legacy DRB1 autorun](docs/user/indirect-autorun.md)
 remains unchanged, including explicit NetMHCIIpan 3.2 support. These optional
-features are not part of immutable v0.3.0 or frozen cmpb-code-v1. The installed
+features are not part of immutable v0.3.0 or frozen reproducibility-v1. The installed
 `examples/indirect-class2.R` provides a clearly labeled synthetic mock workflow.
 
-## CMPB reproducibility package
+## Reproducibility Snapshot
 
-Use the [cmpb-code-v1 GitHub pre-release](https://github.com/hase62/Neoantimon2/releases/tag/cmpb-code-v1)
-and its **Neoantimon2_CMPB_GitHub_Reproduction_v1.zip** asset, rather than the
+A versioned research reproducibility snapshot with supporting data and verification scripts.
+
+Use the [reproducibility-v1 GitHub pre-release](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1)
+and its **Neoantimon2_Reproducibility_v1.zip** asset, rather than the
 automatically generated source-code ZIP. It contains eight preserved HCC1395
 tables, pinned source archives, checksums and read-only standard-Python scripts.
 They reaggregate **15 peptides, 75 pMHCs, 36 Origins, 180 links and 300 external
 measurements**. No R, genome reference or model weights are needed for that replay.
-See [download, SHA-256 and exact commands](docs/user/reproducibility.md#cmpb-saved-result-reproduction).
+See [download, SHA-256 and exact commands](docs/user/reproducibility.md#snapshot-saved-result-reproduction).
 
 This is saved-result reaggregation, separate from molecular reconstruction,
-new predictor inference or a complete VCF-to-results rerun. The CMPB snapshot
+new predictor inference or a complete VCF-to-results rerun. The fixed snapshot
 has 20 APIs and does not include main's later indirect-HLA autorun extensions.
 
 <a id="scientific-limitations"></a>

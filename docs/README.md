@@ -1,12 +1,12 @@
 # Documentation: choose the depth you need
 
-**Choose a version first:** [v0.3.0 (16 APIs), cmpb-code-v1 (20), or main (22)](../README.md#choose-a-version).
+**Choose a version first:** [v0.3.0 (16 APIs), reproducibility-v1 (20), or main (22)](../README.md#choose-a-version).
 Main includes the integrated indirect-HLA workflows; the immutable tags do not.
 
 **1. Understand and start:** the [five-minute offline Quick Start](../README.md#quick-start)
 needs no predictor or genome download after installation. For indirect-HLA work,
 go directly to the [class II one-command guide](user/indirect-class2.md); for the
-paper's saved tables, use [CMPB reproduction](user/reproducibility.md#cmpb-saved-result-reproduction).
+snapshot's saved tables, use [Reproducibility Snapshot](user/reproducibility.md#snapshot-saved-result-reproduction).
 
 **2. Analyze your data:** follow the [practical user guide](user/getting-started.md)
 from top to bottom: files/identities → references → configuration → execution →
@@ -26,7 +26,7 @@ reading chain.
 | Standard external TSV, policies and execution consent | [External contract](user/external-predictions.md) |
 | Indirect HLA: 13 sources, DRB1/3/4/5 and explicit exploratory DQ/DP | [Class II workflow](user/indirect-class2.md) |
 | Existing five-source DRB1 runner, 4.3k or explicit 3.2 | [Standalone autorun](user/indirect-autorun.md) |
-| CMPB eight-table saved-result reproduction | [Package and commands](user/reproducibility.md#cmpb-saved-result-reproduction) |
+| Snapshot eight-table saved-result reproduction | [Package and commands](user/reproducibility.md#snapshot-saved-result-reproduction) |
 | Longitudinal, vaccine and other extensions | [Advanced workflows](user/workflows.md) |
 | Source VAF/BAM, expression/ASCAT and numerical priorities | [Source evidence](user/source-evidence-and-priorities.md) |
 | Experimental planning and independent evidence categories | [Experimental Yield](user/experimental-yield.md) |

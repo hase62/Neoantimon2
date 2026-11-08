@@ -19,12 +19,12 @@ A deleted run cannot be reopened; regenerate it from the preserved recipe.
 Different output locations and timestamps can change manifests without changing
 biological identities. Compare scientific outputs separately from these fields.
 
-## CMPB saved-result reproduction
+## Snapshot saved-result reproduction
 
 Choose this route to check the published **saved tables**, rather than to run a
-new genomic analysis. Open the [cmpb-code-v1 GitHub pre-release](https://github.com/hase62/Neoantimon2/releases/tag/cmpb-code-v1)
-and download the named [reproduction ZIP](https://github.com/hase62/Neoantimon2/releases/download/cmpb-code-v1/Neoantimon2_CMPB_GitHub_Reproduction_v1.zip)
-and [SHA-256 file](https://github.com/hase62/Neoantimon2/releases/download/cmpb-code-v1/Neoantimon2_CMPB_GitHub_Reproduction_v1.zip.sha256).
+new genomic analysis. Open the [reproducibility-v1 GitHub pre-release](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1)
+and download the named [reproduction ZIP](https://github.com/hase62/Neoantimon2/releases/download/reproducibility-v1/Neoantimon2_Reproducibility_v1.zip)
+and [SHA-256 file](https://github.com/hase62/Neoantimon2/releases/download/reproducibility-v1/Neoantimon2_Reproducibility_v1.zip.sha256).
 The automatic GitHub **Source code** ZIP alone does not include the eight result
 tables. This 20-API snapshot is distinct from 22-API main.
 
@@ -32,15 +32,15 @@ With Python 3 and its standard library, from the directory holding the download:
 
 ```sh
 # Compare with the downloaded .sha256 file (macOS):
-shasum -a 256 Neoantimon2_CMPB_GitHub_Reproduction_v1.zip
-unzip Neoantimon2_CMPB_GitHub_Reproduction_v1.zip -d cmpb-reproduction
-cd cmpb-reproduction
+shasum -a 256 Neoantimon2_Reproducibility_v1.zip
+unzip Neoantimon2_Reproducibility_v1.zip -d snapshot-reproduction
+cd snapshot-reproduction
 python3 -I scripts/verify_package.py
 python3 -I scripts/verify_snapshot.py
 ```
 
 Use a fresh extraction directory; keep Python assertions enabled (no `-O`). The
-asset SHA-256 is `3feb730de9488bf6854e299cc2292cff0da50897d124b4f4693cbcde784b48f9`.
+asset SHA-256 is `f4fb8eb9dff5af88b6cb73fc19aa582ef415753f45df3851cc60d555c527ef23`.
 The package's own README/REPRODUCE describe every command and its scope.
 Expected saved-table totals are **15 unique mutant peptides, 75 peptide–HLA
 candidates, 36 Origins, 180 links and 300 external prediction measurements**.
@@ -111,7 +111,7 @@ The default branch uses 0.3.0.9000 as an explicit R development marker; the
 published v0.3.0 tag, source archive and release assets are immutable. This does
 not change scientific schema or identity versions. Record the Git revision as
 well as DESCRIPTION because earlier unpublished snapshots still reported 0.3.0.
-The sixteen released APIs remain compatible. The CMPB snapshot adds four APIs
+The sixteen released APIs remain compatible. The fixed snapshot adds four APIs
 (20 total); main adds both indirect-HLA runners (22 total). The complete
 [API reference](api-reference.md) and [version choices](../../README.md#choose-a-version)
 distinguish the three editions.
