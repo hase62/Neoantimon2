@@ -1,5 +1,11 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Add an optional sourceable offline HTML viewer over existing reporting tables:
+  bounded, read-only, no network/CDN, sharing aliases/private confirmation, complete
+  Origin links and distinct Native/External statuses. Reorder first-use README
+  navigation and connect standard-length training to browser interpretation.
+  Preserve all 22 exports and existing reporting/scientific contracts.
+
 - Add opt-in sourceable first-real-run examples with read-only, privacy-safe
   readiness checks (no provider process/download), effective historical length
   display and a standard-length authored-synthetic tutorial. Improve config/input/

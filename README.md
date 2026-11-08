@@ -6,53 +6,15 @@ PIRCHE-inspired workflows also analyze indirect HLA class II presentation.
 Candidates and model scores are research outputs, not clinical predictions or
 experimental proof of immunogenicity.
 
-## Choose a version
+## New here? Start here
 
-| Version | Public APIs | Choose it for |
-| --- | ---: | --- |
-| [v0.3.0 — published release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) | 16 | The immutable released baseline; excludes later priority, Yield, reporting and indirect-autorun APIs |
-| [Reproducibility Snapshot — reproducibility-v1](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1) | 20 | Fixed research code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
-| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.0.9000**, including the integrated indirect-HLA extensions |
+Use **main, the latest development version**, for the current tutorials and offline
+viewer. It is not a formal release. [Version choices](#choose-a-version) remain
+available for the released baseline and fixed research snapshot.
 
-Counts are the `export()` entries in each version's NAMESPACE, excluding S3
-methods/imports. Main and the fixed snapshot share a development version number;
-record the **commit as well as the package version**. Main is a moving branch.
-
-## Start here
-
-| Your goal | Entry point |
-| --- | --- |
-| Try the package in five minutes after installation | [Quick Start: small offline synthetic example](#quick-start) |
-| Analyze somatic variants | [Inputs and reconstruction](#inputs-and-reconstruction) → [First Real-Data Workflow](docs/user/first-real-data-workflow.md) |
-| Import external BA / EL / IM predictions | [External predictor workflow](#external-predictor-workflow) |
-| Plan experiments or export complete results | [Experimental Yield](#experimental-yield-estimation) · [Reporting](#complete-result-reporting) |
-| Analyze indirect HLA / PIRCHE-inspired presentation | [Scope and one-command workflow](#indirect-hla--pirche-inspired-analysis) |
-| Reproduce the Reproducibility Snapshot saved tables | [Package and exact reproduction commands](#reproducibility-snapshot) |
-
-[Installation](#installation) · [Documentation](docs/README.md) ·
-[Citation](#citation) · [License](#license)
-
-## Key capabilities
-
-| Capability | Implemented scope |
-| --- | --- |
-| Reconstruction | Somatic SNVs/indels; supported normalized compound/phased contexts, transcript-aware CDS/protein reconstruction and explicit unsupported states |
-| Peptides and HLA | Configurable Class I lengths, including 8–12mers; supported Class II workflows with explicit alpha~beta presenters; every eligible window under the documented reconstruction policy |
-| Provenance | Event → Origin → peptide–HLA links; sequence/query deduplication preserves all biological Origins |
-| Native assessment | Existing A–E Grade and ranking policies; optional configured native predictors |
-| Biological evidence | VCF-first DNA VAF, optional DNA/RNA BAM allele evidence, externally quantified expression, generic CN/purity and supported native ASCAT imports |
-| External evidence | Separately identified BA/EL/IM observations, exact peptide/HLA matching and model/run/metric provenance |
-| Numerical priorities | `neo_priorities()` keeps prediction-only, exploratory adjusted ordering and original-paper PI/PR methods separate |
-| Experiment planning | Optional evidence A–D/B1/B2, independent score-bin rates, yield curves and target candidate counts |
-| Reporting | Complete Event, unique-peptide, pMHC and Origin views, independent channel representatives and explicit linkage tables |
-| Indirect HLA | One-command local 4.3k BA; DRB1/3/4/5, separately scoped exploratory DQ/DP and 13 configurable precursor loci |
-
-Specialized structural/source, long-read, longitudinal and indirect-HLA workflows
-have explicit prerequisites and limited contracts. This is not arbitrary SV,
-splice-event or complex-mutation support. See [advanced workflows](docs/user/workflows.md)
-and [scientific limitations](docs/user/methods-and-limitations.md).
-
-![Inputs, reconstruction, peptide–HLA candidates, independent prediction channels and traceable results.](docs/assets/neoantimon2-overview.svg)
+1. [Install](#installation), then run the [five-minute technical Quick Start](#quick-start).
+2. Continue to the [standard-length First Real-Data Workflow](docs/user/first-real-data-workflow.md): prepare inputs → diagnose → generate candidates → select one → inspect all Origins and evidence → reopen saved results.
+3. Create an [offline HTML report](#standard-length-tutorial-and-offline-results) for collaborators who do not use R. No predictor is needed for the authored synthetic training run.
 
 ## Installation
 
@@ -105,6 +67,44 @@ are not negative predictions or grade E. These windows are not human-analysis
 settings. The script leaves `p`, `events`, `origins` and `results` in R.
 
 <a id="analyze-your-own-data"></a>
+## Standard-length tutorial and offline results
+
+After the small technical check, follow the [First Real-Data Workflow](docs/user/first-real-data-workflow.md).
+Its **authored synthetic input** uses the ordinary reconstruction route and explicit
+Class I 8–12mers / Class II 15mers: **1 Event, 65 Origins, 65 candidates**, all
+`NOT_RUN` / `NOT_GRADED`. These are generated candidates, not evaluated binders.
+
+For a completed project `p`, make a standalone browser report:
+
+```r
+source(system.file("examples", "report-html.R", package="Neoantimon2"), local=TRUE)
+view <- write_neo_report_html(p, tempfile(fileext=".html"))
+view$path  # open this local HTML in a browser; no R needed for viewing
+```
+
+The [viewer guide](docs/user/result-reporting.md#offline-html-viewer) explains
+search/sort, all linked Origins/Events, separate Native/External records, privacy
+and output limits. Sharing mode pseudonymizes identifiers and withholds paths and
+free-form metadata; the HTML still contains scientific data. Keep the returned
+`private_id_map` locally to trace aliases. Full private output requires explicit
+confirmation. This sourceable utility adds no exported API and changes no saved
+result or TSV/JSON contract.
+
+<a id="start-here"></a>
+## Workflow navigation
+
+| Your goal | Entry point |
+| --- | --- |
+| Try the package in five minutes after installation | [Quick Start: small offline synthetic example](#quick-start) |
+| Analyze somatic variants | [Inputs and reconstruction](#inputs-and-reconstruction) → [First Real-Data Workflow](docs/user/first-real-data-workflow.md) |
+| Import external BA / EL / IM predictions | [External predictor workflow](#external-predictor-workflow) |
+| Plan experiments or export complete results | [Experimental Yield](#experimental-yield-estimation) · [Reporting](#complete-result-reporting) |
+| Analyze indirect HLA / PIRCHE-inspired presentation | [Scope and one-command workflow](#indirect-hla--pirche-inspired-analysis) |
+| Reproduce the Reproducibility Snapshot saved tables | [Package and exact reproduction commands](#reproducibility-snapshot) |
+
+[Installation](#installation) · [Documentation](docs/README.md) ·
+[Citation](#citation) · [License](#license)
+
 ## Inputs and reconstruction
 
 Declare sample/patient identity, single-sample tumor VCFs, patient HLA and verified
@@ -338,6 +338,40 @@ new predictor inference or a complete VCF-to-results rerun. The fixed snapshot
 has 20 APIs and does not include main's later indirect-HLA autorun extensions.
 
 <a id="scientific-limitations"></a>
+## Choose a version
+
+| Version | Public APIs | Choose it for |
+| --- | ---: | --- |
+| [v0.3.0 — published release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) | 16 | The immutable released baseline; excludes later priority, Yield, reporting and indirect-autorun APIs |
+| [Reproducibility Snapshot — reproducibility-v1](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1) | 20 | Fixed research code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
+| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.0.9000**, including the integrated indirect-HLA extensions |
+
+Counts are the `export()` entries in each version's NAMESPACE, excluding S3
+methods/imports. Main and the fixed snapshot share a development version number;
+record the **commit as well as the package version**. Main is a moving branch.
+
+## Key capabilities
+
+| Capability | Implemented scope |
+| --- | --- |
+| Reconstruction | Somatic SNVs/indels; supported normalized compound/phased contexts, transcript-aware CDS/protein reconstruction and explicit unsupported states |
+| Peptides and HLA | Configurable Class I lengths, including 8–12mers; supported Class II workflows with explicit alpha~beta presenters; every eligible window under the documented reconstruction policy |
+| Provenance | Event → Origin → peptide–HLA links; sequence/query deduplication preserves all biological Origins |
+| Native assessment | Existing A–E Grade and ranking policies; optional configured native predictors |
+| Biological evidence | VCF-first DNA VAF, optional DNA/RNA BAM allele evidence, externally quantified expression, generic CN/purity and supported native ASCAT imports |
+| External evidence | Separately identified BA/EL/IM observations, exact peptide/HLA matching and model/run/metric provenance |
+| Numerical priorities | `neo_priorities()` keeps prediction-only, exploratory adjusted ordering and original-paper PI/PR methods separate |
+| Experiment planning | Optional evidence A–D/B1/B2, independent score-bin rates, yield curves and target candidate counts |
+| Reporting | Complete Event, unique-peptide, pMHC and Origin views, independent channel representatives and explicit linkage tables |
+| Indirect HLA | One-command local 4.3k BA; DRB1/3/4/5, separately scoped exploratory DQ/DP and 13 configurable precursor loci |
+
+Specialized structural/source, long-read, longitudinal and indirect-HLA workflows
+have explicit prerequisites and limited contracts. This is not arbitrary SV,
+splice-event or complex-mutation support. See [advanced workflows](docs/user/workflows.md)
+and [scientific limitations](docs/user/methods-and-limitations.md).
+
+![Inputs, reconstruction, peptide–HLA candidates, independent prediction channels and traceable results.](docs/assets/neoantimon2-overview.svg)
+
 ## Validation and scientific boundaries
 
 [Versioned validation evidence](docs/development/validation-evidence.md) distinguishes

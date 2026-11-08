@@ -10,6 +10,8 @@ snapshot's saved tables, use [Reproducibility Snapshot](user/reproducibility.md#
 
 **2. First real-data run:** use the [continuous training and preflight tutorial](user/first-real-data-workflow.md) before switching to real references/VCF/HLA.
 
+For collaborators, the [offline HTML viewer](user/result-reporting.md#offline-html-viewer) exposes saved Candidates, every linked Origin and separate model evidence without R.
+
 **3. Analyze your data:** follow the [practical user guide](user/getting-started.md)
 from top to bottom: files/identities → references → configuration → execution →
 interpretation → external prediction → reopening. This is the one recommended
