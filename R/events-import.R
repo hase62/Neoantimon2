@@ -197,7 +197,7 @@ event_parse_vcf <- function(project, input, reference) {
           c("#CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO")))
           stop("Malformed VCF column header")
         if (length(header) > 9L && !identical(header[[10L]], input$sample_id))
-          stop("VCF sample does not match authoritative input sample binding")
+          stop("VCF sample does not match authoritative input sample binding [#CHROM sample column versus input$sample_id]. Expected an exact single-sample identity match; inspect the original header and declared binding locally. Do not silently rename samples. See the First Real-Data Workflow guide.", call. = FALSE)
         if (length(header) > 10L) stop("Multi-sample VCF requires a single explicit sample input")
         if (!length(header) %in% c(8L, 10L) ||
             (length(header) == 10L && header[[9L]] != "FORMAT"))

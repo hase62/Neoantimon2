@@ -15,7 +15,27 @@ expanded_setup <- function(mode="good",profile="dr-expanded-v1") {
   list(donor=da,recipient=re,profile=profile,reference=list(path=ref,sha256=ia_hash(ref)),installation=list(path=tool,authorization=list(status="mock_only",terms="Controlled software fixture only")),output_dir=file.path(root,"run"),
     source_loci=loci,self_loci=loci)
 }
-expanded_call <- function(a)do.call(neo_indirect_class2,a)
+# Controlled mock computations use KB-scale authored inputs. Isolate their df
+# dependency from the host's free capacity; the production guard body/default
+# remains intact, and its low-space rejection is tested explicitly below.
+expanded_capacity_guard <- function(available_kib) {
+  guard <- getFromNamespace("ie_guard", "Neoantimon2")
+  e <- new.env(parent=environment(guard))
+  e$system2 <- function(command,args,stdout) {
+    stopifnot(identical(as.character(command),as.character(Sys.which("df"))),
+      identical(args[[1L]],"-Pk"),isTRUE(stdout))
+    c("Filesystem 1024-blocks Used Available Capacity Mounted on",
+      paste("fixture 134217728 0",available_kib,"0% /fixture"))
+  }
+  environment(guard) <- e
+  guard
+}
+expanded_call <- function(a) {
+  if (!isTRUE(a$dry_run) && !identical(a$installation$authorization$status,"mock_only"))
+    return(do.call(neo_indirect_class2,a))
+  testthat::with_mocked_bindings(do.call(neo_indirect_class2,a),
+    ie_guard=expanded_capacity_guard(64*1024^2),.package="Neoantimon2")
+}
 
 test_that("13 sources retain every Origin while exact queries and cores deduplicate",{
  a<-expanded_setup();x<-expanded_call(a)
@@ -174,4 +194,15 @@ test_that("typing-based DR eligibility is not experimental expression confirmati
  unconfirmed<-ie_presenters(list(declaration),typing,"dr-expanded-v1")[[1]]
  expect_identical(unconfirmed$status,"expression_unconfirmed")
  expect_identical(unconfirmed$experimental_expression_status,"not_verified_by_workflow")
+})
+
+
+test_that("mock capacity isolation preserves the production disk safeguard", {
+  expect_identical(formals(neo_indirect_class2)$min_free_gib,25)
+  low <- expanded_capacity_guard(1024^2)
+  expect_error(low(tempdir(),25),"Disk guard: insufficient free space")
+  high <- expanded_capacity_guard(64*1024^2)
+  expect_equal(high(tempdir(),25),64*1024^3)
+  a <- expanded_setup();a$min_free_gib <- 24
+  expect_error(expanded_call(a),"Free-space reserve must be at least 25 GiB")
 })

@@ -1,5 +1,11 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Add opt-in sourceable first-real-run examples with read-only, privacy-safe
+  readiness checks (no provider process/download), effective historical length
+  display and a standard-length authored-synthetic tutorial. Improve config/input/
+  VCF binding errors without changing validation gates or scientific outputs.
+  Keep 22 exports; use existing result/report/explanation APIs.
+
 - Clarify expanded indirect class II presenter expression metadata: automatic
   DR uses a typing-based assumption; explicit inputs remain user declarations.
   Neither is marked experimentally verified by the workflow. Preserve the

@@ -8,7 +8,17 @@ scalar_text <- function(x, label) {
 strict_keys <- function(x, allowed, label) {
   if (!is.list(x) || (length(x) && (is.null(names(x)) || anyDuplicated(names(x)) ||
       any(!nzchar(names(x)))))) stop(label, " must be a unique named list")
-  if (length(setdiff(names(x), allowed))) stop("Unknown key in ", label)
+  unknown <- setdiff(names(x), allowed)
+  if (length(unknown)) {
+    # Field names, never values; patient-keyed HLA maps are deliberately opaque.
+    safe <- function(k) if (grepl("^[A-Za-z][A-Za-z0-9_.-]{0,63}$", k) &&
+      !grepl("^(gh[pousr]_|AKIA|ASIA)", k)) k else "[nonstandard key omitted]"
+    detail <- if (identical(label, "hla subject")) "undeclared subject key (identifiers omitted)" else
+      paste(vapply(unknown, safe, ""), collapse = ", ")
+    expected <- if (identical(label, "hla subject")) "declared patient_id keys" else paste(allowed, collapse = ", ")
+    stop("Unknown key in ", label, ": ", detail, ". Expected: ", expected,
+      ". Inspect the corresponding named list; see ?neo_config and the First Real-Data Workflow guide.", call. = FALSE)
+  }
 }
 merge_config <- function(base, x) {
   strict_keys(x, c(names(base), "allo", "indirect_hla", "allo_native_evidence"), "config")

@@ -13,7 +13,7 @@ single-sample VCFs. Advanced input/analysis modes have their own contracts.
 
 Use R ≥ 4.1.0. Install main (0.3.0.9000, 22 APIs), then run the small example.
 For the immutable published release (16 APIs), set `ref = "v0.3.0"`; the fixed
-fixed snapshot (20 APIs) uses `ref = "reproducibility-v1"`. Both development snapshots
+snapshot (20 APIs) uses `ref = "reproducibility-v1"`. Both development snapshots
 include priority/planning/reporting; only main includes the later indirect-HLA
 autorun extensions. See [version choices](../../README.md#choose-a-version):
 
@@ -125,6 +125,10 @@ is not proof its models work. Vendor software/models are not bundled and retain
 licensing/registration restrictions. MHCflurry installation/environment changes
 require explicit opt-in; this guide does not install any predictor.
 
+For a first run, follow the [First Real-Data Workflow](first-real-data-workflow.md),
+including a no-provider-process preflight and standard-length synthetic example.
+The readiness check is conservative; it does not replace full reference/body/model validation.
+
 ## Configure your own project
 
 With the complete profile already present, replace the paths, identities and
@@ -139,7 +143,16 @@ refs <- neo_check_resources(profile = "minimum", dest = data_dir)
 stopifnot(refs$ok)
 cfg_user <- neo_config(env = character(),
   paths = list(data_root = data_dir, run_root = run_dir),
-  scientific = refs$scientific, resources = refs$resources)
+  scientific = refs$scientific, resources = refs$resources,
+  peptides = list(class_i_lengths = 8:12, class_ii_lengths = 15L))
+source(system.file("examples", "first-real-run.R", package="Neoantimon2"), local=TRUE)
+samples_user <- data.frame(sample_id="S1",patient_id="P1")
+hla_user <- list(P1=c("HLA-A*02:01","HLA-B*07:02"))
+inputs_user <- list(list(input_id="S1-somatic",input_role="somatic_vcf",
+  sample_id="S1",path=vcf_path))
+readiness <- first_real_run_check(cfg_user,samples_user,hla_user,inputs_user)
+readiness$checks
+stopifnot(readiness$ok)
 p_user <- neo_project(
   samples = data.frame(sample_id = "S1", patient_id = "P1"),
   hla = list(P1 = c("HLA-A*02:01", "HLA-B*07:02")),

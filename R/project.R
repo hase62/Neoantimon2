@@ -14,15 +14,18 @@ sample_records <- function(samples) {
 
 input_records <- function(inputs, config, samples) {
   if (!is.list(inputs) || !is.null(names(inputs))) stop("inputs must be a record array")
-  out <- lapply(inputs, function(x) {
+  out <- lapply(seq_along(inputs), function(i) {
+    x <- inputs[[i]]
     strict_keys(x, c("input_id", "input_role", "sample_id", "path", "checksum", "version"), "input")
     scalar_text(x$input_role, "input_role")
     if (!grepl("^[a-z][a-z0-9_]*$", x$input_role)) stop("Invalid input_role")
     scalar_text(x$input_id, "input_id"); scalar_text(x$sample_id, "sample_id")
-    if (!x$sample_id %in% vapply(samples, `[[`, "", "sample_id")) stop("Input sample binding missing")
+    if (!x$sample_id %in% vapply(samples, `[[`, "", "sample_id"))
+      stop("Input sample binding missing [inputs[[", i, "]]$sample_id]. Expected a value declared in samples$sample_id; inspect both locally. See ?neo_project.", call. = FALSE)
     spec <- resource_spec(list(path = x$path, required = TRUE, checksum = x$checksum, version = x$version))
     path <- resolve_path(spec$path, config$paths$input_root)
-    if (!file.exists(path) || dir.exists(path)) stop("Required input file missing")
+    if (!file.exists(path) || dir.exists(path))
+      stop("Required input file missing [inputs[[", i, "]]$path]. Expected an existing regular file; check file.exists() and file.access(..., 4) on this declared path. Private path omitted. See ?neo_project and the First Real-Data Workflow guide.", call. = FALSE)
     list(input_id = x$input_id, input_role = x$input_role, sample_id = x$sample_id, declared_path = x$path,
       resolved_path = path, version = x$version,
       integrity = integrity_record(path, config$checksum, spec$checksum))
@@ -106,7 +109,8 @@ neo_project <- function(samples = NULL, hla = NULL, reference = NULL, config = N
   if (!is.null(hla)) {
     strict_keys(hla, unique(vapply(samples, `[[`, "", "patient_id")), "hla subject")
     hla <- lapply(hla, function(x) {
-      if (!is.character(x) || anyNA(x) || any(!nzchar(x))) stop("hla must contain declared allele strings")
+      if (!is.character(x) || anyNA(x) || any(!nzchar(x)))
+        stop("hla must contain declared allele strings, keyed by declared patient_id. Example: HLA-A*02:01 or HLA-DRA*01:01~HLA-DRB1*01:01; do not infer an alpha chain. See ?neo_project.", call. = FALSE)
       as.list(sort(unique(x), method = "radix"))
     })
   }
