@@ -181,7 +181,14 @@ evidence of clinical suitability.
 
 ## Allo contexts and strict indirect-HLA
 
-Allo support remains available through configuration; there is no `mode = "allo"`.
+For one-command indirect-HLA analysis on main, use
+[`neo_indirect_class2()`](indirect-class2.md): 13 configurable precursor loci,
+DRB1/3/4/5 and separately scoped explicit exploratory DQ/DP. The compatible
+[five-source DRB1 autorun](indirect-autorun.md) also remains available.
+
+The rest of this section describes the separate **legacy declarative strict
+profile**, not the expanded wrapper's scope. Allo support remains available
+through configuration; there is no `mode = "allo"`.
 The optional [`neo_indirect_autorun()`](indirect-autorun.md) now provides standalone
 local orchestration without invoking the somatic `neo_run()` route. `neo_project()` still uses its supported `somatic`
 mode. Construction validates and derives the separate opt-in graph, which

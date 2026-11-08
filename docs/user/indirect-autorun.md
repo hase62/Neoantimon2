@@ -6,6 +6,11 @@ edit or convert prediction result files. This is research software, not official
 PIRCHE/Frost or a clinical risk model. Version alone is insufficient: record the
 source commit, exact predictor/model identity and analysis profile.
 
+This API is available in current main, not in v0.3.0 or reproducibility-v1. For new
+13-source DRB1/3/4/5 and exploratory DQ/DP analyses, use the
+[expanded class II workflow](indirect-class2.md). The five-source DRB1 contract
+described here remains supported.
+
 ## One command after setup
 
 ```r
