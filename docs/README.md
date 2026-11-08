@@ -8,13 +8,15 @@ needs no predictor or genome download after installation. For indirect-HLA work,
 go directly to the [class II one-command guide](user/indirect-class2.md); for the
 snapshot's saved tables, use [Reproducibility Snapshot](user/reproducibility.md#snapshot-saved-result-reproduction).
 
-**2. Analyze your data:** follow the [practical user guide](user/getting-started.md)
+**2. First real-data run:** use the [continuous training and preflight tutorial](user/first-real-data-workflow.md) before switching to real references/VCF/HLA.
+
+**3. Analyze your data:** follow the [practical user guide](user/getting-started.md)
 from top to bottom: files/identities → references → configuration → execution →
 interpretation → external prediction → reopening. This is the one recommended
 own-data entrypoint. [Cohort recipes](user/multi-sample-examples.md) and
 [file examples](user/input-output-examples.md) are worked supplements.
 
-**3. Look up a contract:** use the shelf below for details, not as a prerequisite
+**4. Look up a contract:** use the shelf below for details, not as a prerequisite
 reading chain.
 
 | Reference question | Page |

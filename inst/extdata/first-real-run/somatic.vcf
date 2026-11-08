@@ -1,0 +1,6 @@
+##fileformat=VCFv4.2
+##source=Neoantimon2-authored-synthetic-fixture
+##contig=<ID=chr1,length=186,assembly=GRCh38.p14>
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Synthetic genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	demo-sample
+chr1	88	.	A	G	.	PASS	.	GT	0/1

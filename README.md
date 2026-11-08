@@ -23,7 +23,7 @@ record the **commit as well as the package version**. Main is a moving branch.
 | Your goal | Entry point |
 | --- | --- |
 | Try the package in five minutes after installation | [Quick Start: small offline synthetic example](#quick-start) |
-| Analyze somatic variants | [Inputs and reconstruction](#inputs-and-reconstruction) → [practical user guide](docs/user/getting-started.md) |
+| Analyze somatic variants | [Inputs and reconstruction](#inputs-and-reconstruction) → [First Real-Data Workflow](docs/user/first-real-data-workflow.md) |
 | Import external BA / EL / IM predictions | [External predictor workflow](#external-predictor-workflow) |
 | Plan experiments or export complete results | [Experimental Yield](#experimental-yield-estimation) · [Reporting](#complete-result-reporting) |
 | Analyze indirect HLA / PIRCHE-inspired presentation | [Scope and one-command workflow](#indirect-hla--pirche-inspired-analysis) |
@@ -69,7 +69,7 @@ For the immutable published release instead:
 remotes::install_github("hase62/Neoantimon2", ref = "v0.3.0", upgrade = "never")
 ```
 
-For the fixed fixed reproducibility source, use `ref = "reproducibility-v1"` instead. To
+For the fixed reproducibility source, use `ref = "reproducibility-v1"` instead. To
 reaggregate its saved tables, download the [reproduction asset](#reproducibility-snapshot);
 installing the R package alone does not provide those eight tables.
 
@@ -120,9 +120,10 @@ cfg <- neo_config(peptides = list(class_i_lengths = 8:12,
                                   class_ii_lengths = 15L))
 ```
 
-This only declares configuration. Supply actual references/inputs before executing
-an analysis. Reference bundles are normally several GB; retain their full required
-scope and integrity. Class II candidate generation requires supported complete
+These are explicit example lengths, not defaults. The historical defaults remain
+Class I **8:11** and Class II **13:25**. This only declares configuration; supply
+actual references/inputs before executing an analysis. Reference bundles are
+normally several GB; retain their full required scope and integrity. Class II candidate generation requires supported complete
 presenters, not an invented alpha partner.
 
 Supported tumor VCF FORMAT evidence can supply DNA VAF without BAM or a manual
@@ -133,6 +134,30 @@ supported outputs are imported with explicit identity/build/coordinate checks.
 Missing observations remain unavailable, and reported fractions do not become
 invented read counts. See the [continuous user guide](docs/user/getting-started.md)
 and [source evidence and numerical priorities](docs/user/source-evidence-and-priorities.md).
+
+### Before the first real-data run
+
+Follow the [First Real-Data Workflow](docs/user/first-real-data-workflow.md) for
+one continuous preparation → diagnosis → execution → interpretation → reopening
+recipe, plus an authored synthetic standard-length example. Before `neo_run()`:
+
+```r
+source(system.file("examples", "first-real-run.R", package="Neoantimon2"), local=TRUE)
+# Use your reviewed cfg/samples/hla/inputs; this creates no project or output:
+check <- first_real_run_check(cfg, samples, hla, inputs, output_dir=cfg$paths$run_root)
+check$software
+check$effective
+check$checks
+stopifnot(check$ok)
+```
+
+The helper is a sourceable example, not a new exported API. It reuses resource,
+length and HLA validators, checks VCF header bindings and output permissions,
+and keeps paths/identifiers out of default output. No predictor process or
+download starts. Configured tools are reported **not probed**; an explicit
+`neo_check_predictors(..., smoke_test=FALSE)` can still execute help/version
+commands. The guide explains that separate opt-in and how to read `NOT_RUN`,
+Origin links and the existing `neo_report_bundle()` tables.
 
 <a id="add-external-predictions-if-needed"></a>
 ## External predictor workflow
