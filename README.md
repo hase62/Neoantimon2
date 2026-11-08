@@ -305,6 +305,12 @@ DRB1 never implies an additional DR gene or its copy count. DRA–DRB1/3/4/5 is
 separate from the exploratory `dqdp-exploratory-v1` profile, which requires
 explicit typed and expression-confirmed DQA1–DQB1 / DPA1–DPB1 pairs.
 No Cartesian pairing or fuzzy allele substitution is performed.
+Automatic DR pairing assumes expression from explicitly typed chains; it does
+not establish experimental expression. Presenter metadata distinguishes
+`expression_basis="typing_based_assumption"` from `"user_declaration"` and records
+`experimental_expression_status="not_verified_by_workflow"` in both cases.
+The retained `expression_confirmed` flag is an analysis-admission declaration,
+not proof of measured expression; eligibility and counting are unchanged.
 
 The reference is retrieved or hash-verified from a versioned cache; processed
 IPD data remain local under [upstream terms](https://github.com/ANHIG/IMGTHLA/blob/3660/LICENCE.md).

@@ -90,7 +90,17 @@ source in the 13-locus profile. No sequence or missing terminal region is padded
 `dr-expanded-v1` supports DRA*01:01–DRB1/3/4/5. With one explicitly typed DRA
 protein, automatic DR declarations use only explicitly typed beta alleles.
 All DR beta loci must be characterized as typed/absent for complete automatic
-DR coverage. An untyped additional beta locus leaves the overall DR count
+DR coverage. Automatic DR pairing assumes expression from typing, not from an
+expression assay. Its presenter records carry
+`expression_basis="typing_based_assumption"`; explicit declarations instead carry
+`expression_basis="user_declaration"`. Both record
+`experimental_expression_status="not_verified_by_workflow"`: the workflow does
+not independently verify experimental expression, including a user's assay claim.
+The compatibility field `expression_confirmed` remains the analysis-admission
+flag (TRUE for automatic DR), not a measured-expression result. These fields are
+saved in the request/plan and public presenter summaries, including JSON/TSV
+exports and explanations. They do not change eligibility, scores or counts.
+An untyped additional beta locus leaves the overall DR count
 unavailable, even if known presenters were evaluated. Alternatively, explicit
 `presenters` selects a clearly labeled subset rather than claiming all expressed
 DR molecules. Two-field presenter protein names are required; higher-resolution

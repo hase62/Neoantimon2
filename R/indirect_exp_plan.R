@@ -17,6 +17,7 @@ ie_vendor <- function(pair) {
   } else paste0("HLA-",gsub("[*:]","",sub("^HLA-","",p$hla_alpha)),"-",gsub("[*:]","",sub("^HLA-","",p$hla_beta)))
 }
 ie_presenters <- function(declarations, typing, profile) {
+  auto_dr<-is.null(declarations)
   if(is.null(declarations)) {
     if(profile!="dr-expanded-v1")stop("DQ/DP requires explicit confirmed alpha/beta pairing declarations; no Cartesian combinations")
     alpha <- Filter(function(t)t$locus=="DRA"&&t$status=="typed",typing)
@@ -38,7 +39,11 @@ ie_presenters <- function(declarations, typing, profile) {
     typed<-all(vapply(chains,function(a)any(vapply(typing,function(t)t$status=="typed"&&a%in%unlist(t$alleles),TRUE)),TRUE))
     status<-if(!typed)"unresolved_typing" else if(!x$expression_confirmed)"expression_unconfirmed" else "eligible"
     list(presenter=p$mhc_key,group=group,vendor=ie_vendor(p$mhc_key),pairing=x$pairing,
-      expression_confirmed=x$expression_confirmed,status=status,reason=if(status=="eligible")NULL else status,
+      # Compatibility flag admits the presenter; it is not an experimental observation.
+      expression_confirmed=x$expression_confirmed,
+      expression_basis=if(auto_dr)"typing_based_assumption"else"user_declaration",
+      experimental_expression_status="not_verified_by_workflow",
+      status=status,reason=if(status=="eligible")NULL else status,
       evidence=if(is.null(x$evidence))"explicit hypothetical input, not patient observation" else allo_text(x$evidence,"pair evidence"))
   })
   ids<-vapply(out,`[[`,"","presenter");if(anyDuplicated(ids))stop("Duplicate presenter declaration")

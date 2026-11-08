@@ -1,5 +1,10 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Clarify expanded indirect class II presenter expression metadata: automatic
+  DR uses a typing-based assumption; explicit inputs remain user declarations.
+  Neither is marked experimentally verified by the workflow. Preserve the
+  existing expression admission flag, eligibility and all counting rules.
+
 - Add optional `neo_indirect_class2()` with configured 13-locus donor/self
   provenance, explicit absence/unknown states, DRB1/3/4/5 and separately scoped
   exploratory DQ/DP pairing. Reuse strict 4.3k BA/core parsing and unchanged

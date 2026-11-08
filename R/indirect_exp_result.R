@@ -32,6 +32,8 @@ ie_result <- function(origins,presenters,rows,source_complete,self_complete,prof
     }
     complete<-source_complete&&self_complete&&supported
     summaries[[length(summaries)+1L]]<-list(presenter=p$presenter,group=p$group,status=if(complete)"complete"else"incomplete",prediction_status=p$status,reason=p$reason,
+      expression_confirmed=p$expression_confirmed,expression_basis=p$expression_basis,
+      experimental_expression_status=p$experimental_expression_status,
       complete_count=if(complete)length(unique(keys))else NULL,conditional_count=length(unique(keys)),conditional_semantics="provisional_nonself_relative_to_observed_self; not a complete score",
       evaluated_donor_pmhcs=evaluated,self_excluded_pmhcs=excluded,unknown_pmhcs=unknown,threshold_nM=cutoff,threshold_semantics="explicit BA assumption; not cross-model calibration")
   }

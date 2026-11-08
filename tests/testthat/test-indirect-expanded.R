@@ -22,6 +22,12 @@ test_that("13 sources retain every Origin while exact queries and cores deduplic
  expect_identical(x$status,"COMPLETED");expect_false(x$manifest$real_predictor_executed)
  expect_equal(x$result$donor_origin_count,78L);expect_equal(x$result$self_origin_count,13L)
  expect_length(x$result$candidates,24L);expect_length(x$result$candidate_origin_links,312L)
+ expect_true(all(vapply(x$plan$presenters,function(p)p$expression_confirmed&&p$expression_basis=="typing_based_assumption"&&p$experimental_expression_status=="not_verified_by_workflow",TRUE)))
+ expect_true(all(vapply(x$result$presenter_summary,function(p)p$expression_confirmed&&p$expression_basis=="typing_based_assumption"&&p$experimental_expression_status=="not_verified_by_workflow",TRUE)))
+ saved<-jsonlite::read_json(file.path(a$output_dir,"result.json"))
+ expect_identical(saved$presenter_summary,x$result$presenter_summary)
+ table<-utils::read.delim(file.path(a$output_dir,"presenter_summary.tsv"),check.names=FALSE)
+ expect_true(all(table$expression_basis=="typing_based_assumption"&table$experimental_expression_status=="not_verified_by_workflow"))
  expect_equal(x$result$group_summary[[1]]$complete_count,20L)
  expect_setequal(unique(vapply(x$result$locus_summary,`[[`,"","locus")),ie_loci())
  expect_true(all(vapply(x$result$candidates,function(c)length(c$origin_ids)==13L,TRUE)))
@@ -147,4 +153,25 @@ test_that("official four-digit protein names stay exact and unsupported is not z
  a$presenters<-list(list(pair="DPA1*02:02~DPB1*1033:01",pairing="explicit_expressed",expression_confirmed=TRUE))
  x<-expanded_call(a);expect_identical(x$status,"INCOMPLETE");expect_identical(x$plan$presenters[[1]]$status,"unsupported")
  expect_null(x$result$group_summary[[1]]$complete_count);expect_false(x$manifest$real_predictor_executed)
+})
+
+
+test_that("typing-based DR eligibility is not experimental expression confirmation",{
+ typing<-ie_typing(list(DRA="DRA*01:01",DRB1="DRB1*01:01"),c("DRA","DRB1"),"recipient")
+ automatic<-ie_presenters(NULL,typing,"dr-expanded-v1")[[1]]
+ expect_identical(automatic$status,"eligible")
+ expect_true(automatic$expression_confirmed) # Existing analysis admission stays intact.
+ expect_identical(automatic$expression_basis,"typing_based_assumption")
+ expect_identical(automatic$experimental_expression_status,"not_verified_by_workflow")
+ declaration<-list(pair="DRA*01:01~DRB1*01:01",pairing="explicit_DR_single_alpha",
+   expression_confirmed=TRUE,evidence="User-supplied assay claim; not verified here")
+ explicit<-ie_presenters(list(declaration),typing,"dr-expanded-v1")[[1]]
+ expect_identical(explicit$expression_basis,"user_declaration")
+ expect_identical(explicit$experimental_expression_status,"not_verified_by_workflow")
+ expect_identical(explicit$evidence,declaration$evidence)
+ expect_identical(explicit[c("presenter","vendor","pairing","status","expression_confirmed")],automatic[c("presenter","vendor","pairing","status","expression_confirmed")])
+ declaration$expression_confirmed<-FALSE
+ unconfirmed<-ie_presenters(list(declaration),typing,"dr-expanded-v1")[[1]]
+ expect_identical(unconfirmed$status,"expression_unconfirmed")
+ expect_identical(unconfirmed$experimental_expression_status,"not_verified_by_workflow")
 })
