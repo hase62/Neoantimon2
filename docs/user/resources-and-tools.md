@@ -131,7 +131,7 @@ Provider values preserve their own units/tasks/scopes; they are not interchangea
 | --- | --- | --- | --- |
 | NetMHCpan | Local Class I binding/EL execution via `predictors` | Standard 4.1/4.2 EL/BA output families, including detected patch suffixes; explicit `executable` or PATH. Adapter lengths 8–14, supported A/B/C syntax. Optional newer transfer-learning modes are not requested | Manual official DTU acquisition/registration/license; no vendor redistribution |
 | NetMHCIIpan, somatic adapter | Local Class II binding/EL execution | 4.3 family; explicit alpha~beta presenter; `executable` or PATH, adapter lengths 9–25 | Manual official DTU acquisition/license |
-| NetMHCIIpan, indirect-HLA import | Import externally executed BA evidence; **no local indirect predictor runner** | **3.2-family BA**, pinned build/model/query/result identity, `indirect_hla$provider$path`. 4.x EL is not a substitute | Authorized manual provider acquisition/execution; supply provenance, not redistributed binaries/models |
+| NetMHCIIpan, indirect-HLA | Import or opt-in [`neo_indirect_autorun()`](indirect-autorun.md) with explicit licensed executable/model/reference | **4.3k BA standard**, explicit **3.2-family BA legacy**; separate profile/contract, pinned build/model/query/result identity. 4.3k EL is retained but never substituted for BA nM | Authorized manual provider acquisition/execution; supply provenance, not redistributed binaries/models |
 | MHCflurry | Local Class I binding/presentation CSV adapter | 2.x; `executable` (`mhcflurry-predict`) and explicit nonempty `model_path`; lengths 8–15. Binding-only option restricted to binding task | User installs package/models via provider instructions and terms; not downloaded by the public-resource script |
 | ANNOVAR / VEP | Event-table imports only | `somatic_annovar`/`germline_annovar`, or supported VEP roles; user supplies output path/version/build. No annotation runner | ANNOVAR registration/license/personal links remain manual. Follow VEP's official installation/data terms externally |
 | FACETS | Copy-number `cncf` import | `somatic_evidence` kind `facets_cn`, output `path`, source version and `reference_build`; no FACETS execution | User-generated output; provider software acquired separately under its terms |
@@ -157,3 +157,5 @@ provider needs an account, email registration, license acceptance or credentials
 complete that process manually. Keep vendor binaries/models intact; Neoantimon2
 compatibility belongs in its own wrappers. Never put credentials in committed
 configuration, shared reports or acquisition metadata.
+
+The optional [expanded class II wrapper](indirect-class2.md) can explicitly acquire a pinned official IPD protein cache, then run an already licensed local 4.3k installation. It never downloads the predictor or weights, and does not redistribute processed reference data.

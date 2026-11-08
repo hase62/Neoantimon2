@@ -42,8 +42,8 @@ indirect_result_collection <- function(contexts) {
   list(schema_version = "indirect-hla-result-1.0.0", specification_id = "neo-allo-indirect-spec-0.1",
     official_reproduction = FALSE, aggregation = "separate_contexts_no_patient_aggregate", contexts = contexts)
 }
-indirect_public_result <- function(x, foundation) indirect_result_collection(lapply(x$contexts,
-  function(context) indirect_result_context(x, foundation, context)))
+indirect_public_result <- function(x, foundation) ia43_public(indirect_result_collection(lapply(x$contexts,
+  function(context) indirect_result_context(x, foundation, context))), x)
 
 indirect_reconciliation <- function(context) {
   units <- context$baseline_units
@@ -257,7 +257,7 @@ indirect_graph_integrity <- function(graph) {
   # Check embedded semantic references as well as materialized graph edges.
   namespaces <- c("allo-context-id-v1", "hla-source-sequence-id-v1", "hla-source-occurrence-id-v1",
     "indirect-peptide-occurrence-id-v1", "peptide_key", "candidate_key", "indirect-pmhc-id-v1",
-    "indirect-core-assignment-id-v1", "epitope_key", "self-comparison-id-v1", "indirect-evidence-id-v1",
+    "indirect-core-assignment-id-v1", "indirect43-core-presenter-id-v1", "epitope_key", "self-comparison-id-v1", "indirect-evidence-id-v1",
     "self-universe-id-v1", "allo-policy-id-v1", "allo-analysis-id-v1")
   values <- unlist(graph$nodes, recursive = TRUE, use.names = FALSE)
   references <- unique(values[grepl(paste0("^(", paste(namespaces, collapse = "|"), "):[0-9a-f]{64}$"), values)])
@@ -267,9 +267,9 @@ indirect_graph_integrity <- function(graph) {
 indirect_public_explanation <- function(x, foundation) {
   contexts <- indirect_explanation_contexts(lapply(x$contexts, function(c) indirect_explanation_context(x, foundation, c)))
   rows <- indirect_report_order(x$provider$rows, "evidence_id")
-  list(schema_version = "indirect-hla-explanation-1.0.0", specification_id = x$specification_id,
+  out <- list(schema_version = "indirect-hla-explanation-1.0.0", specification_id = x$specification_id,
     profile = x$profile, profile_version = x$profile_version, claim_boundary = x$claim,
-    official_reproduction = FALSE, contexts = contexts, compatibility = indirect_compatibility(),
+    official_reproduction = FALSE, contexts = contexts, compatibility = if (ia43_is_analysis(x)) ia43_compatibility() else indirect_compatibility(),
     provenance = list(reference = foundation$reference$provenance, provider = x$provider$provenance,
       provider_artifact = x$provenance,
       contexts = lapply(indirect_report_order(foundation$contexts, "allo_context_id"),
@@ -280,6 +280,7 @@ indirect_public_explanation <- function(x, foundation) {
         function(o) list(hla_source_occurrence_id = o$hla_source_occurrence_id, resolution_provenance = o$resolution_provenance)),
       evidence = lapply(rows, function(r) r[c("evidence_id", "raw_output", "raw_output_alternatives", "provenance")])),
     limitations = x$limitations)
+  ia43_public(out, x)
 }
 indirect_explanation_contexts <- function(contexts) {
   contexts <- indirect_report_order(contexts, "allo_context_id")

@@ -1,0 +1,3 @@
+# NetMHCIIpan version 4.3k
+Pos MHC Peptide Of Core Core_Rel Inverted Identity Score_EL %Rank_EL Exp_Bind
+25 HLA-DPA10202-DPB11901 NPISEFVKWYKSHKL 4 KYWKVFESI 1.000 1 Q5QFB9 0.600852 0.84 NA

@@ -37,7 +37,8 @@ indirect_binding <- function(x, base) {
 }
 indirect_config <- function(x, base = NULL) {
   allo_keys(x, c("version", "profile", "presenters", "provider"), label = "indirect baseline config")
-  if (x$version != "indirect-hla-baseline-1.0.0" || x$profile != indirect_profile())
+  if (!((x$version == "indirect-hla-baseline-1.0.0" && x$profile == indirect_profile()) ||
+      (x$version == "indirect-hla-netmhciipan43k-ba-1.0.0" && x$profile == ia43_profile())))
     stop("Unsupported literature-derived indirect-HLA profile")
   allo_records(x$presenters)
   for (p in x$presenters) {
@@ -46,6 +47,8 @@ indirect_config <- function(x, base = NULL) {
     if (p$resolution_policy != "explicit_typed_alpha_beta") stop("DRA resolution must be explicit; no inferred alpha chain")
   }
   x$provider <- indirect_binding(x$provider, base)
+  if (identical(x$profile, ia43_profile()) != identical(x$provider$manifest$provider$version, "4.3k"))
+    stop("Indirect profile and predictor contract disagree; 4.3k is not legacy 3.2 evidence")
   x
 }
 indirect_enabled <- function(project) !is.null(project$config$indirect_hla)

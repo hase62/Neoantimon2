@@ -40,7 +40,8 @@ indirect_provider_provenance <- function(x, p) {
 indirect_provider <- function(m) {
   if (is.null(m$provenance)) stop("Structured provider provenance is required")
   allo_keys(m, c("version", "provider", "rows", "provenance"), label = "indirect binding import")
-  if (m$version != "indirect-binding-import-1.0.0") stop("Unsupported indirect binding import version")
+  modern <- identical(m$version, ia43_import_version())
+  if (!modern && m$version != "indirect-binding-import-1.0.0") stop("Unsupported indirect binding import version")
   if ("provenance" %in% names(m) && (!is.list(m$provenance) || is.null(names(m$provenance))))
     stop("Provider provenance must be an object")
   p <- m$provider
@@ -48,12 +49,12 @@ indirect_provider <- function(m) {
     "supported_presenters", "supported_lengths", "calibration", "batching", "evidence_kind"), label = "pinned predictor")
   for (k in c("name", "version", "build", "model", "task", "prediction_mode", "species", "calibration", "batching", "evidence_kind"))
     p[[k]] <- allo_text(p[[k]], k)
-  if (p$name != "NetMHCIIpan" || !grepl("^3\\.2($|\\.)", p$version) ||
+  if (p$name != "NetMHCIIpan" || !(if (modern) identical(p$version, "4.3k") else grepl("^3\\.2($|\\.)", p$version)) ||
     !p$task %in% peptide_prediction_tasks() || p$task != "mhc2_binding" ||
     p$prediction_mode != "BA" || p$species != "NCBITaxon:9606")
     stop("Strict profile requires pinned NetMHCIIpan 3.2 binding-affinity evidence; other engines require a separately authorized profile")
   if (!p$evidence_kind %in% c("precomputed_predictor_output", "synthetic_fixture")) stop("Unknown imported evidence kind")
-  p$arguments <- indirect_provider_arguments(p$arguments)
+  p$arguments <- if (modern) ia43_arguments(p$arguments) else indirect_provider_arguments(p$arguments)
   provenance <- indirect_provider_provenance(m$provenance, p)
   p$supported_presenters <- allo_strings(p$supported_presenters, "provider presenter scope", TRUE)
   for (s in p$supported_presenters) {
@@ -65,7 +66,7 @@ indirect_provider <- function(m) {
     if (!is.numeric(n) || length(n) != 1L || is.na(n) || n != floor(n) || n < 1L) stop("Invalid supported peptide length")
     as.integer(n)
   }, 1L))))
-  config_id <- allo_id("policy", list(profile = indirect_profile(), provider = p))
+  config_id <- allo_id("policy", list(profile = if (modern) ia43_profile() else indirect_profile(), provider = p))
   rows <- lapply(allo_records(m$rows), function(r) {
     allo_keys(r, c("peptide_sequence", "presenter", "status", "affinity_nM", "percentile_rank", "cores", "raw_output", "reason_codes"),
       "provenance", "imported binding row", nullable = c("affinity_nM", "percentile_rank"))
@@ -96,6 +97,7 @@ indirect_provider <- function(m) {
         substring(r$peptide_sequence, c$offset + 1L, c$offset + 9L) != c$core_sequence) stop("Core does not map to full ligand")
       c
     }))
+    if (modern) ia43_validate_row(r)
     if ("provenance" %in% names(r)) {
       if (!is.list(r$provenance) || is.null(names(r$provenance))) stop("Row provenance must be an object")
       canonical_bytes(r$provenance)
@@ -108,7 +110,9 @@ indirect_provider <- function(m) {
   normalized <- lapply(sort(unique(queries), method = "radix"), function(q) {
     rr <- rows[queries == q]
     sem <- lapply(rr, function(r) r[setdiff(names(r), c("provenance", "raw_output"))])
-    if (length(unique(vapply(sem, canonical_bytes, ""))) != 1L) stop("Contradictory duplicate provider query")
+    checks <- if (modern) lapply(seq_along(rr), function(i) list(binding = sem[[i]],
+      metrics = if (rr[[i]]$status == "evaluated") ia43_row_metrics(rr[[i]]) else NULL)) else sem
+    if (length(unique(vapply(checks, canonical_bytes, ""))) != 1L) stop("Contradictory duplicate provider query")
     r <- sem[[1L]]
     r$evidence_id <- indirect_id("indirect-evidence-id-v1", list(target = r[c("peptide_sequence", "presenter")],
       dimension = "binding_affinity_and_core", provider_configuration_id = config_id,
@@ -118,7 +122,7 @@ indirect_provider <- function(m) {
     r$provenance <- allo_records(lapply(rr, function(z) if (is.null(z$provenance)) list() else z$provenance))
     r
   })
-  list(schema_version = "indirect-binding-import-1.0.0", semantics = p,
+  list(schema_version = m$version, semantics = p,
     provider_configuration_id = config_id, rows = allo_records(normalized),
     provenance = provenance)
 }
@@ -132,11 +136,11 @@ indirect_query <- function(provider, peptide, presenter) {
     raw_output_alternatives = list(),
     evidence_id = NULL, reason_codes = list("provider_query_unevaluable"), provenance = list())
 }
-indirect_primary <- function(row) {
+indirect_primary <- function(row, allow_reverse = FALSE) {
   primary <- Filter(function(c) c$primary, row$cores)
   if (length(primary) != 1L) return(list(status = "ambiguous", core = NULL, reason_codes = list("primary_core_ambiguous")))
   c <- primary[[1L]]
-  if (c$status != "evaluated" || c$orientation != "forward") return(list(status = "ambiguous", core = NULL,
+  if (c$status != "evaluated" || !(c$orientation == "forward" || (allow_reverse && c$orientation == "reverse"))) return(list(status = "ambiguous", core = NULL,
     reason_codes = list("primary_core_unresolved")))
   list(status = "evaluated", core = c, reason_codes = list())
 }

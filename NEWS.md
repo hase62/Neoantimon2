@@ -1,5 +1,36 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Clarify expanded indirect class II presenter expression metadata: automatic
+  DR uses a typing-based assumption; explicit inputs remain user declarations.
+  Neither is marked experimentally verified by the workflow. Preserve the
+  existing expression admission flag, eligibility and all counting rules.
+
+- Add optional `neo_indirect_class2()` with configured 13-locus donor/self
+  provenance, explicit absence/unknown states, DRB1/3/4/5 and separately scoped
+  exploratory DQ/DP pairing. Reuse strict 4.3k BA/core parsing and unchanged
+  legacy autorun; locally prepare pinned official IPD protein references with
+  completeness metadata and no sequence imputation. Reference/model assets are
+  not redistributed. These are research assumptions, not official PIRCHE parity.
+
+- Make NetMHCIIpan 4.3k the standard indirect autorun target, with explicit BA
+  execution, independent EL/BA metrics, orientation-aware primary-core/self
+  comparison and a separately versioned BA1000 assumption profile. Retain
+  the legacy 3.2 adapter/profile via predictor_version="3.2". Pin the official
+  platform layout/internal data link, use vendor temporary-directory templates,
+  and reject EL-only, wrong-version and incomplete outputs. No Frost or clinical
+  equivalence is claimed.
+
+- Add optional `neo_indirect_autorun()` v0.1 for explicit SOT donor-to-recipient
+  DRA~DRB1 workflows: pinned HLA reference, donor/self 15mer query planning,
+  authorized local NetMHCIIpan 3.2 BA execution/import, saved coverage/trace
+  and hash-checked completed-run resume. Existing molecular/counting contracts
+  and Native/External/Yield policies are reused unchanged. Includes explicit
+  mock-only integration; no real-provider or official PIRCHE parity claim.
+
+- Add an optional sourceable publication-workflow example composing existing
+  unique-peptide selection and Yield curves for model/set and explicit scenario
+  comparisons. No new public API or scientific scoring policy.
+
 - Add optional `neo_report_bundle()` with Event representatives per Native/exact external channel, complete peptide/pMHC/Origin links, and unchanged Experimental Yield tables (`result-report-0.1.0`). No scientific scoring or reconstruction changes.
 
 * Add optional Experimental Yield Estimation v0.1: independent A–D evidence

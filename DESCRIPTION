@@ -16,6 +16,6 @@ Description: Reconstructs genomic events, coding sequence origins, altered
 License: file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1.0)
-Imports: jsonlite, digest, stringi, yaml, xml2, tools
+Imports: jsonlite, digest, stringi, yaml, xml2, tools, utils
 Suggests: testthat (>= 3.0.0), jsonvalidate, pkgload, Rsamtools, GenomicRanges, IRanges
 Config/testthat/edition: 3

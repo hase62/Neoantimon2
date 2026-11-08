@@ -1,0 +1,346 @@
+{
+  "version": "hla-reference-1.0.0",
+  "status": "evaluated",
+  "reference_source": "synthetic_local_fixture",
+  "reference_release": "fixture-1",
+  "nomenclature_authority": "IPD-IMGT/HLA allele syntax only; synthetic fixture mapping",
+  "nomenclature_release": "synthetic-nomenclature-1",
+  "species": "NCBITaxon:9606",
+  "provider": {
+    "name": "vendored_fixture",
+    "version": "1.0.0"
+  },
+  "parser": {
+    "name": "literal_amino_acids",
+    "version": "1.0.0"
+  },
+  "coordinate_convention": "one_based_inclusive",
+  "isoform_policy": "explicit_mapped_isoforms",
+  "completion_policy": "none",
+  "sequence_policy": "precursor",
+  "records": [
+    {
+      "allele": "HLA-A*02:01",
+      "sequence_identifier": "synthetic:A*02:01",
+      "protein_sequence": "ACDEFGHIKLMNPQRSTVWY",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-B*07:02",
+      "sequence_identifier": "synthetic:B*07:02",
+      "protein_sequence": "ACDEFGHIKLMNPQRSTVWY",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-C*07:02",
+      "sequence_identifier": "synthetic:C*07:02",
+      "protein_sequence": "ACDEFGHIKLMNPQRSTVWY",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-DRB1*04:01",
+      "sequence_identifier": "synthetic:DRB1*04:01",
+      "protein_sequence": "ACDEFGHIKLMNPQRSTVWY",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-DQB1*03:01",
+      "sequence_identifier": "synthetic:DQB1*03:01",
+      "protein_sequence": "ACDEFGHIKLMNPQRSTVWY",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 20
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-A*01:01",
+      "sequence_identifier": "synthetic:A*01:01",
+      "protein_sequence": "ACDEFGHIKAAAAAA",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-B*08:01",
+      "sequence_identifier": "synthetic:B*08:01",
+      "protein_sequence": "ACDEFGHIKAAAAAA",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-C*07:01",
+      "sequence_identifier": "synthetic:C*07:01",
+      "protein_sequence": "ACDEFGHIKAAAAAA",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-DRB1*01:01",
+      "sequence_identifier": "synthetic:DRB1*01:01",
+      "protein_sequence": "ACDEFGHIKAAAAAA",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-DQB1*02:01",
+      "sequence_identifier": "synthetic:DQB1*02:01",
+      "protein_sequence": "ACDEFGHIKAAAAAA",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    },
+    {
+      "allele": "HLA-DRA*01:01",
+      "sequence_identifier": "synthetic:DRA*01:01",
+      "protein_sequence": "ACDEFGHIKAAAAAA",
+      "sequence_status": "complete",
+      "supported": true,
+      "protein_definition": "synthetic_indirect_hla_mechanics",
+      "isoform": "fixture_isoform_1",
+      "coordinate_map": {
+        "sequence_coordinates": "precursor",
+        "precursor_start": 1,
+        "mature_start": null
+      },
+      "domains": [
+        {
+          "name": "full_precursor",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "covered_regions": [
+        {
+          "name": "known",
+          "start": 1,
+          "end": 15
+        }
+      ],
+      "resolution_provenance": "synthetic_fixture_mapping; not an actual IPD protein"
+    }
+  ],
+  "provenance": {
+    "license": "synthetic test data",
+    "source_url": "repository fixture; no external lookup"
+  }
+}

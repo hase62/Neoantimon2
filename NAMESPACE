@@ -24,3 +24,9 @@ export(neo_yield_evidence)
 S3method(plot,neo_experimental_yield)
 
 export(neo_report_bundle)
+
+export(neo_indirect_autorun)
+
+export(neo_indirect_class2)
+
+importFrom(utils,tail)

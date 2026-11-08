@@ -308,7 +308,7 @@ The end-to-end path above is the recommended own-data guide. Open these only
 for the exact contract you need: [input roles](inputs.md), [setup options](setup.md),
 [resource/tool inventory](resources-and-tools.md), [result/grade rules](results-and-explain.md),
 [external schema/policies](external-predictions.md), [VCF scope](vcf-compatibility.md),
-[20 current / 16 released APIs](api-reference.md), [advanced workflows](workflows.md),
+[Public API reference](api-reference.md), [advanced workflows](workflows.md),
 [limits](methods-and-limitations.md) and [troubleshooting](troubleshooting.md).
 
 Longitudinal, vaccine-set and restricted indirect-HLA/allo workflows are distinct

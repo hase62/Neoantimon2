@@ -5,7 +5,7 @@ then follow the single authoritative [analysis playbook](docs/ai/ANALYSIS_PLAYBO
 Use the [manifest example](docs/ai/INPUT_MANIFEST.example.yaml) and
 [request examples](docs/ai/EXAMPLE_REQUESTS.md) as needed. Inspect existing inputs
 before asking questions; record the installed version/commit and preserve original data.
-The default development package has 20 APIs; immutable v0.3.0 has 16.
+This autorun development branch has 22 APIs; frozen cmpb-code-v1 has 20 and immutable v0.3.0 has 16.
 Use the version supporting the requested feature; never infer it from old logs.
 
 For repository maintenance, follow the user's requested scope. The playbook is
