@@ -1,3 +1,22 @@
+# Neoantimon2 Reproducibility Snapshot v1
+
+A versioned research reproducibility snapshot with supporting data and verification scripts.
+
+This fixed **20-API** development snapshot preserves the scientific implementation
+at `19152001c964bc2078c6d9b163365866f6a8b9d7`. This child commit changes only
+documentation. The immutable release `v0.3.0` has 16 APIs; current `main` has 22
+and additionally includes the later indirect-HLA autorun extensions.
+
+Download [Neoantimon2_Reproducibility_v1.zip](https://github.com/hase62/Neoantimon2/releases/download/reproducibility-v1/Neoantimon2_Reproducibility_v1.zip)
+from the [Reproducibility Snapshot pre-release](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1).
+It contains eight saved HCC1395 tables, exact source archives, checksums and
+standard-Python read-only verification scripts. GitHub's automatic source-code
+ZIP does not contain those result tables. See [snapshot instructions](REPRODUCIBILITY_SNAPSHOT.md).
+This is a research artifact, not a claim of submission, acceptance or publication
+in any particular journal. No predictor/model execution is required for replay.
+
+---
+
 # Neoantimon2
 
 Neoantimon2 is an R package for **somatic-variant-derived neoantigen reconstruction
