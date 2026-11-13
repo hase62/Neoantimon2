@@ -71,6 +71,8 @@ peptide_origin <- function(p, context, project, events, contract = peptide_contr
     sequence_certainty = "T009_DETERMINISTIC", translation_status = context$translation$status,
     isoform_source = "BOUND_REFERENCE", origin_validity = "VALID",
     origin_evidence_status = "NOT_EVALUATED",
+    origin_warning_codes = if (identical(peptide_phase_condition(context)$status,
+      "CONDITIONAL")) list("PHASE_UNCERTAIN") else list(),
     origin_evaluation_ref = paste0("intermediate/peptide_candidates.rds#", id),
     analysis_context = ct$context_id, source_protein_id = context$protein_id,
     origin_identity = identity)

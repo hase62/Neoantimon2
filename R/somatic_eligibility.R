@@ -8,6 +8,12 @@ somatic_eligibility_reason <- function(candidate_id,origin_id,event_id,code,fiel
 
 somatic_origin_eligibility <- function(path,candidate_id,event_index,policy) {
   reasons <- list(); criteria <- list(); dna_criteria <- list(); failures <- FALSE; missing <- FALSE
+  if (identical(path$phase_condition$status, "CONDITIONAL")) {
+    missing <- TRUE
+    reasons[[length(reasons)+1L]] <- somatic_eligibility_reason(candidate_id,
+      path$origin_id, NULL, "molecular_phase_not_resolved", "phase_condition",
+      path$phase_condition, "RESOLVED", "==", FALSE)
+  }
   ids <- unlist(path$somatic_event_ids)
   if (!length(ids)) {
     missing <- TRUE

@@ -1,5 +1,11 @@
 # Neoantimon2 0.3.0.9000 (development)
 
+- Integrate evaluated bounded molecular repairs: retain conditional phase provenance
+  and hold unresolved-only native support, include reached explicit-cis somatic
+  substitutions in bounded stop-loss extension, and omit empty Sec annotation IDs.
+  Preserve independently eligible Origin support, existing identity constructors,
+  all 22 public functions and the additional development workflows.
+
 - Retain superseded documentation snapshot commits in default-branch ancestry
   while preserving current content and immutable release/snapshot tags.
 

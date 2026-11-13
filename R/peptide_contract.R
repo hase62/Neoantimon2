@@ -41,9 +41,23 @@ peptide_sequence_validate <- function(sequence, nullable = FALSE) {
   invisible(TRUE)
 }
 
+# Phase certainty is conditional on the constructed molecular context. The
+# legacy phase_status is specifically the normal/germline background label.
+peptide_phase_condition <- function(context) {
+  conditional <- identical(context$phase_state, "BACKGROUND_UNKNOWN") ||
+    any(vapply(context$phase_context, function(x)
+      identical(x$relation, "UNKNOWN"), TRUE))
+  list(version = "molecular-phase-condition-1.0.0",
+    status = if (conditional) "CONDITIONAL" else "RESOLVED",
+    background_phase_state = context$phase_state,
+    phase_context = context$phase_context,
+    interpretation = "Sequence is deterministic conditional on the recorded context; background resolution does not resolve every somatic relationship")
+}
+
 peptide_translation_provenance <- function(context) {
   t <- context$translation
   list(translation_id = t$translation_id, reconstruction_id = context$reconstruction_id,
+    phase_condition = peptide_phase_condition(context),
     translation_system = t$translation_system,
     translation_exception_ids = as.list(t$translation_exception_ids),
     annotated_translation_exception_ids = as.list(t$spec$translation_exception_ids),

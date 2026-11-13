@@ -82,6 +82,18 @@ vaccine_eligibility <- function(p, policy) {
     any(vapply(p$origins, function(o) identical(o$origin_validity, "INVALID"), TRUE)) &&
     all(vapply(p$origins, function(o) identical(o$origin_validity, "INVALID"), TRUE))
   add("frozen_technical_validity", !invalid, r[c("final_grade", "technical_eligibility")])
+  conditional <- vapply(p$origins, function(o)
+    "PHASE_UNCERTAIN" %in% unlist(o$origin_warning_codes), TRUE)
+  if (any(conditional)) {
+    origin_checks <- p$evidence$somatic_evidence$eligibility$origin_results
+    supported <- if (length(origin_checks))
+      any(vapply(origin_checks, function(o) identical(o$status, "eligible"), TRUE)) else
+      any(!conditional & vapply(p$origins, function(o)
+        !identical(o$origin_validity, "INVALID"), TRUE))
+    add("molecular_phase_evaluable", supported,
+      "Conditional phase requires an independently eligible Origin; no unknown cis/trans combination is assumed",
+      !supported)
+  }
   ids <- c(p$candidate_id, p$candidate_key)
   if (length(policy$allowlist)) add("allowlist", any(ids %in% unlist(policy$allowlist)))
   if (length(policy$blocklist)) add("blocklist", !any(ids %in% unlist(policy$blocklist)))

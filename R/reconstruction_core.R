@@ -217,6 +217,66 @@ reconstruction_layer <- function(model, reference, rows) {
   list(status = "COMPLETE", cds = paste0(sequences, collapse = ""), edits = projected)
 }
 
+# Bounded stop-loss repair: only length-preserving, explicitly cis somatic
+# substitutions that translation actually reaches are admitted. Unresolved,
+# opposing, complex and germline extension peers remain under the T009 guard.
+reconstruction_stoploss_peers <- function(model, ref, group, normal_rows, rows) {
+  if (!is.null(ref$reason) || model$incomplete || model$contig == "chrM" ||
+      !nrow(model$stop_segments)) return(group)
+  substitution <- function(x) {
+    e <- reconstruction_edit_core(x)
+    !is.null(e) && !e$insertion && e$delta == 0L
+  }
+  if (!all(vapply(c(group, normal_rows), substitution, TRUE))) return(group)
+  ex <- translation_coordinates(model$exons, model$strand)
+  cds <- match(translation_coordinates(model$segments, model$strand), ex)
+  stop_pos <- match(translation_coordinates(model$stop_segments, model$strand), ex)
+  if (length(stop_pos) != 3L || anyNA(c(cds, stop_pos)) ||
+      !identical(as.integer(stop_pos), as.integer(max(cds) + 1:3))) return(group)
+  tx_model <- model; tx_model$segments <- model$exons
+  tx_ref <- list(forward = ref$exon_forward)
+  normal <- reconstruction_layer(tx_model, tx_ref, normal_rows)
+  if (normal$status != "COMPLETE" ||
+      !substring(normal$cds, min(stop_pos), max(stop_pos)) %in% c("TAA","TAG","TGA"))
+    return(group)
+  candidates <- Filter(function(x) {
+    if (!identical(x$contig, model$contig) ||
+        !identical(x$sample_id, group[[1L]]$sample_id) ||
+        !identical(x$event_role, "somatic") || !substitution(x)) return(FALSE)
+    e <- reconstruction_edit_core(x)
+    pos <- match(seq.int(e$start, e$end), ex)
+    !anyNA(pos) && all(pos > max(stop_pos)) &&
+      identical(reconstruction_project_edit(e, model$exons)$status, "PROJECTED")
+  }, rows)
+  repeat {
+    combined <- reconstruction_tumor_rows(normal_rows, group)
+    if (combined$status != "COMPLETE") return(group)
+    tumor <- reconstruction_layer(tx_model, tx_ref, combined$rows)
+    if (tumor$status != "COMPLETE" ||
+        substring(tumor$cds, min(stop_pos), max(stop_pos)) %in% c("TAA","TAG","TGA"))
+      return(group)
+    start <- min(cds); count <- (nchar(tumor$cds) - start + 1L) %/% 3L
+    if (count < 1L || substring(tumor$cds, start, start+2L) != "ATG") return(group)
+    protein <- reconstruction_translate(substring(tumor$cds, start, start+count*3L-1L))
+    first_stop <- regexpr("*", protein, fixed=TRUE)[[1L]]
+    end <- if (first_stop > 0L) start + first_stop*3L-1L else nchar(tumor$cds)
+    admitted <- Filter(function(x) {
+      if (x$event_id %in% vapply(group, `[[`, "", "event_id")) return(FALSE)
+      e <- reconstruction_edit_core(x); pos <- match(seq.int(e$start, e$end), ex)
+      all(pos <= end) && all(vapply(group, function(anchor)
+        identical(phase_relative_events(rows, anchor$event_id, x$event_id)$relation,
+          "SAME_HAPLOTYPE"), TRUE))
+    }, candidates)
+    if (!length(admitted)) return(group)
+    # Pairwise consistency is mandatory; do not close a contradictory phase graph.
+    pair <- c(group, admitted)
+    for (a in pair) for (b in pair) if (a$event_id != b$event_id &&
+      !identical(phase_relative_events(rows,a$event_id,b$event_id)$relation,
+        "SAME_HAPLOTYPE")) return(group)
+    group <- pair
+  }
+}
+
 reconstruction_context_id <- function(analysis_id, sample_id, transcript_id, germline_ids,
                                       somatic_ids, phase_state, phase_context) {
   paste0("reconstruction:", digest::digest(charToRaw(canonical_bytes(list(
@@ -396,10 +456,13 @@ reconstruction_contexts <- function(project, bundle, rows) {
         opposite = spec$opposite, sole_both = spec$sole_both)
       for (background in backgrounds) {
       normal_rows <- background$rows
+      group <- reconstruction_stoploss_peers(model, ref, spec$events, normal_rows, rows)
       phase_state <- background$phase_state
       germ_ids <- sort(vapply(normal_rows, `[[`, "", "event_id"), method = "radix")
       som_ids <- sort(vapply(group, `[[`, "", "event_id"), method = "radix")
-      phase_rows <- relevant[order(vapply(relevant, `[[`, "", "event_id"), method = "radix")]
+      phase_rows <- c(relevant, Filter(function(x) !x$event_id %in%
+        vapply(relevant, `[[`, "", "event_id"), group))
+      phase_rows <- phase_rows[order(vapply(phase_rows, `[[`, "", "event_id"), method = "radix")]
       phase_context <- lapply(phase_rows, function(x) list(event_id = x$event_id,
         relation = if (reconstruction_homozygous(x)) "BOTH" else
           if (x$event_id %in% som_ids) "SAME_HAPLOTYPE" else
@@ -470,10 +533,10 @@ reconstruction_contexts <- function(project, bundle, rows) {
           result$reason <- "CDS_TERMINAL_BOUNDARY_INTERSECTION"
         } else {
           normal_cds <- reconstruction_layer(model, ref,
-            Filter(function(x) !touches_stop(x), normal_rows))
+            Filter(function(x) touches_cds(x) && !touches_stop(x), normal_rows))
           tumor_cds <- if (tumor_rows$status == "COMPLETE")
             reconstruction_layer(model, ref,
-              Filter(function(x) !touches_stop(x), tumor_rows$rows)) else
+              Filter(function(x) touches_cds(x) && !touches_stop(x), tumor_rows$rows)) else
               list(status = tumor_rows$status)
           result$patient_normal_cds <- normal_cds$cds
           result$tumor_cds <- tumor_cds$cds
