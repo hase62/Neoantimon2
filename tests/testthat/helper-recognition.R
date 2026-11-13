@@ -80,10 +80,13 @@ recognition_gold_project <- function() {
     executable = recognition_mock_presentation_executable("netmhcpan"), options = list()),
     list(provider = "netmhciipan", task = "mhc2_presentation",
       executable = recognition_mock_presentation_executable("netmhciipan"), options = list()))
+  # Numerical-grade invariance is conditioned on explicit opposite haplotypes.
+  # Unknown phase remains a separate held-support control.
   path <- tempfile(fileext = ".vcf")
   writeLines(c("##fileformat=VCFv4.2", "##FORMAT=<ID=GT,Number=1,Type=String,Description=Genotype>",
+    "##FORMAT=<ID=PS,Number=1,Type=String,Description=Explicit synthetic phase>",
     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tsample-1",
-    "chrW\t4\t.\tA\tG\t.\tPASS\t.\tGT\t0/1", "chrW\t13\t.\tA\tG\t.\tPASS\t.\tGT\t0/1"), path)
+    "chrW\t4\t.\tA\tG\t.\tPASS\t.\tGT:PS\t0|1:resolved-gold", "chrW\t13\t.\tA\tG\t.\tPASS\t.\tGT:PS\t1|0:resolved-gold"), path)
   inputs <- list(list(input_id = "recognition-gold-vcf", input_role = "somatic_vcf", sample_id = "sample-1", path = path))
   hla <- list("patient-1" = c("HLA-A*02:01", "HLA-DRA*01:01~HLA-DRB1*04:01"))
   pre <- neo_project(samples = base$samples, config = cfg, hla = hla, inputs = inputs)

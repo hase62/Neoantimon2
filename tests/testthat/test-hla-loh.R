@@ -373,13 +373,16 @@ hla_loh_mock_predictor <- function(provider) {
   path
 }
 
-test_that("frozen gold priority and identity survive HLA LOH attachment", {
+test_that("resolved-trans frozen gold priority and identity survive HLA LOH attachment", {
+  # Numerical grade-invariance fixture explicitly declares separate haplotypes.
+  # The original unphased baseline source remains immutable; unknown native support is separately tested.
   vcf <- tempfile(fileext=".vcf")
   writeLines(c("##fileformat=VCFv4.2",
     "##FORMAT=<ID=GT,Number=1,Type=String,Description=Genotype>",
+    "##FORMAT=<ID=PS,Number=1,Type=String,Description=Explicit synthetic phase>",
     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tsample-1",
-    "chrW\t4\t.\tA\tG\t.\tPASS\t.\tGT\t0/1",
-    "chrW\t13\t.\tA\tG\t.\tPASS\t.\tGT\t0/1"),vcf)
+    "chrW\t4\t.\tA\tG\t.\tPASS\t.\tGT:PS\t0|1:resolved-gold",
+    "chrW\t13\t.\tA\tG\t.\tPASS\t.\tGT:PS\t1|0:resolved-gold"),vcf)
   base <- reconstruction_test_project(); cfg <- base$config
   cfg$peptides <- peptide_test_policy(8L,9L)
   cfg$predictors <- list(list(provider="netmhcpan",task="mhc1_presentation",

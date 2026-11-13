@@ -234,12 +234,11 @@ test_that("extension variants outside T008 context are recorded, not ignored", {
   downstream <- reconstruction_test_row("extension", "chrF", 41L, "C", "T",
                                         side = "LEFT")
   same <- t009_one(list(stop, downstream), "TF.1")
-  expect_identical(same$translation$status, "UNRESOLVED")
-  expect_identical(same$translation$reason,
-                   "EXTENSION_EVENT_OUTSIDE_T008_HAPLOTYPE")
-  expect_identical(same$translation$extension_event_ids, "extension")
-  expect_identical(same$translation$extension_event_statuses[["extension"]],
-                   "KNOWN_SAME_HAPLOTYPE")
+  expect_identical(same$translation$status, "EVALUABLE")
+  expect_identical(same$translation$mutant_protein, "MKPGKPGKPQSG")
+  expect_setequal(same$somatic_event_ids, c("stop", "extension"))
+  expect_identical(same$translation$mutant_stop_origin, 37:39)
+  expect_length(same$translation$extension_event_ids, 0L)
   downstream$event_details_json$phase_assertions <- list()
   unknown <- t009_one(list(stop, downstream), "TF.1")
   expect_identical(unknown$translation$reason, "EXTENSION_PHASE_UNRESOLVED")

@@ -17,13 +17,16 @@ priority_mock_executable <- function(provider) {
   path
 }
 
-test_that("gold project runs through final result and explanation artifacts", {
+test_that("resolved-trans gold project runs through final result and explanation artifacts", {
+  # This numerical-grade regression now explicitly declares opposite haplotypes.
+  # Unknown-only eligibility is exercised separately by bounded-repair/public controls.
   vcf <- tempfile(fileext=".vcf")
   writeLines(c("##fileformat=VCFv4.2",
     "##FORMAT=<ID=GT,Number=1,Type=String,Description=Genotype>",
+    "##FORMAT=<ID=PS,Number=1,Type=String,Description=Explicit synthetic phase>",
     "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tsample-1",
-    "chrW\t4\t.\tA\tG\t.\tPASS\t.\tGT\t0/1",
-    "chrW\t13\t.\tA\tG\t.\tPASS\t.\tGT\t0/1"),vcf)
+    "chrW\t4\t.\tA\tG\t.\tPASS\t.\tGT:PS\t0|1:resolved-gold",
+    "chrW\t13\t.\tA\tG\t.\tPASS\t.\tGT:PS\t1|0:resolved-gold"),vcf)
   base <- reconstruction_test_project()
   cfg <- base$config
   cfg$peptides <- peptide_test_policy(8L,9L)

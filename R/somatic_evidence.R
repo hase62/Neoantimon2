@@ -416,6 +416,7 @@ somatic_candidate_links <- function(candidates,origins,peptides,event_evidence,e
       has_expression_source <- any(vapply(sources,function(x)
         x$kind=="expression" && x$sample_id==candidate$sample_id,TRUE))
       list(origin_id=id,peptide_id=origin$sample_peptide_id,
+        phase_condition=peptide$provenance$phase_condition,
         reconstruction_ids=as.list(sort(unique(vapply(peptide$provenance_occurrences,
           `[[`,"","reconstruction_id")),method="radix")),
         translation_id=origin$sequence_context_id,

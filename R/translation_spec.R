@@ -110,8 +110,8 @@ translation_specification <- function(model, context, bundle, protein_catalog,
   basic$terminal_completion <- terminal_completion
   basic$sec_aa_positions <- sec_aa
   basic$sec_tx_positions <- sec_tx
-  basic$translation_exception_ids <- paste0("GENCODE_SEC:", context$transcript_id,
-                                            ":", sec_aa)
+  basic$translation_exception_ids <- if (length(sec_aa))
+    paste0("GENCODE_SEC:", context$transcript_id, ":", sec_aa) else character()
   basic$spec_id <- paste0("translation_spec:", digest::digest(charToRaw(canonical_bytes(list(
     policy = translation_policy(), transcript_id = context$transcript_id,
     protein_id = context$protein_id, reference_identity = bundle$resource_identity,
