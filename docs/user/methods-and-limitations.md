@@ -19,9 +19,11 @@ subject-scoped longitudinal summaries,
 deterministic lexicographic vaccine-set selection, and the strict
 literature-derived indirect-HLA profile have separate contracts. The selection
 heuristic is not a global optimum. Indirect-HLA is not an official PIRCHE
-implementation: its strict profile retains DRA~DRB1 presenters, contiguous 15-mers,
+implementation: its legacy strict profile retains DRA~DRB1 presenters, contiguous 15-mers,
 9-aa core self comparison, and strict `<1000 nM` BA evidence. Incomplete scope
-has a null complete count. See [supported workflows](workflows.md) for details.
+has a null complete count. Current main also has explicit DRB1/3/4/5 and separate
+exploratory DQ/DP workflows; see the [class II guide](indirect-class2.md).
+No official PIRCHE numerical or clinical equivalence is established.
 
 External analysis requires a completed local `neo_project`; an exported bundle
 alone cannot execute downstream analysis. Standardized predictions support
@@ -44,12 +46,28 @@ Acquire licensed tools and reference data separately under their provider terms;
 see [resources and tools](resources-and-tools.md). The software citation is not a
 peer-reviewed Neoantimon2 validation publication.
 
+## Molecular reconstruction boundaries
+
+A generated sequence is conditional on its recorded phase and transcript context.
+The normal/germline-background label is distinct from uncertainty among somatic
+Events. Current main retains conditional support and holds native admission when
+no independently eligible Origin remains. Sequence deduplication does not discard
+that distinction or alternate Origins. See [native support interpretation](results-and-explain.md#molecular-conditions-and-native-support).
+
+Stop-loss handling is bounded to reached explicit-cis, length-preserving somatic
+substitutions under a complete standard nuclear extension; general UTR, indel,
+complex germline and unknown-phase enumeration are not implied. Annotated Sec
+sites and exceptions actually used are separate. The [bounded repair contract](../developer/bounded-repair.md)
+identifies source and regression tests. These current-main repairs do not rewrite
+historical saved outputs or change either immutable tag.
+
 ## Development evidence and planning boundaries
 
 The default branch includes later [versioned software/data evidence](../development/validation-evidence.md)
 and optional [yield planning](experimental-yield.md) / [complete reporting](result-reporting.md).
-These do not revise historical release validation, Native Grades, raw prediction
-semantics or molecular identities. A–D/B1/B2 are descriptive evidence labels;
+Yield and reporting do not rewrite historical results or overwrite Native Grades
+and predictor measurements. Molecular eligibility follows the explicit current-main
+conditions above. A–D/B1/B2 are descriptive evidence labels;
 scenario probabilities are assumptions and independent outcomes are not assured.
 Reporting representatives retain every alternative; joint multi-Event Origins
 are not independent single-Event causal experiments. No clinical or experimental

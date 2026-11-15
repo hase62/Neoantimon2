@@ -1,7 +1,10 @@
 # Documentation: choose the depth you need
 
 **Choose a version first:** [v0.3.0 (16 APIs), reproducibility-v1 (20), or main (22)](../README.md#choose-a-version).
-Main includes the integrated indirect-HLA workflows; the immutable tags do not.
+Main includes the integrated indirect-HLA workflows and
+[bounded molecular-condition repairs](developer/bounded-repair.md); the immutable
+tags do not. [Public snapshot and additional replay scope](user/reproducibility.md#current-main-and-additional-replay-materials)
+are distinct.
 
 **1. Understand and start:** the [five-minute offline Quick Start](../README.md#quick-start)
 needs no predictor or genome download after installation. For indirect-HLA work,
@@ -26,7 +29,7 @@ reading chain.
 | Accepted files, sample/HLA declarations and configuration | [Inputs](user/inputs.md) |
 | Which VCF features are supported/rejected? | [VCF compatibility](user/vcf-compatibility.md) |
 | Resource/tool identities and advanced acquisition | [Resources](user/resources-and-tools.md), [R setup](user/setup.md) |
-| Result fields, missingness, grades and ranks | [Results](user/results-and-explain.md) |
+| Result fields, molecular conditions, missingness, grades and ranks | [Results](user/results-and-explain.md) |
 | Standard external TSV, policies and execution consent | [External contract](user/external-predictions.md) |
 | Indirect HLA: 13 sources, DRB1/3/4/5 and explicit exploratory DQ/DP | [Class II workflow](user/indirect-class2.md) |
 | Existing five-source DRB1 runner, 4.3k or explicit 3.2 | [Standalone autorun](user/indirect-autorun.md) |

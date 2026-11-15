@@ -78,6 +78,41 @@ negative. Unknown receptor pairing, missing RNA and unresolved self-search scope
 remain unknown. A run's completion describes execution, not complete biological
 evaluability across every optional evidence family.
 
+## Molecular conditions and native support
+
+On current main, an Origin's `phase_status` reflects its normal/germline-background
+state. Somatic relationships are retained separately in `phase_context`;
+exported peptide `provenance.phase_condition` records `CONDITIONAL` or `RESOLVED`
+and the supporting context. `T009_DETERMINISTIC` means that the sequence is
+deterministic **given that context**, not that every phase relationship is known.
+`origin_warning_codes` includes `PHASE_UNCERTAIN` for conditional support.
+Unknown cis/trans combinations are not exhaustively enumerated.
+
+When somatic eligibility is evaluated, inspect the per-Origin reasons rather
+than interpreting a favorable prediction score as molecular support:
+
+| Available support for a candidate | Native eligibility and selection |
+| --- | --- |
+| At least one independently eligible Origin | Eligible support is retained even if other Origins are ineligible or conditional |
+| Every Origin is ineligible | Candidate is ineligible for native admission |
+| Only conditional/unavailable support remains, with no eligible Origin | `not_evaluated`; native admission is held, not converted into a negative prediction |
+
+A hard DNA failure remains a failure even when phase is also uncertain.
+The reason `molecular_phase_not_resolved` identifies conditional molecular support;
+optional vaccine selection consumes the support decision. These decisions do not
+remove the original Event/Origin/candidate records or their links. External
+`external_rank` orders its selected measured channel; it is not a native
+eligibility decision and does not resolve unknown phase.
+
+Current stop-loss support admits only reached, length-preserving somatic
+substitutions with explicit cis relationships in a complete standard nuclear
+extension. It does not add trans or unknown peers, an exhaustive haplotype engine,
+or general UTR/indel/complex-germline support. Sec provenance distinguishes
+annotated translation exceptions from those actually used; empty Sec positions
+produce no annotation IDs. See the [bounded contract and source references](../developer/bounded-repair.md).
+These repairs are not in the immutable release/snapshot, and legacy saved
+metadata is not automatically relabelled or rewritten.
+
 ## Somatic grades and ranking
 
 Quantitative somatic evidence enables the existing technical eligibility and
