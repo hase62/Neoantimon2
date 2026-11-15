@@ -4,7 +4,7 @@
 [Scientific limitations](../user/methods-and-limitations.md)
 
 This page distinguishes historical scientific/software evidence from fresh
-integration testing. Counts below are transcribed from machine-readable primary
+integration testing. The historical inventory table is transcribed from machine-readable primary
 receipts whose exact byte hashes and revision anchors are in the
 [compact inventory](validation-evidence.json). They are not new runs performed
 during README/repository integration. A package test assertion is not an
@@ -30,6 +30,37 @@ adapter (`indel_exon_boundary`), unknown actual germline background
 (`stoploss_extension_snv`). They are not silently promoted to unconditional PASS.
 The underlying historical inventory contains 49 primary, two secondary and three
 fusion cases, plus eight auxiliary comparison rows; these denominators are distinct.
+
+## Current molecular-repair integration
+
+[PR #9](https://github.com/hase62/Neoantimon2/pull/9) integrated the bounded repairs
+at merge `0fa9af969e3a0e812c2b4ff5efbbc9c1822d858a`, with tested candidate
+`2aa579df884b3f5a5141cef4a562823748614bda`. Its public PR records 2,992 related
+source assertions, 12,491 installed assertions with one expected repository-only
+example skip, and normal `R CMD check --no-manual` with zero errors, warnings and
+notes. The unchanged repository-only example separately passed 12 assertions.
+The recorded R environment was 4.5.1; a testthat build-under-R-4.5.2 startup warning
+was retained separately from assertion/check warning counts. These are historical
+integration receipts, not newly executed tests during a documentation update,
+CI success or independent experimental validation.
+
+The same integration recorded 2,004 fixed-value checks in an 18-condition
+comparison, six additional conditions / 946 checks and R09 initial/fresh query
+checks of 45 / 49. The current-source side executed 18 conditions (17 completed
+projects and one intentional invalid-Sec input rejection); the earlier baseline
+side reused its separately recorded executions. These are condition/check units,
+not independent patients. The first integration harness rejected the correctly
+installed 22-API source because it required 20 exports; a source-specific API
+preflight adapter resolved that technical mismatch without changing biological
+inputs, control values or expected sequences. Initial failures were retained.
+
+R09 used controlled downstream input, native pVACtools binding/aggregate outputs
+and external queries. At that tested boundary, the available pVACtools full table
+and detailed JSON supported equivalent information queries. This does not show
+that another tool loses provenance, nor a full pVACseq reconstruction, predictor
+inference or clinical advantage. See [repair behavior](../developer/bounded-repair.md)
+and [public versus author-held replay scope](../user/reproducibility.md#current-main-and-additional-replay-materials).
+The historical evidence inventory above has not been reassigned to this revision.
 
 ## Source and experimental boundaries
 
@@ -60,13 +91,15 @@ have separate meanings.
 
 The public source includes automated synthetic fixtures and installed examples.
 Use the [package validation commands](../user/reproducibility.md), not a new full
-HCC1395 run, to check an integration. Historical test counts are versioned receipts;
-see the integration review for the newly executed source/installed/check results.
+HCC1395 run, to check an integration. Historical test counts are versioned receipts; see the
+[recorded repair integration](#current-molecular-repair-integration) for its
+source/installed/check scope, not a new run during documentation changes.
 
 Large references, licensed models, original scientific projects and experimental
 reference databases are intentionally outside Git. The local audit locators in
 the inventory identify owner-held receipts, not publicly downloadable archives.
-The compact inventory is not a substitute for those originals. Before a scientific
-submission, archive a fixed source revision and redistributable inputs/results,
-make full reproduction recipes accessible, and resolve remaining evidence/access
-limitations. No new release, DOI or scientific-publication claim is made here.
+The compact inventory is not a substitute for those originals. The [public fixed snapshot](../user/reproducibility.md#snapshot-saved-result-reproduction)
+provides the scoped eight-table reaggregation; it does not provide every historical
+project or the additional author-held replay archives. Remaining recipe/access
+and redistribution decisions must be resolved separately. No new release, DOI
+or scientific-publication claim is made here.

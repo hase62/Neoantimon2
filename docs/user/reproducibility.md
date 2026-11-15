@@ -58,6 +58,29 @@ Independent scripts are MIT and author-owned explanatory materials CC BY 4.0;
 Core/Converter remain PolyForm Noncommercial and scientific/third-party data
 retain their own terms. See the package's LICENSES/SCOPE.md and NOTICE.md.
 
+## Current main and additional replay materials
+
+The public snapshot above remains the historical eight-table saved-result
+reaggregation. Its code and data are unchanged by the later
+[molecular repairs](../developer/bounded-repair.md) integrated in
+[PR #9](https://github.com/hase62/Neoantimon2/pull/9), merge
+`0fa9af969e3a0e812c2b4ff5efbbc9c1822d858a`.
+
+Current main has 22 APIs and public regression tests. The earlier evaluated
+20-export repair archive and the separate 18-condition, six-condition and R09
+replay packages are author-held materials, not assets of `reproducibility-v1`
+and not separately deposited here. Do not use the snapshot download as a link
+to those packages or claim that it reruns current main. Their publication and
+licensing require a separate decision; no private download URL is provided.
+
+Reconstructing fresh small projects, reopening saved projects and reaggregating
+saved TSVs are different operations. The [versioned validation page](../development/validation-evidence.md#current-molecular-repair-integration)
+labels the code/revision and recorded scope of the repair checks. A historical
+54-case oracle result or full HCC1395 saved-graph count is not evidence that the
+entire analysis was rerun on every later main commit. A documentation-only merge
+changes the Git revision without changing the tested R implementation; record
+both the scientific-code baseline and the documentation revision when needed.
+
 ## Public source map
 
 | Location | Purpose |

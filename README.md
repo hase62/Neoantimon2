@@ -126,6 +126,12 @@ actual references/inputs before executing an analysis. Reference bundles are
 normally several GB; retain their full required scope and integrity. Class II candidate generation requires supported complete
 presenters, not an invented alpha partner.
 
+Current main retains the molecular conditions under which each sequence exists.
+A resolved normal/germline-background label does not establish every somatic
+phase relation. Conditional-only support stays unevaluated in native selection;
+see [molecular conditions and alternate-Origin decisions](docs/user/results-and-explain.md#molecular-conditions-and-native-support),
+including the bounded explicit-cis stop-loss and Sec annotation limits.
+
 Supported tumor VCF FORMAT evidence can supply DNA VAF without BAM or a manual
 Event-ID table. DNA BAM is optional fallback/verification; RNA BAM can supply
 variant-specific allele support. Expression is imported from external estimates;
@@ -335,7 +341,10 @@ See [download, SHA-256 and exact commands](docs/user/reproducibility.md#snapshot
 
 This is saved-result reaggregation, separate from molecular reconstruction,
 new predictor inference or a complete VCF-to-results rerun. The fixed snapshot
-has 20 APIs and does not include main's later indirect-HLA autorun extensions.
+has 20 APIs and does not include main's later indirect-HLA autorun extensions
+or [bounded molecular repairs](docs/developer/bounded-repair.md). Current source
+regression tests are public; separate author-held replay archives have not been
+deposited as a new public asset. See the [code/data availability boundaries](docs/user/reproducibility.md#current-main-and-additional-replay-materials).
 
 <a id="scientific-limitations"></a>
 ## Choose a version
@@ -344,11 +353,13 @@ has 20 APIs and does not include main's later indirect-HLA autorun extensions.
 | --- | ---: | --- |
 | [v0.3.0 — published release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) | 16 | The immutable released baseline; excludes later priority, Yield, reporting and indirect-autorun APIs |
 | [Reproducibility Snapshot — reproducibility-v1](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1) | 20 | Fixed research code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
-| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.0.9000**, including the integrated indirect-HLA extensions |
+| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.0.9000**, including current molecular-condition repairs, indirect-HLA extensions and offline reporting |
 
 Counts are the `export()` entries in each version's NAMESPACE, excluding S3
 methods/imports. Main and the fixed snapshot share a development version number;
 record the **commit as well as the package version**. Main is a moving branch.
+Later fixes are not backported into either immutable tag, and opening an older
+saved result does not silently reconstruct it with current code.
 
 ## Key capabilities
 
