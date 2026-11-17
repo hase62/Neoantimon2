@@ -66,12 +66,24 @@ reaggregation. Its code and data are unchanged by the later
 [PR #9](https://github.com/hase62/Neoantimon2/pull/9), merge
 `0fa9af969e3a0e812c2b4ff5efbbc9c1822d858a`.
 
-Current main has 22 APIs and public regression tests. The earlier evaluated
-20-export repair archive and the separate 18-condition, six-condition and R09
-replay packages are author-held materials, not assets of `reproducibility-v1`
-and not separately deposited here. Do not use the snapshot download as a link
-to those packages or claim that it reruns current main. Their publication and
-licensing require a separate decision; no private download URL is provided.
+Current main uses the **0.3.1.9000 development marker** and has 22 APIs and
+public regression tests. This marker is not a new release or an assertion that
+historical scientific evaluations ran on this revision.
+
+The author-held replay materials use a separately fixed **20-API** repair source.
+They include six restored conditions and R09 controlled downstream comparisons,
+and the later **MR11 v002** candidate with its pre-execution freeze, inputs,
+independent expectations and replay scripts. MR11 records nine sequence
+expectations, one unresolved-contract condition and one planned input rejection:
+ten exits of zero and one expected exit of one, 2,500 checks and four separate
+R readers. These units must not be reported as eleven sequence matches.
+The earlier 18-condition / 2,004-check history is distinct; its complete original
+replay inputs, independent expectations and driver remain unrecovered.
+
+These are private candidates awaiting a separate disclosure and licensing decision,
+not assets of `reproducibility-v1` or publicly deposited replay packages. The
+public snapshot does not rerun current main or these fixed-source studies.
+No private download URL or author-held input is distributed with this checkout.
 
 Reconstructing fresh small projects, reopening saved projects and reaggregating
 saved TSVs are different operations. The [versioned validation page](../development/validation-evidence.md#current-molecular-repair-integration)
@@ -118,7 +130,7 @@ testthat::test_local(".", reporter = "summary")
 
 ```sh
 R CMD build .
-R CMD check --no-manual --install-tests Neoantimon2_0.3.0.9000.tar.gz
+R CMD check --no-manual Neoantimon2_0.3.1.9000.tar.gz
 python3 scripts/development/test_public_data_acquisition.py
 ```
 
@@ -130,23 +142,29 @@ part of this package; the Registry client and synthetic integration fixtures are
 
 ## Development version and integration checks
 
-The default branch uses 0.3.0.9000 as an explicit R development marker; the
+The default branch uses 0.3.1.9000 as an explicit R development marker; the
 published v0.3.0 tag, source archive and release assets are immutable. This does
-not change scientific schema or identity versions. Record the Git revision as
+not change scientific schema or identity versions. Earlier development checkouts
+used 0.3.0.9000; their receipts and frozen archives retain that version. Record the Git revision as
 well as DESCRIPTION because earlier unpublished snapshots still reported 0.3.0.
 The sixteen released APIs remain compatible. The fixed snapshot adds four APIs
 (20 total); main adds both indirect-HLA runners (22 total). The complete
 [API reference](api-reference.md) and [version choices](../../README.md#choose-a-version)
 distinguish the three editions.
 
-After installing this source snapshot into an isolated library, run focused
+For a scientific implementation change, after installing into an isolated library, run focused
 `testthat::test_local()` filters `experimental-yield`, `result-reporting` and
 relevant provenance tests, then the full source suite. Build and run
-`R CMD check --no-manual --install-tests` for the full installed suite. The
+`R CMD check --no-manual` for the package test suite. `--install-tests` belongs to
+`R CMD INSTALL`, not `R CMD check`; use it when separately installing tests into
+a chosen library. The
 repository-only [AI acceptance script](../../scripts/development/validate_ai_playbook.R)
 checks the preserved baseline helper on the release or explicitly supported
 current development version. [Historical evidence](../development/validation-evidence.md)
-is distinct from a fresh integration test receipt.
+is distinct from a fresh integration test receipt. For metadata/documentation-only
+changes, use the existing link/metadata checks, isolated installation and small
+offline examples; run the standard package check once when required. Do not
+repeat costly historical molecular or predictor runs solely for a version label.
 
 The public R modules, tests/fixtures, man pages, runtime resources and installed
 examples retain their conventional paths. Supplementary guides remain in docs;

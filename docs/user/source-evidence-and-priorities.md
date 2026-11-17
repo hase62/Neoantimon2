@@ -1,6 +1,6 @@
 # Source-file evidence and numerical priorities (unreleased)
 
-These additions are in default-branch development version **0.3.0.9000**,
+These additions are in default-branch development version **0.3.1.9000**,
 not the immutable v0.3.0 tag.
 The 16 released function signatures and somatic Grade/rank algorithms are retained;
 `neo_priorities()` is one additional read-only accessor. Research use only.

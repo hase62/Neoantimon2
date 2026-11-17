@@ -353,11 +353,11 @@ deposited as a new public asset. See the [code/data availability boundaries](doc
 | --- | ---: | --- |
 | [v0.3.0 — published release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) | 16 | The immutable released baseline; excludes later priority, Yield, reporting and indirect-autorun APIs |
 | [Reproducibility Snapshot — reproducibility-v1](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1) | 20 | Fixed research code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
-| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.0.9000**, including current molecular-condition repairs, indirect-HLA extensions and offline reporting |
+| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.1.9000**, including current molecular-condition repairs, indirect-HLA extensions and offline reporting |
 
 Counts are the `export()` entries in each version's NAMESPACE, excluding S3
-methods/imports. Main and the fixed snapshot share a development version number;
-record the **commit as well as the package version**. Main is a moving branch.
+methods/imports. Main now uses 0.3.1.9000; the fixed snapshot retains 0.3.0.9000.
+Record the **commit as well as the package version**. Main is a moving branch.
 Later fixes are not backported into either immutable tag, and opening an older
 saved result does not silently reconstruct it with current code.
 

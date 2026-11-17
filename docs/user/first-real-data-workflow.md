@@ -19,7 +19,7 @@ R CMD INSTALL /path/to/Neoantimon2
 ```
 
 Restart R after installation. Record the exact source commit and any uncommitted
-changes; 0.3.0.9000 alone does not identify them. The immutable release/snapshot
+changes; 0.3.1.9000 alone does not identify them. The immutable release/snapshot
 do not contain this tutorial. Installing an older main/release cannot provide
 helpers absent from that revision.
 
