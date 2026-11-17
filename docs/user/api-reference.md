@@ -2,7 +2,7 @@
 
 [Documentation index](../README.md) · [Quickstart](getting-started.md)
 
-Current **main (0.3.0.9000) exports 22 APIs**, counted from NAMESPACE `export()`
+Current **main (0.3.1.9000) exports 22 APIs**, counted from NAMESPACE `export()`
 entries; S3 registrations and imports are not additional public functions.
 The immutable published **v0.3.0 has 16 APIs**. The frozen **reproducibility-v1 has
 20 APIs**, adding `neo_priorities`, `neo_experimental_yield`, `neo_yield_evidence`

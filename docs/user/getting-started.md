@@ -11,7 +11,7 @@ single-sample VCFs. Advanced input/analysis modes have their own contracts.
 
 ## Install and run the offline example
 
-Use R ≥ 4.1.0. Install main (0.3.0.9000, 22 APIs), then run the small example.
+Use R ≥ 4.1.0. Install main (0.3.1.9000, 22 APIs), then run the small example.
 For the immutable published release (16 APIs), set `ref = "v0.3.0"`; the fixed
 snapshot (20 APIs) uses `ref = "reproducibility-v1"`. Both development snapshots
 include priority/planning/reporting; only main includes the later indirect-HLA

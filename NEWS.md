@@ -1,3 +1,16 @@
+# Neoantimon2 0.3.1.9000 (development)
+
+- Advance the development identifier and synchronize current-version setup,
+  citation metadata and sourceable documentation-helper version admission.
+  This is not a 0.3.1 release; existing release and snapshot tags are unchanged.
+- Distinguish public eight-table reaggregation, author-held fixed 20-API replay
+  materials and the moving 22-API default branch. Record MR11 as nine sequence
+  expectations, one unresolved-contract condition and one planned input rejection;
+  its historical 18-condition predecessor remains a separate unrecovered scope.
+  No molecular replay or predictor inference was repeated for this metadata update.
+- Preserve package implementation, 22 public APIs, scientific identities, Native
+  and External policies, Yield mathematics and all frozen evaluated materials.
+
 # Neoantimon2 0.3.0.9000 (development)
 
 - Integrate evaluated bounded molecular repairs: retain conditional phase provenance

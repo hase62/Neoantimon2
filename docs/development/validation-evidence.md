@@ -54,6 +54,23 @@ installed 22-API source because it required 20 exports; a source-specific API
 preflight adapter resolved that technical mismatch without changing biological
 inputs, control values or expected sequences. Initial failures were retained.
 
+### Retention and later fixed-source replay
+
+The earlier 18-condition / 2,004-check figures above are historical receipt
+claims. Their complete original replay inputs, independent expectations and driver
+have not been recovered; this is not a presently executable public replay scope.
+The separately restored six-condition candidate (946 recorded checks) and R09
+candidate retain their fixed 20-API source identities and prior execution records.
+
+The later author-held MR11 v002 is a distinct study, not a renamed restoration
+of those 18 conditions. Its preserved candidate and pre-run freeze record nine
+sequence expectations, one unresolved-contract condition and one planned input
+rejection (ten exit-zero cases, one expected exit-one case), 2,500 checks and four
+separate R readers. Initial harness failures remain retained. These private
+materials are not deposited in the public snapshot and were not rerun for the
+0.3.1.9000 development-version/documentation update. New metadata validation must
+be reported independently of all these historical scientific receipts.
+
 R09 used controlled downstream input, native pVACtools binding/aggregate outputs
 and external queries. At that tested boundary, the available pVACtools full table
 and detailed JSON supported equivalent information queries. This does not show

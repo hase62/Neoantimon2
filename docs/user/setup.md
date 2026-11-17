@@ -15,7 +15,7 @@ Restart R before replacing a loaded package, then verify its identity:
 
 ```r
 library(Neoantimon2)
-stopifnot(as.character(packageVersion("Neoantimon2")) %in% c("0.3.0", "0.3.0.9000"))
+stopifnot(as.character(packageVersion("Neoantimon2")) %in% c("0.3.0", "0.3.1.9000"))
 stopifnot(all(c("neo_download_resources", "neo_check_resources",
   "neo_check_predictors", "neo_setup_predictor") %in%
   getNamespaceExports("Neoantimon2")))

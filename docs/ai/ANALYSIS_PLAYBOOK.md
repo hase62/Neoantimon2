@@ -5,7 +5,7 @@
 
 This is the authoritative workflow for both Codex and Claude Code. Use R 4.1+
 and an already installed supported package/dependencies (immutable v0.3.0 or
-current development 0.3.0.9000). The instructions work with
+current development 0.3.1.9000). The instructions work with
 an installed package; repository utilities are explicitly labeled. No specific
 home directory, development library or hidden environment variable is required.
 
@@ -40,7 +40,7 @@ Do not infer chronology or turn absent evidence into evaluated absence.
 
 ```r
 library(Neoantimon2)
-stopifnot(as.character(packageVersion("Neoantimon2")) %in% c("0.3.0", "0.3.0.9000"))
+stopifnot(as.character(packageVersion("Neoantimon2")) %in% c("0.3.0", "0.3.1.9000"))
 e <- new.env()
 source(system.file("examples", "quickstart.R", package = "Neoantimon2"), local = e)
 p <- e$p
