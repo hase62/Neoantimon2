@@ -1,0 +1,20 @@
+##description: newly authored synthetic test reference; NOT a real GRCh38 genome
+chr1	NV_synthetic	transcript	1	115	.	+	.	gene_id "G1.1"; transcript_id "AUD1.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD1.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	exon	1	17	.	+	.	gene_id "G1.1"; transcript_id "AUD1.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD1.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	exon	28	115	.	+	.	gene_id "G1.1"; transcript_id "AUD1.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD1.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	CDS	1	17	.	+	0	gene_id "G1.1"; transcript_id "AUD1.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD1.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	CDS	28	103	.	+	1	gene_id "G1.1"; transcript_id "AUD1.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD1.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	start_codon	1	3	.	+	0	gene_id "G1.1"; transcript_id "AUD1.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD1.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	stop_codon	104	106	.	+	0	gene_id "G1.1"; transcript_id "AUD1.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD1.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	transcript	1	115	.	+	.	gene_id "G1.1"; transcript_id "AUD2.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD2.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	exon	1	17	.	+	.	gene_id "G1.1"; transcript_id "AUD2.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD2.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	exon	28	115	.	+	.	gene_id "G1.1"; transcript_id "AUD2.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD2.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	CDS	1	17	.	+	0	gene_id "G1.1"; transcript_id "AUD2.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD2.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	CDS	28	103	.	+	1	gene_id "G1.1"; transcript_id "AUD2.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD2.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	start_codon	1	3	.	+	0	gene_id "G1.1"; transcript_id "AUD2.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD2.1"; gene_name "NV_SYNTHETIC";
+chr1	NV_synthetic	stop_codon	104	106	.	+	0	gene_id "G1.1"; transcript_id "AUD2.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PAUD2.1"; gene_name "NV_SYNTHETIC";
+chrN	NV_synthetic	transcript	1	105	.	-	.	gene_id "GN.1"; transcript_id "NVN.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PNVN.1"; gene_name "NV_SYNTHETIC";
+chrN	NV_synthetic	exon	1	105	.	-	.	gene_id "GN.1"; transcript_id "NVN.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PNVN.1"; gene_name "NV_SYNTHETIC";
+chrN	NV_synthetic	CDS	13	105	.	-	0	gene_id "GN.1"; transcript_id "NVN.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PNVN.1"; gene_name "NV_SYNTHETIC";
+chrN	NV_synthetic	start_codon	103	105	.	-	0	gene_id "GN.1"; transcript_id "NVN.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PNVN.1"; gene_name "NV_SYNTHETIC";
+chrN	NV_synthetic	stop_codon	10	12	.	-	0	gene_id "GN.1"; transcript_id "NVN.1"; gene_type "protein_coding"; transcript_type "protein_coding"; protein_id "PNVN.1"; gene_name "NV_SYNTHETIC";

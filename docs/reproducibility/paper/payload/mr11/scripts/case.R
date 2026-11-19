@@ -1,0 +1,33 @@
+a<-commandArgs(TRUE);C<-normalizePath(a[[1L]]);W<-normalizePath(a[[2L]]);id<-a[[3L]]
+library(Neoantimon2);library(jsonlite);stopifnot(length(getNamespaceExports('Neoantimon2'))==20L)
+full<-function(x,p){if(inherits(x,'neo_explanation'))x<-unclass(x);write_json(x,p,auto_unbox=TRUE,null='null',na='null',digits=NA,pretty=TRUE,dataframe='rows')}
+cases<-read_json(file.path(C,'inputs/cases.json'));case<-Filter(function(x)x$case_id==id,cases)[[1L]];D<-file.path(W,'observed',id);stopifnot(!dir.exists(D));dir.create(D,recursive=TRUE)
+runtime<-list(R_process_pid=Sys.getpid(),package_path=system.file(package='Neoantimon2'),package_version=as.character(packageVersion('Neoantimon2')),public_API_count=length(getNamespaceExports('Neoantimon2')),session=capture.output(sessionInfo()))
+rec<-list(case_id=id,study='MR11_20261116_A',runtime=runtime,started=format(Sys.time(),'%Y-%m-%dT%H:%M:%OS6%z'),status='RUNNING',stage='declaration',api_calls=list());code<-0L
+tryCatch({
+ ref<-file.path(C,case$reference);roles<-c(genome_fasta='genome.fa',genome_fai='genome.fa.fai',annotation_gtf='annotation.gtf',transcript_fasta='transcripts.fa',protein_coding_transcript_fasta='coding.fa',protein_fasta='proteins.fa',selenocysteine_metadata='sec.tsv',mane_summary='mane.tsv',mane_gtf='mane.gtf')
+ resources<-lapply(names(roles),function(role){path<-file.path(ref,roles[[role]]);list(path=path,type='file',required=TRUE,resource_id=if(role=='annotation_gtf')'gencode_primary_assembly_all_catalogs_mane_supplemental_v1'else role,version=if(startsWith(role,'genome'))'GRCh38.p14'else if(startsWith(role,'mane'))'1.5'else'50',source='MR11_NEW_SYNTHETIC_NOT_REAL_GRCH38_GENCODE',checksum=list(algorithm='sha256',scope='file',value=digest::digest(file=path,algo='sha256',serialize=FALSE)))})
+ names(resources)<-paste0('reference.',names(roles));vcf<-file.path(C,case$vcf)
+ cfg<-neo_config(env=character(),paths=list(data_root=file.path(C,'inputs'),input_root=file.path(C,'inputs'),run_root=file.path(W,'runs',id)),scientific=list(genome_assembly='GRCh38.p14'),resources=resources,checksum='sha256',peptides=list(class_i_lengths=as.integer(c(8,9,10)),class_ii_lengths=15L))
+ rec$stage<-'neo_project';p<-neo_project(samples=data.frame(sample_id='MR_SAMPLE',patient_id='MR_SUBJECT'),hla=list(MR_SUBJECT=c('HLA-A*02:01','HLA-B*07:02')),inputs=list(list(input_id=paste0('MR11-',id),input_role='somatic_vcf',sample_id='MR_SAMPLE',path=vcf)),config=cfg)
+ rec$api_calls<-list('neo_config','neo_project','neo_run');rec$project_path<-p$path;rec$stage<-'neo_run';full(rec,file.path(D,'receipt.json'));p<-neo_run(p);rec$project_path<-p$path
+ rec$stage<-'public-observation';e<-neo_events(p);o<-neo_origins(p);r<-neo_results(p)
+ for(z in c('events','origins','native'))full(get(switch(z,events='e',origins='o',native='r')),file.path(D,paste0(z,'.json')))
+ for(n in c('sequence_reconstruction','translation_resolution','peptide_candidates')){f<-file.path(p$path,'intermediate',paste0(n,'.rds'));if(file.exists(f))full(readRDS(f),file.path(D,paste0(n,'.json')))}
+ graph<-NULL;analysis<-NULL;er<-NULL;pr<-NULL
+ if(nrow(o)>0L){bundle<-neo_export_bundle(p);graph<-bundle$graph;full(graph[setdiff(names(graph),'annotations')],file.path(D,'graph.json'));full(graph$annotations$core_peptides,file.path(D,'peptide_provenance.json'));rec$api_calls<-c(rec$api_calls,list('neo_export_bundle'))}
+ if(nrow(r)>0L){full(neo_explain(p,candidate_id=head(r$candidate_id,3L)),file.path(D,'native_explain.json'));rec$api_calls<-c(rec$api_calls,list('neo_explain'))}
+ if(isTRUE(case$public_external_chain)&&nrow(r)>0L){
+   before_files<-list.files(p$path,recursive=TRUE,full.names=TRUE);before_files<-before_files[!dir.exists(before_files)];bh<-vapply(before_files,function(f)digest::digest(file=f,algo='sha256',serialize=FALSE),'')
+   q<-read.delim(file.path(bundle$path,'pmhc_queries.tsv'),colClasses='character',check.names=FALSE);q<-q[order(q$peptide_sequence,q$mhc_key,method='radix'),,drop=FALSE];write.table(q,file.path(D,'queries.tsv'),sep='\t',quote=TRUE,row.names=FALSE)
+   rows<-lapply(seq_len(nrow(q)),function(i){if(i%%7L==0L)return(NULL);st<-if(i%%11L==0L)'unsupported'else if(i%%13L==0L)'failed'else'evaluated';data.frame(schema_version='1.0.0',peptide_sequence=q$peptide_sequence[[i]],scope='peptide_hla',mhc_key=q$mhc_key[[i]],task='external:mr11_control',provider='MR11-CONTROL-NOT-INFERENCE',predictor_version='1',model_version='CONTROL',run_id=id,metric='controlled_score',metric_kind='raw_score',metric_semantics='raw',score=if(st=='evaluated')as.character((i%%3L)/2)else'',score_direction='higher_is_better',unit='unitless',status=st,reason=if(st=='evaluated')''else'CONTROL_NOT_INFERENCE',source_row=paste0('CONTROL:',i))})
+   pred<-do.call(rbind,Filter(Negate(is.null),rows));file<-file.path(D,'controlled_input.tsv');write.table(pred,file,sep='\t',quote=TRUE,row.names=FALSE,qmethod='double',na='')
+   analysis<-neo_analyze_external(p,file,policy=list(mode='external_rank',provider='MR11-CONTROL-NOT-INFERENCE',predictor_version='1',model_version='CONTROL',run_id=id,task='external:mr11_control',metric='controlled_score',score_direction='higher_is_better'))
+   er<-neo_external_results(analysis);pr<-neo_priorities(p,analysis=analysis);full(er,file.path(D,'external.json'));full(pr,file.path(D,'priorities.json'));full(neo_external_explain(analysis,head(r$candidate_id,3L)),file.path(D,'external_explain.json'))
+   stopifnot(identical(neo_results(p),r),identical(neo_origins(p),o),identical(neo_events(p),e));ah<-vapply(before_files,function(f)digest::digest(file=f,algo='sha256',serialize=FALSE),'');stopifnot(identical(bh,ah));full(list(paths=before_files,before=bh,after=ah,unchanged=TRUE),file.path(D,'native_file_invariance.json'))
+   rec$analysis_id<-analysis$analysis_id;rec$api_calls<-c(rec$api_calls,list('neo_analyze_external','neo_external_results','neo_external_explain','neo_priorities'));rec$native_unchanged_by_import<-TRUE
+ }
+ saveRDS(list(events=e,origins=o,native=r,graph=graph,external=er,priorities=pr),file.path(D,'first_views.rds'),version=3)
+ rec$stage_artifacts_sha<-lapply(c('translation_resolution','peptide_candidates'),function(n){f<-file.path(p$path,'intermediate',paste0(n,'.rds'));list(name=n,sha256=digest::digest(file=f,algo='sha256',serialize=FALSE))});rec$counts<-list(events=nrow(e),origins=nrow(o),candidates=nrow(r));rec$stage<-'completed';rec$status<-'COMPLETED'
+},error=function(e){rec$status<<-'FAILED';rec$error<<-conditionMessage(e);rec$error_code<<-attr(e,'neo_error_code');rec$error_class<<-class(e);code<<-1L;message(conditionMessage(e))})
+rec$finished<-format(Sys.time(),'%Y-%m-%dT%H:%M:%OS6%z');rec$exit_status<-code;full(rec,file.path(D,'receipt.json'));print(rec[c('case_id','status','stage','counts','error')]);quit(status=code)

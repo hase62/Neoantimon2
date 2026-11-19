@@ -1,0 +1,15 @@
+case_id	candidate_id	sequence	HLA	actual_native_status	actual_selected
+CLOSURE-A-conditional-only	candidate_id:544a7bafbc220f1864bd4dcf381d9bc41f32ec323d1743f45fc7b80d7bea7afa	MKACDFGH	HLA-A*02:01	not_evaluated	False
+CLOSURE-A-conditional-only	candidate_id:754ed35760a83fc420044caba443ac92b1ae632b048b7e50a5a418a788f5e84e	MKACDFGH	HLA-B*07:02	not_evaluated	False
+CLOSURE-A-mixed	candidate_id:544a7bafbc220f1864bd4dcf381d9bc41f32ec323d1743f45fc7b80d7bea7afa	MKACDFGH	HLA-A*02:01	eligible	True
+CLOSURE-A-mixed	candidate_id:754ed35760a83fc420044caba443ac92b1ae632b048b7e50a5a418a788f5e84e	MKACDFGH	HLA-B*07:02	eligible	True
+CLOSURE-B-cis	candidate_id:a5ca62b730a15b3dc187bccbb2645f1b5fff0ddc62fd998dfb5405d747f2d2c0	MTACDFGH	HLA-A*02:01	eligible	True
+CLOSURE-B-cis	candidate_id:ebb95a7c7cc38340e086ecfb24c2640d9d953c6400ae610f62f0dad3693dce4c	MTACDFGH	HLA-B*07:02	eligible	True
+CLOSURE-B-trans	candidate_id:544a7bafbc220f1864bd4dcf381d9bc41f32ec323d1743f45fc7b80d7bea7afa	MKACDFGH	HLA-A*02:01	eligible	True
+CLOSURE-B-trans	candidate_id:73d0028f8de39c137f096b5dd390acfcb69a882364bae15db7b1434eeddf7e4d	MAACDFGH	HLA-A*02:01	eligible	True
+CLOSURE-B-trans	candidate_id:754ed35760a83fc420044caba443ac92b1ae632b048b7e50a5a418a788f5e84e	MKACDFGH	HLA-B*07:02	eligible	True
+CLOSURE-B-trans	candidate_id:aa866aed54ae04e3a12fd90fd246e5564f38b1a78365c1ded44f973ce2c94f42	MAACDFGH	HLA-B*07:02	eligible	True
+CLOSURE-B-unknown	candidate_id:544a7bafbc220f1864bd4dcf381d9bc41f32ec323d1743f45fc7b80d7bea7afa	MKACDFGH	HLA-A*02:01	not_evaluated	False
+CLOSURE-B-unknown	candidate_id:73d0028f8de39c137f096b5dd390acfcb69a882364bae15db7b1434eeddf7e4d	MAACDFGH	HLA-A*02:01	not_evaluated	False
+CLOSURE-B-unknown	candidate_id:754ed35760a83fc420044caba443ac92b1ae632b048b7e50a5a418a788f5e84e	MKACDFGH	HLA-B*07:02	not_evaluated	False
+CLOSURE-B-unknown	candidate_id:aa866aed54ae04e3a12fd90fd246e5564f38b1a78365c1ded44f973ce2c94f42	MAACDFGH	HLA-B*07:02	not_evaluated	False

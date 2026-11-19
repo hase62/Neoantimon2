@@ -1,0 +1,6 @@
+filename	line	contig	pos	ref	alt	filter	declared_CDS_genes	type
+high-confidence_sINDEL_in_HC_regions_v1.2.1.vcf.gz	99	chr1	31630697	GAAGGCC	G	PASS;HighConf	PEF1	DEL
+high-confidence_sINDEL_in_HC_regions_v1.2.1.vcf.gz	1001	chr8	123220221	A	AGGGCTAC	PASS;HighConf	C8orf76	INS
+high-confidence_sSNV_in_HC_regions_v1.2.1.vcf.gz	91	chr1	1049980	G	C	PASS;HighConf	AGRN	SNV
+high-confidence_sSNV_in_HC_regions_v1.2.1.vcf.gz	34262	chr17	225998	A	T	PASS;HighConf		SNV
+high-confidence_sSNV_in_HC_regions_v1.2.1.vcf.gz	34359	chr17	7675088	C	T	PASS;HighConf	TP53	SNV

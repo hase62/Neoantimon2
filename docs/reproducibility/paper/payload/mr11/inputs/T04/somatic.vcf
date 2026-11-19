@@ -1,0 +1,7 @@
+##fileformat=VCFv4.2
+##contig=<ID=chr1,length=111>
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Declared synthetic genotype">
+##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Declared synthetic phase set">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	MR_SAMPLE
+chr1	94	stop-loss	T	C	.	PASS	.	GT:PS	0/1:.
+chr1	97	downstream-substitution	G	A	.	PASS	.	GT:PS	0/1:.

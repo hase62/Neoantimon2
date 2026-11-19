@@ -1,0 +1,7 @@
+payload/** -text -filter
+# Preserve the original CRLF bytes in the two R09 control tables.
+payload/r09/r09/R09_CANDIDATE/inputs/*.tsv whitespace=cr-at-eol
+
+# Retain the exact saved-observation bytes, including original raw CSV line endings.
+observations/** -text -filter
+observations/authentic/* whitespace=cr-at-eol

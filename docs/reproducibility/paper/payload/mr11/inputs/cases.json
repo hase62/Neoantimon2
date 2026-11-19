@@ -1,0 +1,559 @@
+[
+  {
+    "case_id": "M01",
+    "reference": "inputs/M01/reference",
+    "vcf": "inputs/M01/somatic.vcf",
+    "transcripts": [
+      "MRP1.1",
+      "MRP2.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "coding-SNV",
+        "contig": "chr1",
+        "pos": 37,
+        "ref": "C",
+        "alt": "G",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        113
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": true
+  },
+  {
+    "case_id": "M02",
+    "reference": "inputs/M02/reference",
+    "vcf": "inputs/M02/somatic.vcf",
+    "transcripts": [
+      "MRP1.1",
+      "MRP2.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "codon-deletion",
+        "contig": "chr1",
+        "pos": 39,
+        "ref": "GGAA",
+        "alt": "G",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        113
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": true
+  },
+  {
+    "case_id": "M03",
+    "reference": "inputs/M03/reference",
+    "vcf": "inputs/M03/somatic.vcf",
+    "transcripts": [
+      "MRP1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "frame-insertion",
+        "contig": "chr1",
+        "pos": 36,
+        "ref": "T",
+        "alt": "TC",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        113
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": true
+  },
+  {
+    "case_id": "M04",
+    "reference": "inputs/M04/reference",
+    "vcf": "inputs/M04/somatic.vcf",
+    "transcripts": [
+      "MRP1.1"
+    ],
+    "strand": "-",
+    "events": [
+      {
+        "label": "coding-SNV",
+        "contig": "chr1",
+        "pos": 77,
+        "ref": "G",
+        "alt": "C",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        83
+      ],
+      [
+        96,
+        113
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": true
+  },
+  {
+    "case_id": "T01",
+    "reference": "inputs/T01/reference",
+    "vcf": "inputs/T01/somatic.vcf",
+    "transcripts": [
+      "MRP1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "stop-loss",
+        "contig": "chr1",
+        "pos": 94,
+        "ref": "T",
+        "alt": "C",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        111
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": false
+  },
+  {
+    "case_id": "T02",
+    "reference": "inputs/T02/reference",
+    "vcf": "inputs/T02/somatic.vcf",
+    "transcripts": [
+      "MRP1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "stop-loss",
+        "contig": "chr1",
+        "pos": 94,
+        "ref": "T",
+        "alt": "C",
+        "GT": "0|1",
+        "PS": "901"
+      },
+      {
+        "label": "downstream-substitution",
+        "contig": "chr1",
+        "pos": 97,
+        "ref": "G",
+        "alt": "A",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        111
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": false
+  },
+  {
+    "case_id": "T03",
+    "reference": "inputs/T03/reference",
+    "vcf": "inputs/T03/somatic.vcf",
+    "transcripts": [
+      "MRP1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "stop-loss",
+        "contig": "chr1",
+        "pos": 94,
+        "ref": "T",
+        "alt": "C",
+        "GT": "0|1",
+        "PS": "901"
+      },
+      {
+        "label": "downstream-substitution",
+        "contig": "chr1",
+        "pos": 97,
+        "ref": "G",
+        "alt": "A",
+        "GT": "1|0",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        111
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": false
+  },
+  {
+    "case_id": "T04",
+    "reference": "inputs/T04/reference",
+    "vcf": "inputs/T04/somatic.vcf",
+    "transcripts": [
+      "MRP1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "stop-loss",
+        "contig": "chr1",
+        "pos": 94,
+        "ref": "T",
+        "alt": "C",
+        "GT": "0/1",
+        "PS": "."
+      },
+      {
+        "label": "downstream-substitution",
+        "contig": "chr1",
+        "pos": 97,
+        "ref": "G",
+        "alt": "A",
+        "GT": "0/1",
+        "PS": "."
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        111
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": false
+  },
+  {
+    "case_id": "S01",
+    "reference": "inputs/S01/reference",
+    "vcf": "inputs/S01/somatic.vcf",
+    "transcripts": [
+      "MRSEC1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "pre-Sec-SNV",
+        "contig": "chr1",
+        "pos": 13,
+        "ref": "C",
+        "alt": "G",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        113
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": false
+  },
+  {
+    "case_id": "S02",
+    "reference": "inputs/S02/reference",
+    "vcf": "inputs/S02/somatic.vcf",
+    "transcripts": [
+      "MRSEC1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "pre-Sec-SNV",
+        "contig": "chr1",
+        "pos": 13,
+        "ref": "C",
+        "alt": "G",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        113
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 27,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": false
+  },
+  {
+    "case_id": "S03",
+    "reference": "inputs/S03/reference",
+    "vcf": "inputs/S03/somatic.vcf",
+    "transcripts": [
+      "MRSEC1.1"
+    ],
+    "strand": "+",
+    "events": [
+      {
+        "label": "pre-Sec-SNV",
+        "contig": "chr1",
+        "pos": 13,
+        "ref": "C",
+        "alt": "G",
+        "GT": "0|1",
+        "PS": "901"
+      }
+    ],
+    "exons_genomic": [
+      [
+        1,
+        18
+      ],
+      [
+        31,
+        113
+      ]
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "coding_length_nt": 81,
+    "class_i_lengths": [
+      8,
+      9,
+      10
+    ],
+    "class_ii_catalog_length": 15,
+    "hla": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "public_external_chain": false
+  }
+]
