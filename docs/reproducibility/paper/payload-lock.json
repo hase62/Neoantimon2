@@ -1,0 +1,759 @@
+{
+  "fixed_core": {
+    "sha256": "af58b053bc57fcb1f46fb8378ee16173621579e4aec156cdb54767d26792486a",
+    "file_count": 502,
+    "exports": 20,
+    "version": "0.3.0.9000"
+  },
+  "donor_candidate_sha256": {
+    "mr11": "bc4011f758928b79cf4a9bdc726230696bf50db5262a70f5d5e781f970f8ab80",
+    "study6": "05c37696a55da8dffb53e3a539bb1f4f9ee7cbd868c94f20a9862bf8042ac29d",
+    "r09": "c21de7b0b6752485489c519959c9b4a81c077ce7d6083e27ce1a0743880c3eca"
+  },
+  "files": {
+    "mr11/expected/GENERATION_RECORD.json": {
+      "bytes": 633,
+      "sha256": "b16a79239028c65c1346d777c07d4d1390e7788b20ee86bf7b212d5988bc5436"
+    },
+    "mr11/expected/independent_expected.json": {
+      "bytes": 205613,
+      "sha256": "b2dee8cccd4f5f001ada4825098eb021f6c5975e731accfc645d471f1ba5ce3e"
+    },
+    "mr11/inputs/M01/reference/annotation.gtf": {
+      "bytes": 2753,
+      "sha256": "f224f1a92fb5f5abea36d150abab7b787169af4219470ae78a62edc0e12e9560"
+    },
+    "mr11/inputs/M01/reference/coding.fa": {
+      "bytes": 351,
+      "sha256": "4f224cce30b6b089a7b16fcadc1536c638b109929f6877724ca846aa91c605ee"
+    },
+    "mr11/inputs/M01/reference/genome.fa": {
+      "bytes": 120,
+      "sha256": "928570094e9627d6e1ffa0a36252c48f31f3693adb7ebb588fab65208bcf5490"
+    },
+    "mr11/inputs/M01/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "ba841bee93bcd33659969daba6b986e48f5b508d1684f80300b8a04ba5df6a4d"
+    },
+    "mr11/inputs/M01/reference/mane.gtf": {
+      "bytes": 1330,
+      "sha256": "a879532a1ae2b83d5a29233c01786fef7dfd565f600c2cf4a8b62a5668584ae0"
+    },
+    "mr11/inputs/M01/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "384f5546f48c9114ffb3c318a8a1170861a94eb4800e3a1052b0157b70508c3f"
+    },
+    "mr11/inputs/M01/reference/proteins.fa": {
+      "bytes": 218,
+      "sha256": "8e270d149c80ece604f900cbb799d4077c0ea7a9a8af77a06c74b3d38bef8049"
+    },
+    "mr11/inputs/M01/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/M01/reference/transcripts.fa": {
+      "bytes": 351,
+      "sha256": "4f224cce30b6b089a7b16fcadc1536c638b109929f6877724ca846aa91c605ee"
+    },
+    "mr11/inputs/M01/somatic.vcf": {
+      "bytes": 315,
+      "sha256": "eaac4e8456a2eb16a498e9852cb198a56d999aee67f550cf7b8d6298bbfeaad2"
+    },
+    "mr11/inputs/M02/reference/annotation.gtf": {
+      "bytes": 2753,
+      "sha256": "f224f1a92fb5f5abea36d150abab7b787169af4219470ae78a62edc0e12e9560"
+    },
+    "mr11/inputs/M02/reference/coding.fa": {
+      "bytes": 351,
+      "sha256": "4f224cce30b6b089a7b16fcadc1536c638b109929f6877724ca846aa91c605ee"
+    },
+    "mr11/inputs/M02/reference/genome.fa": {
+      "bytes": 120,
+      "sha256": "928570094e9627d6e1ffa0a36252c48f31f3693adb7ebb588fab65208bcf5490"
+    },
+    "mr11/inputs/M02/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "ba841bee93bcd33659969daba6b986e48f5b508d1684f80300b8a04ba5df6a4d"
+    },
+    "mr11/inputs/M02/reference/mane.gtf": {
+      "bytes": 1330,
+      "sha256": "a879532a1ae2b83d5a29233c01786fef7dfd565f600c2cf4a8b62a5668584ae0"
+    },
+    "mr11/inputs/M02/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "384f5546f48c9114ffb3c318a8a1170861a94eb4800e3a1052b0157b70508c3f"
+    },
+    "mr11/inputs/M02/reference/proteins.fa": {
+      "bytes": 218,
+      "sha256": "8e270d149c80ece604f900cbb799d4077c0ea7a9a8af77a06c74b3d38bef8049"
+    },
+    "mr11/inputs/M02/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/M02/reference/transcripts.fa": {
+      "bytes": 351,
+      "sha256": "4f224cce30b6b089a7b16fcadc1536c638b109929f6877724ca846aa91c605ee"
+    },
+    "mr11/inputs/M02/somatic.vcf": {
+      "bytes": 322,
+      "sha256": "7a9bce29a65ce307a6315ce6d0b5e52c0774e21405bc39d16b7fbad5c647001d"
+    },
+    "mr11/inputs/M03/reference/annotation.gtf": {
+      "bytes": 1423,
+      "sha256": "d7585d5f78b6c8c2b38970599467f14401f7fe538d6de0c52b5ff47eefa84071"
+    },
+    "mr11/inputs/M03/reference/coding.fa": {
+      "bytes": 207,
+      "sha256": "6994eb3499ac4113404e051a8986c4332de092c913b64530248d15e47c0e8653"
+    },
+    "mr11/inputs/M03/reference/genome.fa": {
+      "bytes": 120,
+      "sha256": "928570094e9627d6e1ffa0a36252c48f31f3693adb7ebb588fab65208bcf5490"
+    },
+    "mr11/inputs/M03/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "ba841bee93bcd33659969daba6b986e48f5b508d1684f80300b8a04ba5df6a4d"
+    },
+    "mr11/inputs/M03/reference/mane.gtf": {
+      "bytes": 1330,
+      "sha256": "a879532a1ae2b83d5a29233c01786fef7dfd565f600c2cf4a8b62a5668584ae0"
+    },
+    "mr11/inputs/M03/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "384f5546f48c9114ffb3c318a8a1170861a94eb4800e3a1052b0157b70508c3f"
+    },
+    "mr11/inputs/M03/reference/proteins.fa": {
+      "bytes": 141,
+      "sha256": "1bfa979d1f033a7a45fdef79693bb635d7080a8e253a5a6e7bb2ded5e6d69670"
+    },
+    "mr11/inputs/M03/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/M03/reference/transcripts.fa": {
+      "bytes": 207,
+      "sha256": "6994eb3499ac4113404e051a8986c4332de092c913b64530248d15e47c0e8653"
+    },
+    "mr11/inputs/M03/somatic.vcf": {
+      "bytes": 321,
+      "sha256": "3aa76b34f438b23a2acb7ab2af1e36442331c52354d23e961c26916dea02bdaa"
+    },
+    "mr11/inputs/M04/reference/annotation.gtf": {
+      "bytes": 1429,
+      "sha256": "e1c275aad74469b337b8c7d6e5a440c12e45123618bbafbdcb77d83fbe412a23"
+    },
+    "mr11/inputs/M04/reference/coding.fa": {
+      "bytes": 207,
+      "sha256": "6994eb3499ac4113404e051a8986c4332de092c913b64530248d15e47c0e8653"
+    },
+    "mr11/inputs/M04/reference/genome.fa": {
+      "bytes": 120,
+      "sha256": "7a62ccfc74b1cbd5a78f0be19e84e628dc475959cb3765f36eb192183d543bb1"
+    },
+    "mr11/inputs/M04/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "ba841bee93bcd33659969daba6b986e48f5b508d1684f80300b8a04ba5df6a4d"
+    },
+    "mr11/inputs/M04/reference/mane.gtf": {
+      "bytes": 1336,
+      "sha256": "4695c0cee5757f0b7278f7944bc92484fc881886459dd2050b9a4f6bd607ca35"
+    },
+    "mr11/inputs/M04/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "0491f323ef427ad312c3dcfb4de1d61d5b89eb53b0e7820c07113e035dbfb3fd"
+    },
+    "mr11/inputs/M04/reference/proteins.fa": {
+      "bytes": 141,
+      "sha256": "1bfa979d1f033a7a45fdef79693bb635d7080a8e253a5a6e7bb2ded5e6d69670"
+    },
+    "mr11/inputs/M04/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/M04/reference/transcripts.fa": {
+      "bytes": 207,
+      "sha256": "6994eb3499ac4113404e051a8986c4332de092c913b64530248d15e47c0e8653"
+    },
+    "mr11/inputs/M04/somatic.vcf": {
+      "bytes": 315,
+      "sha256": "686052a792cd36740615d85f876d743da2bd20a5b03a7ba829d3a754ad90e208"
+    },
+    "mr11/inputs/S01/reference/annotation.gtf": {
+      "bytes": 1451,
+      "sha256": "b71ec0d56f61bbddc0993e4067fb1809ce99e6f6c50191d1000d8106b3b791bd"
+    },
+    "mr11/inputs/S01/reference/coding.fa": {
+      "bytes": 209,
+      "sha256": "c4cc0681c0d3e7646e59836476f64a939a36a6f7def9e0501596d94253c50ef7"
+    },
+    "mr11/inputs/S01/reference/genome.fa": {
+      "bytes": 120,
+      "sha256": "fabf2c9bf8e6590de0333059fb0cd6c35e4fb66924f639f6fac8f2627f9e5d7d"
+    },
+    "mr11/inputs/S01/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "ba841bee93bcd33659969daba6b986e48f5b508d1684f80300b8a04ba5df6a4d"
+    },
+    "mr11/inputs/S01/reference/mane.gtf": {
+      "bytes": 1358,
+      "sha256": "aace422cf398ab73e8f1fe56695476109104ce61d5758fba56479a3c03df32f4"
+    },
+    "mr11/inputs/S01/reference/mane.tsv": {
+      "bytes": 261,
+      "sha256": "4813248b5736a25837f0df8cc1478d15f77a94d9e8e7205b281ab2738f17c740"
+    },
+    "mr11/inputs/S01/reference/proteins.fa": {
+      "bytes": 145,
+      "sha256": "1994e61051befbdea2e337d27788ffdf8133a34845905a0153a6a4890d87da5b"
+    },
+    "mr11/inputs/S01/reference/sec.tsv": {
+      "bytes": 24,
+      "sha256": "5e7ff0c49963ddac9b2e02f8f547e112121224b10687ff5c0500d8bede91b48a"
+    },
+    "mr11/inputs/S01/reference/transcripts.fa": {
+      "bytes": 209,
+      "sha256": "c4cc0681c0d3e7646e59836476f64a939a36a6f7def9e0501596d94253c50ef7"
+    },
+    "mr11/inputs/S01/somatic.vcf": {
+      "bytes": 316,
+      "sha256": "b57aef1c777f9d851387d5f894e809789e6f207cd52ca536719d5f466c804dbc"
+    },
+    "mr11/inputs/S02/reference/annotation.gtf": {
+      "bytes": 1451,
+      "sha256": "a68607da16c8114d8690f4184890e4736c08207c0464eb34b792d1cf1df08d34"
+    },
+    "mr11/inputs/S02/reference/coding.fa": {
+      "bytes": 209,
+      "sha256": "c4cc0681c0d3e7646e59836476f64a939a36a6f7def9e0501596d94253c50ef7"
+    },
+    "mr11/inputs/S02/reference/genome.fa": {
+      "bytes": 120,
+      "sha256": "fabf2c9bf8e6590de0333059fb0cd6c35e4fb66924f639f6fac8f2627f9e5d7d"
+    },
+    "mr11/inputs/S02/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "ba841bee93bcd33659969daba6b986e48f5b508d1684f80300b8a04ba5df6a4d"
+    },
+    "mr11/inputs/S02/reference/mane.gtf": {
+      "bytes": 1358,
+      "sha256": "e298339a45cfefcf052d3433d8a8baa9211c350c8197e535f60296e54231869c"
+    },
+    "mr11/inputs/S02/reference/mane.tsv": {
+      "bytes": 261,
+      "sha256": "4813248b5736a25837f0df8cc1478d15f77a94d9e8e7205b281ab2738f17c740"
+    },
+    "mr11/inputs/S02/reference/proteins.fa": {
+      "bytes": 126,
+      "sha256": "34d01ce9dca4ea21ed6b2dd258a2debb133a070c0d320e018a0bdb6ae9065960"
+    },
+    "mr11/inputs/S02/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/S02/reference/transcripts.fa": {
+      "bytes": 209,
+      "sha256": "c4cc0681c0d3e7646e59836476f64a939a36a6f7def9e0501596d94253c50ef7"
+    },
+    "mr11/inputs/S02/somatic.vcf": {
+      "bytes": 316,
+      "sha256": "b57aef1c777f9d851387d5f894e809789e6f207cd52ca536719d5f466c804dbc"
+    },
+    "mr11/inputs/S03/reference/annotation.gtf": {
+      "bytes": 1451,
+      "sha256": "b71ec0d56f61bbddc0993e4067fb1809ce99e6f6c50191d1000d8106b3b791bd"
+    },
+    "mr11/inputs/S03/reference/coding.fa": {
+      "bytes": 209,
+      "sha256": "c4cc0681c0d3e7646e59836476f64a939a36a6f7def9e0501596d94253c50ef7"
+    },
+    "mr11/inputs/S03/reference/genome.fa": {
+      "bytes": 120,
+      "sha256": "fabf2c9bf8e6590de0333059fb0cd6c35e4fb66924f639f6fac8f2627f9e5d7d"
+    },
+    "mr11/inputs/S03/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "ba841bee93bcd33659969daba6b986e48f5b508d1684f80300b8a04ba5df6a4d"
+    },
+    "mr11/inputs/S03/reference/mane.gtf": {
+      "bytes": 1358,
+      "sha256": "aace422cf398ab73e8f1fe56695476109104ce61d5758fba56479a3c03df32f4"
+    },
+    "mr11/inputs/S03/reference/mane.tsv": {
+      "bytes": 261,
+      "sha256": "4813248b5736a25837f0df8cc1478d15f77a94d9e8e7205b281ab2738f17c740"
+    },
+    "mr11/inputs/S03/reference/proteins.fa": {
+      "bytes": 145,
+      "sha256": "1994e61051befbdea2e337d27788ffdf8133a34845905a0153a6a4890d87da5b"
+    },
+    "mr11/inputs/S03/reference/sec.tsv": {
+      "bytes": 25,
+      "sha256": "82d531a28205f39471efa02be7a5133eae49055073967d31b2c66a25e098864e"
+    },
+    "mr11/inputs/S03/reference/transcripts.fa": {
+      "bytes": 209,
+      "sha256": "c4cc0681c0d3e7646e59836476f64a939a36a6f7def9e0501596d94253c50ef7"
+    },
+    "mr11/inputs/S03/somatic.vcf": {
+      "bytes": 316,
+      "sha256": "b57aef1c777f9d851387d5f894e809789e6f207cd52ca536719d5f466c804dbc"
+    },
+    "mr11/inputs/T01/reference/annotation.gtf": {
+      "bytes": 1423,
+      "sha256": "b9a7803ed743db78730eead322bbccd542c2539399b9d02fa98090df14ec6406"
+    },
+    "mr11/inputs/T01/reference/coding.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T01/reference/genome.fa": {
+      "bytes": 118,
+      "sha256": "ed490412a97bde281a1f82bfce6ffb8a3290259c328be200d9e98bfae0976342"
+    },
+    "mr11/inputs/T01/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "cc670fa7cd2334cd96657315ae792ad75f2908edecf59e8d30a51687c43fde4b"
+    },
+    "mr11/inputs/T01/reference/mane.gtf": {
+      "bytes": 1330,
+      "sha256": "f371883c9a0cd753b9d1895dd5f0a537bba9dedcc59802693b25ac472c556f35"
+    },
+    "mr11/inputs/T01/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "5fb31b8ca97a63df4395f3b642a15cb23eea3cff66d9863d6dc90473597b73f0"
+    },
+    "mr11/inputs/T01/reference/proteins.fa": {
+      "bytes": 141,
+      "sha256": "1bfa979d1f033a7a45fdef79693bb635d7080a8e253a5a6e7bb2ded5e6d69670"
+    },
+    "mr11/inputs/T01/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/T01/reference/transcripts.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T01/somatic.vcf": {
+      "bytes": 314,
+      "sha256": "37b909a0699a2793ace3f14ed6670c947c71c6ec81abdc816571d8a956b229c3"
+    },
+    "mr11/inputs/T02/reference/annotation.gtf": {
+      "bytes": 1423,
+      "sha256": "b9a7803ed743db78730eead322bbccd542c2539399b9d02fa98090df14ec6406"
+    },
+    "mr11/inputs/T02/reference/coding.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T02/reference/genome.fa": {
+      "bytes": 118,
+      "sha256": "ed490412a97bde281a1f82bfce6ffb8a3290259c328be200d9e98bfae0976342"
+    },
+    "mr11/inputs/T02/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "cc670fa7cd2334cd96657315ae792ad75f2908edecf59e8d30a51687c43fde4b"
+    },
+    "mr11/inputs/T02/reference/mane.gtf": {
+      "bytes": 1330,
+      "sha256": "f371883c9a0cd753b9d1895dd5f0a537bba9dedcc59802693b25ac472c556f35"
+    },
+    "mr11/inputs/T02/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "5fb31b8ca97a63df4395f3b642a15cb23eea3cff66d9863d6dc90473597b73f0"
+    },
+    "mr11/inputs/T02/reference/proteins.fa": {
+      "bytes": 141,
+      "sha256": "1bfa979d1f033a7a45fdef79693bb635d7080a8e253a5a6e7bb2ded5e6d69670"
+    },
+    "mr11/inputs/T02/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/T02/reference/transcripts.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T02/somatic.vcf": {
+      "bytes": 373,
+      "sha256": "77bd49542934cc3fdfc05692a24a7e8ae097c8dfc995cf938f3f478c6fd750b6"
+    },
+    "mr11/inputs/T03/reference/annotation.gtf": {
+      "bytes": 1423,
+      "sha256": "b9a7803ed743db78730eead322bbccd542c2539399b9d02fa98090df14ec6406"
+    },
+    "mr11/inputs/T03/reference/coding.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T03/reference/genome.fa": {
+      "bytes": 118,
+      "sha256": "ed490412a97bde281a1f82bfce6ffb8a3290259c328be200d9e98bfae0976342"
+    },
+    "mr11/inputs/T03/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "cc670fa7cd2334cd96657315ae792ad75f2908edecf59e8d30a51687c43fde4b"
+    },
+    "mr11/inputs/T03/reference/mane.gtf": {
+      "bytes": 1330,
+      "sha256": "f371883c9a0cd753b9d1895dd5f0a537bba9dedcc59802693b25ac472c556f35"
+    },
+    "mr11/inputs/T03/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "5fb31b8ca97a63df4395f3b642a15cb23eea3cff66d9863d6dc90473597b73f0"
+    },
+    "mr11/inputs/T03/reference/proteins.fa": {
+      "bytes": 141,
+      "sha256": "1bfa979d1f033a7a45fdef79693bb635d7080a8e253a5a6e7bb2ded5e6d69670"
+    },
+    "mr11/inputs/T03/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/T03/reference/transcripts.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T03/somatic.vcf": {
+      "bytes": 373,
+      "sha256": "26bce2675c18e667cf52d49002f6f865646dbcbf7a1d0b6290e6400ca7c8d42e"
+    },
+    "mr11/inputs/T04/reference/annotation.gtf": {
+      "bytes": 1423,
+      "sha256": "b9a7803ed743db78730eead322bbccd542c2539399b9d02fa98090df14ec6406"
+    },
+    "mr11/inputs/T04/reference/coding.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T04/reference/genome.fa": {
+      "bytes": 118,
+      "sha256": "ed490412a97bde281a1f82bfce6ffb8a3290259c328be200d9e98bfae0976342"
+    },
+    "mr11/inputs/T04/reference/genome.fa.fai": {
+      "bytes": 19,
+      "sha256": "cc670fa7cd2334cd96657315ae792ad75f2908edecf59e8d30a51687c43fde4b"
+    },
+    "mr11/inputs/T04/reference/mane.gtf": {
+      "bytes": 1330,
+      "sha256": "f371883c9a0cd753b9d1895dd5f0a537bba9dedcc59802693b25ac472c556f35"
+    },
+    "mr11/inputs/T04/reference/mane.tsv": {
+      "bytes": 257,
+      "sha256": "5fb31b8ca97a63df4395f3b642a15cb23eea3cff66d9863d6dc90473597b73f0"
+    },
+    "mr11/inputs/T04/reference/proteins.fa": {
+      "bytes": 141,
+      "sha256": "1bfa979d1f033a7a45fdef79693bb635d7080a8e253a5a6e7bb2ded5e6d69670"
+    },
+    "mr11/inputs/T04/reference/sec.tsv": {
+      "bytes": 12,
+      "sha256": "48cf87060a00ee0a25dbc56eea55dee27d2325cd69dad038aa62667ad33f9def"
+    },
+    "mr11/inputs/T04/reference/transcripts.fa": {
+      "bytes": 204,
+      "sha256": "251c88a9acba7e6f815008ebd60b63a1f97b538ddb39ac3f8020a01b6f5fe501"
+    },
+    "mr11/inputs/T04/somatic.vcf": {
+      "bytes": 369,
+      "sha256": "79647f4c707d7e9aa69810ba937ec8950f9946ec3e54077b943b6a8718b724ac"
+    },
+    "mr11/inputs/cases.json": {
+      "bytes": 8911,
+      "sha256": "b45570799b3ca6ea727d4b76bda19e5d52ef2637be48c0d3593e5bcdbbd96a2b"
+    },
+    "mr11/run_replay.py": {
+      "bytes": 5306,
+      "sha256": "15e7136689d50ba6d0cd3ac39b67b485f79107b8c87f367d6f0bd6a34b5acddf"
+    },
+    "mr11/scripts/case.R": {
+      "bytes": 6747,
+      "sha256": "913c2c8b406e15e7f198520f9f851168a5fff9d3721f4242356bf6373a1834d3"
+    },
+    "mr11/scripts/check_saved.py": {
+      "bytes": 10744,
+      "sha256": "d78cfbfac540354459b0440ee37c2864ee56f07697aa407103c69f28341af79c"
+    },
+    "mr11/scripts/generate_independent.py": {
+      "bytes": 10919,
+      "sha256": "ff082fc5aeec5c54fbf6ac9100643fc8d0083a4d647ddd5a59c030e494241a7f"
+    },
+    "mr11/scripts/reader.R": {
+      "bytes": 1935,
+      "sha256": "1f2a08e79380f420ee527edf6c5a0ef4e6dab7dfa392cc1cb76c7ae4acf52b1a"
+    },
+    "mr11/source/RESTORED_SOURCE502_HASHES.json": {
+      "bytes": 54124,
+      "sha256": "b41751154347e744408f52e62575fb1e7f6d25de83451f1a4dc38291ed3e8ee7"
+    },
+    "r09/r09/PVACTOOLS_EXPECTED_SOURCE.json": {
+      "bytes": 217749,
+      "sha256": "42756fdecc0e1bc3903381c09c33f21f8611e95f2807309eba9ded775bbe9553"
+    },
+    "r09/r09/R09_CANDIDATE/FREEZE_BEFORE_EXECUTION.json": {
+      "sha256": "37eab82f1edac2b072cccd68610962e6af3c8b1fd9ea4f96646fb8f94f431422",
+      "bytes": 2456
+    },
+    "r09/r09/R09_CANDIDATE/ROUTE_AND_SCOPE.md": {
+      "sha256": "9187986363ccdddbd05f6095429d87f5fd95ba578078b368f012226ac8c9424b",
+      "bytes": 6055
+    },
+    "r09/r09/R09_CANDIDATE/expected/query_expected.json": {
+      "bytes": 2968,
+      "sha256": "861ebf3a85479bc1c9246e3e4c3abfa0e30ab3a180f36dc71b675e2d206ce3d5"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/CONVERSION_RULES.json": {
+      "bytes": 1007,
+      "sha256": "8998ab76784766ac656acf66d25b1414db8b9fe9179a0a3ec9d68b4e45a971da"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/R09.CONTROL_INPUT.all_epitopes.tsv": {
+      "bytes": 3171,
+      "sha256": "94cfd74673d702e2eee9e2247aaa4903b9f337267f863c27aab27d80ab4dce8e"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/canonical.json": {
+      "bytes": 3525,
+      "sha256": "5db5ddef063383ccd811991048ba370b42688177fdbf30a857805988e718c691"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/cases.json": {
+      "bytes": 887,
+      "sha256": "a014e295f821bb5c0e72512906eb91ef464ecb14ef4c475a771b55528db4d7bb"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/annotation.gtf": {
+      "bytes": 4953,
+      "sha256": "a0eb632a1888ba100833bffdc0040a2a8aa3185ab43275467c96a925242768b5"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/coding.fa": {
+      "bytes": 588,
+      "sha256": "1fb77374b9ccca086e6bfc8ed201560145c32e8c740dfb2954faf1ff66c2d200"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/genome.fa": {
+      "bytes": 356,
+      "sha256": "925ac81e1dfd5d6ef163300f2e27d7a5425d48c7a9b4fb3c19287347a84ab609"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/genome.fa.fai": {
+      "bytes": 61,
+      "sha256": "a26c05a82ff3253d0567e47fdba3d018fc813278c86ff17fdaa48d28abda4ca2"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/mane.gtf": {
+      "bytes": 1393,
+      "sha256": "3fddd7324be54b905c4aa097364efc134594d6ada3b0f4bdbcd2b208aa4cb0b4"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/mane.tsv": {
+      "bytes": 246,
+      "sha256": "0849fea54bcd26ce1acc5ea1df70b6c7932ec823faf4b694387acf13347bd2f7"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/models_independent.json": {
+      "bytes": 1175,
+      "sha256": "80583e16755b18f0144d8760cbd8c894647819059fc52661896de693edd784bf"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/proteins.fa": {
+      "bytes": 366,
+      "sha256": "33f4cac2cb6bcbaa0aa2d2929a24991b5ab61f9bce6a6111bb0b99293320e6ed"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/sec.tsv": {
+      "bytes": 10,
+      "sha256": "46ea18e6645647d27c8da9a453f8f0f58c8d43773f595bc07e6df276df380949"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/native-reference/transcripts.fa": {
+      "bytes": 588,
+      "sha256": "1fb77374b9ccca086e6bfc8ed201560145c32e8c740dfb2954faf1ff66c2d200"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/neo_control.tsv": {
+      "bytes": 650,
+      "sha256": "cede785dca27e68d719b85a944eb447397fb778aefbf9ee06e3a7438f1868a5d"
+    },
+    "r09/r09/R09_CANDIDATE/inputs/resolved.vcf": {
+      "bytes": 224,
+      "sha256": "76c7f29c215650ae5d2d1f3a851a4a880c3a8e04830aaacde51acef8e73b74f8"
+    },
+    "r09/r09/R09_CANDIDATE/scripts/neo_reopen.R": {
+      "bytes": 2720,
+      "sha256": "9f79d140c29df18df216e716b928436c2cfbe21d3bed8afa19193136799b9d7f"
+    },
+    "r09/r09/R09_CANDIDATE/scripts/neo_run.R": {
+      "bytes": 10127,
+      "sha256": "f2196f235280efbd981f61da5e0cb3c5d0a1826145d52526212ff204ea6d48c7"
+    },
+    "r09/r09/R09_CANDIDATE/scripts/query_saved.py": {
+      "bytes": 12034,
+      "sha256": "206cd35d589f3a2b46cc71abae050bbee153bd538540352acea88974ffa2eedd"
+    },
+    "r09/r09/R09_CANDIDATE/scripts/run_r09.py": {
+      "bytes": 5157,
+      "sha256": "09aabcb2ae72e18b3b78a473791266eaa6e2a03992e59bc8766ffde03b8727a7"
+    },
+    "r09/r09/prepare_existing_pvac.py": {
+      "bytes": 1444,
+      "sha256": "34932149a244ea3caf689aa4a392ede0e9e5308b147b294c6aeb75bae33e7919"
+    },
+    "r09/verify_candidate.py": {
+      "bytes": 806,
+      "sha256": "1d0f28d66a4e9bd80b46ab1c03cacfffb8bd9ac42a357b69434fe03307d4a4c1"
+    },
+    "shared/LICENSE": {
+      "bytes": 4563,
+      "sha256": "ffcca38841adb694b6f380647e15f17c446a4d1656fed51a1e2041d064c94cc8"
+    },
+    "shared/NOTICE": {
+      "bytes": 633,
+      "sha256": "cf8adbaa2510fdfe9e157fcae9d2095676970481e5a3b025de5181f0aaec07f4"
+    },
+    "shared/restored20api-502-files-v001.tar.gz": {
+      "bytes": 5887880,
+      "sha256": "af58b053bc57fcb1f46fb8378ee16173621579e4aec156cdb54767d26792486a"
+    },
+    "study6/ORIGINAL_SOURCE503_EXPECTED_HASHES.json": {
+      "bytes": 54230,
+      "sha256": "fdfa2fd2a9013e4c4d5c5dfcc171a1cdce44ce7107cdec0067b2866bfb2e5587"
+    },
+    "study6/study6/FREEZE_BEFORE_FRESH_V3.json": {
+      "bytes": 3967,
+      "sha256": "8f1838cc7176dd1fd73221aebb049b34609039d8912606b5d8a9be14f0b81853"
+    },
+    "study6/study6/SOURCE_IDENTITY.json": {
+      "bytes": 329,
+      "sha256": "21861905f4b8d13fcc2944d0b774b2cef881a9a4ee56ce44c1809afca263701c"
+    },
+    "study6/study6/expected/boundary_representation.json": {
+      "bytes": 1866,
+      "sha256": "389a597df217308b7943463e5ba378cb31c9bd95d071e59a6c299f5ebdd0a4ea"
+    },
+    "study6/study6/expected/closure_expected.json": {
+      "bytes": 10641,
+      "sha256": "2d69831623938ddae1161ef9131a1ca70fc4f703225710dfdf17e549ee906d97"
+    },
+    "study6/study6/inputs/cases.json": {
+      "bytes": 7232,
+      "sha256": "2ed2d02cab3a8ef48202d94d67f24d84fa757d04c56b477141a290ddccbb91d6"
+    },
+    "study6/study6/inputs/native-reference/annotation.gtf": {
+      "bytes": 4953,
+      "sha256": "a0eb632a1888ba100833bffdc0040a2a8aa3185ab43275467c96a925242768b5"
+    },
+    "study6/study6/inputs/native-reference/coding.fa": {
+      "bytes": 588,
+      "sha256": "1fb77374b9ccca086e6bfc8ed201560145c32e8c740dfb2954faf1ff66c2d200"
+    },
+    "study6/study6/inputs/native-reference/genome.fa": {
+      "bytes": 356,
+      "sha256": "925ac81e1dfd5d6ef163300f2e27d7a5425d48c7a9b4fb3c19287347a84ab609"
+    },
+    "study6/study6/inputs/native-reference/genome.fa.fai": {
+      "bytes": 61,
+      "sha256": "a26c05a82ff3253d0567e47fdba3d018fc813278c86ff17fdaa48d28abda4ca2"
+    },
+    "study6/study6/inputs/native-reference/mane.gtf": {
+      "bytes": 1393,
+      "sha256": "3fddd7324be54b905c4aa097364efc134594d6ada3b0f4bdbcd2b208aa4cb0b4"
+    },
+    "study6/study6/inputs/native-reference/mane.tsv": {
+      "bytes": 246,
+      "sha256": "0849fea54bcd26ce1acc5ea1df70b6c7932ec823faf4b694387acf13347bd2f7"
+    },
+    "study6/study6/inputs/native-reference/models_independent.json": {
+      "bytes": 1175,
+      "sha256": "80583e16755b18f0144d8760cbd8c894647819059fc52661896de693edd784bf"
+    },
+    "study6/study6/inputs/native-reference/proteins.fa": {
+      "bytes": 366,
+      "sha256": "33f4cac2cb6bcbaa0aa2d2929a24991b5ab61f9bce6a6111bb0b99293320e6ed"
+    },
+    "study6/study6/inputs/native-reference/sec.tsv": {
+      "bytes": 10,
+      "sha256": "46ea18e6645647d27c8da9a453f8f0f58c8d43773f595bc07e6df276df380949"
+    },
+    "study6/study6/inputs/native-reference/transcripts.fa": {
+      "bytes": 588,
+      "sha256": "1fb77374b9ccca086e6bfc8ed201560145c32e8c740dfb2954faf1ff66c2d200"
+    },
+    "study6/study6/inputs/reference/annotation.gtf": {
+      "bytes": 3641,
+      "sha256": "ecff97c5d72cdb4ea972b6c4099866b48c36745e224bad7df60d3958c8a2946e"
+    },
+    "study6/study6/inputs/reference/coding.fa": {
+      "bytes": 455,
+      "sha256": "e308cc3dc1f5ec2b61ee06ac22abf56e782ec1e4f4f718861975d631f03a466c"
+    },
+    "study6/study6/inputs/reference/genome.fa": {
+      "bytes": 234,
+      "sha256": "c7bf5c78675795be3168ffe615c52808342856ff257fb0512bbb430e2d1836f2"
+    },
+    "study6/study6/inputs/reference/genome.fa.fai": {
+      "bytes": 40,
+      "sha256": "a56ecfeb8445f68f80991bc97caa2b930ca46f3e7ceeba9b48f2fac68d5077b0"
+    },
+    "study6/study6/inputs/reference/mane.gtf": {
+      "bytes": 1393,
+      "sha256": "3fddd7324be54b905c4aa097364efc134594d6ada3b0f4bdbcd2b208aa4cb0b4"
+    },
+    "study6/study6/inputs/reference/mane.tsv": {
+      "bytes": 246,
+      "sha256": "0849fea54bcd26ce1acc5ea1df70b6c7932ec823faf4b694387acf13347bd2f7"
+    },
+    "study6/study6/inputs/reference/models_independent.json": {
+      "bytes": 1175,
+      "sha256": "80583e16755b18f0144d8760cbd8c894647819059fc52661896de693edd784bf"
+    },
+    "study6/study6/inputs/reference/proteins.fa": {
+      "bytes": 286,
+      "sha256": "b8104383372b7d76bc1a6915ebe2bd97d088b27fb31029f51ef87d6d9dee5cdc"
+    },
+    "study6/study6/inputs/reference/sec.tsv": {
+      "bytes": 10,
+      "sha256": "46ea18e6645647d27c8da9a453f8f0f58c8d43773f595bc07e6df276df380949"
+    },
+    "study6/study6/inputs/reference/transcripts.fa": {
+      "bytes": 455,
+      "sha256": "e308cc3dc1f5ec2b61ee06ac22abf56e782ec1e4f4f718861975d631f03a466c"
+    },
+    "study6/study6/inputs/vcf/CLOSURE-A-conditional-only.vcf": {
+      "bytes": 358,
+      "sha256": "b779c7865cf33e36296de944d0a985e3ddbfea47a2f357d81227f1577885ab82"
+    },
+    "study6/study6/inputs/vcf/CLOSURE-A-mixed.vcf": {
+      "bytes": 358,
+      "sha256": "b779c7865cf33e36296de944d0a985e3ddbfea47a2f357d81227f1577885ab82"
+    },
+    "study6/study6/inputs/vcf/CLOSURE-B-cis.vcf": {
+      "bytes": 336,
+      "sha256": "07e4642d58acbe8afb12d4648b3105dce95520d758f4c1380157ffd93ec0d397"
+    },
+    "study6/study6/inputs/vcf/CLOSURE-B-trans.vcf": {
+      "bytes": 336,
+      "sha256": "4ed4dfc611969bc75b4cddf51e0d6aea75e0fecec230051226ee631d4a464901"
+    },
+    "study6/study6/inputs/vcf/CLOSURE-B-unknown.vcf": {
+      "bytes": 312,
+      "sha256": "0438dd2ea7516b52e45d88033f0fff2bd5264b43e2bc143c10976db0d8eff1e8"
+    },
+    "study6/study6/inputs/vcf/CLOSURE-C-valid-boundary-del.vcf": {
+      "bytes": 280,
+      "sha256": "d073962fc50b4d94199ce9c6d8c63a64edfabbaca8da513cffd307759140b127"
+    },
+    "study6/study6/scripts/execute.py": {
+      "bytes": 4566,
+      "sha256": "5f2b999fce9702cfd43e6fc6d65eb45c32c0d8abfa2206474dd622abc3bbb206"
+    },
+    "study6/study6/scripts/freeze_expectations.py": {
+      "bytes": 5533,
+      "sha256": "b27a4ac1aa573323cbc087a66120bb005f6179d133c4abb44e31a0634c49a755"
+    },
+    "study6/study6/scripts/reopen_saved.R": {
+      "bytes": 2541,
+      "sha256": "eeb6cc98420f137dff788fee14ea17cdf4198824825162085c0c5387a8cf3e23"
+    },
+    "study6/study6/scripts/review_saved.py": {
+      "bytes": 13387,
+      "sha256": "990567f105d5cba11457d36359af2b2161707a8743dce633898943a491e4822d"
+    },
+    "study6/study6/scripts/run_case.R": {
+      "bytes": 11257,
+      "sha256": "183c543942d1f02633b302aad9a250d9ef770b493de379734becf14485286db8"
+    },
+    "study6/verify_restoration.py": {
+      "bytes": 1702,
+      "sha256": "27152c493f6aacb843228b02b2407ae2d0cc96e7a1f8b5a1ec5357e1bc563f70"
+    }
+  }
+}

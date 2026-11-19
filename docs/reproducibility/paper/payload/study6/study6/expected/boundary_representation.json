@@ -1,0 +1,77 @@
+{
+  "old_REF": "TT",
+  "actual_genome17_18": "TG",
+  "old_REF_valid": false,
+  "tx_nt17_genome": 17,
+  "tx_nt18_genome": 28,
+  "valid_variant": {
+    "event_id": "e27_GT_G",
+    "contig": "chr1",
+    "pos": 27,
+    "ref": "GT",
+    "alt": "G",
+    "nt": 17,
+    "old": "TT",
+    "new": "T",
+    "side": null,
+    "role": "somatic"
+  },
+  "actual_REF27_28": "GT",
+  "fixed_splicing_RNA_equivalent_to_old_edit": true,
+  "repeat_ambiguity": "Deleting either of adjacent transcript TT yields same RNA; genomic deletion28 with intronic anchor27 is one valid distinct genomic representation, not unique recovery of historical mutation",
+  "expected": {
+    "causal_event_labels": [
+      "e27_GT_G"
+    ],
+    "normal_RNA": "ATGGAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+    "mutant_RNA": "ATGGAAGCTTGTGACTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+    "normal": {
+      "protein": "MEACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+      "first_stop_nt": 94,
+      "stop_codon": "TAA"
+    },
+    "mutant": {
+      "protein": "MEACDLVILN",
+      "first_stop_nt": 31,
+      "stop_codon": "TGA"
+    },
+    "windows": [
+      {
+        "start": 1,
+        "end": 8,
+        "length": 8,
+        "sequence": "MEACDLVI"
+      },
+      {
+        "start": 2,
+        "end": 9,
+        "length": 8,
+        "sequence": "EACDLVIL"
+      },
+      {
+        "start": 3,
+        "end": 10,
+        "length": 8,
+        "sequence": "ACDLVILN"
+      },
+      {
+        "start": 1,
+        "end": 9,
+        "length": 9,
+        "sequence": "MEACDLVIL"
+      },
+      {
+        "start": 2,
+        "end": 10,
+        "length": 9,
+        "sequence": "EACDLVILN"
+      },
+      {
+        "start": 1,
+        "end": 10,
+        "length": 10,
+        "sequence": "MEACDLVILN"
+      }
+    ]
+  }
+}

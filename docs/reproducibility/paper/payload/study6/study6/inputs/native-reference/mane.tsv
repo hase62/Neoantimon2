@@ -1,0 +1,2 @@
+#NCBI_GeneID	Ensembl_Gene	HGNC_ID	symbol	name	RefSeq_nuc	RefSeq_prot	Ensembl_nuc	Ensembl_prot	MANE_status	GRCh38_chr	chr_start	chr_end	chr_strand
+GeneID:NV	G1.1	HGNC:NV	NV	synthetic	NM_NV.1	NP_NV.1	AUD1.1	PAUD1.1	MANE Select	NC_000001.11	1	115	+

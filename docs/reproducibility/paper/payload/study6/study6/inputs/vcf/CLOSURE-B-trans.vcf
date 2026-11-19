@@ -1,0 +1,6 @@
+##fileformat=VCFv4.2
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Controlled synthetic genotype">
+##FORMAT=<ID=PS,Number=1,Type=String,Description="Synthetic source-local phase set">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NV_SAMPLE
+chr1	4	e4_G_A	G	A	.	PASS	.	GT:PS	0|1:NV_BLOCK
+chr1	5	e5_A_C	A	C	.	PASS	.	GT:PS	1|0:NV_BLOCK

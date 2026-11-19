@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-12T23:16:43.853502+09:00",
+  "files": {
+    "inputs/neo_control.tsv": "cede785dca27e68d719b85a944eb447397fb778aefbf9ee06e3a7438f1868a5d",
+    "inputs/R09.CONTROL_INPUT.all_epitopes.tsv": "94cfd74673d702e2eee9e2247aaa4903b9f337267f863c27aab27d80ab4dce8e",
+    "inputs/canonical.json": "5db5ddef063383ccd811991048ba370b42688177fdbf30a857805988e718c691",
+    "inputs/cases.json": "a014e295f821bb5c0e72512906eb91ef464ecb14ef4c475a771b55528db4d7bb",
+    "inputs/CONVERSION_RULES.json": "8998ab76784766ac656acf66d25b1414db8b9fe9179a0a3ec9d68b4e45a971da",
+    "inputs/resolved.vcf": "76c7f29c215650ae5d2d1f3a851a4a880c3a8e04830aaacde51acef8e73b74f8",
+    "inputs/native-reference/genome.fa": "925ac81e1dfd5d6ef163300f2e27d7a5425d48c7a9b4fb3c19287347a84ab609",
+    "inputs/native-reference/sec.tsv": "46ea18e6645647d27c8da9a453f8f0f58c8d43773f595bc07e6df276df380949",
+    "inputs/native-reference/mane.tsv": "0849fea54bcd26ce1acc5ea1df70b6c7932ec823faf4b694387acf13347bd2f7",
+    "inputs/native-reference/annotation.gtf": "a0eb632a1888ba100833bffdc0040a2a8aa3185ab43275467c96a925242768b5",
+    "inputs/native-reference/mane.gtf": "3fddd7324be54b905c4aa097364efc134594d6ada3b0f4bdbcd2b208aa4cb0b4",
+    "inputs/native-reference/genome.fa.fai": "a26c05a82ff3253d0567e47fdba3d018fc813278c86ff17fdaa48d28abda4ca2",
+    "inputs/native-reference/models_independent.json": "80583e16755b18f0144d8760cbd8c894647819059fc52661896de693edd784bf",
+    "inputs/native-reference/coding.fa": "1fb77374b9ccca086e6bfc8ed201560145c32e8c740dfb2954faf1ff66c2d200",
+    "inputs/native-reference/proteins.fa": "33f4cac2cb6bcbaa0aa2d2929a24991b5ab61f9bce6a6111bb0b99293320e6ed",
+    "inputs/native-reference/transcripts.fa": "1fb77374b9ccca086e6bfc8ed201560145c32e8c740dfb2954faf1ff66c2d200",
+    "expected/query_expected.json": "861ebf3a85479bc1c9246e3e4c3abfa0e30ab3a180f36dc71b675e2d206ce3d5",
+    "scripts/neo_run.R": "f2196f235280efbd981f61da5e0cb3c5d0a1826145d52526212ff204ea6d48c7",
+    "scripts/run_r09.py": "09aabcb2ae72e18b3b78a473791266eaa6e2a03992e59bc8766ffde03b8727a7",
+    "scripts/neo_reopen.R": "9f79d140c29df18df216e716b928436c2cfbe21d3bed8afa19193136799b9d7f",
+    "sources/patched.tar.gz": "af58b053bc57fcb1f46fb8378ee16173621579e4aec156cdb54767d26792486a",
+    "ROUTE_AND_SCOPE.md": "9187986363ccdddbd05f6095429d87f5fd95ba578078b368f012226ac8c9424b"
+  },
+  "expectations_from_tool_observations": false,
+  "route_fixed_before_native_reports": true
+}

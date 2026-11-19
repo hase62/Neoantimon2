@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-11-16T23:17:12.366188+09:00",
+  "generator": "scripts/generate_independent.py",
+  "generator_sha256": "ff082fc5aeec5c54fbf6ac9100643fc8d0083a4d647ddd5a59c030e494241a7f",
+  "method": "Independent nucleotide projection/splicing/editing, standard64codon table+explicit Sec, first-stop translation, predeclared mutation/junction/tail window geometry; no Core or observed data access",
+  "case_ids": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "S01",
+    "S02",
+    "S03"
+  ],
+  "new_study": "MR11_20261116_A",
+  "exact_comparison_no_sequence_tolerance": true
+}

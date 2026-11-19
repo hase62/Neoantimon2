@@ -1,0 +1,400 @@
+{
+  "CLOSURE-A-mixed": {
+    "target": "MKACDFGH",
+    "HLA": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "expected_origin_counts": {
+      "eligible": 2,
+      "ineligible": 0,
+      "not_evaluated": 1
+    },
+    "expected_candidate_status": "eligible",
+    "expected_selected_pMHC": 2,
+    "DNA_counts": {
+      "chr1_4_G_A": 8,
+      "chrB_4_G_A": 8,
+      "chrB_83_T_C": 8
+    },
+    "native_policy": {
+      "allowlist_sequences": [
+        "MKACDFGH"
+      ],
+      "max_peptides": 2,
+      "fill_to_capacity": true
+    },
+    "clinical_scope": "Synthetic DNA support; full-context conditionality; not biological negativity"
+  },
+  "CLOSURE-A-conditional-only": {
+    "target": "MKACDFGH",
+    "HLA": [
+      "HLA-A*02:01",
+      "HLA-B*07:02"
+    ],
+    "expected_origin_counts": {
+      "eligible": 0,
+      "ineligible": 2,
+      "not_evaluated": 1
+    },
+    "expected_candidate_status": "not_evaluated",
+    "expected_selected_pMHC": 0,
+    "DNA_counts": {
+      "chr1_4_G_A": 0,
+      "chrB_4_G_A": 8,
+      "chrB_83_T_C": 8
+    },
+    "native_policy": {
+      "allowlist_sequences": [
+        "MKACDFGH"
+      ],
+      "max_peptides": 2,
+      "fill_to_capacity": true
+    },
+    "clinical_scope": "Synthetic DNA support; full-context conditionality; not biological negativity"
+  },
+  "CLOSURE-B-cis": {
+    "observational_rule": "exact declared molecular haplotypes",
+    "hypotheses": [
+      {
+        "causal_event_labels": [
+          "e4_G_A",
+          "e5_A_C"
+        ],
+        "normal_RNA": "ATGGAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "mutant_RNA": "ATGACAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "normal": {
+          "protein": "MEACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "mutant": {
+          "protein": "MTACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "windows": [
+          {
+            "start": 1,
+            "end": 8,
+            "length": 8,
+            "sequence": "MTACDFGH"
+          },
+          {
+            "start": 2,
+            "end": 9,
+            "length": 8,
+            "sequence": "TACDFGHI"
+          },
+          {
+            "start": 1,
+            "end": 15,
+            "length": 15,
+            "sequence": "MTACDFGHIKLNPQR"
+          },
+          {
+            "start": 2,
+            "end": 16,
+            "length": 15,
+            "sequence": "TACDFGHIKLNPQRS"
+          }
+        ]
+      }
+    ],
+    "hypothesis_semantics": "declared phase",
+    "expected_target_status": "eligible",
+    "expected_selected_pMHC": 2,
+    "native_policy": {
+      "allowlist_sequences": [
+        "MTACDFGH",
+        "MKACDFGH",
+        "MAACDFGH"
+      ],
+      "max_peptides": 6,
+      "fill_to_capacity": true
+    },
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ]
+  },
+  "CLOSURE-B-trans": {
+    "observational_rule": "exact declared molecular haplotypes",
+    "hypotheses": [
+      {
+        "causal_event_labels": [
+          "e4_G_A"
+        ],
+        "normal_RNA": "ATGGAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "mutant_RNA": "ATGAAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "normal": {
+          "protein": "MEACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "mutant": {
+          "protein": "MKACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "windows": [
+          {
+            "start": 1,
+            "end": 8,
+            "length": 8,
+            "sequence": "MKACDFGH"
+          },
+          {
+            "start": 2,
+            "end": 9,
+            "length": 8,
+            "sequence": "KACDFGHI"
+          },
+          {
+            "start": 1,
+            "end": 15,
+            "length": 15,
+            "sequence": "MKACDFGHIKLNPQR"
+          },
+          {
+            "start": 2,
+            "end": 16,
+            "length": 15,
+            "sequence": "KACDFGHIKLNPQRS"
+          }
+        ]
+      },
+      {
+        "causal_event_labels": [
+          "e5_A_C"
+        ],
+        "normal_RNA": "ATGGAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "mutant_RNA": "ATGGCAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "normal": {
+          "protein": "MEACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "mutant": {
+          "protein": "MAACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "windows": [
+          {
+            "start": 1,
+            "end": 8,
+            "length": 8,
+            "sequence": "MAACDFGH"
+          },
+          {
+            "start": 2,
+            "end": 9,
+            "length": 8,
+            "sequence": "AACDFGHI"
+          },
+          {
+            "start": 1,
+            "end": 15,
+            "length": 15,
+            "sequence": "MAACDFGHIKLNPQR"
+          },
+          {
+            "start": 2,
+            "end": 16,
+            "length": 15,
+            "sequence": "AACDFGHIKLNPQRS"
+          }
+        ]
+      }
+    ],
+    "hypothesis_semantics": "declared phase",
+    "expected_target_status": "eligible",
+    "expected_selected_pMHC": 4,
+    "native_policy": {
+      "allowlist_sequences": [
+        "MTACDFGH",
+        "MKACDFGH",
+        "MAACDFGH"
+      ],
+      "max_peptides": 6,
+      "fill_to_capacity": true
+    },
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ]
+  },
+  "CLOSURE-B-unknown": {
+    "observational_rule": "For unknown, inspect generated hypotheses and require conditional native gate; exhaustive cis/trans output NOT required",
+    "hypotheses": [
+      {
+        "causal_event_labels": [
+          "e4_G_A"
+        ],
+        "normal_RNA": "ATGGAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "mutant_RNA": "ATGAAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "normal": {
+          "protein": "MEACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "mutant": {
+          "protein": "MKACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "windows": [
+          {
+            "start": 1,
+            "end": 8,
+            "length": 8,
+            "sequence": "MKACDFGH"
+          },
+          {
+            "start": 2,
+            "end": 9,
+            "length": 8,
+            "sequence": "KACDFGHI"
+          },
+          {
+            "start": 1,
+            "end": 15,
+            "length": 15,
+            "sequence": "MKACDFGHIKLNPQR"
+          },
+          {
+            "start": 2,
+            "end": 16,
+            "length": 15,
+            "sequence": "KACDFGHIKLNPQRS"
+          }
+        ]
+      },
+      {
+        "causal_event_labels": [
+          "e5_A_C"
+        ],
+        "normal_RNA": "ATGGAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "mutant_RNA": "ATGGCAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "normal": {
+          "protein": "MEACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "mutant": {
+          "protein": "MAACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "windows": [
+          {
+            "start": 1,
+            "end": 8,
+            "length": 8,
+            "sequence": "MAACDFGH"
+          },
+          {
+            "start": 2,
+            "end": 9,
+            "length": 8,
+            "sequence": "AACDFGHI"
+          },
+          {
+            "start": 1,
+            "end": 15,
+            "length": 15,
+            "sequence": "MAACDFGHIKLNPQR"
+          },
+          {
+            "start": 2,
+            "end": 16,
+            "length": 15,
+            "sequence": "AACDFGHIKLNPQRS"
+          }
+        ]
+      }
+    ],
+    "hypothesis_semantics": "possible singleton contexts; not certain trans",
+    "expected_target_status": "not_evaluated",
+    "expected_selected_pMHC": 0,
+    "native_policy": {
+      "allowlist_sequences": [
+        "MTACDFGH",
+        "MKACDFGH",
+        "MAACDFGH"
+      ],
+      "max_peptides": 6,
+      "fill_to_capacity": true
+    },
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ]
+  },
+  "CLOSURE-C-valid-boundary-del": {
+    "hypotheses": [
+      {
+        "causal_event_labels": [
+          "e27_GT_G"
+        ],
+        "normal_RNA": "ATGGAAGCTTGTGACTTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "mutant_RNA": "ATGGAAGCTTGTGACTTGGTCATATTAAACTGAATCCTCAACGTTCTACTGTTTGGTATGCTTGTGACGAATTTGGTCATATTAAACTGCCTTAACCCGGGTAA",
+        "normal": {
+          "protein": "MEACDFGHIKLNPQRSTVWYACDEFGHIKLP",
+          "first_stop_nt": 94,
+          "stop_codon": "TAA"
+        },
+        "mutant": {
+          "protein": "MEACDLVILN",
+          "first_stop_nt": 31,
+          "stop_codon": "TGA"
+        },
+        "windows": [
+          {
+            "start": 1,
+            "end": 8,
+            "length": 8,
+            "sequence": "MEACDLVI"
+          },
+          {
+            "start": 2,
+            "end": 9,
+            "length": 8,
+            "sequence": "EACDLVIL"
+          },
+          {
+            "start": 3,
+            "end": 10,
+            "length": 8,
+            "sequence": "ACDLVILN"
+          },
+          {
+            "start": 1,
+            "end": 9,
+            "length": 9,
+            "sequence": "MEACDLVIL"
+          },
+          {
+            "start": 2,
+            "end": 10,
+            "length": 9,
+            "sequence": "EACDLVILN"
+          },
+          {
+            "start": 1,
+            "end": 10,
+            "length": 10,
+            "sequence": "MEACDLVILN"
+          }
+        ]
+      }
+    ],
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ],
+    "expected_Origins": 12,
+    "assumption": "fixed exons1-17/28-115; deletion of genomic28; splice alterations not modeled"
+  }
+}

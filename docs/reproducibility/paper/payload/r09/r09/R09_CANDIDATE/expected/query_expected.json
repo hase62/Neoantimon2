@@ -1,0 +1,118 @@
+{
+  "sample_id": "NV_SAMPLE",
+  "sequence": "MKACDFGH",
+  "contexts": [
+    {
+      "sample_id": "NV_SAMPLE",
+      "context_id": "R09:chr1:4:G:A:AUD1.1:1-8:MKACDFGH",
+      "event_key": "chr1:4:G:A",
+      "contig": "chr1",
+      "pos": 4,
+      "ref": "G",
+      "alt": "A",
+      "transcript": "AUD1.1",
+      "gene_id": "G1.1",
+      "gene_symbol": "NV_SYNTHETIC",
+      "protein_position": 2,
+      "mutation": "E/K",
+      "peptide_start": 1,
+      "peptide_end": 8,
+      "peptide_sequence": "MKACDFGH",
+      "WT_peptide": "MEACDFGH",
+      "phase": "SINGLE_SOMATIC_EVENT_PER_TRANSCRIPT_RESOLVED",
+      "synthetic_DNA": {
+        "tumor_alt": 8,
+        "tumor_depth": 20,
+        "normal_alt": 0,
+        "normal_depth": 20
+      }
+    },
+    {
+      "sample_id": "NV_SAMPLE",
+      "context_id": "R09:chr1:4:G:A:AUD2.1:1-8:MKACDFGH",
+      "event_key": "chr1:4:G:A",
+      "contig": "chr1",
+      "pos": 4,
+      "ref": "G",
+      "alt": "A",
+      "transcript": "AUD2.1",
+      "gene_id": "G1.1",
+      "gene_symbol": "NV_SYNTHETIC",
+      "protein_position": 2,
+      "mutation": "E/K",
+      "peptide_start": 1,
+      "peptide_end": 8,
+      "peptide_sequence": "MKACDFGH",
+      "WT_peptide": "MEACDFGH",
+      "phase": "SINGLE_SOMATIC_EVENT_PER_TRANSCRIPT_RESOLVED",
+      "synthetic_DNA": {
+        "tumor_alt": 8,
+        "tumor_depth": 20,
+        "normal_alt": 0,
+        "normal_depth": 20
+      }
+    },
+    {
+      "sample_id": "NV_SAMPLE",
+      "context_id": "R09:chrB:4:G:A:BUD1.1:1-8:MKACDFGH",
+      "event_key": "chrB:4:G:A",
+      "contig": "chrB",
+      "pos": 4,
+      "ref": "G",
+      "alt": "A",
+      "transcript": "BUD1.1",
+      "gene_id": "GB.1",
+      "gene_symbol": "NV_SYNTHETIC",
+      "protein_position": 2,
+      "mutation": "E/K",
+      "peptide_start": 1,
+      "peptide_end": 8,
+      "peptide_sequence": "MKACDFGH",
+      "WT_peptide": "MEACDFGH",
+      "phase": "SINGLE_SOMATIC_EVENT_PER_TRANSCRIPT_RESOLVED",
+      "synthetic_DNA": {
+        "tumor_alt": 8,
+        "tumor_depth": 20,
+        "normal_alt": 0,
+        "normal_depth": 20
+      }
+    }
+  ],
+  "HLA_scores": {
+    "HLA-A*02:01": "100",
+    "HLA-B*07:02": "200"
+  },
+  "score_unit": "nM",
+  "direction": "lower_is_better",
+  "contexts_per_HLA": 3,
+  "Events": 2,
+  "unique_sequence": 1,
+  "pmhc": 2,
+  "context_HLA_links": 6,
+  "exclusion_policies": {
+    "none": [],
+    "exclude_chr1": [
+      "chr1:4:G:A"
+    ],
+    "exclude_chrB": [
+      "chrB:4:G:A"
+    ],
+    "exclude_all": [
+      "chr1:4:G:A",
+      "chrB:4:G:A"
+    ]
+  },
+  "expected_remaining_contexts": {
+    "none": 3,
+    "exclude_chr1": 1,
+    "exclude_chrB": 2,
+    "exclude_all": 0
+  },
+  "Q5": "Equal canonical relation/measurement sets across separate-process reads",
+  "noncomparable": [
+    "native unknown-phase behavior",
+    "typed Neo Origin IDs",
+    "clinical/native grade semantics",
+    "model/run identity absent from standard pVAC metrics schema at this boundary"
+  ]
+}

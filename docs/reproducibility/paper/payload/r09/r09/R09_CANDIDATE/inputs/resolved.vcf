@@ -1,0 +1,5 @@
+##fileformat=VCFv4.2
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Synthetic genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NV_SAMPLE
+chr1	4	chr1_4_G_A	G	A	.	PASS	.	GT	0/1
+chrB	4	chrB_4_G_A	G	A	.	PASS	.	GT	0/1

@@ -1,0 +1,371 @@
+[
+  {
+    "case_id": "CLOSURE-A-mixed",
+    "kind": "NATIVE_CONTROL",
+    "reference": "inputs/native-reference",
+    "native": true,
+    "dna_counts": {
+      "chr1_4_G_A": 8,
+      "chrB_4_G_A": 8,
+      "chrB_83_T_C": 8
+    },
+    "events": [
+      {
+        "event_id": "chr1_4_G_A",
+        "contig": "chr1",
+        "pos": 4,
+        "ref": "G",
+        "alt": "A",
+        "nt": 4,
+        "old": "G",
+        "new": "A",
+        "side": null,
+        "role": "somatic"
+      },
+      {
+        "event_id": "chrB_4_G_A",
+        "contig": "chrB",
+        "pos": 4,
+        "ref": "G",
+        "alt": "A",
+        "nt": 4,
+        "old": "G",
+        "new": "A",
+        "side": null,
+        "role": "somatic"
+      },
+      {
+        "event_id": "chrB_83_T_C",
+        "contig": "chrB",
+        "pos": 83,
+        "ref": "T",
+        "alt": "C",
+        "nt": 73,
+        "old": "T",
+        "new": "C",
+        "side": null,
+        "role": "somatic"
+      }
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      15
+    ],
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1",
+      "BUD1.1"
+    ],
+    "vcfs": [
+      {
+        "role": "somatic",
+        "path": "inputs/vcf/CLOSURE-A-mixed.vcf"
+      }
+    ],
+    "targets": [
+      "MKACDFGH"
+    ],
+    "max_selected": 2,
+    "expected_status": "eligible",
+    "expected_selected": 2
+  },
+  {
+    "case_id": "CLOSURE-A-conditional-only",
+    "kind": "NATIVE_CONTROL",
+    "reference": "inputs/native-reference",
+    "native": true,
+    "dna_counts": {
+      "chr1_4_G_A": 0,
+      "chrB_4_G_A": 8,
+      "chrB_83_T_C": 8
+    },
+    "events": [
+      {
+        "event_id": "chr1_4_G_A",
+        "contig": "chr1",
+        "pos": 4,
+        "ref": "G",
+        "alt": "A",
+        "nt": 4,
+        "old": "G",
+        "new": "A",
+        "side": null,
+        "role": "somatic"
+      },
+      {
+        "event_id": "chrB_4_G_A",
+        "contig": "chrB",
+        "pos": 4,
+        "ref": "G",
+        "alt": "A",
+        "nt": 4,
+        "old": "G",
+        "new": "A",
+        "side": null,
+        "role": "somatic"
+      },
+      {
+        "event_id": "chrB_83_T_C",
+        "contig": "chrB",
+        "pos": 83,
+        "ref": "T",
+        "alt": "C",
+        "nt": 73,
+        "old": "T",
+        "new": "C",
+        "side": null,
+        "role": "somatic"
+      }
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      15
+    ],
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1",
+      "BUD1.1"
+    ],
+    "vcfs": [
+      {
+        "role": "somatic",
+        "path": "inputs/vcf/CLOSURE-A-conditional-only.vcf"
+      }
+    ],
+    "targets": [
+      "MKACDFGH"
+    ],
+    "max_selected": 2,
+    "expected_status": "not_evaluated",
+    "expected_selected": 0
+  },
+  {
+    "case_id": "CLOSURE-B-cis",
+    "historical_case": "same_codon_cis",
+    "kind": "P0A",
+    "phase_expectation": "EXPLICIT_SOURCE_LOCAL_GT_PS",
+    "events": [
+      {
+        "event_id": "e4_G_A",
+        "nt": 4,
+        "old": "G",
+        "new": "A",
+        "contig": "chr1",
+        "pos": 4,
+        "ref": "G",
+        "alt": "A",
+        "side": "LEFT",
+        "role": "somatic"
+      },
+      {
+        "event_id": "e5_A_C",
+        "nt": 5,
+        "old": "A",
+        "new": "C",
+        "contig": "chr1",
+        "pos": 5,
+        "ref": "A",
+        "alt": "C",
+        "side": "LEFT",
+        "role": "somatic"
+      }
+    ],
+    "bridge_marker": false,
+    "reference": "inputs/reference",
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ],
+    "lengths": [
+      8,
+      15
+    ],
+    "vcfs": [
+      {
+        "role": "somatic",
+        "path": "inputs/vcf/CLOSURE-B-cis.vcf"
+      }
+    ],
+    "native": true,
+    "targets": [
+      "MTACDFGH",
+      "MKACDFGH",
+      "MAACDFGH"
+    ],
+    "max_selected": 6,
+    "dna_counts": {
+      "e4_G_A": 8,
+      "e5_A_C": 8
+    },
+    "expected_target_status": "eligible",
+    "expected_selected": 2
+  },
+  {
+    "case_id": "CLOSURE-B-trans",
+    "historical_case": "same_codon_trans",
+    "kind": "P0A",
+    "phase_expectation": "EXPLICIT_SOURCE_LOCAL_GT_PS",
+    "events": [
+      {
+        "event_id": "e4_G_A",
+        "nt": 4,
+        "old": "G",
+        "new": "A",
+        "contig": "chr1",
+        "pos": 4,
+        "ref": "G",
+        "alt": "A",
+        "side": "LEFT",
+        "role": "somatic"
+      },
+      {
+        "event_id": "e5_A_C",
+        "nt": 5,
+        "old": "A",
+        "new": "C",
+        "contig": "chr1",
+        "pos": 5,
+        "ref": "A",
+        "alt": "C",
+        "side": "RIGHT",
+        "role": "somatic"
+      }
+    ],
+    "bridge_marker": false,
+    "reference": "inputs/reference",
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ],
+    "lengths": [
+      8,
+      15
+    ],
+    "vcfs": [
+      {
+        "role": "somatic",
+        "path": "inputs/vcf/CLOSURE-B-trans.vcf"
+      }
+    ],
+    "native": true,
+    "targets": [
+      "MTACDFGH",
+      "MKACDFGH",
+      "MAACDFGH"
+    ],
+    "max_selected": 6,
+    "dna_counts": {
+      "e4_G_A": 8,
+      "e5_A_C": 8
+    },
+    "expected_target_status": "eligible",
+    "expected_selected": 4
+  },
+  {
+    "case_id": "CLOSURE-B-unknown",
+    "historical_case": "same_codon_unknown",
+    "kind": "P0A",
+    "phase_expectation": "UNKNOWN",
+    "events": [
+      {
+        "event_id": "e4_G_A",
+        "nt": 4,
+        "old": "G",
+        "new": "A",
+        "contig": "chr1",
+        "pos": 4,
+        "ref": "G",
+        "alt": "A",
+        "side": null,
+        "role": "somatic"
+      },
+      {
+        "event_id": "e5_A_C",
+        "nt": 5,
+        "old": "A",
+        "new": "C",
+        "contig": "chr1",
+        "pos": 5,
+        "ref": "A",
+        "alt": "C",
+        "side": null,
+        "role": "somatic"
+      }
+    ],
+    "bridge_marker": false,
+    "reference": "inputs/reference",
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ],
+    "lengths": [
+      8,
+      15
+    ],
+    "vcfs": [
+      {
+        "role": "somatic",
+        "path": "inputs/vcf/CLOSURE-B-unknown.vcf"
+      }
+    ],
+    "native": true,
+    "targets": [
+      "MTACDFGH",
+      "MKACDFGH",
+      "MAACDFGH"
+    ],
+    "max_selected": 6,
+    "dna_counts": {
+      "e4_G_A": 8,
+      "e5_A_C": 8
+    },
+    "expected_target_status": "not_evaluated",
+    "expected_selected": 0
+  },
+  {
+    "case_id": "CLOSURE-C-valid-boundary-del",
+    "kind": "FIXED_ANNOTATION_BOUNDARY_CONTROL",
+    "reference": "inputs/reference",
+    "events": [
+      {
+        "event_id": "e27_GT_G",
+        "contig": "chr1",
+        "pos": 27,
+        "ref": "GT",
+        "alt": "G",
+        "nt": 17,
+        "old": "TT",
+        "new": "T",
+        "side": null,
+        "role": "somatic"
+      }
+    ],
+    "lengths": [
+      8,
+      9,
+      10,
+      11,
+      15
+    ],
+    "transcripts": [
+      "AUD1.1",
+      "AUD2.1"
+    ],
+    "vcfs": [
+      {
+        "role": "somatic",
+        "path": "inputs/vcf/CLOSURE-C-valid-boundary-del.vcf"
+      }
+    ],
+    "native": false,
+    "interpretation": "REF-valid intronic anchor27 G plus first next-exon base28 T; delete28 only. Fixed original exon structure, NOT a splice-effect prediction. Equivalent RNA sequence to old TT>T because tandem TT."
+  }
+]

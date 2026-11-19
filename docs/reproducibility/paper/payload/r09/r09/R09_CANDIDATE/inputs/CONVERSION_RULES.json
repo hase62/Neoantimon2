@@ -1,0 +1,18 @@
+{
+  "identity": "CONTROL_NOT_INFERENCE",
+  "genomic_coordinates": "canonical pos1based4 -> pVAC Start3 Stop4; no REF/ALT change",
+  "extra_columns": "R09 columns are input annotations, not evidence of a new pVAC molecular Origin model",
+  "required_annotations": {
+    "TSL1": "synthetic schema annotation",
+    "MANE_SelectFalse": "synthetic schema annotation",
+    "CanonicalFalse": "synthetic schema annotation",
+    "TranscriptLength31": "length of tiny fixture reference protein",
+    "Biotype": "protein_coding from tiny fixture GTF",
+    "TranscriptCDSFlagsNone": "declared complete synthetic CDS"
+  },
+  "expression": "all unknown NA, not0",
+  "percentiles_WT_affinity": "all unknown NA, not0",
+  "algorithm_column": "MHCflurry schema carrier, NOT real MHCflurry execution; no predictor provenance can be inferred from it",
+  "row_units": "6 context-HLA rows;2 pMHC identities;1 synthesized sequence",
+  "native_generated_output": "Only CLI outputs after the input boundary count as observations"
+}

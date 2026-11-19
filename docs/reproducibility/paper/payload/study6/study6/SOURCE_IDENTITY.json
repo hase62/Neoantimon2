@@ -1,0 +1,7 @@
+{
+  "baseline_label": "f05da8628077ece986fe941314bf938062d4b7a2",
+  "patched_source_sha256": "af58b053bc57fcb1f46fb8378ee16173621579e4aec156cdb54767d26792486a",
+  "source_changed_this_task": false,
+  "original_candidate_sha256": "4a77fe3559f67ca545a4c93ce6e1e97ef907c10bae97b1d7f24a47f8b8dc8d71",
+  "Core_public_API_count": 20
+}

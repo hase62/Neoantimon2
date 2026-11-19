@@ -1,0 +1,130 @@
+{
+  "sample_id": "NV_SAMPLE",
+  "contexts": [
+    {
+      "sample_id": "NV_SAMPLE",
+      "context_id": "R09:chr1:4:G:A:AUD1.1:1-8:MKACDFGH",
+      "event_key": "chr1:4:G:A",
+      "contig": "chr1",
+      "pos": 4,
+      "ref": "G",
+      "alt": "A",
+      "transcript": "AUD1.1",
+      "gene_id": "G1.1",
+      "gene_symbol": "NV_SYNTHETIC",
+      "protein_position": 2,
+      "mutation": "E/K",
+      "peptide_start": 1,
+      "peptide_end": 8,
+      "peptide_sequence": "MKACDFGH",
+      "WT_peptide": "MEACDFGH",
+      "phase": "SINGLE_SOMATIC_EVENT_PER_TRANSCRIPT_RESOLVED",
+      "synthetic_DNA": {
+        "tumor_alt": 8,
+        "tumor_depth": 20,
+        "normal_alt": 0,
+        "normal_depth": 20
+      }
+    },
+    {
+      "sample_id": "NV_SAMPLE",
+      "context_id": "R09:chr1:4:G:A:AUD2.1:1-8:MKACDFGH",
+      "event_key": "chr1:4:G:A",
+      "contig": "chr1",
+      "pos": 4,
+      "ref": "G",
+      "alt": "A",
+      "transcript": "AUD2.1",
+      "gene_id": "G1.1",
+      "gene_symbol": "NV_SYNTHETIC",
+      "protein_position": 2,
+      "mutation": "E/K",
+      "peptide_start": 1,
+      "peptide_end": 8,
+      "peptide_sequence": "MKACDFGH",
+      "WT_peptide": "MEACDFGH",
+      "phase": "SINGLE_SOMATIC_EVENT_PER_TRANSCRIPT_RESOLVED",
+      "synthetic_DNA": {
+        "tumor_alt": 8,
+        "tumor_depth": 20,
+        "normal_alt": 0,
+        "normal_depth": 20
+      }
+    },
+    {
+      "sample_id": "NV_SAMPLE",
+      "context_id": "R09:chrB:4:G:A:BUD1.1:1-8:MKACDFGH",
+      "event_key": "chrB:4:G:A",
+      "contig": "chrB",
+      "pos": 4,
+      "ref": "G",
+      "alt": "A",
+      "transcript": "BUD1.1",
+      "gene_id": "GB.1",
+      "gene_symbol": "NV_SYNTHETIC",
+      "protein_position": 2,
+      "mutation": "E/K",
+      "peptide_start": 1,
+      "peptide_end": 8,
+      "peptide_sequence": "MKACDFGH",
+      "WT_peptide": "MEACDFGH",
+      "phase": "SINGLE_SOMATIC_EVENT_PER_TRANSCRIPT_RESOLVED",
+      "synthetic_DNA": {
+        "tumor_alt": 8,
+        "tumor_depth": 20,
+        "normal_alt": 0,
+        "normal_depth": 20
+      }
+    }
+  ],
+  "measurements": [
+    {
+      "sample_id": "NV_SAMPLE",
+      "peptide_sequence": "MKACDFGH",
+      "HLA": "HLA-A*02:01",
+      "score_string": "100",
+      "metric": "controlled_affinity_nm",
+      "unit": "nM",
+      "direction": "lower_is_better",
+      "status": "evaluated",
+      "source": "CONTROL_NOT_INFERENCE",
+      "provider": "R09-CONTROL-NOT-INFERENCE",
+      "predictor_version": "CONTROL1",
+      "model_version": "NO_TRAINED_MODEL",
+      "run_id": "R09-CONTROL-v1"
+    },
+    {
+      "sample_id": "NV_SAMPLE",
+      "peptide_sequence": "MKACDFGH",
+      "HLA": "HLA-B*07:02",
+      "score_string": "200",
+      "metric": "controlled_affinity_nm",
+      "unit": "nM",
+      "direction": "lower_is_better",
+      "status": "evaluated",
+      "source": "CONTROL_NOT_INFERENCE",
+      "provider": "R09-CONTROL-NOT-INFERENCE",
+      "predictor_version": "CONTROL1",
+      "model_version": "NO_TRAINED_MODEL",
+      "run_id": "R09-CONTROL-v1"
+    }
+  ],
+  "scope": "Target one8mer only; other native generated peptides remain outside predeclared comparison. All values and annotations synthetic control unless sourced from tiny synthetic reference.",
+  "missing": [
+    "WT affinity",
+    "all percentiles",
+    "all RNA expression/coverage"
+  ],
+  "canonical_key": [
+    "sample_id",
+    "contig",
+    "pos",
+    "ref",
+    "alt",
+    "transcript",
+    "peptide_start",
+    "peptide_end",
+    "peptide_sequence",
+    "HLA"
+  ]
+}
