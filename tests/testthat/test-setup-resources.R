@@ -14,16 +14,23 @@ test_that('the installed catalog preserves profiles, identities and runtime asse
   expect_match(text,attr(c,'sha256'),fixed=TRUE)
 })
 
-test_that('the twelve released API signatures remain unchanged alongside explicitly listed additions', {
+test_that('released argument prefixes stay unchanged with only the authorized optional extension', {
   baseline <- jsonlite::read_json(test_path('..','fixtures','setup','released-api-signatures.json'))$functions
   expect_length(baseline,12L)
   expect_setequal(setdiff(getNamespaceExports('Neoantimon2'),names(baseline)),
     c('neo_download_resources','neo_check_resources','neo_check_predictors','neo_setup_predictor','neo_priorities','neo_experimental_yield','neo_yield_evidence','neo_report_bundle','neo_indirect_autorun','neo_indirect_class2'))
   for(name in names(baseline)) {
     f <- getExportedValue('Neoantimon2',name)
-    expect_identical(as.list(names(formals(f))),baseline[[name]]$arguments)
+    arguments <- as.list(names(formals(f)))
     defaults <- lapply(formals(f),function(x)if(missing(x)) '<missing>' else
       paste(deparse(x,width.cutoff=500L),collapse='\n'))
+    if(name=='neo_analyze_external') {
+      expect_identical(arguments,c(baseline[[name]]$arguments,list('reference_percentiles')))
+      expect_identical(defaults['reference_percentiles'],list(reference_percentiles='NULL'))
+      arguments<-arguments[seq_along(baseline[[name]]$arguments)]
+      defaults<-defaults[unlist(baseline[[name]]$arguments)]
+    }
+    expect_identical(arguments,baseline[[name]]$arguments)
     expect_identical(defaults,baseline[[name]]$defaults)
   }
 })
