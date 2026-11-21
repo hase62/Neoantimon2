@@ -46,11 +46,11 @@ globalThis.NeoCandidateReview = (() => {
     async loadText(text) {
       this.requirePrivate();
       const revision=this.revision;
-      if (typeof text!=='string' || new TextEncoder().encode(text).length>10*1024*1024) throw new Error('レビューJSONが大きすぎます。');
+      if (typeof text!=='string') throw new Error('レビューJSON文字列が必要です。');
       const x=JSON.parse(text), identity=['project_run_id','project_analysis_id','source_manifest_sha256'];
       if (!exact(x,['schema_version','project_identity','history']) || x.schema_version!==version ||
           !exact(x.project_identity,identity) || !identity.every(k=>nonempty(x.project_identity[k])) ||
-          !hash(x.project_identity.source_manifest_sha256) || !Array.isArray(x.history) || x.history.length>100000)
+          !hash(x.project_identity.source_manifest_sha256) || !Array.isArray(x.history))
         throw new Error('壊れたレビューJSON、または未知のスキーマ版です。画面のレビューは変更しません。');
       if (!identity.every(k=>x.project_identity[k]===this.payload.project_identity[k]))
         throw new Error('別プロジェクトまたは異なる基礎実行のレビューJSONです。適用しません。');

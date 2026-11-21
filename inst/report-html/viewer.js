@@ -52,7 +52,7 @@
    for(const value of NeoCandidateReview.states){const o=el('option',NeoCandidateReview.labels[value]);o.value=value;$('review-filter').append(o);}
    $('review-save').addEventListener('click',()=>downloadText(review.exportText(),'neoantimon2-review.json','application/json'));
    $('review-export').addEventListener('click',()=>downloadText(review.acceptedTsv(candidates),'neoantimon2-confirmed-accepted.tsv','text/tab-separated-values'));
-   $('review-load').addEventListener('change',async()=>{const f=$('review-load').files[0];if(!f)return;try{if(f.size>10*1024*1024)throw new Error('レビューJSONが大きすぎます。');const count=await review.loadText(await f.text());$('review-notice').textContent='レビューを再開しました。適用対象外の履歴 '+count+' 件は保持し、再保存します。';if(current)show(candidates.find(c=>c.candidate_id===current));else render();}catch(e){$('review-notice').textContent='読み込み拒否: '+e.message;}finally{$('review-load').value='';}});
+   $('review-load').addEventListener('change',async()=>{const f=$('review-load').files[0];if(!f)return;try{const count=await review.loadText(await f.text());$('review-notice').textContent='レビューを再開しました。適用対象外の履歴 '+count+' 件は保持し、再保存します。';if(current)show(candidates.find(c=>c.candidate_id===current));else render();}catch(e){$('review-notice').textContent='読み込み拒否: '+e.message;}finally{$('review-load').value='';}});
  }
 
  $('download').addEventListener('click',()=>{const a=el('a'),url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.href=url;a.download='neoantimon2-embedded-view.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});render();

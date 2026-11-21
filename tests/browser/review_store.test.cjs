@@ -30,3 +30,10 @@ test('malformed, foreign, unknown, invalid timestamps, tampered evidence fail at
   await assert.rejects(x.loadText('{broken'));assert.equal(x.exportText(),before);
   const shared=new Store(null);assert.throws(()=>shared.record('c1','accepted',''));assert.throws(()=>shared.exportText());await assert.rejects(shared.loadText(before));assert.throws(()=>shared.acceptedTsv([]));
 });
+test('every valid self-export remains reloadable beyond a single HTML payload size',async()=>{
+  const x=new Store(await payload());
+  for(let i=0;i<110;i++)x.record('c1','held','x'.repeat(100000));
+  const text=x.exportText();assert.ok(text.length>10*1024*1024);
+  const y=new Store(await payload());await y.loadText(text);
+  assert.equal(y.history.length,110);assert.equal(y.exportText(),text);
+});
