@@ -6,6 +6,7 @@ Original public-reference model identity cannot be inferred from this experiment
 """
 import argparse
 import csv
+import datetime
 import hashlib
 import importlib.metadata
 import importlib.util
@@ -54,6 +55,11 @@ def main():
     native_percentiles = predictor.percentile_ranks(values[256:], allele='HLA-A*02:01')
     reference = target/'scores.tsv'
     reference.write_text('score\n'+''.join(format(float(v),'.17g')+'\n' for v in values[:256]))
+    original_reference = target/'reference-native.csv'
+    with original_reference.open('w', newline='') as stream:
+        writer = csv.writer(stream);writer.writerow(['peptide','allele','mhcflurry_affinity'])
+        for peptide,value in zip(peptides,values[:256]):
+            writer.writerow([peptide,'HLA-A*02:01',format(float(value),'.17g')])
     # Preserve native output before conversion and the original converter output.
     raw = target/'queries.csv'
     with raw.open('w', newline='') as stream:
@@ -79,10 +85,15 @@ def main():
         '256 deterministic SHA256-derived AA20 9mers; software test only, not a representative biological population',
         source='https://github.com/openvax/mhcflurry/releases/download/pre-2.0/models_class1_pan.selected.20200610.tar.bz2',
         source_version='e9263e842da394abd9b41e2418c58ce8e6662fb8 / models_class1_pan.selected.20200610',
-        original_sha256=sha(target/'reference-peptides.txt'),scores_file='scores.tsv',scores_sha256=sha(reference),
+        original_file='reference-native.csv',original_sha256=sha(original_reference),
+        reference_peptides_file='reference-peptides.txt',reference_peptides_sha256=sha(target/'reference-peptides.txt'),
+        scores_file='scores.tsv',scores_sha256=sha(reference),
         count=256,license='MHCflurry Apache-2.0; review upstream model/data terms',model_provenance='receipt.json')
     (target/'manifest.json').write_text(json.dumps({'schema_version':'reference-percentiles-1.0.0','distributions':[record]},indent=2)+'\n')
     receipt = dict(purpose='same-fixed-model software verification, not validation of pVACtools model equivalence or biological calibration',
+        completed_at_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        script_sha256=sha(__file__),execution_settings={key:os.environ[key] for key in
+            ['TF_NUM_INTEROP_THREADS','TF_NUM_INTRAOP_THREADS','OMP_NUM_THREADS','CUDA_VISIBLE_DEVICES','TF_CPP_MIN_LOG_LEVEL']},
         model_files=records,model_sha256=identity,predictor_version=version,python=sys.version,platform=platform.platform(),
         packages={d.metadata['Name']:d.version for d in importlib.metadata.distributions()
                   if d.metadata['Name'].lower() in ['tensorflow-macos','keras','h5py','numpy','mhcflurry']},
