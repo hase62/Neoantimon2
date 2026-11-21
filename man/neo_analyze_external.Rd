@@ -5,7 +5,8 @@
 \title{Analyze explicitly selected external prediction evidence}
 \usage{
 neo_analyze_external(project, predictions, policy, converter = NULL,
-  converter_id = NULL, registry = NULL, trust = FALSE, timeout = 60)
+  converter_id = NULL, registry = NULL, trust = FALSE, timeout = 60,
+  reference_percentiles = NULL)
 neo_external_results(analysis, project = NULL)
 neo_external_explain(analysis, candidate_id, project = NULL)
 }
@@ -22,6 +23,10 @@ index is \url{https://www.hase62.jp/Neoantimon2-Converters/index.json}.
 Use this canonical HTTPS URL; the github.io alias can redirect through HTTP.}
 \item{trust}{Explicit consent to execute a first-use community converter as arbitrary user code.}
 \item{timeout}{Finite converter timeout in seconds.}
+\item{reference_percentiles}{Optional local reference-percentiles-1.0.0 JSON
+manifest. Exact human Class I peptide-HLA raw-score/model/length matching only.
+The independently saved reference percentile never changes provider scores,
+Native Grade or selected ranking. NULL preserves the legacy fingerprint.}
 \item{analysis}{Returned analysis handle or its fingerprint with project.}
 \item{candidate_id}{Canonical candidate IDs to explain.}}
 \description{Validates literal sequences and full canonical presenters, fans evidence

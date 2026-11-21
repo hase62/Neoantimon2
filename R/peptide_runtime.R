@@ -13,12 +13,17 @@ peptide_reference_checksum <- function(project) {
     algo = "sha256", serialize = FALSE))
 }
 
-peptide_stage_fingerprints <- function(project) checkpoint_fingerprints(
-  inputs = list(translation_output = translation_stage_output(project)),
+peptide_stage_fingerprints <- function(project) {
+  inputs <- list(translation_output = translation_stage_output(project))
+  if (length(peptide_fasta_inputs(project))) inputs$peptide_fasta <-
+    sorted_records(identity_records(peptide_fasta_inputs(project)))
+  checkpoint_fingerprints(
+  inputs = inputs,
   config = list(implementation = "peptide-candidate-v2-gene-annotation", policy = peptide_policy(project$config$peptides),
     contract = peptide_contract()$peptide_version, hla = project$hla),
   dependencies = list(reference = sorted_records(identity_records(project$resources)),
     self_proteome_content = peptide_reference_checksum(project)))
+}
 
 peptide_stage_run <- function(project, contexts, events) {
   # The complete T009 artifact checksum covers proteins, mapping and provenance.

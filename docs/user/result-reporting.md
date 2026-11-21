@@ -110,6 +110,12 @@ present; the original graph snapshot status remains available separately. A disp
 sort never defines a new biological ranking, and model scores are not combined.
 The table inspector and JSON download contain the same embedded view.
 
+For full peptide FASTA input, optional exact-model reference percentiles, and
+private human-review JSON save/reopen with evidence-change reconfirmation, see
+[the candidate review guide](candidate-review-and-reference-percentiles.md).
+Review state is separate from these scientific tables and their generic JSON
+download; use the explicit review JSON controls to persist human decisions.
+
 Overview distinguishes source graph counts from report-scope counts, distinct
 sequences from per-sample peptide units, and prediction measurements from coverage/
 status rows. Missing values remain null / “Not supplied”; observed numeric zero

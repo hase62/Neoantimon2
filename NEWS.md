@@ -1,5 +1,12 @@
 # Neoantimon2 0.3.1.9000 (development)
 
+- Accept full supplied peptide FASTA records in ordinary projects, preserving
+  separate input occurrences without inventing molecular or wild-type support.
+- Add explicit private offline candidate-review JSON persistence, evidence-change
+  reconfirmation and confirmed-accepted TSV, separate from scientific results.
+- Add optional exact-model, Class I length-specific reference percentiles as a
+  separate external-analysis table; preserve original scores and default identities.
+
 - Advance the development identifier and synchronize current-version setup,
   citation metadata and sourceable documentation-helper version admission.
   This is not a 0.3.1 release; existing release and snapshot tags are unchanged.

@@ -16,6 +16,7 @@ html_report_fields <- function() c(
   "event_ref","event_domain","event_id","event_role","event_type","contig","pos","end","ref","alt","record_status","link_role","is_source","source_field","source_set_id","source_set_event_refs","independent_causation_claimed",
   "source","analysis_id","run_id","prediction_record_id","provider","predictor_version","model_version","task","metric","metric_kind","metric_semantics","unit","score_direction","prediction_scope","model_input_mhc_key","record_kind","raw_score","original_score_text","reason","evidence_id","status",
   "evidence_category","evidence_status","B_subtypes","A_experimental_status","B1_experimental_status","B2_experimental_status","reference_endpoint","reference_assay","experimental_reference_id","experimental_reference_version",
+  "candidate_ids","matching_key","reference_percentile","reference_id","reference_sha256","reference_count","method","percentile_direction",
   "tumor_vaf","normal_vaf","rna_vaf","tumor_alt_count","normal_alt_count","rna_alt_count","tumor_evidence_status","normal_evidence_status","rna_evidence_status","gene_tpm","transcript_tpm","ccf",
   "native_priority_origin_id","best_candidate_id","best_origin_id","scope_id","n_distinct_peptides","n_candidate_peptides","n_pmhc_candidates","n_origins","n_candidate_origin_links","n_context_candidates","candidate_ids","context_origin_ids","source_event_refs","context_event_refs","alternative_HLAs","synthesized_peptide_unit","planning_status","primary_HLA_proxy","primary_candidate_id","score_bin","assumed_or_empirical_rate","probability_interpretation","planning_profile_id","planning_profile_version")
 html_report_share <- function(tables, subjects, metadata=list()) {
@@ -29,6 +30,11 @@ html_report_share <- function(tables, subjects, metadata=list()) {
   }
   scrub <- function(x,key="") {
     if(is.list(x)) {
+      # Named ID arrays may carry original IDs in BOTH keys and values.
+      # Their public representation is an unnamed array of aliases.
+      if (!is.null(html_report_id_family(key)) &&
+          all(vapply(x,function(v)is.character(v)&&length(v)==1L,TRUE)))
+        return(unname(lapply(x,scrub,key=key)))
       if(is.null(names(x)))return(lapply(x,scrub,key=key))
       return(stats::setNames(lapply(names(x),function(k)scrub(x[[k]],k)),names(x)))
     }
@@ -101,6 +107,7 @@ html_report_payload <- function(bundle, project_metadata=list(), privacy="share"
   # Same alias dictionary must cover project version identifiers too; project metadata
   # intentionally carries no paths or personal identifiers, only role/version/hash.
   out<-list(metadata=meta,tables=data)
+  if (privacy == "private") out$review <- review_payload(t, bundle$manifest)
   if(privacy=="share")attr(out,"private_id_map")<-share$private_id_map
   out
 }
@@ -123,6 +130,14 @@ html_report_write <- function(project, file, analyses=list(), candidate_id=NULL,
   native<-neo_results(project,candidate_id=candidate_id)
   if(nrow(native)>max_candidates)stop("Candidate count exceeds explicit HTML limit; select exact candidate_id values or raise max_candidates deliberately. No candidate was silently truncated.")
   b<-do.call(neo_report_bundle,c(list(project=project,analyses=analyses,candidate_id=candidate_id),report_options))
+  if (privacy == "private" && length(peptide_fasta_inputs(project))) {
+    peptides <- readRDS(peptide_stage_path(project))$peptides
+    b$tables$origins$html_supplied_peptide <- I(lapply(b$tables$origins$origin_id,
+      function(id) {
+        own <- Filter(function(p) identical(p$peptide_id, id), peptides)
+        if (length(own)) own[[1L]]$provenance$supplied_peptide else NULL
+      }))
+  }
   if(nrow(b$tables$pmhc_candidates)>max_candidates)stop("Reporting candidate count exceeds HTML limit; no candidate was silently truncated")
   version_record<-function(r)list(role=if(is.null(r$input_role))r$logical_name else r$input_role,resource_id=r$resource_id,version=r$version,integrity=r$integrity[c("mode","observed","declared","verified")])
   metadata<-list(label=label,subjects=unique(c(report_chars(lapply(project$samples,`[[`,"sample_id")),report_chars(lapply(project$samples,`[[`,"patient_id")))),
@@ -132,6 +147,7 @@ html_report_write <- function(project, file, analyses=list(), candidate_id=NULL,
   root<-system.file("report-html",package="Neoantimon2")
   css<-paste(readLines(file.path(root,"viewer.css"),warn=FALSE),collapse="\n")
   js<-paste(readLines(file.path(root,"viewer.js"),warn=FALSE),collapse="\n")
+  js<-paste(paste(readLines(file.path(root,"review.js"),warn=FALSE),collapse="\n"),js,sep="\n")
   nonce<-digest::digest(paste(json,css,js),algo="sha256",serialize=FALSE)
   template<-paste(readLines(file.path(root,"viewer.html"),warn=FALSE),collapse="\n")
   replace<-function(text,token,value) {

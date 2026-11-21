@@ -708,7 +708,7 @@ event_parse_canonical <- function(project, input, reference) {
 event_import_project <- function(project) {
   if (!length(project$inputs)) stop("Real event run requires event input; no-input production is not implemented in T004")
   roles <- vapply(project$inputs, `[[`, "", "input_role")
-  if (any(!roles %in% c(event_input_roles(), source_input_roles(), long_read_roles(), recognition_roles(), presentation_roles(), longitudinal_roles())))
+  if (any(!roles %in% c(event_input_roles(), source_input_roles(), long_read_roles(), recognition_roles(), presentation_roles(), longitudinal_roles(), "peptide_fasta")))
     stop("Production input stage for this role is not implemented in T004/T006")
   inputs <- Filter(function(x) x$input_role %in% event_input_roles(), project$inputs)
   if (!length(inputs)) return(list())

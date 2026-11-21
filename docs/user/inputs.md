@@ -84,6 +84,7 @@ primary profile for a new analysis.
 | ANNOVAR output | `somatic_annovar` / `germline_annovar`; TSV `Chr`, `Start`, `End`, `Ref`, `Alt` | Import only; no ANNOVAR installation/execution. Indels require REF-validatable anchor/interval semantics; `Ref=0` is rejected |
 | VEP output | `somatic_vep` / `germline_vep`; supported named-coordinate/allele table | Import only; not general automatic VEP execution |
 | Other event representations | `canonical_events`, `germline_snp_table`, `somatic_bnd_table`, `sequence_fragment`, `sequence_entire_region` | Dedicated parsers, not arbitrary free-form inputs. BND/SV retention does not guarantee peptide reconstruction; sequence provenance/coverage limits remain explicit |
+| Supplied peptide sequences | `peptide_fasta` | Plain/gzip multiline FASTA; each full record is one supplied peptide. Uses configured Class I/II candidate lengths and assigned HLA without slicing, translation or inferred molecular support. See [FASTA and candidate review](candidate-review-and-reference-percentiles.md). |
 | HLA declaration | Needed to create peptide–presenter candidates; `hla = list("subject-1" = c(...))` | Literal declared alleles normalized to supported presenter identities; no typing inference. Omitted/unresolved HLA can yield no candidates despite retained events/origins |
 
 The supported VCF has standard `#CHROM POS ID REF ALT QUAL FILTER INFO` fields;

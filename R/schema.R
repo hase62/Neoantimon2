@@ -39,7 +39,7 @@ validate_value <- function(x, f, contract, path) {
   if (!is.null(f$record)) validate_record(x, contract$records[[f$record]], contract, path)
   if (f$type == "array") {
     if (isTRUE(f$unique_items) && anyDuplicated(vapply(x, canonical_bytes, ""))) fail("duplicate array item")
-    if (isTRUE(f$sorted_set) && !identical(unlist(x), sort(unlist(x), method = "radix"))) fail("set must be sorted")
+    if (isTRUE(f$sorted_set) && length(x) && !identical(unlist(x), sort(unlist(x), method = "radix"))) fail("set must be sorted")
     for (i in seq_along(x)) {
       p <- paste0(path, "[", i, "]")
       if (!is.null(f$items_record)) validate_record(x[[i]], contract$records[[f$items_record]], contract, p)

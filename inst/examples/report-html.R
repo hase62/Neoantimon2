@@ -1,5 +1,8 @@
 # Sourceable helper; no project, predictor, network or output is started by sourcing.
 # This is an example utility, not an additional exported Neoantimon2 API.
+# Explicit privacy="private", confirm_private=TRUE enables human-review JSON
+# save/load and confirmed-accepted TSV. Save that JSON to resume in a new session.
+# Sharing HTML contains no review identity/history or original identifier mapping.
 write_neo_report_html <- function(project, file, analyses = list(), candidate_id = NULL,
     privacy = "share", confirm_private = FALSE, max_candidates = 500L,
     max_bytes = 10 * 1024^2, report_options = list(), label = "Saved scientific results") {
