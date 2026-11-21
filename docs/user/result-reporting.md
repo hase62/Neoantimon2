@@ -124,6 +124,14 @@ The original raw score string remains separate from its numeric representation.
 
 For a durable report, choose a fresh filename in an existing protected folder outside the project, or copy the HTML there before closing R. The `tempfile()` examples live in R temporary storage and may disappear when R exits.
 
+### Private candidate review
+
+Generate an HTML view with `privacy = "private", confirm_private = TRUE` to
+record accept, exclude or hold decisions and comments. Save the review JSON and
+load it in another session for the same source run. Decisions requiring
+reconfirmation after an evidence update remain separate from confirmed shortlist
+exports. See the [review and reopening steps](candidate-review-and-reference-percentiles.md#review-json-save-reopen-and-evidence-updates).
+
 ### Privacy choices
 
 - Default `privacy="share"`: known identity fields receive consistent aliases;

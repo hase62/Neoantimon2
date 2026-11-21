@@ -70,20 +70,21 @@ Current main uses the **0.3.1.9000 development marker** and has 22 APIs and
 public regression tests. This marker is not a new release or an assertion that
 historical scientific evaluations ran on this revision.
 
-The author-held replay materials use a separately fixed **20-API** repair source.
-They include six restored conditions and R09 controlled downstream comparisons,
-and the later **MR11 v002** candidate with its pre-execution freeze, inputs,
-independent expectations and replay scripts. MR11 records nine sequence
+The [commit-pinned paper guide](https://github.com/hase62/Neoantimon2/blob/4234f653e9572ffbe5db6237f30fd5a89fc03e4f/docs/reproducibility/paper/README.md)
+provides three public replay routes. These use a separately fixed **20-API**
+source and include the six-condition study, R09 controlled downstream comparison
+and MR11 with frozen inputs, independent expectations and replay scripts. MR11 records nine sequence
 expectations, one unresolved-contract condition and one planned input rejection:
 ten exits of zero and one expected exit of one, 2,500 checks and four separate
 R readers. These units must not be reported as eleven sequence matches.
 The earlier 18-condition / 2,004-check history is distinct; its complete original
 replay inputs, independent expectations and driver remain unrecovered.
 
-These are private candidates awaiting a separate disclosure and licensing decision,
-not assets of `reproducibility-v1` or publicly deposited replay packages. The
-public snapshot does not rerun current main or these fixed-source studies.
-No private download URL or author-held input is distributed with this checkout.
+The guide and the assets of `reproducibility-v1` serve different purposes.
+The guide provides replay instructions and saved observations for numerical
+checks. The snapshot reaggregates archived HCC1395 tables. Neither route
+reruns the original HCC1395 predictor inference or reproduces a current-main
+pipeline run.
 
 Reconstructing fresh small projects, reopening saved projects and reaggregating
 saved TSVs are different operations. The [versioned validation page](../development/validation-evidence.md#current-molecular-repair-integration)

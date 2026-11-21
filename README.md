@@ -14,7 +14,7 @@ available for the released baseline and fixed research snapshot.
 
 1. [Install](#installation), then run the [five-minute technical Quick Start](#quick-start).
 2. Continue to the [standard-length First Real-Data Workflow](docs/user/first-real-data-workflow.md): prepare inputs → diagnose → generate candidates → select one → inspect all Origins and evidence → reopen saved results.
-3. Create an [offline HTML report](#standard-length-tutorial-and-offline-results) for collaborators who do not use R. No predictor is needed for the authored synthetic training run.
+3. Open an [offline HTML report](#standard-length-tutorial-and-offline-results) to inspect candidates and their evidence. Use the [private candidate workflow](#supplied-peptides-external-scores-and-candidate-review) to record decisions and resume them later.
 
 ## Installation
 
@@ -90,6 +90,21 @@ free-form metadata; the HTML still contains scientific data. Keep the returned
 confirmation. This sourceable utility adds no exported API and changes no saved
 result or TSV/JSON contract.
 
+## Supplied peptides external scores and candidate review
+
+| Your starting point | What you can do |
+| --- | --- |
+| A peptide FASTA and known HLA | Add the `peptide_fasta` input to a project and run `neo_run()`. Each record is used at full length. Identical sequences for the same sample and presenter share a candidate, while their separate input records remain traceable. |
+| A completed project and external prediction output | Import standardized predictions with `neo_analyze_external()`. To report length-specific reference percentiles for supported human Class I raw scores, supply `reference_percentiles` with a matching local manifest. The original scores, provider ranks and native decisions remain available. |
+| Candidates ready for manual review | Open the private offline HTML view, record decisions and save the review JSON. Reopen it in another browser session. If displayed evidence changes, revisit the decision before exporting the confirmed shortlist. |
+
+Use the [worked steps and input contracts](docs/user/candidate-review-and-reference-percentiles.md) for all three operations.
+A FASTA-only project can be used without genomic reference files. Declared HLA
+is required for peptide–HLA candidates. A supplied sequence alone provides no
+somatic support. Reference conversion requires a reference distribution from the
+same verified predictor and model, allele, peptide length and score channel.
+Human review records and comments stay in private review files.
+
 <a id="start-here"></a>
 ## Workflow navigation
 
@@ -97,6 +112,7 @@ result or TSV/JSON contract.
 | --- | --- |
 | Try the package in five minutes after installation | [Quick Start: small offline synthetic example](#quick-start) |
 | Analyze somatic variants | [Inputs and reconstruction](#inputs-and-reconstruction) → [First Real-Data Workflow](docs/user/first-real-data-workflow.md) |
+| Use a peptide FASTA or record review decisions | [Supplied peptides, external scores and candidate review](#supplied-peptides-external-scores-and-candidate-review) |
 | Import external BA / EL / IM predictions | [External predictor workflow](#external-predictor-workflow) |
 | Plan experiments or export complete results | [Experimental Yield](#experimental-yield-estimation) · [Reporting](#complete-result-reporting) |
 | Analyze indirect HLA / PIRCHE-inspired presentation | [Scope and one-command workflow](#indirect-hla--pirche-inspired-analysis) |
@@ -185,7 +201,7 @@ status and all matched Origins are retained. External evidence does not overwrit
 Native results. Raw BigMHC-IM scores are not calibrated experimental positive
 probabilities. BA, EL and IM scales are not interchangeable and are not combined
 into a universal score. The Registry supplies converters, not predictor engines.
-See the [external contract and offline example](docs/user/external-predictions.md).
+See the [external contract and offline example](docs/user/external-predictions.md). Optional [reference percentiles for matched external scores](docs/user/candidate-review-and-reference-percentiles.md#optional-local-reference-percentile) remain a separate measurement.
 
 ## Experimental Yield Estimation
 
@@ -342,9 +358,10 @@ See [download, SHA-256 and exact commands](docs/user/reproducibility.md#snapshot
 This is saved-result reaggregation, separate from molecular reconstruction,
 new predictor inference or a complete VCF-to-results rerun. The fixed snapshot
 has 20 APIs and does not include main's later indirect-HLA autorun extensions
-or [bounded molecular repairs](docs/developer/bounded-repair.md). Current source
-regression tests are public; separate author-held replay archives have not been
-deposited as a new public asset. See the [code/data availability boundaries](docs/user/reproducibility.md#current-main-and-additional-replay-materials).
+or [bounded molecular repairs](docs/developer/bounded-repair.md). The separate
+[commit-pinned paper guide](https://github.com/hase62/Neoantimon2/blob/4234f653e9572ffbe5db6237f30fd5a89fc03e4f/docs/reproducibility/paper/README.md)
+provides the MR11, six-condition and R09 replay procedures and identifies the
+archived records used for numerical checks. See the [replay scope](docs/user/reproducibility.md#current-main-and-additional-replay-materials).
 
 <a id="scientific-limitations"></a>
 ## Choose a version
@@ -353,7 +370,7 @@ deposited as a new public asset. See the [code/data availability boundaries](doc
 | --- | ---: | --- |
 | [v0.3.0 — published release](https://github.com/hase62/Neoantimon2/releases/tag/v0.3.0) | 16 | The immutable released baseline; excludes later priority, Yield, reporting and indirect-autorun APIs |
 | [Reproducibility Snapshot — reproducibility-v1](https://github.com/hase62/Neoantimon2/releases/tag/reproducibility-v1) | 20 | Fixed research code and the **eight-table saved-result reproduction ZIP**; a GitHub pre-release, separate from the released baseline |
-| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.1.9000**, including current molecular-condition repairs, indirect-HLA extensions and offline reporting |
+| [main — latest development](https://github.com/hase62/Neoantimon2/tree/main) | 22 | Version **0.3.1.9000**, including molecular-condition repairs, indirect-HLA extensions, peptide FASTA input, external reference percentiles and private offline review |
 
 Counts are the `export()` entries in each version's NAMESPACE, excluding S3
 methods/imports. Main now uses 0.3.1.9000; the fixed snapshot retains 0.3.0.9000.
