@@ -168,6 +168,12 @@ peptide_construct <- function(project, contexts, events, self_path = NULL,
       origins[[length(origins) + 1L]] <- origin; peptides[[length(peptides) + 1L]] <- p
     }
   }
+  if (length(peptide_fasta_inputs(project))) {
+    supplied <- peptide_fasta_construct(project, contract)
+    origins <- c(origins, supplied$origins)
+    peptides <- c(peptides, supplied$peptides)
+    statuses <- c(statuses, supplied$statuses)
+  }
   if (length(origins)) {
     ids <- vapply(origins, `[[`, "", "origin_id")
     for (i in which(duplicated(ids))) {

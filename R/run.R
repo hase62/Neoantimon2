@@ -159,6 +159,7 @@ neo_run <- function(project) run_runtime(project)
 # Adapter injection is internal and restricted to synthetic/mock fixtures.
 run_runtime <- function(project, adapter = NULL) {
   if (!inherits(project, "neo_project")) stop("project must be a neo_project", call. = FALSE)
+  peptide_fasta_verify(project)
   if (!is.null(adapter)) {
     if (!is.function(adapter)) stop("adapter must be a function", call. = FALSE)
     if (!project$fixture_kind %in% c("synthetic", "mock"))

@@ -28,7 +28,7 @@ input_records <- function(inputs, config, samples) {
       stop("Required input file missing [inputs[[", i, "]]$path]. Expected an existing regular file; check file.exists() and file.access(..., 4) on this declared path. Private path omitted. See ?neo_project and the First Real-Data Workflow guide.", call. = FALSE)
     list(input_id = x$input_id, input_role = x$input_role, sample_id = x$sample_id, declared_path = x$path,
       resolved_path = path, version = x$version,
-      integrity = integrity_record(path, config$checksum, spec$checksum))
+      integrity = integrity_record(path, if (x$input_role == "peptide_fasta") "sha256" else config$checksum, spec$checksum))
   })
   if (anyDuplicated(vapply(out, `[[`, "", "input_id"))) stop("Duplicate input_id")
   sorted_records(out)

@@ -15,6 +15,9 @@ snapshot's saved tables, use [Reproducibility Snapshot](user/reproducibility.md#
 
 For collaborators, the [offline HTML viewer](user/result-reporting.md#offline-html-viewer) exposes saved Candidates, every linked Origin and separate model evidence without R.
 
+Development also supports [supplied peptide FASTA, exact-model reference
+percentiles and private candidate-review save/reopen](user/candidate-review-and-reference-percentiles.md).
+
 **3. Analyze your data:** follow the [practical user guide](user/getting-started.md)
 from top to bottom: files/identities → references → configuration → execution →
 interpretation → external prediction → reopening. This is the one recommended

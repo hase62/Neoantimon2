@@ -180,7 +180,8 @@ external_frame <- function(rows, required = c("candidate_id", "external_status",
 }
 
 neo_analyze_external <- function(project, predictions, policy, converter = NULL,
-                                 converter_id = NULL, registry = NULL, trust = FALSE, timeout = 60) {
+                                 converter_id = NULL, registry = NULL, trust = FALSE, timeout = 60,
+                                 reference_percentiles = NULL) {
   bundle <- neo_export_bundle(project)
   if (!is.null(converter) && !is.null(converter_id)) external_error("INVALID_CONVERTER", "Choose converter or converter_id")
   registry_pin <- NULL
@@ -199,10 +200,15 @@ neo_analyze_external <- function(project, predictions, policy, converter = NULL,
   selection <- external_policy(policy, normalized)
   matched <- external_match_predictions(bundle$graph, normalized)
   rows <- external_derive(project, bundle$graph, matched, selection)
+  reference <- if (is.null(reference_percentiles)) NULL else reference_percentile_load(reference_percentiles)
+  reference_rows <- if (is.null(reference)) NULL else
+    reference_percentile_derive(reference, normalized, matched, bundle$graph)
   fingerprint <- list(schema_version = external_version(), bundle_id = bundle$manifest$bundle_id,
     source_manifest_sha256 = bundle$manifest$source_manifest_sha256,
     raw_input_sha256 = raw_input_sha256, normalized_sha256 = external_sha(predictions),
     converter = if (is.null(conversion)) NULL else conversion$identity, policy = selection$policy)
+  # Keep the legacy fingerprint byte-for-byte unchanged when the option is absent.
+  if (!is.null(reference)) fingerprint$reference_percentiles <- reference$identity
   id <- infra_hash(fingerprint)
   root <- external_analysis_root(project, id)
   handle <- structure(list(analysis_id = id, project = project, path = root), class = "neo_external_analysis")
@@ -220,6 +226,7 @@ neo_analyze_external <- function(project, predictions, policy, converter = NULL,
   payload <- list(schema_version = external_version(), policy = selection$policy,
     graph = bundle$graph, predictions = normalized, evidence = matched$evidence,
     unmatched = matched$unmatched, import_report = matched$report, rows = rows, conversion = conversion)
+  if (!is.null(reference)) payload$reference_percentiles <- reference_rows
   atomic_json(payload, file.path(tmp, "analysis.json"))
   external_write_tsv(rows, external_fields(rows, c("candidate_id", "external_status", "external_score", "external_rank")),
     file.path(tmp, "results.tsv"))
@@ -235,6 +242,12 @@ neo_analyze_external <- function(project, predictions, policy, converter = NULL,
     "Vaccine, longitudinal, receptor, presentation and allo overlays continue to select native results."),
     file.path(tmp, "report.md"))
   files <- c("normalized.tsv", "analysis.json", "results.tsv", "matched_evidence.tsv", "unmatched.tsv", "import_report.json", "report.md")
+  if (!is.null(reference)) {
+    external_write_tsv(reference_rows, c("evidence_id", "source_row", "candidate_ids",
+      "raw_score", "reference_percentile", "status", "reason", "reference_id", "reference_sha256",
+      "reference_count", "method"), file.path(tmp, "reference_percentiles.tsv"))
+    files <- c(files, "reference_percentiles.tsv")
+  }
   meta <- list(schema_version = external_version(), analysis_id = id,
     fingerprint = fingerprint, files = external_records(tmp, files))
   meta$metadata_digest <- infra_hash(meta)
@@ -259,11 +272,16 @@ neo_external_explain <- function(analysis, candidate_id, project = NULL) {
   list(analysis_id = x$manifest$analysis_id, policy = x$payload$policy,
     provenance = x$manifest$fingerprint, import_report = x$payload$import_report,
     conversion = x$payload$conversion,
-    candidates = lapply(rows, function(c) list(result = c,
+    candidates = lapply(rows, function(c) {
+      out <- list(result = c,
       origins = origins[sort(unique(unlist(lapply(c$origin_ids, function(id)
         external_index_get(origin_index, id)), use.names = FALSE)))],
       candidate_origin_links = links[external_index_get(link_index, c$candidate_id)],
       evidence = c$external_evidence,
       events = x$payload$graph$events,
-      annotation_provenance = x$payload$graph$annotations)))
+      annotation_provenance = x$payload$graph$annotations)
+      if (!is.null(x$payload$reference_percentiles)) out$reference_percentiles <-
+        Filter(function(r) c$candidate_id %in% unlist(r$candidate_ids), x$payload$reference_percentiles)
+      out
+    }))
 }

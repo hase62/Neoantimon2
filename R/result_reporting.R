@@ -108,7 +108,7 @@ report_catalog <- function(graph) {
     for (id in report_chars(o$germline_context_ids)) put("core", id, "germline_context_ids", TRUE)
     ext <- Filter(function(m) identical(m$origin_id, o$origin_id), mappings)
     for (m in ext) put(m$domain, m$id, m$field)
-    if (!length(ext) && !is.null(o$source_antigen_key)) {
+    if (!length(ext) && !is.null(o$source_antigen_key) && !identical(o$source_domain, "provided_peptide")) {
       # Exact registered identity only. Never infer a namespace from an ID prefix.
       at <- Filter(function(e) e$event_domain != "core" && identical(e$event_id, o$source_antigen_key), catalog)
       if (length(at) == 1L) put(at[[1L]]$event_domain, at[[1L]]$event_id, "source_antigen_key_exact_registered")
@@ -581,6 +581,27 @@ neo_report_bundle <- function(project, dir = NULL, analyses = list(), candidate_
   if(is.null(raw))raw<-somatic_read_sidecar(project)$raw
   out<-report_construct(graph,native,runs,external,raw,yield_plan,candidate_id,
     external_channels,reference,endpoint,assay)
+  if (length(peptide_fasta_inputs(project))) {
+    supplied <- readRDS(peptide_stage_path(project))
+    status <- Filter(function(s) !is.null(s$input_id) &&
+      (is.null(candidate_id) || s$origin_id %in% out$tables$origins$origin_id), supplied$statuses)
+    origin_index <- external_value_index(vapply(supplied$origins, `[[`, "", "origin_id"), supplied$origins)
+    status <- lapply(status, function(s) {
+      s$peptide_sequence <- origin_index[[s$origin_id]]$peptide_sequence
+      s
+    })
+    out$tables$supplied_peptide_status <- report_frame(status,
+      c("origin_id", "input_id", "record_id", "peptide_sequence", "peptide_length", "status", "reason"))
+  }
+  if (any(vapply(external, function(a) !is.null(a$payload$reference_percentiles), TRUE))) {
+    # One derived row per measurement; candidate IDs retain fan-out associations.
+    selected_ids <- out$tables$pmhc_candidates$candidate_id
+    calibration <- unlist(lapply(external, function(a) lapply(Filter(function(r)
+      any(unlist(r$candidate_ids) %in% selected_ids), a$payload$reference_percentiles),
+      function(r) c(list(analysis_id = a$manifest$analysis_id), r))), recursive = FALSE)
+    out$tables$external_reference_percentiles <- report_frame(calibration,
+      c("analysis_id", "evidence_id", "candidate_ids", "reference_percentile", "status", "reason"))
+  }
   manifest<-c(list(contract=report_version(),schema_version="0.1.0",
     package_version=as.character(utils::packageVersion("Neoantimon2")),
     project_run_id=project$run_id,project_analysis_id=project$analysis_id,

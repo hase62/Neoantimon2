@@ -157,6 +157,15 @@ the default native view. Vaccine, longitudinal, receptor, presentation and allo
 subsystems continue to use native results and are not scientifically integrated
 with this new external analysis view.
 
+## Reference percentiles for imported raw scores
+
+Pass `reference_percentiles` to `neo_analyze_external()` to evaluate supported
+human Class I scores against a local reference with the same predictor version,
+model, task, metric, direction, unit, HLA and peptide length. Derived percentiles
+are saved separately from raw scores and provider-supplied ranks. The selected
+external ranking policy continues to use its original input channel. See the
+[manifest and worked example](candidate-review-and-reference-percentiles.md#optional-local-reference-percentile).
+
 ## Local and registry converters
 
 Provide an R or Python script obeying:

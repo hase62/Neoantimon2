@@ -110,6 +110,12 @@ present; the original graph snapshot status remains available separately. A disp
 sort never defines a new biological ranking, and model scores are not combined.
 The table inspector and JSON download contain the same embedded view.
 
+For full peptide FASTA input, optional exact-model reference percentiles, and
+private human-review JSON save/reopen with evidence-change reconfirmation, see
+[the candidate review guide](candidate-review-and-reference-percentiles.md).
+Review state is separate from these scientific tables and their generic JSON
+download; use the explicit review JSON controls to persist human decisions.
+
 Overview distinguishes source graph counts from report-scope counts, distinct
 sequences from per-sample peptide units, and prediction measurements from coverage/
 status rows. Missing values remain null / “Not supplied”; observed numeric zero
@@ -117,6 +123,14 @@ remains zero. NOT_RUN, NOT_GRADED, failed and unsupported states are not negativ
 The original raw score string remains separate from its numeric representation.
 
 For a durable report, choose a fresh filename in an existing protected folder outside the project, or copy the HTML there before closing R. The `tempfile()` examples live in R temporary storage and may disappear when R exits.
+
+### Private candidate review
+
+Generate an HTML view with `privacy = "private", confirm_private = TRUE` to
+record accept, exclude or hold decisions and comments. Save the review JSON and
+load it in another session for the same source run. Decisions requiring
+reconfirmation after an evidence update remain separate from confirmed shortlist
+exports. See the [review and reopening steps](candidate-review-and-reference-percentiles.md#review-json-save-reopen-and-evidence-updates).
 
 ### Privacy choices
 
