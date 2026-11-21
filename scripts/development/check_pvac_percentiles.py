@@ -22,7 +22,11 @@ def main():
     observed=hashlib.sha256(hdf5.read_bytes()).hexdigest()
     if observed!='2caf69fca14bf70b1e6b69a38f544708139b88243dd0b1e72d190369f5b78b54':
         raise ValueError('Pinned reference file checksum mismatch')
-    functions=[n for n in ast.walk(ast.parse(source.read_text())) if isinstance(n,ast.FunctionDef)
+    source_bytes = source.read_bytes()
+    source_sha = hashlib.sha256(source_bytes).hexdigest()
+    if source_sha != '5af398a9e44f14c9c70942278848ad9bb50dce68d54f82329d4492ff1f0e3541':
+        raise ValueError('Pinned pVACtools source checksum mismatch')
+    functions=[n for n in ast.walk(ast.parse(source_bytes)) if isinstance(n,ast.FunctionDef)
                and n.name in ('calculate_normalized_percentile','_normalize_allele')]
     if len(functions)!=2: raise ValueError('Expected exactly two upstream methods')
     cls=ast.ClassDef(name='PinnedParser', bases=[], keywords=[], body=functions, decorator_list=[])
@@ -46,7 +50,7 @@ def main():
                 score_file_sha256=hashlib.sha256(file.read_bytes()).hexdigest(),dataset_attributes=dict(f[method+'/9mer'].attrs)))
     (target/'receipt.json').write_text(json.dumps(dict(status='PASS',reference_sha256=observed,
         pvac_commit='871f2b3d979d5d1988af7a2d3ef2d52e179d1524',reference_commit='24fdb2aed1c575d1421eae909a473706edda84dc',
-        source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),model_identity='UNKNOWN: computation check only, not applied to historical scores',
+        source_sha256=source_sha,model_identity='UNKNOWN: computation check only, not applied to historical scores',
         methods=results),indent=2)+'\n')
     print(json.dumps(results),flush=True)
 

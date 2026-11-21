@@ -166,8 +166,49 @@ reference-set percentiles verify software integration; they do not estimate
 biological prevalence, immunogenicity, clinical benefit or an established
 population calibration.
 
-Reproduction needs explicit local model assets, their upstream terms and the
-optional Python packages. Scripts do not assume an existing download or fetch
-models automatically. The review ZIP provides exact observed hashes, environment,
-commands and inputs; do not substitute a newer model silently. See its report for
-actual PASS/FAIL/SKIP results, browser sessions and remaining limitations.
+### Reproduce from a fixed checkout
+
+From the Core repository, check out the full commit cited for this example.
+Run the commands below with a new output directory. Use Python with `h5py`
+and `numpy` for the arithmetic cross-check. The script checks SHA-256 for the
+upstream parser and HDF5 bytes before executing the selected upstream methods.
+
+```sh
+replay_dir="$(mktemp -d "$PWD/candidate-replay.XXXXXX")"
+mkdir "$replay_dir/upstream"
+curl -fL 'https://raw.githubusercontent.com/griffithlab/pVACtools/871f2b3d979d5d1988af7a2d3ef2d52e179d1524/pvactools/lib/output_parser.py' -o "$replay_dir/upstream/output_parser.py"
+curl -fL 'https://raw.githubusercontent.com/griffithlab/pvactools_percentiles_data/24fdb2aed1c575d1421eae909a473706edda84dc/hdf5/HLA-A_02_01_percentiles.h5' -o "$replay_dir/upstream/HLA-A_02_01_percentiles.h5"
+python scripts/development/check_pvac_percentiles.py \
+  --source "$replay_dir/upstream/output_parser.py" \
+  --hdf5 "$replay_dir/upstream/HLA-A_02_01_percentiles.h5" \
+  --output-dir "$replay_dir/pvac"
+node --test tests/browser/review_store.test.cjs
+```
+
+For the fixed-model walkthrough, acquire the upstream
+[MHCflurry model archive](https://github.com/openvax/mhcflurry/releases/download/pre-2.0/models_class1_pan.selected.20200610.tar.bz2)
+under its source terms. Point `model_dir` to the extracted predictor directory
+containing `manifest.csv`. Use `model_python` for the MHCflurry environment.
+The recorded run used Python 3.10, MHCflurry 2.0.6, tensorflow-macos 2.13.0,
+Keras 2.13.1, NumPy 1.24.3 and h5py 3.8.0 on macOS arm64. The verification
+script checks the fixed model-file identity and Converter hash before inference.
+
+```sh
+curl -fL 'https://raw.githubusercontent.com/hase62/Neoantimon2-Converters/1d111e1e109ac1e1694f45b12f40ed23888eff69/converters/mhcflurry-ba@1.0.0/converter.py' -o "$replay_dir/upstream/converter.py"
+"$model_python" scripts/development/validate_reference_model.py \
+  --model-dir "$model_dir" --converter "$replay_dir/upstream/converter.py" \
+  --output-dir "$replay_dir/model"
+Rscript --vanilla scripts/development/validate_candidate_review.R \
+  "$replay_dir/example" "$replay_dir/model" "$replay_dir/pvac"
+python tests/browser/candidate_review.py --acceptance "$replay_dir/example" \
+  --output "$replay_dir/browser" --chrome "$chrome_executable"
+```
+
+The R step uses the Core dependencies plus `pkgload` from the checkout.
+Set `chrome_executable` to a local Chrome or Chromium binary and use a Python
+environment with Playwright for the last step. The recipe records fresh outputs
+and receipts. The recorded walkthrough produced two peptide–HLA candidates and
+three Origins. Its illustrative percentiles were 15.625 and 0.390625. The browser
+script checks that an accepted candidate with changed evidence stays out of the
+approved export until reconfirmed, and that partial views preserve other review
+records. The reference scores and user comments stay in the chosen replay directory.

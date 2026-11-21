@@ -41,6 +41,11 @@ def main():
     records = [{'path': str(p.relative_to(model)), 'sha256': sha(p)}
                for p in sorted(model.rglob('*')) if p.is_file()]
     identity = hashlib.sha256(json.dumps(records, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    if identity != '4bf7e97baaaa53b4d90ec3cbc9f2710fc3ca1da77a7df6363544142b7e09b06d':
+        raise ValueError('Fixed reference model files do not match the recorded model identity')
+    converter_sha = sha(args.converter)
+    if converter_sha != 'cfd9573ec3a48d1f3bd29e663b51e33eff2b19191d677efba224dd8b636ef5b5':
+        raise ValueError('Pinned MHCflurry BA converter checksum mismatch')
     version = importlib.metadata.version('mhcflurry')
     if version != '2.0.6':
         raise ValueError('This reproducible verification pins MHCflurry 2.0.6')
@@ -97,7 +102,7 @@ def main():
         model_files=records,model_sha256=identity,predictor_version=version,python=sys.version,platform=platform.platform(),
         packages={d.metadata['Name']:d.version for d in importlib.metadata.distributions()
                   if d.metadata['Name'].lower() in ['tensorflow-macos','keras','h5py','numpy','mhcflurry']},
-        converter_sha256=sha(args.converter),provider='mhcflurry-ba',model_binding='Only model_version field added to converter-original.tsv from observed weights hash',
+        converter_sha256=converter_sha,provider='mhcflurry-ba',model_binding='Only model_version field added to converter-original.tsv from observed weights hash',
         reference_count=256,query_count=2,outputs={p.name:sha(p) for p in sorted(target.iterdir()) if p.is_file()},
         expected_percentiles=[100*sum(float(r)<float(q) for r in values[:256])/256+
                               50*sum(float(r)==float(q) for r in values[:256])/256 for q in values[256:]])
