@@ -169,12 +169,14 @@ population calibration.
 ### Reproduce from a fixed checkout
 
 From the Core repository, check out the full commit cited for this example.
-Run the commands below with a new output directory. Use Python with `h5py`
-and `numpy` for the arithmetic cross-check. The script checks SHA-256 for the
+Run the commands below from the checkout. The replay directory must be outside
+the checkout because the R report writer rejects output paths inside the
+repository. If you set `TMPDIR`, use a writable directory outside the checkout.
+Use Python with `h5py` and `numpy` for the arithmetic cross-check. The script checks SHA-256 for the
 upstream parser and HDF5 bytes before executing the selected upstream methods.
 
 ```sh
-replay_dir="$(mktemp -d "$PWD/candidate-replay.XXXXXX")"
+replay_dir="$(mktemp -d "${TMPDIR:-/tmp}/candidate-replay.XXXXXX")"
 mkdir "$replay_dir/upstream"
 curl -fL 'https://raw.githubusercontent.com/griffithlab/pVACtools/871f2b3d979d5d1988af7a2d3ef2d52e179d1524/pvactools/lib/output_parser.py' -o "$replay_dir/upstream/output_parser.py"
 curl -fL 'https://raw.githubusercontent.com/griffithlab/pvactools_percentiles_data/24fdb2aed1c575d1421eae909a473706edda84dc/hdf5/HLA-A_02_01_percentiles.h5' -o "$replay_dir/upstream/HLA-A_02_01_percentiles.h5"
