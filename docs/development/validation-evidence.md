@@ -62,21 +62,20 @@ have not been recovered; this is not a presently executable public replay scope.
 The separately restored six-condition candidate (946 recorded checks) and R09
 candidate retain their fixed 20-API source identities and prior execution records.
 
-The later author-held MR11 v002 is a distinct study, not a renamed restoration
-of those 18 conditions. Its preserved candidate and pre-run freeze record nine
-sequence expectations, one unresolved-contract condition and one planned input
-rejection (ten exit-zero cases, one expected exit-one case), 2,500 checks and four
-separate R readers. Initial harness failures remain retained. These private
-materials are not deposited in the public snapshot and were not rerun for the
-0.3.1.9000 development-version/documentation update. New metadata validation must
-be reported independently of all these historical scientific receipts.
+MR11 v002 is a separate study. Its preserved candidate and pre-run freeze record
+nine sequence expectations, one unresolved-contract condition and one planned
+input rejection (ten exit-zero cases, one expected exit-one case), 2,500 checks
+and four separate R readers. Initial harness failures remain in the historical
+record. The [fixed paper guide](https://github.com/hase62/Neoantimon2/blob/4234f653e9572ffbe5db6237f30fd5a89fc03e4f/docs/reproducibility/paper/README.md)
+provides the public MR11, six-condition and R09 replay procedures. The
+development-version documentation update did not rerun those studies.
 
 R09 used controlled downstream input, native pVACtools binding/aggregate outputs
 and external queries. At that tested boundary, the available pVACtools full table
 and detailed JSON supported equivalent information queries. This does not show
 that another tool loses provenance, nor a full pVACseq reconstruction, predictor
 inference or clinical advantage. See [repair behavior](../developer/bounded-repair.md)
-and [public versus author-held replay scope](../user/reproducibility.md#current-main-and-additional-replay-materials).
+and [public replay scope](../user/reproducibility.md#current-main-and-additional-replay-materials).
 The historical evidence inventory above has not been reassigned to this revision.
 
 ## Source and experimental boundaries
@@ -116,7 +115,6 @@ Large references, licensed models, original scientific projects and experimental
 reference databases are intentionally outside Git. The local audit locators in
 the inventory identify owner-held receipts, not publicly downloadable archives.
 The compact inventory is not a substitute for those originals. The [public fixed snapshot](../user/reproducibility.md#snapshot-saved-result-reproduction)
-provides the scoped eight-table reaggregation; it does not provide every historical
-project or the additional author-held replay archives. Remaining recipe/access
-and redistribution decisions must be resolved separately. No new release, DOI
-or scientific-publication claim is made here.
+provides the scoped eight-table reaggregation. The [fixed paper replay guide](https://github.com/hase62/Neoantimon2/blob/4234f653e9572ffbe5db6237f30fd5a89fc03e4f/docs/reproducibility/paper/README.md) and the [fixed candidate workflow guide](https://github.com/hase62/Neoantimon2/blob/e88934784ae8247a3ac3be2ca3e43f9ad9d4a969/docs/user/candidate-review-and-reference-percentiles.md#reproduce-from-a-fixed-checkout)
+describe separate execution routes. The original full scientific projects and
+private audit receipts remain distinct from those replays.

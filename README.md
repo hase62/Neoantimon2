@@ -1,8 +1,9 @@
 # Neoantimon2
 
-An R package for somatic-variant-derived **neoantigen reconstruction, traceable
-predictor integration and assumption-aware experimental planning**. Optional
-PIRCHE-inspired workflows also analyze indirect HLA class II presentation.
+Neoantimon2 is an R package for **neoantigen reconstruction, external prediction
+import and evidence-linked candidate review**. Start from called variants, upstream
+transcript models or a supplied peptide FASTA. Optional workflows support
+experimental planning and PIRCHE-inspired indirect HLA class II analysis.
 Candidates and model scores are research outputs, not clinical predictions or
 experimental proof of immunogenicity.
 
@@ -90,7 +91,7 @@ free-form metadata; the HTML still contains scientific data. Keep the returned
 confirmation. This sourceable utility adds no exported API and changes no saved
 result or TSV/JSON contract.
 
-## Supplied peptides external scores and candidate review
+## Supplied peptides, external scores and candidate review
 
 | Your starting point | What you can do |
 | --- | --- |
@@ -361,7 +362,9 @@ has 20 APIs and does not include main's later indirect-HLA autorun extensions
 or [bounded molecular repairs](docs/developer/bounded-repair.md). The separate
 [commit-pinned paper guide](https://github.com/hase62/Neoantimon2/blob/4234f653e9572ffbe5db6237f30fd5a89fc03e4f/docs/reproducibility/paper/README.md)
 provides the MR11, six-condition and R09 replay procedures and identifies the
-archived records used for numerical checks. See the [replay scope](docs/user/reproducibility.md#current-main-and-additional-replay-materials).
+archived records used for numerical checks. The [candidate workflow replay](https://github.com/hase62/Neoantimon2/blob/e88934784ae8247a3ac3be2ca3e43f9ad9d4a969/docs/user/candidate-review-and-reference-percentiles.md#reproduce-from-a-fixed-checkout)
+follows supplied FASTA records through prediction import, reference percentile
+calculation and review resumption. See the [scope and prerequisites for each replay](docs/user/reproducibility.md#current-main-and-additional-replay-materials).
 
 <a id="scientific-limitations"></a>
 ## Choose a version
