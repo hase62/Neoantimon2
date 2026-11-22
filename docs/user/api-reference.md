@@ -27,12 +27,13 @@ remain intact.
 | Additional function | Purpose |
 | --- | --- |
 | `neo_export_bundle(project, dir = NULL)` | Verify/export a completed run's literal peptide/HLA queries and all origins/annotations |
-| `neo_analyze_external(project, predictions, policy, ...)` | Strict standardized import, optional local/consented registry conversion, explicit external evidence/rank/eligible somatic grading |
+| `neo_analyze_external(project, predictions, policy, ...)` | Strict standardized import, optional registry conversion and reference percentiles, explicit external evidence/rank/eligible somatic grading |
 | `neo_external_results(analysis, project = NULL)` | Read the separately checksummed derived result without changing native results |
 | `neo_external_explain(analysis, candidate_id, project = NULL)` | Explain external evidence and every preserved candidate origin |
 
 See [external prediction interoperability](external-predictions.md) and installed
-help `?neo_export_bundle` / `?neo_analyze_external`. The canonical optional registry
+help `?neo_export_bundle` / `?neo_analyze_external`. The [candidate workflow guide](candidate-review-and-reference-percentiles.md)
+covers optional `reference_percentiles` and private offline review. The optional registry
 is https://www.hase62.jp/Neoantimon2-Converters/; the default native workflow
 requires neither its network availability nor consent to execute a converter.
 

@@ -86,6 +86,11 @@ checks. The snapshot reaggregates archived HCC1395 tables. Neither route
 reruns the original HCC1395 predictor inference or reproduces a current-main
 pipeline run.
 
+The [fixed candidate workflow guide](https://github.com/hase62/Neoantimon2/blob/e88934784ae8247a3ac3be2ca3e43f9ad9d4a969/docs/user/candidate-review-and-reference-percentiles.md#reproduce-from-a-fixed-checkout)
+covers a separate walkthrough using FASTA, optional reference percentiles and
+saved browser reviews. Use the documented model and dependencies and create
+the replay directory outside the checkout.
+
 Reconstructing fresh small projects, reopening saved projects and reaggregating
 saved TSVs are different operations. The [versioned validation page](../development/validation-evidence.md#current-molecular-repair-integration)
 labels the code/revision and recorded scope of the repair checks. A historical
